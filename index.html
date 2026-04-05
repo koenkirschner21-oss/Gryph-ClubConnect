@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Gryph Club Connect - Every Club. One Platform.">
+    <meta name="description" content="Gryph Club Connect - Every Club. One Platform. The official club management platform for University of Guelph.">
     <title>Gryph Club Connect - Every Club. One Platform.</title>
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -11,18 +11,14 @@
     <!-- NAVIGATION -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="nav-left">
-                <a href="/" class="logo">
-                    <div class="logo-icon">🦁</div>
-                    <span class="logo-text"><span class="club">Club</span><span class="connect">Connect</span></span>
-                </a>
+            <a href="/" class="logo">🦁 Gryph ClubConnect</a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#pricing">Pricing</a>
+                <a href="#testimonials">Testimonials</a>
             </div>
-            <div class="nav-center">
-                <a href="#features" class="nav-link">Features</a>
-                <a href="#pricing" class="nav-link">Pricing</a>
-                <a href="#testimonials" class="nav-link">Testimonials</a>
-            </div>
-            <div class="nav-right">
+            <div class="nav-buttons">
                 <button class="btn btn-ghost">Sign In</button>
                 <button class="btn btn-primary">Join Free →</button>
             </div>
@@ -31,67 +27,66 @@
 
     <!-- HERO SECTION -->
     <section class="hero">
-        <div class="hero-content">
-            <div class="hero-copy">
+        <div class="hero-container">
+            <div class="hero-content">
                 <div class="eyebrow">🎓 OFFICIAL CAMPUS PLATFORM — UNIVERSITY OF GUELPH</div>
-                <h1>Every Club.<br><span class="highlight">One Platform.</span></h1>
+                <h1>Every Club.<br><span class="gold-text">One Platform.</span></h1>
                 <p>Replace scattered group chats, missed emails, and lost tasks. Gryph Club Connect gives every UofG student organization a professional home base — built around the way clubs actually work.</p>
-                <div class="hero-ctas">
-                    <button class="btn btn-primary btn-large">Get Started Free →</button>
-                    <button class="btn btn-ghost btn-large">See a Demo</button>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary btn-lg">Get Started Free →</button>
+                    <button class="btn btn-ghost btn-lg">See a Demo</button>
                 </div>
                 <div class="hero-stats">
                     <div class="stat">
-                        <div class="stat-number">UofG</div>
+                        <div class="stat-value">UofG</div>
                         <div class="stat-label">Only Private Campus</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-number">4</div>
+                        <div class="stat-value">4</div>
                         <div class="stat-label">Core Modules</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-number">5 min</div>
+                        <div class="stat-value">5 min</div>
                         <div class="stat-label">Setup Time</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-number">Free</div>
+                        <div class="stat-value">Free</div>
                         <div class="stat-label">To Get Started</div>
                     </div>
                 </div>
             </div>
             <div class="hero-mockup">
-                <div class="mockup-preview">
+                <div class="mockup-frame">
                     <div class="mockup-header">
-                        <div class="window-dots">
+                        <div class="dots">
                             <div class="dot red"></div>
                             <div class="dot gold"></div>
                             <div class="dot green"></div>
                         </div>
                     </div>
-                    <div class="mockup-content">
+                    <div class="mockup-body">
                         <div class="sidebar">
-                            <div class="sidebar-section">MY CLUBS</div>
-                            <div class="channel-item active">GMA <span class="unread-badge">3</span></div>
-                            <div class="channel-item">ESS</div>
-                            <div class="channel-item">GFAB</div>
-                            <div class="sidebar-section">CHANNELS</div>
+                            <div class="section-title">MY CLUBS</div>
+                            <div class="club-item active">🔴 GMA <span class="badge">3</span></div>
+                            <div class="club-item">🔵 ESS</div>
+                            <div class="club-item">🟡 GFAB</div>
+                            <div class="divider"></div>
+                            <div class="section-title">CHANNELS</div>
                             <div class="channel-item active">#events</div>
                             <div class="channel-item">#general</div>
                             <div class="channel-item">#marketing</div>
+                            <div class="channel-item">#exec-team</div>
                         </div>
-                        <div class="chat-area">
-                            <div class="chat-header">
-                                <span># events</span>
-                                <span class="online-badge">24 online</span>
-                            </div>
+                        <div class="chat">
+                            <div class="chat-header"># events <span class="online">24 online</span></div>
                             <div class="messages">
                                 <div class="message">
-                                    <div class="avatar-circle">P</div>
-                                    <div><strong>Priya Sharma</strong><br>Winter Gala planning... 🔥</div>
+                                    <div class="avatar">P</div>
+                                    <div><strong>Priya Sharma</strong><br>Winter Gala planning starts...</div>
                                 </div>
                                 <div class="message">
-                                    <div class="avatar-circle blue">J</div>
-                                    <div><strong>James Okafor</strong><br>Venue booking help</div>
+                                    <div class="avatar blue">J</div>
+                                    <div><strong>James Okafor</strong><br>I can help with venue booking</div>
                                 </div>
                             </div>
                         </div>
@@ -103,229 +98,468 @@
 
     <!-- TICKER -->
     <section class="ticker">
-        <div class="ticker-scroll">
-            <span>● SECURE @UOGUELPH.CA LOGIN ● MULTI-CLUB DASHBOARD ● REAL-TIME CHANNELS ● TASK TRACKING ● EVENT CALENDAR ● RSVP MANAGEMENT ● BUILT FOR GUELPH ●</span>
+        <div class="ticker-text">
+            ● SECURE @UOGUELPH.CA LOGIN ● MULTI-CLUB DASHBOARD ● REAL-TIME CHANNELS ● TASK TRACKING ● EVENT CALENDAR ● RSVP MANAGEMENT ● MEMBER DIRECTORY ● BUILT FOR GUELPH CLUBS ONLY ●
         </div>
     </section>
 
     <!-- PROBLEM SECTION -->
-    <section class="problem">
-        <div class="problem-content">
-            <div class="section-eyebrow">THE PROBLEM</div>
-            <h2>Your club runs on chaos.</h2>
-            <p>Group chats buried in Instagram DMs. Tasks lost in email threads. New members who don't know what's going on.</p>
+    <section class="problem-section">
+        <div class="container">
+            <div class="section-header">
+                <div class="eyebrow">THE PROBLEM</div>
+                <h2>Your club runs on chaos.</h2>
+                <p>Group chats buried in Instagram DMs. Tasks lost in email threads. New members who don't know what's going on. Sound familiar?</p>
+            </div>
             <div class="problem-cards">
                 <div class="problem-card">
                     <div class="icon">💔</div>
                     <h3>Fragmented Communication</h3>
-                    <p>Announcements go to 4 different places. Half your members miss them.</p>
+                    <p>Your announcements go to 4 different places. Half your members miss them.</p>
                 </div>
                 <div class="problem-card">
                     <div class="icon">📋</div>
                     <h3>No Task Accountability</h3>
-                    <p>Who was supposed to book the venue? Nobody remembers.</p>
+                    <p>Who was supposed to book the venue? Nobody remembers. Nothing gets tracked.</p>
                 </div>
                 <div class="problem-card">
                     <div class="icon">📅</div>
                     <h3>Event Planning Nightmares</h3>
-                    <p>Spreadsheets. Texts. Hoping people show up.</p>
+                    <p>Spreadsheets. Texts. Hoping people show up. There has to be a better way.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- FEATURES SECTION -->
-    <section class="features" id="features">
-        <div class="features-header">
-            <div class="section-eyebrow">CORE PLATFORM</div>
-            <h2>Everything your club needs, finally in one place.</h2>
-            <p>Built specifically for student organizations. Not a social app. Not a generic project tool. A purpose-built club OS.</p>
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <div class="eyebrow">CORE PLATFORM</div>
+                <h2>Everything your club needs, finally in one place.</h2>
+                <p>Built specifically for student organizations. Not a social app. Not a generic project tool. A purpose-built club OS.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card red">
+                    <div class="feature-icon">💬</div>
+                    <div class="feature-tag">COMMUNICATION</div>
+                    <h3>Team Channels</h3>
+                    <p>Separate channels for all-hands, exec, marketing, events, and more. No more mixed-up group chats.</p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+                <div class="feature-card gold">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-tag">TASK MANAGEMENT</div>
+                    <h3>Task Tracker</h3>
+                    <p>Assign tasks, set deadlines, track To Do → In Progress → Complete. Accountability built in.</p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+                <div class="feature-card red">
+                    <div class="feature-icon">📅</div>
+                    <div class="feature-tag">EVENTS</div>
+                    <h3>Shared Event Calendar</h3>
+                    <p>Create events, collect RSVPs, send reminders. Your whole club sees what's happening and when.</p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+                <div class="feature-card gold">
+                    <div class="feature-icon">👥</div>
+                    <div class="feature-tag">MEMBERS</div>
+                    <h3>Member Directory</h3>
+                    <p>Every member's name, role, photo, and contact info — searchable, role-gated, always up to date.</p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+                <div class="feature-card red wide">
+                    <div class="feature-icon">🔄</div>
+                    <div class="feature-tag">MULTI-CLUB</div>
+                    <h3>Belong to Multiple Clubs</h3>
+                    <p>One account. Switch between Marketing Club, Engineering Society, and Finance Club from a single sidebar. No separate logins. No data mixing.</p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+                <div class="feature-card gold">
+                    <div class="feature-icon">📊</div>
+                    <div class="feature-tag">ADMIN</div>
+                    <h3>Club Admin Dashboard</h3>
+                    <p>Monitor task completion rates, member engagement, RSVP counts, and channel activity. Run your club like a leader.</p>
+                    <a href="#" class="feature-link">Learn more →</a>
+                </div>
+            </div>
         </div>
-        <div class="features-grid">
-            <div class="feature-card red">
-                <div class="feature-icon">💬</div>
-                <div class="feature-tag">COMMUNICATION</div>
-                <h3>Team Channels</h3>
-                <p>Separate channels for all-hands, exec, marketing, events, and more.</p>
-                <a href="#" class="feature-link">Learn more →</a>
+    </section>
+
+    <!-- FEATURE DEEP DIVE: TASKS -->
+    <section class="feature-showcase alt-bg">
+        <div class="container">
+            <div class="showcase-grid">
+                <div class="showcase-mockup">
+                    <div class="mockup-frame">
+                        <div class="mockup-header">
+                            <div class="dots">
+                                <div class="dot red"></div>
+                                <div class="dot gold"></div>
+                                <div class="dot green"></div>
+                            </div>
+                        </div>
+                        <div class="kanban-board">
+                            <div class="kanban-column">
+                                <div class="column-header red">TO DO</div>
+                                <div class="task-card">Task item</div>
+                                <div class="task-card">Task item</div>
+                            </div>
+                            <div class="kanban-column">
+                                <div class="column-header gold">IN PROGRESS</div>
+                                <div class="task-card">Task item</div>
+                            </div>
+                            <div class="kanban-column">
+                                <div class="column-header green">COMPLETE</div>
+                                <div class="task-card">Task item</div>
+                                <div class="task-card">Task item</div>
+                                <div class="task-card">Task item</div>
+                            </div>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-label">Overall Progress <span>50%</span></div>
+                            <div class="progress-fill" style="width: 50%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-content">
+                    <div class="eyebrow">TASK MANAGEMENT</div>
+                    <h2>Every task. Every owner. Every deadline.</h2>
+                    <p>Create tasks, assign them to specific members, set due dates, and track progress. No more "I thought you were doing that."</p>
+                    <ul class="feature-list">
+                        <li>✓ Task creation with assignee + due date</li>
+                        <li>✓ Status columns: To Do / In Progress / Complete</li>
+                        <li>✓ Club-wide task visibility for execs</li>
+                        <li>✓ Completion tracking and accountability</li>
+                    </ul>
+                </div>
             </div>
-            <div class="feature-card gold">
-                <div class="feature-icon">✓</div>
-                <div class="feature-tag">TASK MANAGEMENT</div>
-                <h3>Task Tracker</h3>
-                <p>Assign tasks, set deadlines, track progress. Accountability built in.</p>
-                <a href="#" class="feature-link">Learn more →</a>
+        </div>
+    </section>
+
+    <!-- FEATURE DEEP DIVE: EVENTS -->
+    <section class="feature-showcase">
+        <div class="container">
+            <div class="showcase-grid">
+                <div class="showcase-content">
+                    <div class="eyebrow">EVENT PLANNING</div>
+                    <h2>Plan once. Everyone shows up.</h2>
+                    <p>Add events to your shared club calendar. Members RSVP directly in the platform. Automated reminders before every event.</p>
+                    <ul class="feature-list">
+                        <li>✓ Shared calendar all members can view</li>
+                        <li>✓ One-click RSVP with attendance tracking</li>
+                        <li>✓ Automatic event reminders</li>
+                        <li>✓ RSVP count visible to organizers</li>
+                    </ul>
+                </div>
+                <div class="showcase-mockup">
+                    <div class="mockup-frame">
+                        <div class="mockup-header">
+                            <div class="dots">
+                                <div class="dot red"></div>
+                                <div class="dot gold"></div>
+                                <div class="dot green"></div>
+                            </div>
+                        </div>
+                        <div class="calendar-preview">
+                            <div class="calendar-header">S M T W T F S</div>
+                            <div class="calendar-grid">
+                                <div class="day">1</div>
+                                <div class="day">2</div>
+                                <div class="day event-day">9</div>
+                                <div class="day event-day">15</div>
+                                <div class="day event-day">22</div>
+                                <div class="day">29</div>
+                                <div class="day">30</div>
+                            </div>
+                            <div class="event-card">
+                                <div class="event-title">Winter Gala</div>
+                                <div class="event-date">Dec 14 · 📍 UC</div>
+                                <div class="rsvp-badge">✅ 24 RSVPs</div>
+                                <button class="btn btn-primary">RSVP Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="feature-card red">
-                <div class="feature-icon">📅</div>
-                <div class="feature-tag">EVENTS</div>
-                <h3>Shared Event Calendar</h3>
-                <p>Create events, collect RSVPs, send reminders. One platform for all.</p>
-                <a href="#" class="feature-link">Learn more →</a>
+        </div>
+    </section>
+
+    <!-- FEATURE DEEP DIVE: COMMUNICATION -->
+    <section class="feature-showcase alt-bg">
+        <div class="container">
+            <div class="showcase-grid">
+                <div class="showcase-mockup">
+                    <div class="mockup-frame">
+                        <div class="mockup-header">
+                            <div class="dots">
+                                <div class="dot red"></div>
+                                <div class="dot gold"></div>
+                                <div class="dot green"></div>
+                            </div>
+                        </div>
+                        <div class="mockup-body">
+                            <div class="sidebar">
+                                <div class="section-title">CHANNELS</div>
+                                <div class="channel-item">#general</div>
+                                <div class="channel-item active">#events</div>
+                                <div class="channel-item">#marketing</div>
+                            </div>
+                            <div class="chat">
+                                <div class="chat-header"># events</div>
+                                <div class="messages">
+                                    <div class="message">
+                                        <div class="avatar">P</div>
+                                        <div><strong>Priya</strong><br>Winter Gala planning...</div>
+                                    </div>
+                                    <div class="message">
+                                        <div class="avatar blue">J</div>
+                                        <div><strong>James</strong><br>I can help with venue booking</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="showcase-content">
+                    <div class="eyebrow">COMMUNICATION</div>
+                    <h2>Stop losing messages. Start leading conversations.</h2>
+                    <p>Create dedicated channels for every team — all-members, exec, marketing, events. Real-time messages, mentions (@James), and notifications so nothing slips through.</p>
+                    <ul class="feature-list">
+                        <li>✓ Club-wide announcements to all members</li>
+                        <li>✓ Team-specific private channels</li>
+                        <li>✓ @mentions and push notifications</li>
+                        <li>✓ Message history — searchable, permanent</li>
+                    </ul>
+                </div>
             </div>
-            <div class="feature-card gold">
-                <div class="feature-icon">👥</div>
-                <div class="feature-tag">MEMBERS</div>
-                <h3>Member Directory</h3>
-                <p>Every member's info—searchable, role-gated, always up to date.</p>
-                <a href="#" class="feature-link">Learn more →</a>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <div class="eyebrow">HOW IT WORKS</div>
+                <h2>Up and running in under 5 minutes.</h2>
             </div>
-            <div class="feature-card red wide">
-                <div class="feature-icon">🔄</div>
-                <div class="feature-tag">MULTI-CLUB</div>
-                <h3>Belong to Multiple Clubs</h3>
-                <p>One account. Switch between clubs from a single sidebar. No data mixing.</p>
-                <a href="#" class="feature-link">Learn more →</a>
+            <div class="how-it-works-grid">
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Create Your Account</h3>
+                            <p>Sign up with your official @uoguelph.ca email. Verified university email required — no outside accounts.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Enter Your Club Code</h3>
+                            <p>Your club executive gives you a secure 6-digit access code. Enter it to join your club's private workspace.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Set Up Your Profile</h3>
+                            <p>Add your name, photo, year, and program. Your club directory updates automatically.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Start Collaborating</h3>
+                            <p>Jump into channels, check your tasks, see upcoming events. You're live.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="setup-wizard">
+                    <div class="mockup-frame">
+                        <div class="mockup-header">
+                            <div class="dots">
+                                <div class="dot red"></div>
+                                <div class="dot gold"></div>
+                                <div class="dot green"></div>
+                            </div>
+                            <div class="wizard-label">SETUP WIZARD</div>
+                        </div>
+                        <div class="wizard-content">
+                            <h4>Welcome to Gryph Club Connect</h4>
+                            <p>Let's get your account set up in just a few steps.</p>
+                            <div class="form-field">
+                                <label>Official Guelph Email</label>
+                                <input type="email" placeholder="president@uoguelph.ca" />
+                            </div>
+                            <div class="form-field">
+                                <label>Club Access Code</label>
+                                <div class="code-input">8 7 4 2 9 1</div>
+                            </div>
+                            <div class="success-message">✅ Welcome to Gryph Club Connect!</div>
+                            <button class="btn btn-primary">Ready to collaborate! 🚀</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="feature-card gold">
-                <div class="feature-icon">📊</div>
-                <div class="feature-tag">ADMIN</div>
-                <h3>Club Admin Dashboard</h3>
-                <p>Monitor engagement, RSVP counts, and channel activity in real-time.</p>
-                <a href="#" class="feature-link">Learn more →</a>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <div class="eyebrow">PRICING</div>
+                <h2>Start free. Scale when you're ready.</h2>
+                <p>No credit card required. Built for students, priced for clubs.</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <div class="price-tier">FREE</div>
+                    <div class="price-amount">$0<span>/month</span></div>
+                    <div class="price-features">
+                        <div class="feature">✓ 1 club workspace</div>
+                        <div class="feature">✓ Up to 20 members</div>
+                        <div class="feature">✓ 3 channels</div>
+                        <div class="feature">✓ Basic task tracking</div>
+                        <div class="feature">✓ Event calendar</div>
+                        <div class="feature grayed">✗ Admin analytics</div>
+                        <div class="feature grayed">✗ Unlimited members</div>
+                        <div class="feature grayed">✗ Priority support</div>
+                    </div>
+                    <button class="btn btn-ghost">Get Started</button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="popular-badge">MOST POPULAR</div>
+                    <div class="price-tier gold">CLUB PRO</div>
+                    <div class="price-amount">$9<span>/month per club</span></div>
+                    <div class="price-features">
+                        <div class="feature">✓ Unlimited members</div>
+                        <div class="feature">✓ Unlimited channels</div>
+                        <div class="feature">✓ Full task management</div>
+                        <div class="feature">✓ Event calendar + RSVP analytics</div>
+                        <div class="feature">✓ Member directory</div>
+                        <div class="feature">✓ Admin engagement dashboard</div>
+                        <div class="feature">✓ File sharing (coming soon)</div>
+                        <div class="feature">✓ Priority support</div>
+                    </div>
+                    <button class="btn btn-primary">Start 14-Day Free Trial</button>
+                </div>
+                <div class="pricing-card">
+                    <div class="price-tier gold">INSTITUTIONAL</div>
+                    <div class="price-amount">Custom<span>University-wide licensing</span></div>
+                    <div class="price-features">
+                        <div class="feature">✓ All clubs on one license</div>
+                        <div class="feature">✓ Central admin oversight</div>
+                        <div class="feature">✓ Cross-club analytics</div>
+                        <div class="feature">✓ University SSO integration</div>
+                        <div class="feature">✓ LMS integration</div>
+                        <div class="feature">✓ Dedicated support</div>
+                        <div class="feature">✓ Custom onboarding</div>
+                    </div>
+                    <button class="btn btn-ghost">Contact Us →</button>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- TESTIMONIALS -->
-    <section class="testimonials" id="testimonials">
-        <div class="testimonials-header">
-            <div class="section-eyebrow">FROM GUELPH STUDENTS</div>
-            <h2>Real clubs. Real results.</h2>
-        </div>
-        <div class="testimonials-grid">
-            <div class="testimonial-card">
-                <div class="stars">★★★★★</div>
-                <p class="quote">"We used to run our club through Instagram DMs. Gryph completely changed how we operate — every exec knows what's happening now."</p>
-                <div class="testimonial-author">
-                    <div class="avatar-circle">P</div>
-                    <div>
-                        <strong>Priya Sharma</strong><br>
-                        <small>VP Marketing · GMA</small>
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <div class="eyebrow">FROM GUELPH STUDENTS</div>
+                <h2>Real clubs. Real results.</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"We used to run our club through Instagram DMs and group chats. Gryph Club Connect completely changed how we operate — every exec actually knows what's happening now."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">P</div>
+                        <div>
+                            <strong>Priya Sharma</strong>
+                            <small>VP Marketing · Guelph Marketing Association</small>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="testimonial-card">
-                <div class="stars">★★★★★</div>
-                <p class="quote">"As president, the admin dashboard is everything. I can see who's done their tasks and track real engagement."</p>
-                <div class="testimonial-author">
-                    <div class="avatar-circle blue">J</div>
-                    <div>
-                        <strong>James Okafor</strong><br>
-                        <small>President · Engineering Society</small>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"As president, the admin dashboard is everything. I can see who's done their tasks, how many people RSVP'd, and what channels are actually being used."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar blue">J</div>
+                        <div>
+                            <strong>James Okafor</strong>
+                            <small>President · Engineering Student Society</small>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="testimonial-card">
-                <div class="stars">★★★★★</div>
-                <p class="quote">"Joining three clubs without confusion is finally possible. One login, one dashboard — I switch between them instantly."</p>
-                <div class="testimonial-author">
-                    <div class="avatar-circle green">A</div>
-                    <div>
-                        <strong>Anya Lee</strong><br>
-                        <small>Multi-Club Member</small>
+                <div class="testimonial-card">
+                    <div class="stars">★★★★★</div>
+                    <p>"Joining three clubs without any confusion is actually possible now. One login, one dashboard — I switch between them in one click."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar green">A</div>
+                        <div>
+                            <strong>Anya Lee</strong>
+                            <small>Member · GFAB + ESS + GMA</small>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- PRICING SECTION -->
-    <section class="pricing" id="pricing">
-        <div class="pricing-header">
-            <div class="section-eyebrow">PRICING</div>
-            <h2>Start free. Scale when you're ready.</h2>
-            <p>No credit card required. Built for students, priced for clubs.</p>
-        </div>
-        <div class="pricing-grid">
-            <div class="pricing-card">
-                <div class="pricing-label">FREE</div>
-                <div class="pricing-price">$0</div>
-                <div class="pricing-period">/month</div>
-                <div class="pricing-features">
-                    <div class="feature-row">✓ 1 club workspace</div>
-                    <div class="feature-row">✓ Up to 20 members</div>
-                    <div class="feature-row">✓ 3 channels</div>
-                    <div class="feature-row">✓ Basic task tracking</div>
-                    <div class="feature-row">✗ Admin analytics</div>
-                </div>
-                <button class="btn btn-ghost">Get Started</button>
-            </div>
-            <div class="pricing-card featured">
-                <div class="pricing-badge">MOST POPULAR</div>
-                <div class="pricing-label">CLUB PRO</div>
-                <div class="pricing-price">$9</div>
-                <div class="pricing-period">/month per club</div>
-                <div class="pricing-features">
-                    <div class="feature-row">✓ Unlimited members</div>
-                    <div class="feature-row">✓ Unlimited channels</div>
-                    <div class="feature-row">✓ Full task management</div>
-                    <div class="feature-row">✓ RSVP analytics</div>
-                    <div class="feature-row">✓ Admin dashboard</div>
-                    <div class="feature-row">✓ Priority support</div>
-                </div>
-                <button class="btn btn-primary">Start 14-Day Free Trial</button>
-            </div>
-            <div class="pricing-card">
-                <div class="pricing-label gold">INSTITUTIONAL</div>
-                <div class="pricing-price">Custom</div>
-                <div class="pricing-period">University-wide licensing</div>
-                <div class="pricing-features">
-                    <div class="feature-row">✓ All clubs on one license</div>
-                    <div class="feature-row">✓ Central admin oversight</div>
-                    <div class="feature-row">✓ Cross-club analytics</div>
-                    <div class="feature-row">✓ University SSO</div>
-                    <div class="feature-row">✓ Dedicated support</div>
-                </div>
-                <button class="btn btn-ghost">Contact Us</button>
             </div>
         </div>
     </section>
 
     <!-- FINAL CTA -->
     <section class="final-cta">
-        <h2>Your club deserves better than a group chat.</h2>
-        <p>Join every UofG club already running on Gryph Club Connect.</p>
-        <div class="cta-buttons">
-            <button class="btn btn-primary btn-large">Create Your Club Free →</button>
-            <button class="btn btn-ghost btn-large">Book a Demo</button>
+        <div class="container">
+            <div class="cta-badge">🔴 NOW AVAILABLE AT UOFG</div>
+            <h2>Your club deserves better than a group chat.</h2>
+            <p>Join every UofG club already running on Gryph Club Connect. Free to start, built to scale.</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary btn-lg">Create Your Club Free →</button>
+                <button class="btn btn-ghost btn-lg">Book a Demo</button>
+            </div>
+            <p class="trust-line">🔒 @uoguelph.ca emails only · Free forever plan · No credit card needed</p>
         </div>
-        <p class="trust-line">🔒 @uoguelph.ca emails only · Free forever plan · No credit card needed</p>
     </section>
 
     <!-- FOOTER -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h4>Gryph Club Connect</h4>
-                <p>The official club management platform for University of Guelph.</p>
-                <div class="social-icons">
-                    <a href="#">Instagram</a> · <a href="#">LinkedIn</a> · <a href="#">X</a>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Gryph Club Connect</h4>
+                    <p>The official club management platform for University of Guelph.</p>
+                    <div class="social-links">
+                        <a href="#">📷 Instagram</a>
+                        <a href="#">💼 LinkedIn</a>
+                        <a href="#">𝕏 Twitter</a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h4>PRODUCT</h4>
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#pricing">Pricing</a>
+                    <a href="#">For Club Executives</a>
+                    <a href="#">Mobile App (Coming Soon)</a>
+                </div>
+                <div class="footer-column">
+                    <h4>COMPANY</h4>
+                    <a href="#">About</a>
+                    <a href="#">Blog</a>
+                    <a href="#">Contact</a>
+                    <a href="#">Careers</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+                <div class="footer-column">
+                    <h4>GET STARTED</h4>
+                    <button class="btn btn-primary">Join Free</button>
+                    <a href="#" class="gold-link">For university partnerships →</a>
                 </div>
             </div>
-            <div class="footer-section">
-                <h4>Product</h4>
-                <a href="#" class="footer-link">Features</a>
-                <a href="#" class="footer-link">Pricing</a>
-                <a href="#" class="footer-link">How It Works</a>
-                <a href="#" class="footer-link">Mobile App</a>
+            <div class="footer-bottom">
+                <p>© 2026 Gryph Club Connect. University of Guelph. All rights reserved.</p>
+                <p>Made in Guelph, Ontario 🦁</p>
             </div>
-            <div class="footer-section">
-                <h4>Company</h4>
-                <a href="#" class="footer-link">About</a>
-                <a href="#" class="footer-link">Blog</a>
-                <a href="#" class="footer-link">Contact</a>
-                <a href="#" class="footer-link">Careers</a>
-            </div>
-            <div class="footer-section">
-                <h4>Legal</h4>
-                <a href="#" class="footer-link">Privacy Policy</a>
-                <a href="#" class="footer-link">Terms of Service</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 Gryph Club Connect. University of Guelph. All rights reserved.</p>
-            <p>Made in Guelph, Ontario 🦁</p>
         </div>
     </footer>
 

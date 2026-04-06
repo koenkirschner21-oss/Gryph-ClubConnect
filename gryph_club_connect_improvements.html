@@ -1,0 +1,1254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Gryph Club Connect — Improvements showcase: accessibility, hero demo, feature previews, and UX enhancements." />
+  <meta name="theme-color" content="#0D1117" />
+  <title>Gryph Club Connect — Improvements</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── CSS TOKEN DEFAULTS ─────────────────────────────────────────── */
+    :root {
+      /* Colours */
+      --color-red:           #C8102E;
+      --color-red-dark:      #A00C24;
+      --color-red-light:     #E8203E;
+      --color-gold:          #D4A017;
+      --color-gold-dark:     #B8860B;
+      --color-gold-light:    #F0B820;
+      --color-navy:          #0D1117;
+      --color-navy-light:    #161B22;
+      --color-navy-border:   #21262D;
+      --color-card:          #1A1F26;
+      --color-card-hover:    #1E242C;
+      --color-text:          #F0F6FC;
+      --color-text-secondary:#8B949E;
+      --color-text-muted:    #6E7681;
+
+      /* Typography */
+      --font-heading: 'Syne', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+      --font-mono:    'JetBrains Mono', monospace;
+
+      /* Radii */
+      --radius-sm:   6px;
+      --radius-md:   10px;
+      --radius-lg:   16px;
+      --radius-xl:   24px;
+      --radius-full: 9999px;
+
+      /* Shadows */
+      --shadow-card:     0 4px 24px rgba(0,0,0,.4);
+      --shadow-glow-red: 0 0 30px rgba(200,16,46,.3);
+      --shadow-glow-gold:0 0 30px rgba(212,160,23,.3);
+
+      /* Spacing scale */
+      --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px;
+      --sp-4: 16px; --sp-6: 24px; --sp-8: 32px;
+      --sp-10:40px; --sp-12:48px; --sp-16:64px; --sp-20:80px;
+
+      /* Transition */
+      --transition: 200ms ease;
+    }
+
+    /* ─── RESET ──────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; color-scheme: dark; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--color-navy);
+      color: var(--color-text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    img { display: block; max-width: 100%; }
+    a   { color: inherit; text-decoration: none; }
+
+    /* skip link */
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: var(--sp-4);
+      background: var(--color-red);
+      color: #fff;
+      padding: var(--sp-2) var(--sp-4);
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      z-index: 1000;
+      transition: top var(--transition);
+    }
+    .skip-link:focus { top: var(--sp-4); }
+
+    /* ─── NAV ────────────────────────────────────────────────────────── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,17,23,.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-navy-border);
+    }
+
+    .nav__inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--sp-4) var(--sp-6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-4);
+    }
+
+    .nav__logo {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.2rem;
+      color: var(--color-text);
+      white-space: nowrap;
+    }
+    .nav__logo span { color: var(--color-red); }
+
+    /* Desktop links */
+    .nav__links {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-6);
+      list-style: none;
+    }
+    .nav__links a {
+      font-size: .9rem;
+      color: var(--color-text-secondary);
+      transition: color var(--transition);
+    }
+    .nav__links a:hover,
+    .nav__links a:focus-visible {
+      color: var(--color-text);
+      outline: none;
+    }
+
+    /* Mobile hamburger */
+    .nav__toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      border: 1px solid var(--color-navy-border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      padding: var(--sp-2);
+      transition: border-color var(--transition);
+    }
+    .nav__toggle:hover,
+    .nav__toggle:focus-visible { border-color: var(--color-red); outline: none; }
+    .nav__toggle span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: var(--color-text);
+      border-radius: 2px;
+      transition: transform var(--transition), opacity var(--transition);
+    }
+    /* animated close state */
+    .nav__toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav__toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav__toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile drawer */
+    .nav__mobile {
+      display: none;
+      flex-direction: column;
+      gap: var(--sp-1);
+      padding: var(--sp-4) var(--sp-6);
+      border-top: 1px solid var(--color-navy-border);
+    }
+    .nav__mobile.open { display: flex; }
+    .nav__mobile a {
+      padding: var(--sp-3) 0;
+      font-size: 1rem;
+      color: var(--color-text-secondary);
+      border-bottom: 1px solid var(--color-navy-border);
+      transition: color var(--transition);
+    }
+    .nav__mobile a:last-child { border-bottom: none; }
+    .nav__mobile a:hover,
+    .nav__mobile a:focus-visible { color: var(--color-text); outline: none; }
+
+    @media (max-width: 768px) {
+      .nav__links  { display: none; }
+      .nav__toggle { display: flex; }
+    }
+
+    /* ─── LAYOUT HELPERS ─────────────────────────────────────────────── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--sp-6);
+    }
+
+    section { padding: var(--sp-20) 0; }
+
+    .section-label {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--color-gold);
+      background: rgba(212,160,23,.1);
+      border: 1px solid rgba(212,160,23,.2);
+      border-radius: var(--radius-full);
+      padding: var(--sp-1) var(--sp-3);
+      margin-bottom: var(--sp-4);
+    }
+
+    h1,h2,h3,h4 { font-family: var(--font-heading); line-height: 1.15; }
+
+    /* ─── BUTTONS ────────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      padding: var(--sp-3) var(--sp-6);
+      border-radius: var(--radius-full);
+      font-family: var(--font-body);
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background var(--transition), color var(--transition),
+                  border-color var(--transition), box-shadow var(--transition);
+    }
+    .btn:focus-visible {
+      outline: 3px solid var(--color-gold);
+      outline-offset: 3px;
+    }
+    .btn-primary {
+      background: var(--color-red);
+      color: #fff;
+    }
+    .btn-primary:hover { background: var(--color-red-dark); box-shadow: var(--shadow-glow-red); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--color-text);
+      border-color: var(--color-navy-border);
+    }
+    .btn-outline:hover { border-color: var(--color-text-secondary); }
+
+    /* ─── HERO ───────────────────────────────────────────────────────── */
+    .hero {
+      padding: var(--sp-20) 0 0;
+      overflow: hidden;
+    }
+
+    .hero__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-12);
+      align-items: center;
+    }
+
+    .hero__tag {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--sp-2);
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      color: var(--color-gold);
+      background: rgba(212,160,23,.08);
+      border: 1px solid rgba(212,160,23,.2);
+      border-radius: var(--radius-full);
+      padding: var(--sp-1) var(--sp-3);
+      margin-bottom: var(--sp-6);
+    }
+    .hero__tag span { width: 8px; height: 8px; background: var(--color-gold); border-radius: 50%; }
+
+    .hero__title {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      margin-bottom: var(--sp-6);
+      color: var(--color-text);
+    }
+    .hero__title .accent { color: var(--color-red); }
+
+    .hero__sub {
+      font-size: 1.1rem;
+      color: var(--color-text-secondary);
+      margin-bottom: var(--sp-8);
+      max-width: 480px;
+    }
+
+    .hero__ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-4);
+      align-items: center;
+    }
+
+    /* Hero mockup / animation placeholder */
+    .hero__mockup {
+      position: relative;
+      border-radius: var(--radius-xl);
+      background: var(--color-card);
+      border: 1px solid var(--color-navy-border);
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      box-shadow: var(--shadow-card), var(--shadow-glow-red);
+    }
+
+    /* Animated shimmer bars to simulate a dashboard loading */
+    .hero__mockup-inner {
+      position: absolute;
+      inset: 0;
+      padding: var(--sp-6);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-4);
+    }
+
+    .hero__mockup-bar {
+      border-radius: var(--radius-sm);
+      background: linear-gradient(
+        90deg,
+        var(--color-navy-light) 25%,
+        var(--color-navy-border) 50%,
+        var(--color-navy-light) 75%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 1.8s infinite;
+    }
+    @keyframes shimmer {
+      0%   { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    .hero__mockup-topbar {
+      height: 36px;
+      width: 100%;
+      border-radius: var(--radius-md);
+    }
+    .hero__mockup-row {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: var(--sp-4);
+      flex: 1;
+    }
+    .hero__mockup-sidebar { border-radius: var(--radius-md); height: 100%; }
+    .hero__mockup-content {
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-3);
+    }
+    .hero__mockup-content-bar {
+      border-radius: var(--radius-sm);
+      animation: shimmer 1.8s infinite;
+      background: linear-gradient(
+        90deg,
+        var(--color-navy-light) 25%,
+        var(--color-navy-border) 50%,
+        var(--color-navy-light) 75%
+      );
+      background-size: 200% 100%;
+    }
+
+    /* Floating badge on mockup */
+    .hero__mockup-badge {
+      position: absolute;
+      bottom: var(--sp-4);
+      right: var(--sp-4);
+      background: rgba(200,16,46,.15);
+      border: 1px solid rgba(200,16,46,.4);
+      border-radius: var(--radius-md);
+      padding: var(--sp-2) var(--sp-3);
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--color-red-light);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; }
+      50%      { opacity: .6; }
+    }
+
+    @media (max-width: 900px) {
+      .hero__inner {
+        grid-template-columns: 1fr;
+      }
+      .hero__mockup { aspect-ratio: 16 / 9; }
+    }
+
+    /* ─── TABS ───────────────────────────────────────────────────────── */
+    .tabs-section { background: var(--color-navy-light); }
+
+    .tabs__header { text-align: center; margin-bottom: var(--sp-10); }
+    .tabs__header h2 { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; margin-bottom: var(--sp-4); }
+    .tabs__header p  { color: var(--color-text-secondary); max-width: 540px; margin: 0 auto; }
+
+    .tablist {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-2);
+      justify-content: center;
+      margin-bottom: var(--sp-8);
+      list-style: none;
+      padding: 0;
+    }
+
+    .tab-btn {
+      padding: var(--sp-2) var(--sp-6);
+      border-radius: var(--radius-full);
+      border: 1px solid var(--color-navy-border);
+      background: transparent;
+      color: var(--color-text-secondary);
+      font-family: var(--font-body);
+      font-size: .9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .tab-btn:hover { border-color: var(--color-text-secondary); color: var(--color-text); }
+    .tab-btn[aria-selected="true"] {
+      background: var(--color-red);
+      border-color: var(--color-red);
+      color: #fff;
+      box-shadow: var(--shadow-glow-red);
+    }
+    .tab-btn:focus-visible {
+      outline: 3px solid var(--color-gold);
+      outline-offset: 3px;
+    }
+
+    .tabpanel { display: none; animation: fadeIn .25s ease; }
+    .tabpanel[aria-hidden="false"] { display: block; }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(6px);} to { opacity:1; transform:translateY(0);} }
+
+    /* ─── FEATURE CARDS ──────────────────────────────────────────────── */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--sp-6);
+    }
+
+    .feature-card {
+      background: var(--color-card);
+      border: 1px solid var(--color-navy-border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .feature-card:hover {
+      border-color: rgba(200,16,46,.4);
+      box-shadow: var(--shadow-glow-red);
+    }
+
+    /* GIF placeholder */
+    .feature-card__media {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      background: var(--color-navy-light);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .feature-card__media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: .7;
+    }
+    /* Placeholder when no GIF is loaded */
+    .feature-card__media--placeholder {
+      flex-direction: column;
+      gap: var(--sp-2);
+      background: linear-gradient(135deg, var(--color-card) 0%, var(--color-navy-light) 100%);
+    }
+    .feature-card__media--placeholder svg {
+      width: 48px;
+      height: 48px;
+      color: var(--color-text-muted);
+    }
+    .feature-card__media--placeholder span {
+      font-family: var(--font-mono);
+      font-size: .7rem;
+      color: var(--color-text-muted);
+      letter-spacing: .05em;
+      text-transform: uppercase;
+    }
+    .feature-card__media-tag {
+      position: absolute;
+      top: var(--sp-3);
+      left: var(--sp-3);
+      background: rgba(212,160,23,.15);
+      border: 1px solid rgba(212,160,23,.3);
+      border-radius: var(--radius-full);
+      padding: 2px var(--sp-2);
+      font-family: var(--font-mono);
+      font-size: .65rem;
+      color: var(--color-gold);
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .feature-card__body { padding: var(--sp-6); }
+    .feature-card__icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-md);
+      background: rgba(200,16,46,.12);
+      border: 1px solid rgba(200,16,46,.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: var(--sp-4);
+    }
+    .feature-card__icon svg { width: 22px; height: 22px; color: var(--color-red-light); }
+    .feature-card__title {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: var(--sp-2);
+      color: var(--color-text);
+    }
+    .feature-card__desc { font-size: .9rem; color: var(--color-text-secondary); }
+
+    /* ─── CTA SECTION ────────────────────────────────────────────────── */
+    .cta-section {
+      background: linear-gradient(135deg, rgba(200,16,46,.08) 0%, transparent 60%),
+                  var(--color-navy-light);
+      border-top:    1px solid var(--color-navy-border);
+      border-bottom: 1px solid var(--color-navy-border);
+      text-align: center;
+    }
+
+    .cta-section h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      margin-bottom: var(--sp-4);
+    }
+    .cta-section p {
+      color: var(--color-text-secondary);
+      max-width: 480px;
+      margin: 0 auto var(--sp-8);
+      font-size: 1.05rem;
+    }
+    .cta-section__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-4);
+      justify-content: center;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────────────── */
+    .footer {
+      background: var(--color-navy-light);
+      border-top: 1px solid var(--color-navy-border);
+      padding: var(--sp-12) 0 var(--sp-8);
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: var(--sp-10);
+      margin-bottom: var(--sp-10);
+    }
+
+    .footer__brand .brand-name {
+      font-family: var(--font-heading);
+      font-weight: 800;
+      font-size: 1.15rem;
+      margin-bottom: var(--sp-3);
+    }
+    .footer__brand .brand-name span { color: var(--color-red); }
+    .footer__brand p {
+      font-size: .875rem;
+      color: var(--color-text-secondary);
+      max-width: 260px;
+      line-height: 1.7;
+    }
+
+    .footer__col h3 {
+      font-family: var(--font-heading);
+      font-size: .8rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: var(--sp-4);
+    }
+    .footer__col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+    }
+    .footer__col a {
+      font-size: .875rem;
+      color: var(--color-text-secondary);
+      transition: color var(--transition);
+    }
+    .footer__col a:hover,
+    .footer__col a:focus-visible { color: var(--color-text); outline: none; }
+
+    .footer__bottom {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--sp-4);
+      padding-top: var(--sp-6);
+      border-top: 1px solid var(--color-navy-border);
+      font-size: .8rem;
+      color: var(--color-text-muted);
+    }
+    .footer__bottom a {
+      color: var(--color-text-muted);
+      transition: color var(--transition);
+    }
+    .footer__bottom a:hover { color: var(--color-text); }
+
+    .footer__legal {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--sp-4);
+      align-items: center;
+    }
+    .footer__legal a { color: var(--color-text-secondary); }
+    .footer__legal a:hover { color: var(--color-text); }
+    .footer__legal span { color: var(--color-navy-border); }
+
+    @media (max-width: 900px) {
+      .footer__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: var(--sp-8);
+      }
+    }
+    @media (max-width: 600px) {
+      .footer__grid {
+        grid-template-columns: 1fr;
+      }
+      section { padding: var(--sp-12) 0; }
+    }
+
+    /* ─── UTILITY ────────────────────────────────────────────────────── */
+    .visually-hidden {
+      position: absolute;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0,0,0,0);
+      white-space: nowrap;
+      border: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Skip to main content for keyboard users -->
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <!-- ─── NAV ─────────────────────────────────────────────────────────── -->
+  <nav class="nav" aria-label="Main navigation">
+    <div class="nav__inner">
+      <a class="nav__logo" href="#" aria-label="Gryph Club Connect home">
+        Gryph <span>Club</span> Connect
+      </a>
+
+      <!-- Desktop nav -->
+      <ul class="nav__links" role="list">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#how-it-works">How it works</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+
+      <div style="display:flex;align-items:center;gap:12px;">
+        <a class="btn btn-primary" href="#get-started" style="padding:8px 20px;font-size:.875rem;">
+          Get started
+        </a>
+        <!-- Mobile hamburger -->
+        <button
+          class="nav__toggle"
+          id="nav-toggle"
+          aria-controls="nav-mobile"
+          aria-expanded="false"
+          aria-label="Open navigation menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="nav__mobile" id="nav-mobile" role="navigation" aria-label="Mobile navigation">
+      <a href="#features">Features</a>
+      <a href="#how-it-works">How it works</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About</a>
+      <a href="#get-started" style="color:var(--color-red);font-weight:600;">Get started →</a>
+    </div>
+  </nav>
+
+  <!-- ─── MAIN ─────────────────────────────────────────────────────────── -->
+  <main id="main-content">
+
+    <!-- ── HERO ─────────────────────────────────────────────────────────── -->
+    <section class="hero" aria-labelledby="hero-heading">
+      <div class="container">
+        <div class="hero__inner">
+
+          <!-- Copy -->
+          <div>
+            <div class="hero__tag" aria-hidden="true">
+              <span></span>
+              Now live at UofG
+            </div>
+
+            <h1 class="hero__title" id="hero-heading">
+              Every Club.<br />
+              <span class="accent">One Platform.</span>
+            </h1>
+
+            <p class="hero__sub">
+              Replace scattered group chats, missed emails, and lost tasks.
+              Gryph Club Connect is the centralized operating system built for
+              University of Guelph student clubs.
+            </p>
+
+            <div class="hero__ctas">
+              <a class="btn btn-primary" href="#get-started" id="get-started">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                Get started free
+              </a>
+              <a class="btn btn-outline" href="#features">
+                See all features
+              </a>
+            </div>
+          </div>
+
+          <!-- Animated mockup placeholder -->
+          <div
+            class="hero__mockup"
+            role="img"
+            aria-label="Animated preview of the Gryph Club Connect dashboard interface"
+          >
+            <div class="hero__mockup-inner">
+              <!-- Top bar shimmer -->
+              <div class="hero__mockup-bar hero__mockup-topbar"></div>
+              <!-- Body row -->
+              <div class="hero__mockup-row">
+                <div class="hero__mockup-bar hero__mockup-sidebar"></div>
+                <div class="hero__mockup-content">
+                  <div class="hero__mockup-content-bar" style="height:20px;width:60%;"></div>
+                  <div class="hero__mockup-content-bar" style="height:14px;width:90%;"></div>
+                  <div class="hero__mockup-content-bar" style="height:14px;width:80%;"></div>
+                  <div class="hero__mockup-content-bar" style="height:14px;width:70%;"></div>
+                  <div class="hero__mockup-content-bar" style="height:80px;width:100%;border-radius:var(--radius-md);"></div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
+                    <div class="hero__mockup-content-bar" style="height:60px;border-radius:var(--radius-md);"></div>
+                    <div class="hero__mockup-content-bar" style="height:60px;border-radius:var(--radius-md);"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Live badge -->
+            <div class="hero__mockup-badge" aria-hidden="true">● LIVE DEMO COMING SOON</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TABS / FEATURES OVERVIEW ──────────────────────────────────────── -->
+    <section class="tabs-section" id="features" aria-labelledby="features-heading">
+      <div class="container">
+
+        <div class="tabs__header">
+          <div class="section-label" aria-hidden="true">Features</div>
+          <h2 id="features-heading">Everything your club needs</h2>
+          <p>Explore the tools that make Gryph Club Connect the go-to platform for UofG clubs.</p>
+        </div>
+
+        <!-- Tab list — keyboard: Arrow keys to move, Home/End to jump -->
+        <ul
+          class="tablist"
+          role="tablist"
+          aria-label="Feature categories"
+          id="feature-tablist"
+        >
+          <li role="presentation">
+            <button
+              class="tab-btn"
+              role="tab"
+              id="tab-comms"
+              aria-controls="panel-comms"
+              aria-selected="true"
+              tabindex="0"
+            >Communication</button>
+          </li>
+          <li role="presentation">
+            <button
+              class="tab-btn"
+              role="tab"
+              id="tab-events"
+              aria-controls="panel-events"
+              aria-selected="false"
+              tabindex="-1"
+            >Events</button>
+          </li>
+          <li role="presentation">
+            <button
+              class="tab-btn"
+              role="tab"
+              id="tab-tasks"
+              aria-controls="panel-tasks"
+              aria-selected="false"
+              tabindex="-1"
+            >Task management</button>
+          </li>
+          <li role="presentation">
+            <button
+              class="tab-btn"
+              role="tab"
+              id="tab-members"
+              aria-controls="panel-members"
+              aria-selected="false"
+              tabindex="-1"
+            >Members</button>
+          </li>
+        </ul>
+
+        <!-- Tab panels -->
+        <div
+          id="panel-comms"
+          role="tabpanel"
+          aria-labelledby="tab-comms"
+          aria-hidden="false"
+          tabindex="0"
+        >
+          <div class="features-grid">
+
+            <article class="feature-card">
+              <div class="feature-card__media feature-card__media--placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+                <span>GIF placeholder</span>
+                <div class="feature-card__media-tag">Preview</div>
+              </div>
+              <div class="feature-card__body">
+                <div class="feature-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </div>
+                <h3 class="feature-card__title">Centralized messaging</h3>
+                <p class="feature-card__desc">
+                  Replace group chats with threaded channels organized by topic,
+                  event, or team — all in one place.
+                </p>
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-card__media feature-card__media--placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3"/>
+                </svg>
+                <span>GIF placeholder</span>
+                <div class="feature-card__media-tag">Preview</div>
+              </div>
+              <div class="feature-card__body">
+                <div class="feature-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
+                  </svg>
+                </div>
+                <h3 class="feature-card__title">Announcement broadcasts</h3>
+                <p class="feature-card__desc">
+                  Send important announcements to all members with read-receipts
+                  and push notification support.
+                </p>
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-card__media feature-card__media--placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+                </svg>
+                <span>GIF placeholder</span>
+                <div class="feature-card__media-tag">Preview</div>
+              </div>
+              <div class="feature-card__body">
+                <div class="feature-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/>
+                  </svg>
+                </div>
+                <h3 class="feature-card__title">Activity feed</h3>
+                <p class="feature-card__desc">
+                  A real-time activity stream keeps every member up to date with
+                  club news, mentions, and replies.
+                </p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <div
+          id="panel-events"
+          role="tabpanel"
+          aria-labelledby="tab-events"
+          aria-hidden="true"
+          tabindex="0"
+        >
+          <div class="features-grid">
+
+            <article class="feature-card">
+              <div class="feature-card__media feature-card__media--placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                  <line x1="16" y1="2" x2="16" y2="6"/>
+                  <line x1="8" y1="2" x2="8" y2="6"/>
+                  <line x1="3" y1="10" x2="21" y2="10"/>
+                </svg>
+                <span>GIF placeholder</span>
+                <div class="feature-card__media-tag">Preview</div>
+              </div>
+              <div class="feature-card__body">
+                <div class="feature-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6"/>
+                    <line x1="8" y1="2" x2="8" y2="6"/>
+                    <line x1="3" y1="10" x2="21" y2="10"/>
+                  </svg>
+                </div>
+                <h3 class="feature-card__title">Event calendar</h3>
+                <p class="feature-card__desc">
+                  Create, manage, and RSVP to events with an integrated calendar
+                  that syncs to Google Calendar and iCal.
+                </p>
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-card__media feature-card__media--placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+                <span>GIF placeholder</span>
+                <div class="feature-card__media-tag">Preview</div>
+              </div>
+              <div class="feature-card__body">
+                <div class="feature-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                    <circle cx="9" cy="7" r="4"/>
+                  </svg>
+                </div>
+                <h3 class="feature-card__title">RSVP &amp; attendance</h3>
+                <p class="feature-card__desc">
+                  Track attendance, send reminders, and export sign-in sheets
+                  with one click.
+                </p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <div
+          id="panel-tasks"
+          role="tabpanel"
+          aria-labelledby="tab-tasks"
+          aria-hidden="true"
+          tabindex="0"
+        >
+          <div class="features-grid">
+
+            <article class="feature-card">
+              <div class="feature-card__media feature-card__media--placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <polyline points="9 11 12 14 22 4"/>
+                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                </svg>
+                <span>GIF placeholder</span>
+                <div class="feature-card__media-tag">Preview</div>
+              </div>
+              <div class="feature-card__body">
+                <div class="feature-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9 11 12 14 22 4"/>
+                    <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                  </svg>
+                </div>
+                <h3 class="feature-card__title">Kanban board</h3>
+                <p class="feature-card__desc">
+                  Drag-and-drop tasks across To Do, In Progress, and Done columns.
+                  Assign deadlines and owners instantly.
+                </p>
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-card__media feature-card__media--placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/>
+                </svg>
+                <span>GIF placeholder</span>
+                <div class="feature-card__media-tag">Preview</div>
+              </div>
+              <div class="feature-card__body">
+                <div class="feature-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 3h18v18H3z"/><path d="M3 9h18M9 21V9"/>
+                  </svg>
+                </div>
+                <h3 class="feature-card__title">Role-based assignments</h3>
+                <p class="feature-card__desc">
+                  Automatically assign tasks based on member roles. Executives,
+                  coordinators, and volunteers each see only what's relevant.
+                </p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+        <div
+          id="panel-members"
+          role="tabpanel"
+          aria-labelledby="tab-members"
+          aria-hidden="true"
+          tabindex="0"
+        >
+          <div class="features-grid">
+
+            <article class="feature-card">
+              <div class="feature-card__media feature-card__media--placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                  <circle cx="12" cy="7" r="4"/>
+                </svg>
+                <span>GIF placeholder</span>
+                <div class="feature-card__media-tag">Preview</div>
+              </div>
+              <div class="feature-card__body">
+                <div class="feature-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                  </svg>
+                </div>
+                <h3 class="feature-card__title">Member directory</h3>
+                <p class="feature-card__desc">
+                  Browse all club members, filter by role, and quickly contact
+                  anyone from a unified profile page.
+                </p>
+              </div>
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-card__media feature-card__media--placeholder">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                </svg>
+                <span>GIF placeholder</span>
+                <div class="feature-card__media-tag">Preview</div>
+              </div>
+              <div class="feature-card__body">
+                <div class="feature-card__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  </svg>
+                </div>
+                <h3 class="feature-card__title">Permissions &amp; roles</h3>
+                <p class="feature-card__desc">
+                  Define custom roles with granular permissions. Control who can
+                  post, manage events, or access financials.
+                </p>
+              </div>
+            </article>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── CTA ───────────────────────────────────────────────────────────── -->
+    <section class="cta-section" aria-labelledby="cta-heading">
+      <div class="container">
+        <div class="section-label" aria-hidden="true">Get started</div>
+        <h2 id="cta-heading">Ready to simplify your club?</h2>
+        <p>
+          Join clubs already using Gryph Club Connect to stay organized,
+          communicate better, and get more done.
+        </p>
+        <div class="cta-section__actions">
+          <a class="btn btn-primary" href="#get-started" aria-describedby="cta-heading">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            Get started free
+          </a>
+          <a class="btn btn-outline" href="mailto:contact@gryphclubconnect.ca" aria-label="Contact the Gryph Club Connect team">
+            Contact us
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── FOOTER ───────────────────────────────────────────────────────── -->
+  <footer class="footer" aria-label="Site footer">
+    <div class="container">
+      <div class="footer__grid">
+
+        <!-- Brand -->
+        <div class="footer__brand">
+          <p class="brand-name">Gryph <span>Club</span> Connect</p>
+          <p>The centralized operating system for University of Guelph student clubs.</p>
+        </div>
+
+        <!-- Product -->
+        <nav class="footer__col" aria-label="Product links">
+          <h3>Product</h3>
+          <ul>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#how-it-works">How it works</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#for-clubs">For clubs</a></li>
+          </ul>
+        </nav>
+
+        <!-- Company -->
+        <nav class="footer__col" aria-label="Company links">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#blog">Blog</a></li>
+            <li><a href="#careers">Careers</a></li>
+          </ul>
+        </nav>
+
+        <!-- Legal / Contact -->
+        <nav class="footer__col" aria-label="Legal and contact links">
+          <h3>Legal &amp; contact</h3>
+          <ul>
+            <li><a href="#privacy">Privacy policy</a></li>
+            <li><a href="#terms">Terms of service</a></li>
+            <li><a href="mailto:contact@gryphclubconnect.ca">Contact us</a></li>
+            <li><a href="mailto:support@gryphclubconnect.ca">Support</a></li>
+          </ul>
+        </nav>
+
+      </div>
+
+      <div class="footer__bottom">
+        <span>© <span id="footer-year"></span> Gryph Club Connect. All rights reserved.</span>
+        <div class="footer__legal">
+          <a href="#privacy">Privacy policy</a>
+          <span aria-hidden="true">·</span>
+          <a href="#terms">Terms of service</a>
+          <span aria-hidden="true">·</span>
+          <a href="mailto:contact@gryphclubconnect.ca">contact@gryphclubconnect.ca</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ─── SCRIPTS ──────────────────────────────────────────────────────── -->
+  <script>
+    /* ── Footer year ──────────────────────────────────────────────────── */
+    document.getElementById('footer-year').textContent = new Date().getFullYear();
+
+    /* ── Mobile nav toggle ────────────────────────────────────────────── */
+    (function () {
+      var btn    = document.getElementById('nav-toggle');
+      var drawer = document.getElementById('nav-mobile');
+      if (!btn || !drawer) return;
+
+      btn.addEventListener('click', function () {
+        var expanded = btn.getAttribute('aria-expanded') === 'true';
+        btn.setAttribute('aria-expanded', String(!expanded));
+        btn.setAttribute('aria-label', expanded ? 'Open navigation menu' : 'Close navigation menu');
+        drawer.classList.toggle('open', !expanded);
+      });
+
+      /* Close drawer when a link inside it is clicked */
+      drawer.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          btn.setAttribute('aria-expanded', 'false');
+          btn.setAttribute('aria-label', 'Open navigation menu');
+          drawer.classList.remove('open');
+        });
+      });
+    }());
+
+    /* ── Tabs with keyboard navigation ───────────────────────────────── */
+    (function () {
+      var tablist = document.getElementById('feature-tablist');
+      if (!tablist) return;
+
+      var tabs = Array.from(tablist.querySelectorAll('[role="tab"]'));
+
+      function selectTab(tab) {
+        /* Deactivate all */
+        tabs.forEach(function (t) {
+          t.setAttribute('aria-selected', 'false');
+          t.setAttribute('tabindex', '-1');
+          var panel = document.getElementById(t.getAttribute('aria-controls'));
+          if (panel) panel.setAttribute('aria-hidden', 'true');
+        });
+        /* Activate chosen tab */
+        tab.setAttribute('aria-selected', 'true');
+        tab.setAttribute('tabindex', '0');
+        tab.focus();
+        var activePanel = document.getElementById(tab.getAttribute('aria-controls'));
+        if (activePanel) activePanel.setAttribute('aria-hidden', 'false');
+      }
+
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () { selectTab(tab); });
+
+        tab.addEventListener('keydown', function (e) {
+          var idx = tabs.indexOf(tab);
+          if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            selectTab(tabs[(idx + 1) % tabs.length]);
+          } else if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            selectTab(tabs[(idx - 1 + tabs.length) % tabs.length]);
+          } else if (e.key === 'Home') {
+            e.preventDefault();
+            selectTab(tabs[0]);
+          } else if (e.key === 'End') {
+            e.preventDefault();
+            selectTab(tabs[tabs.length - 1]);
+          }
+        });
+      });
+    }());
+  </script>
+</body>
+</html>

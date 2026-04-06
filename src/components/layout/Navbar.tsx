@@ -53,7 +53,7 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
             : 'bg-transparent'
         }`}
       >
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between py-2">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between py-2">
           {/* Logo */}
           <Link
             to="/"

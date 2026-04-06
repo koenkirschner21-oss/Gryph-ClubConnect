@@ -14,7 +14,7 @@ interface StatItem {
 const stats: StatItem[] = [
   { value: '50+', label: 'Active Clubs', numericEnd: 50, suffix: '+' },
   { value: '2,400+', label: 'Students', numericEnd: 2400, suffix: '+' },
-  { value: '84%', label: 'Tasks Completed', numericEnd: 84, suffix: '%' },
+  { value: 'Free', label: 'To Start', numericEnd: 0 },
 ];
 
 function useCounter(end: number, duration = 1500, start = false) {

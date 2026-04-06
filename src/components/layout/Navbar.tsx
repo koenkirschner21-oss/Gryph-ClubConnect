@@ -16,10 +16,16 @@ function useScrollPosition() {
   return scrolled;
 }
 
-export default function Navbar() {
+interface NavbarProps {
+  onGetStarted?: () => void;
+}
+
+export default function Navbar({ onGetStarted }: NavbarProps) {
   const scrolled = useScrollPosition();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [localModalOpen, setLocalModalOpen] = useState(false);
+  const modalOpen = localModalOpen;
+  const handleGetStarted = onGetStarted ?? (() => setLocalModalOpen(true));
 
   useEffect(() => {
     if (menuOpen) document.body.style.overflow = 'hidden';
@@ -60,7 +66,7 @@ export default function Navbar() {
           {/* Desktop actions */}
           <div className="hidden md:flex items-center gap-3">
             <Button variant="ghost" size="sm">Sign In</Button>
-            <Button variant="red" size="sm" onClick={() => setModalOpen(true)}>
+            <Button variant="red" size="sm" onClick={handleGetStarted}>
               Get Started
             </Button>
           </div>
@@ -114,7 +120,7 @@ export default function Navbar() {
                   variant="red"
                   size="md"
                   className="w-full justify-center"
-                  onClick={() => { setMenuOpen(false); setModalOpen(true); }}
+                  onClick={() => { setMenuOpen(false); handleGetStarted(); }}
                 >
                   Get Started
                 </Button>
@@ -124,7 +130,7 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+      <Modal isOpen={modalOpen} onClose={() => setLocalModalOpen(false)} />
     </>
   );
 }

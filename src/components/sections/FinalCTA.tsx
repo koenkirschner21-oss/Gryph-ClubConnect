@@ -36,11 +36,11 @@ export default function FinalCTA() {
           <AnimatedSection>
             <h2
               className="font-extrabold text-[#F0F6FC] font-[Syne,sans-serif] mb-5 leading-tight"
-              style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)' }}
+              style={{ fontSize: 'clamp(2.25rem, 5.5vw, 3.75rem)' }}
             >
               Your club deserves better<br className="hidden sm:block" /> than a group chat.
             </h2>
-            <p className="text-[#8B949E] text-xl max-w-2xl mx-auto mb-8">
+            <p className="text-[#9DA5AE] text-xl max-w-2xl mx-auto mb-8">
               Join 50+ University of Guelph clubs already using Gryph Club Connect to stay organized and connected.
             </p>
 
@@ -53,7 +53,7 @@ export default function FinalCTA() {
               </Button>
             </div>
 
-            <p className="text-[#6E7681] text-sm font-mono mb-8">
+            <p className="text-[#8B949E] text-sm font-mono mb-8">
               🔒 @uoguelph.ca emails only · No credit card required
             </p>
 
@@ -63,19 +63,19 @@ export default function FinalCTA() {
                 {trustedClubs.map((club, i) => (
                   <div
                     key={i}
-                    className="w-8 h-8 rounded-full border-2 border-[#0D1117] flex items-center justify-center text-[10px] font-bold text-white shadow-lg"
+                    className="w-9 h-9 rounded-full border-2 border-[#0D1117] flex items-center justify-center text-[11px] font-bold text-white shadow-lg"
                     style={{ backgroundColor: club.color }}
                     title={club.name}
                   >
                     {club.name[0]}
                   </div>
                 ))}
-                <div className="w-8 h-8 rounded-full border-2 border-[#0D1117] bg-[#21262D] flex items-center justify-center text-[10px] font-medium text-[#8B949E]">
+                <div className="w-9 h-9 rounded-full border-2 border-[#0D1117] bg-[#21262D] flex items-center justify-center text-[11px] font-medium text-[#8B949E]">
                   +45
                 </div>
               </div>
-              <p className="text-[#6E7681] text-xs">
-                Trusted by <span className="text-[#8B949E] font-medium">2,400+ students</span> across campus
+              <p className="text-[#8B949E] text-sm">
+                Trusted by <span className="text-[#9DA5AE] font-medium">2,400+ students</span> across campus
               </p>
             </div>
           </AnimatedSection>

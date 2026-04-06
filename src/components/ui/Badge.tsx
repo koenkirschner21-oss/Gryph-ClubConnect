@@ -36,7 +36,7 @@ export default function Badge({ variant = 'ghost', children, dot = false, classN
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
-      className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono font-medium ${container} ${className}`}
+      className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-mono font-medium ${container} ${className}`}
     >
       {dot && (
         <span className="relative flex h-1.5 w-1.5">

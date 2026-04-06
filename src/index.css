@@ -67,7 +67,14 @@ h1, h2, h3, h4, h5, h6 {
 /* ===== FOCUS RINGS ===== */
 :focus-visible {
   outline: 2px solid var(--color-red);
-  outline-offset: 2px;
+  outline-offset: 3px;
+}
+
+/* Ensure consistent focus for buttons and links */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 3px;
 }
 
 /* ===== SCROLLBAR ===== */
@@ -229,5 +236,5 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ===== SCROLL OFFSETS ===== */
 section[id] {
-  scroll-margin-top: 80px;
+  scroll-margin-top: 84px;
 }

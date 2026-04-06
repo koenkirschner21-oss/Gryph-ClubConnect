@@ -47,11 +47,11 @@ export default function Footer() {
               className="h-12 w-auto"
               loading="lazy"
             />
-            <p className="text-[#8B949E] text-sm leading-relaxed">
+            <p className="text-[#9DA5AE] text-sm leading-relaxed">
               Every Club. One Platform.<br />
               Built for University of Guelph student clubs.
             </p>
-            <p className="text-[#6E7681] text-xs">Made in Guelph, Ontario 🍁</p>
+            <p className="text-[#8B949E] text-sm">Made in Guelph, Ontario 🍁</p>
             <div className="flex items-center gap-2 pt-1">
               {socialLinks.map(({ icon: Icon, href, label }) => (
                 <a
@@ -60,7 +60,7 @@ export default function Footer() {
                   aria-label={label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#6E7681] hover:text-[#F0F6FC] transition-all p-2 rounded-lg hover:bg-[#21262D] hover:scale-110"
+                  className="text-[#8B949E] hover:text-[#F0F6FC] transition-all p-2.5 rounded-lg hover:bg-[#21262D] hover:scale-110"
                 >
                   <Icon size={18} />
                 </a>
@@ -70,13 +70,13 @@ export default function Footer() {
 
           {/* Col 2: Platform */}
           <div>
-            <h4 className="text-[#F0F6FC] text-sm font-semibold mb-4">Platform</h4>
-            <ul className="space-y-2.5">
+            <h4 className="text-[#F0F6FC] text-base font-semibold mb-4">Platform</h4>
+            <ul className="space-y-3">
               {platformLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-[#8B949E] hover:text-[#F0F6FC] text-sm transition-colors inline-flex items-center gap-1 group"
+                    className="text-[#9DA5AE] hover:text-[#F0F6FC] text-sm transition-colors inline-flex items-center gap-1 group"
                   >
                     {link.label}
                     <ArrowRight size={12} className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
@@ -88,13 +88,13 @@ export default function Footer() {
 
           {/* Col 3: Company */}
           <div>
-            <h4 className="text-[#F0F6FC] text-sm font-semibold mb-4">Company</h4>
-            <ul className="space-y-2.5">
+            <h4 className="text-[#F0F6FC] text-base font-semibold mb-4">Company</h4>
+            <ul className="space-y-3">
               {companyLinks.map((link) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-[#8B949E] hover:text-[#F0F6FC] text-sm transition-colors inline-flex items-center gap-1 group"
+                    className="text-[#9DA5AE] hover:text-[#F0F6FC] text-sm transition-colors inline-flex items-center gap-1 group"
                   >
                     {link.label}
                     <ArrowRight size={12} className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
@@ -106,31 +106,31 @@ export default function Footer() {
 
           {/* Col 4: Newsletter + Contact */}
           <div>
-            <h4 className="text-[#F0F6FC] text-sm font-semibold mb-4">Stay Updated</h4>
+            <h4 className="text-[#F0F6FC] text-base font-semibold mb-4">Stay Updated</h4>
             {subscribed ? (
               <div className="bg-[#22C55E]/10 border border-[#22C55E]/20 rounded-lg px-4 py-3">
                 <p className="text-[#22C55E] text-sm font-medium">✓ You're subscribed!</p>
-                <p className="text-[#8B949E] text-xs mt-1">We'll keep you in the loop.</p>
+                <p className="text-[#9DA5AE] text-sm mt-1">We'll keep you in the loop.</p>
               </div>
             ) : (
               <form onSubmit={handleSubscribe} className="space-y-3">
-                <p className="text-[#8B949E] text-xs">Get product updates and club tips.</p>
+                <p className="text-[#9DA5AE] text-sm">Get product updates and club tips.</p>
                 <div className="flex items-center gap-2">
                   <div className="flex-1 relative">
-                    <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6E7681]" />
+                    <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#8B949E]" />
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="you@uoguelph.ca"
-                      className="w-full bg-[#161B22] border border-[#21262D] rounded-lg pl-9 pr-3 py-2 text-sm text-[#F0F6FC] placeholder:text-[#6E7681] focus:outline-none focus:ring-2 focus:ring-[#C8102E] focus:border-[#C8102E] transition-colors"
+                      className="w-full bg-[#161B22] border border-[#21262D] rounded-lg pl-9 pr-3 py-2.5 text-sm text-[#F0F6FC] placeholder:text-[#8B949E] focus:outline-none focus:ring-2 focus:ring-[#C8102E] focus:border-[#C8102E] transition-colors"
                       required
                       aria-label="Email for newsletter"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="bg-[#C8102E] hover:bg-[#A00C24] text-white p-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#C8102E] focus:ring-offset-2 focus:ring-offset-[#0D1117]"
+                    className="bg-[#C8102E] hover:bg-[#A00C24] text-white p-2.5 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#C8102E] focus:ring-offset-2 focus:ring-offset-[#0D1117]"
                     aria-label="Subscribe"
                   >
                     <ArrowRight size={16} />
@@ -139,11 +139,11 @@ export default function Footer() {
               </form>
             )}
 
-            <div className="mt-5 space-y-2.5">
+            <div className="mt-5 space-y-3">
               <div>
-                <span className="text-[#6E7681] text-xs uppercase tracking-wide font-mono">Email</span>
+                <span className="text-[#8B949E] text-sm uppercase tracking-wide font-mono">Email</span>
                 <p className="text-sm mt-0.5">
-                  <a href="mailto:hello@gryphclubconnect.ca" className="text-[#8B949E] hover:text-[#F0F6FC] transition-colors">
+                  <a href="mailto:hello@gryphclubconnect.ca" className="text-[#9DA5AE] hover:text-[#F0F6FC] transition-colors">
                     hello@gryphclubconnect.ca
                   </a>
                 </p>
@@ -165,10 +165,10 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-[#21262D] px-4 sm:px-6 lg:px-8 py-5">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
-          <p className="text-[#6E7681] text-xs text-center sm:text-left">
+          <p className="text-[#8B949E] text-sm text-center sm:text-left">
             © {new Date().getFullYear()} Gryph Club Connect. University of Guelph.
           </p>
-          <p className="text-[#6E7681] text-xs">
+          <p className="text-[#8B949E] text-sm">
             Built for Gryphons, by Gryphons 🦅
           </p>
         </div>

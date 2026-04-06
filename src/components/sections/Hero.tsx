@@ -39,8 +39,8 @@ function StatCounter({ item, animate }: { item: StatItem; animate: boolean }) {
   const display = item.numericEnd === 0 ? item.value : `${count.toLocaleString()}${item.suffix ?? ''}`;
   return (
     <div className="text-center sm:text-left">
-      <div className="text-2xl font-bold text-[#F0F6FC] font-['JetBrains_Mono',monospace] tabular-nums">{display}</div>
-      <div className="text-xs text-[rgba(240,246,252,0.35)] mt-0.5 uppercase tracking-[0.08em]">{item.label}</div>
+      <div className="text-[28px] font-bold text-[#F0F6FC] font-['JetBrains_Mono',monospace] tabular-nums">{display}</div>
+      <div className="text-sm text-[rgba(240,246,252,0.45)] mt-0.5 uppercase tracking-[0.08em]">{item.label}</div>
     </div>
   );
 }
@@ -144,14 +144,14 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
               <Badge variant="green" dot>Now Live — Free for all UofG clubs</Badge>
             </div>
 
-            <h1 className="font-[Syne,sans-serif] font-extrabold leading-[1.08] tracking-tight" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}>
+            <h1 className="font-[Syne,sans-serif] font-extrabold leading-[1.04] tracking-tight" style={{ fontSize: 'clamp(2.75rem, 6.5vw, 5rem)' }}>
               <span className="block text-[#F0F6FC]">Every Club.</span>
               <span className="block bg-gradient-to-r from-[#D4A017] to-[#F0B820] bg-clip-text text-transparent">
                 One Platform.
               </span>
             </h1>
 
-            <p className="text-[#8B949E] text-lg sm:text-xl leading-relaxed" style={{ maxWidth: '480px' }}>
+            <p className="text-[#9DA5AE] text-xl sm:text-[22px]" style={{ maxWidth: '460px', lineHeight: '1.65' }}>
               Manage your entire club — communication, tasks, events — in one place. Built for UofG student organizations.
             </p>
 
@@ -165,19 +165,19 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
             </div>
 
             {/* Trust bar with Lucide icons */}
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-1">
-              <p className="text-[#6E7681] text-xs font-mono flex items-center gap-1.5">
-                <Shield size={13} className="text-[#6E7681]" />
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
+              <p className="text-[#8B949E] text-sm font-mono flex items-center gap-2">
+                <Shield size={15} className="text-[#8B949E]" />
                 @uoguelph.ca emails only
               </p>
               <span className="text-[#21262D]">·</span>
-              <p className="text-[#6E7681] text-xs font-mono flex items-center gap-1.5">
-                <Clock size={13} className="text-[#6E7681]" />
+              <p className="text-[#8B949E] text-sm font-mono flex items-center gap-2">
+                <Clock size={15} className="text-[#8B949E]" />
                 Setup in under 2 minutes
               </p>
               <span className="text-[#21262D]">·</span>
-              <p className="text-[#6E7681] text-xs font-mono flex items-center gap-1.5">
-                <CreditCard size={13} className="text-[#6E7681]" />
+              <p className="text-[#8B949E] text-sm font-mono flex items-center gap-2">
+                <CreditCard size={15} className="text-[#8B949E]" />
                 No credit card
               </p>
             </div>
@@ -186,9 +186,9 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
             <div className="w-full h-px bg-[rgba(255,255,255,0.06)]" />
 
             {/* Stats row */}
-            <div ref={statsRef} className="flex flex-wrap items-center gap-6">
+            <div ref={statsRef} className="flex flex-wrap items-center gap-8">
               {stats.map((stat, i) => (
-                <div key={i} className="flex items-center gap-6">
+                <div key={i} className="flex items-center gap-8">
                   <StatCounter item={stat} animate={statsVisible} />
                   {i < stats.length - 1 && (
                     <div className="h-10 w-px bg-[#21262D]" />
@@ -204,19 +204,19 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
               transition={{ delay: 0.5, duration: 0.6 }}
               className="flex items-center gap-4 pt-1"
             >
-              <div className="flex -space-x-2.5">
+              <div className="flex -space-x-2">
                 {['#C8102E', '#3B82F6', '#D4A017', '#22C55E', '#A855F7'].map((color, i) => (
                   <div
                     key={i}
-                    className="w-8 h-8 rounded-full border-2 border-[#0D1117] flex items-center justify-center text-[10px] font-bold text-white shadow-sm"
+                    className="w-9 h-9 rounded-full border-2 border-[#0D1117] flex items-center justify-center text-[11px] font-bold text-white shadow-sm"
                     style={{ backgroundColor: color }}
                   >
                     {trustedClubs[i][0]}
                   </div>
                 ))}
               </div>
-              <p className="text-[#6E7681] text-xs">
-                Trusted by <span className="text-[#8B949E] font-medium">50+ UofG clubs</span>
+              <p className="text-[#8B949E] text-sm">
+                Trusted by <span className="text-[#9DA5AE] font-medium">50+ UofG clubs</span>
               </p>
             </motion.div>
           </motion.div>
@@ -283,8 +283,8 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
             </motion.div>
 
             {/* Dark card container with gradient border */}
-            <div className="w-full max-w-[480px] relative">
-              <div className="rounded-2xl p-px bg-gradient-to-br from-[#C8102E]/30 via-[#21262D] to-[#D4A017]/20 shadow-2xl shadow-black/50">
+            <div className="w-full max-w-[520px] relative">
+              <div className="rounded-2xl p-px bg-gradient-to-br from-[#C8102E]/30 via-[#21262D] to-[#D4A017]/20 shadow-xl shadow-black/30">
                 <div className="bg-[#161B22] rounded-2xl overflow-hidden">
                   {/* Titlebar */}
                   <div className="flex items-center gap-2 px-4 py-3 border-b border-[#21262D] bg-[#0D1117]">

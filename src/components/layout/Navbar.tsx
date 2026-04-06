@@ -66,7 +66,7 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
         }`}
         style={scrolled ? { backgroundColor: `rgba(13,17,23,${bgOpacity})` } : undefined}
       >
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[72px] flex items-center justify-between py-2">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[76px] flex items-center justify-between py-2">
           {/* Logo — no background, transparent PNG only */}
           <Link
             to="/"
@@ -77,12 +77,12 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
             <img
               src={`${import.meta.env.BASE_URL}logo-transparent.png`}
               alt="Gryph Club Connect"
-              className="h-14 sm:h-16 w-auto drop-shadow-[0_0_8px_rgba(200,16,46,0.15)]"
+              className="h-[68px] sm:h-20 w-auto drop-shadow-[0_0_8px_rgba(200,16,46,0.15)]"
             />
           </Link>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-1">
+          <div className="hidden md:flex items-center gap-1.5">
             {navLinks.map((link) => {
               const active = isActive(link.href);
               return (
@@ -90,7 +90,7 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
                   key={link.label}
                   href={link.href}
                   onClick={(e) => handleNavClick(e, link.href)}
-                  className={`relative px-3 py-2 text-sm font-medium transition-colors rounded-lg ${
+                  className={`relative px-4 py-2.5 text-[15px] font-medium transition-colors rounded-lg ${
                     active
                       ? 'text-[#F0F6FC]'
                       : 'text-[#8B949E] hover:text-[#F0F6FC] hover:bg-[#21262D]/50'
@@ -101,7 +101,7 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
                   {active && (
                     <motion.div
                       layoutId="nav-underline"
-                      className="absolute bottom-0 left-3 right-3 h-0.5 bg-[#C8102E] rounded-full"
+                      className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#C8102E] rounded-full"
                       transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
                     />
                   )}
@@ -112,15 +112,15 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
 
           {/* Desktop actions */}
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="ghost" size="sm" onClick={handleGetStarted}>Sign In</Button>
-            <Button variant="red" size="sm" onClick={handleGetStarted}>
+            <Button variant="ghost" size="md" onClick={handleGetStarted}>Sign In</Button>
+            <Button variant="red" size="md" onClick={handleGetStarted} className="shadow-[0_2px_12px_rgba(200,16,46,0.3)]">
               Get Started
             </Button>
           </div>
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2 text-[#8B949E] hover:text-[#F0F6FC] transition-colors focus:outline-none focus:ring-2 focus:ring-[#C8102E] rounded-lg"
+            className="md:hidden p-2.5 text-[#8B949E] hover:text-[#F0F6FC] transition-colors focus:outline-none focus:ring-2 focus:ring-[#C8102E] rounded-lg"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
@@ -149,7 +149,7 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-[72px] z-40 bg-[#161B22]/95 backdrop-blur-lg border-b border-[#21262D] shadow-2xl md:hidden"
+            className="fixed inset-x-0 top-[76px] z-40 bg-[#161B22]/95 backdrop-blur-lg border-b border-[#21262D] shadow-2xl md:hidden"
             role="navigation"
             aria-label="Mobile navigation"
           >
@@ -161,7 +161,7 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
                     key={link.label}
                     href={link.href}
                     onClick={(e) => { handleNavClick(e, link.href); setMenuOpen(false); }}
-                    className={`block px-4 py-3.5 rounded-xl text-sm font-medium transition-all ${
+                    className={`block px-4 py-3.5 rounded-xl text-[15px] font-medium transition-all ${
                       active
                         ? 'text-[#F0F6FC] bg-[#C8102E]/10 border border-[#C8102E]/20'
                         : 'text-[#8B949E] hover:text-[#F0F6FC] hover:bg-[#21262D]'

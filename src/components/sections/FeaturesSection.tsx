@@ -24,20 +24,20 @@ const colorMap: Record<FeatureColor, { bg: string; text: string; border: string 
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="py-24 bg-[#0D1117]">
+    <section id="features" className="py-28 bg-[#0D1117]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <AnimatedSection className="text-center mb-16">
-          <span className="text-xs font-mono text-[#D4A017] uppercase tracking-wider mb-3 block">Features</span>
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-[#F0F6FC] font-[Syne,sans-serif] mb-4">
+        <AnimatedSection className="text-center mb-20">
+          <span className="text-sm font-mono text-[#D4A017] uppercase tracking-wider mb-5 block">Features</span>
+          <h2 className="text-[2.75rem] sm:text-[3.5rem] font-extrabold text-[#F0F6FC] font-[Syne,sans-serif] mb-5">
             Everything your club needs
           </h2>
-          <p className="text-[#8B949E] text-lg max-w-lg mx-auto">
+          <p className="text-[#9DA5AE] text-xl max-w-xl mx-auto">
             6 powerful tools, one unified platform — designed for how student clubs actually work.
           </p>
         </AnimatedSection>
 
         <StaggerContainer
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
           staggerDelay={0.08}
         >
           {features.map((feature) => {
@@ -47,19 +47,19 @@ export default function FeaturesSection() {
             return (
               <StaggerItem key={feature.title}>
                 <div
-                  className="group bg-[#1A1F26] border border-[#21262D] rounded-xl p-6 h-full transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(200,16,46,0.3)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.3)]"
+                  className="group bg-[#1A1F26] border border-[#21262D] rounded-xl p-7 h-full transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(200,16,46,0.3)] hover:shadow-[0_20px_50px_rgba(0,0,0,0.4)]"
                 >
                   <div
-                    className="w-11 h-11 rounded-xl flex items-center justify-center mb-5"
+                    className="w-[52px] h-[52px] rounded-xl flex items-center justify-center mb-6"
                     style={{ background: colors.bg, border: `1px solid ${colors.border}` }}
                   >
-                    <Icon size={22} color={colors.text} />
+                    <Icon size={26} color={colors.text} />
                   </div>
 
-                  <h3 className="text-[#F0F6FC] font-semibold text-lg mb-2 font-[Syne,sans-serif]">
+                  <h3 className="text-[#F0F6FC] font-bold text-xl mb-3 font-[Syne,sans-serif]">
                     {feature.title}
                   </h3>
-                  <p className="text-[#8B949E] text-sm leading-relaxed">
+                  <p className="text-[#9DA5AE] text-[15px] leading-relaxed">
                     {feature.description}
                   </p>
                 </div>

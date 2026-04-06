@@ -15,7 +15,7 @@
   <style>
     /* ─── CSS TOKEN DEFAULTS ─────────────────────────────────────────── */
     :root {
-      /* Colours */
+      /* Colors */
       --color-red:           #C8102E;
       --color-red-dark:      #A00C24;
       --color-red-light:     #E8203E;
@@ -643,6 +643,38 @@
       section { padding: var(--sp-12) 0; }
     }
 
+    /* ─── NAV ACTIONS ────────────────────────────────────────────────── */
+    .nav__actions {
+      display: flex;
+      align-items: center;
+      gap: var(--sp-3);
+    }
+
+    /* Small button variant */
+    .btn-sm {
+      padding: var(--sp-2) var(--sp-4);
+      font-size: .875rem;
+    }
+
+    /* Mobile nav CTA link */
+    .nav__mobile-cta {
+      color: var(--color-red);
+      font-weight: 600;
+    }
+
+    /* ─── HERO MOCKUP CONTENT BARS ───────────────────────────────────── */
+    .hero__mockup-content-bar--title { height: 20px; width: 60%; }
+    .hero__mockup-content-bar--lg    { height: 14px; width: 90%; }
+    .hero__mockup-content-bar--md    { height: 14px; width: 80%; }
+    .hero__mockup-content-bar--sm    { height: 14px; width: 70%; }
+    .hero__mockup-content-bar--block { height: 80px; width: 100%; border-radius: var(--radius-md); }
+    .hero__mockup-content-bar--card  { height: 60px; border-radius: var(--radius-md); }
+    .hero__mockup-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-2);
+    }
+
     /* ─── UTILITY ────────────────────────────────────────────────────── */
     .visually-hidden {
       position: absolute;
@@ -675,8 +707,8 @@
         <li><a href="#about">About</a></li>
       </ul>
 
-      <div style="display:flex;align-items:center;gap:12px;">
-        <a class="btn btn-primary" href="#get-started" style="padding:8px 20px;font-size:.875rem;">
+      <div class="nav__actions">
+        <a class="btn btn-primary btn-sm" href="#get-started">
           Get started
         </a>
         <!-- Mobile hamburger -->
@@ -700,7 +732,7 @@
       <a href="#how-it-works">How it works</a>
       <a href="#pricing">Pricing</a>
       <a href="#about">About</a>
-      <a href="#get-started" style="color:var(--color-red);font-weight:600;">Get started →</a>
+      <a href="#get-started" class="nav__mobile-cta">Get started →</a>
     </div>
   </nav>
 
@@ -754,14 +786,14 @@
               <div class="hero__mockup-row">
                 <div class="hero__mockup-bar hero__mockup-sidebar"></div>
                 <div class="hero__mockup-content">
-                  <div class="hero__mockup-content-bar" style="height:20px;width:60%;"></div>
-                  <div class="hero__mockup-content-bar" style="height:14px;width:90%;"></div>
-                  <div class="hero__mockup-content-bar" style="height:14px;width:80%;"></div>
-                  <div class="hero__mockup-content-bar" style="height:14px;width:70%;"></div>
-                  <div class="hero__mockup-content-bar" style="height:80px;width:100%;border-radius:var(--radius-md);"></div>
-                  <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;">
-                    <div class="hero__mockup-content-bar" style="height:60px;border-radius:var(--radius-md);"></div>
-                    <div class="hero__mockup-content-bar" style="height:60px;border-radius:var(--radius-md);"></div>
+                  <div class="hero__mockup-content-bar hero__mockup-content-bar--title"></div>
+                  <div class="hero__mockup-content-bar hero__mockup-content-bar--lg"></div>
+                  <div class="hero__mockup-content-bar hero__mockup-content-bar--md"></div>
+                  <div class="hero__mockup-content-bar hero__mockup-content-bar--sm"></div>
+                  <div class="hero__mockup-content-bar hero__mockup-content-bar--block"></div>
+                  <div class="hero__mockup-grid">
+                    <div class="hero__mockup-content-bar hero__mockup-content-bar--card"></div>
+                    <div class="hero__mockup-content-bar hero__mockup-content-bar--card"></div>
                   </div>
                 </div>
               </div>

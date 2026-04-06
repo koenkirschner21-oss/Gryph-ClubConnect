@@ -52,8 +52,9 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
     navigate(path);
   };
 
-  // Dynamic opacity: 70% at top → 95% when scrolled past 60px
-  const bgOpacity = scrolled ? Math.min(0.95, 0.7 + (scrollY - 20) * 0.00625) : 0;
+  // Dynamic opacity: 70% at top → 95% when scrolled past 60px (rate = 0.25 / 40px)
+  const OPACITY_TRANSITION_RATE = 0.00625;
+  const bgOpacity = scrolled ? Math.min(0.95, 0.7 + (scrollY - 20) * OPACITY_TRANSITION_RATE) : 0;
 
   return (
     <>
@@ -77,7 +78,6 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
               src={`${import.meta.env.BASE_URL}logo-transparent.png`}
               alt="Gryph Club Connect"
               className="h-14 sm:h-16 w-auto drop-shadow-[0_0_8px_rgba(200,16,46,0.15)]"
-              style={{ background: 'none' }}
             />
           </Link>
 

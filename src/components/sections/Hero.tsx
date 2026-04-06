@@ -39,8 +39,8 @@ function StatCounter({ item, animate }: { item: StatItem; animate: boolean }) {
   const display = item.numericEnd === 0 ? item.value : `${count.toLocaleString()}${item.suffix ?? ''}`;
   return (
     <div className="text-center sm:text-left">
-      <div className="text-2xl font-bold text-[#F0F6FC] font-mono tabular-nums">{display}</div>
-      <div className="text-xs text-[rgba(240,246,252,0.35)] mt-0.5 uppercase tracking-[0.08em]" style={{ fontSize: '12px' }}>{item.label}</div>
+      <div className="text-2xl font-bold text-[#F0F6FC] font-['JetBrains_Mono',monospace] tabular-nums">{display}</div>
+      <div className="text-xs text-[rgba(240,246,252,0.35)] mt-0.5 uppercase tracking-[0.08em]">{item.label}</div>
     </div>
   );
 }
@@ -146,7 +146,7 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
 
             <h1 className="font-[Syne,sans-serif] font-extrabold leading-[1.08] tracking-tight" style={{ fontSize: 'clamp(2.5rem, 6vw, 4.5rem)' }}>
               <span className="block text-[#F0F6FC]">Every Club.</span>
-              <span className="block gradient-text-gold">
+              <span className="block bg-gradient-to-r from-[#D4A017] to-[#F0B820] bg-clip-text text-transparent">
                 One Platform.
               </span>
             </h1>
@@ -294,7 +294,7 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
                       <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
                     </div>
                     <div className="flex-1 flex justify-center">
-                      <span className="text-xs font-mono" style={{ color: 'rgba(255,255,255,0.5)' }}>gryphclubconnect.ca</span>
+                      <span className="text-xs font-mono text-white/50">gryphclubconnect.ca</span>
                     </div>
                   </div>
 

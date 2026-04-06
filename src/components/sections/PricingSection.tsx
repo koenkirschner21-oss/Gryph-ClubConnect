@@ -8,11 +8,12 @@ export default function PricingSection() {
     <section id="pricing" className="py-24 bg-[#161B22]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
+          <span className="text-xs font-mono text-[#D4A017] uppercase tracking-wider mb-3 block">Pricing</span>
           <h2 className="text-4xl sm:text-5xl font-extrabold text-[#F0F6FC] font-[Syne,sans-serif] mb-4">
             Simple, transparent pricing
           </h2>
           <p className="text-[#8B949E] text-lg">
-            Start free. Upgrade when you need more.
+            Start free. Upgrade when you need more. No surprises.
           </p>
         </AnimatedSection>
 

@@ -14,11 +14,12 @@ export default function HowItWorks() {
     <section id="how-it-works" className="py-24 bg-[#0D1117]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
+          <span className="text-xs font-mono text-[#22C55E] uppercase tracking-wider mb-3 block">Getting Started</span>
           <h2 className="text-4xl sm:text-5xl font-extrabold text-[#F0F6FC] font-[Syne,sans-serif] mb-4">
             Up and running in minutes
           </h2>
           <p className="text-[#8B949E] text-lg max-w-lg mx-auto">
-            No complicated setup. No IT department required.
+            No complicated setup. No IT department required. Just sign up and go.
           </p>
         </AnimatedSection>
 

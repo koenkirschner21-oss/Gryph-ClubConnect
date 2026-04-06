@@ -1,4 +1,5 @@
-import { Twitter, Instagram, Linkedin, Github } from 'lucide-react';
+import { Twitter, Instagram, Linkedin, Github, Mail, ArrowRight } from 'lucide-react';
+import { useState } from 'react';
 
 const platformLinks = [
   { label: 'Features', href: '/#/features' },
@@ -23,20 +24,35 @@ const socialLinks = [
 ];
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email.trim()) {
+      setSubscribed(true);
+      setEmail('');
+    }
+  };
+
   return (
     <footer className="bg-[#0D1117] border-t border-[#21262D]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Col 1: Brand */}
           <div className="space-y-4">
-            <div className="flex items-center gap-1">
-              <span className="text-[#C8102E] font-bold italic text-xl font-serif">Club</span>
-              <span className="text-[#D4A017] font-bold italic text-xl font-serif">Connect</span>
-              <span className="ml-1 text-base">🦅</span>
-            </div>
-            <p className="text-[#8B949E] text-sm leading-relaxed">Every Club. One Platform.</p>
+            <img
+              src={`${import.meta.env.BASE_URL}logo-transparent.png`}
+              alt="Gryph Club Connect"
+              className="h-12 w-auto"
+              loading="lazy"
+            />
+            <p className="text-[#8B949E] text-sm leading-relaxed">
+              Every Club. One Platform.<br />
+              Built for University of Guelph student clubs.
+            </p>
             <p className="text-[#6E7681] text-xs">Made in Guelph, Ontario 🍁</p>
-            <div className="flex items-center gap-3 pt-1">
+            <div className="flex items-center gap-2 pt-1">
               {socialLinks.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -44,9 +60,9 @@ export default function Footer() {
                   aria-label={label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#6E7681] hover:text-[#F0F6FC] transition-colors p-1.5 rounded-lg hover:bg-[#21262D]"
+                  className="text-[#6E7681] hover:text-[#F0F6FC] transition-all p-2 rounded-lg hover:bg-[#21262D] hover:scale-110"
                 >
-                  <Icon size={17} />
+                  <Icon size={18} />
                 </a>
               ))}
             </div>
@@ -60,9 +76,10 @@ export default function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-[#8B949E] hover:text-[#F0F6FC] text-sm transition-colors"
+                    className="text-[#8B949E] hover:text-[#F0F6FC] text-sm transition-colors inline-flex items-center gap-1 group"
                   >
                     {link.label}
+                    <ArrowRight size={12} className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                   </a>
                 </li>
               ))}
@@ -77,34 +94,61 @@ export default function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-[#8B949E] hover:text-[#F0F6FC] text-sm transition-colors"
+                    className="text-[#8B949E] hover:text-[#F0F6FC] text-sm transition-colors inline-flex items-center gap-1 group"
                   >
                     {link.label}
+                    <ArrowRight size={12} className="opacity-0 -translate-x-1 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                   </a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Col 4: Contact */}
+          {/* Col 4: Newsletter + Contact */}
           <div>
-            <h4 className="text-[#F0F6FC] text-sm font-semibold mb-4">Contact</h4>
-            <ul className="space-y-2.5">
-              <li>
+            <h4 className="text-[#F0F6FC] text-sm font-semibold mb-4">Stay Updated</h4>
+            {subscribed ? (
+              <div className="bg-[#22C55E]/10 border border-[#22C55E]/20 rounded-lg px-4 py-3">
+                <p className="text-[#22C55E] text-sm font-medium">✓ You're subscribed!</p>
+                <p className="text-[#8B949E] text-xs mt-1">We'll keep you in the loop.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubscribe} className="space-y-3">
+                <p className="text-[#8B949E] text-xs">Get product updates and club tips.</p>
+                <div className="flex items-center gap-2">
+                  <div className="flex-1 relative">
+                    <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#6E7681]" />
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="you@uoguelph.ca"
+                      className="w-full bg-[#161B22] border border-[#21262D] rounded-lg pl-9 pr-3 py-2 text-sm text-[#F0F6FC] placeholder:text-[#6E7681] focus:outline-none focus:ring-2 focus:ring-[#C8102E] focus:border-[#C8102E] transition-colors"
+                      required
+                      aria-label="Email for newsletter"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="bg-[#C8102E] hover:bg-[#A00C24] text-white p-2 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#C8102E] focus:ring-offset-2 focus:ring-offset-[#0D1117]"
+                    aria-label="Subscribe"
+                  >
+                    <ArrowRight size={16} />
+                  </button>
+                </div>
+              </form>
+            )}
+
+            <div className="mt-5 space-y-2.5">
+              <div>
                 <span className="text-[#6E7681] text-xs uppercase tracking-wide font-mono">Email</span>
-                <p className="text-[#8B949E] hover:text-[#F0F6FC] text-sm transition-colors mt-0.5">
-                  <a href="mailto:hello@gryphclubconnect.ca">hello@gryphclubconnect.ca</a>
-                </p>
-              </li>
-              <li>
-                <span className="text-[#6E7681] text-xs uppercase tracking-wide font-mono">Twitter</span>
-                <p className="text-[#8B949E] hover:text-[#F0F6FC] text-sm transition-colors mt-0.5">
-                  <a href="https://twitter.com/GryphClubCo" target="_blank" rel="noopener noreferrer">
-                    @GryphClubCo
+                <p className="text-sm mt-0.5">
+                  <a href="mailto:hello@gryphclubconnect.ca" className="text-[#8B949E] hover:text-[#F0F6FC] transition-colors">
+                    hello@gryphclubconnect.ca
                   </a>
                 </p>
-              </li>
-              <li className="pt-2">
+              </div>
+              <div className="pt-2">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-mono bg-[rgba(200,16,46,0.12)] text-[#C8102E] border border-[#C8102E]/20">
                   <span className="relative flex h-1.5 w-1.5">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#C8102E] opacity-75" />
@@ -112,8 +156,8 @@ export default function Footer() {
                   </span>
                   Beta · Free for UofG clubs
                 </span>
-              </li>
-            </ul>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -122,7 +166,7 @@ export default function Footer() {
       <div className="border-t border-[#21262D] px-4 sm:px-6 lg:px-8 py-5">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
           <p className="text-[#6E7681] text-xs text-center sm:text-left">
-            © 2026 Gryph Club Connect. University of Guelph.
+            © {new Date().getFullYear()} Gryph Club Connect. University of Guelph.
           </p>
           <p className="text-[#6E7681] text-xs">
             Built for Gryphons, by Gryphons 🦅

@@ -151,7 +151,7 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
               </span>
             </h1>
 
-            <p className="text-[#9DA5AE] text-xl sm:text-[22px] leading-relaxed" style={{ maxWidth: '460px', lineHeight: '1.65' }}>
+            <p className="text-[#9DA5AE] text-xl sm:text-[22px]" style={{ maxWidth: '460px', lineHeight: '1.65' }}>
               Manage your entire club — communication, tasks, events — in one place. Built for UofG student organizations.
             </p>
 

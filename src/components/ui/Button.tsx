@@ -15,10 +15,10 @@ interface ButtonProps {
 }
 
 const variantClasses: Record<Variant, string> = {
-  red: 'bg-[#C8102E] hover:bg-[#A00C24] text-white font-semibold rounded-lg transition-all hover:scale-[1.02] active:scale-[0.98]',
-  gold: 'bg-[#D4A017] hover:bg-[#B8860B] text-[#0D1117] font-semibold rounded-lg transition-all hover:scale-[1.02] active:scale-[0.98]',
-  ghost: 'bg-transparent border border-[#21262D] hover:border-[#C8102E] hover:bg-[rgba(200,16,46,0.05)] text-[#F0F6FC] font-semibold rounded-lg transition-all',
-  outline: 'bg-transparent border-2 border-[#C8102E] text-[#C8102E] hover:bg-[#C8102E] hover:text-white font-semibold rounded-lg transition-all hover:scale-[1.02] active:scale-[0.98]',
+  red: 'bg-[#C8102E] hover:bg-[#A00C24] text-white font-semibold rounded-lg transition-all hover:-translate-y-px hover:shadow-[0_4px_20px_rgba(200,16,46,0.4)] active:scale-[0.98]',
+  gold: 'bg-[#D4A017] hover:bg-[#B8860B] text-[#0D1117] font-semibold rounded-lg transition-all hover:-translate-y-px hover:shadow-[0_4px_20px_rgba(212,160,23,0.4)] active:scale-[0.98]',
+  ghost: 'bg-transparent border border-[rgba(255,255,255,0.25)] hover:bg-[rgba(255,255,255,0.06)] hover:border-[rgba(255,255,255,0.35)] text-[#F0F6FC] font-semibold rounded-lg transition-all',
+  outline: 'bg-transparent border-2 border-[#C8102E] text-[#C8102E] hover:bg-[#C8102E] hover:text-white font-semibold rounded-lg transition-all hover:-translate-y-px active:scale-[0.98]',
 };
 
 const sizeClasses: Record<Size, string> = {

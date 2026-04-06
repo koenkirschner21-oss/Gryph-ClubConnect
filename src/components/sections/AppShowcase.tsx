@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 type TabKey = 'communication' | 'tasks' | 'events' | 'directory';
@@ -132,23 +132,49 @@ const mockComponents: Record<TabKey, React.ComponentType> = {
   directory: DirectoryMock,
 };
 
+const tabDescriptions: Record<TabKey, string> = {
+  communication: 'Organized channels keep exec talk, event planning, and general chat separate. No more lost messages.',
+  tasks: 'Kanban boards built for club execs. Assign, track, and complete tasks with your team.',
+  events: 'Calendar with built-in RSVPs, reminders, and venue info. One click to see who\'s coming.',
+  directory: 'Searchable member directory with roles, contact info, and club history at your fingertips.',
+};
+
 export default function AppShowcase() {
   const [activeTab, setActiveTab] = useState<TabKey>('communication');
+  const [isHovered, setIsHovered] = useState(false);
   const MockComponent = mockComponents[activeTab];
 
+  // Auto-cycle tabs when not hovered
+  useEffect(() => {
+    if (isHovered) return;
+    const interval = setInterval(() => {
+      setActiveTab((prev) => {
+        const keys = tabs.map(t => t.key);
+        const idx = keys.indexOf(prev);
+        return keys[(idx + 1) % keys.length];
+      });
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isHovered]);
+
   return (
-    <section className="py-24 bg-[#161B22]">
+    <section id="app-showcase" className="py-24 bg-[#161B22]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
+          <span className="text-xs font-mono text-[#C8102E] uppercase tracking-wider mb-3 block">Live Preview</span>
           <h2 className="text-4xl sm:text-5xl font-extrabold text-[#F0F6FC] font-[Syne,sans-serif] mb-4">
             See it in action
           </h2>
-          <p className="text-[#8B949E] text-lg">
-            Every feature, beautifully integrated.
+          <p className="text-[#8B949E] text-lg max-w-lg mx-auto">
+            Every feature, beautifully integrated into one unified platform.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-8 items-start">
+        <div
+          className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-8 items-start"
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
           {/* Feature tabs */}
           <div className="lg:sticky lg:top-24 space-y-2">
             {tabs.map((tab) => {
@@ -157,20 +183,33 @@ export default function AppShowcase() {
                 <button
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-left ${
+                  className={`w-full flex items-start gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all text-left ${
                     isActive
                       ? 'bg-[#1A1F26] border border-[#C8102E]/40 text-[#F0F6FC]'
                       : 'bg-transparent border border-transparent text-[#8B949E] hover:bg-[#1A1F26] hover:text-[#F0F6FC]'
                   }`}
                 >
-                  {isActive && (
-                    <motion.div
-                      layoutId="tab-dot"
-                      className="w-2 h-2 rounded-full bg-[#C8102E] flex-shrink-0"
-                    />
-                  )}
-                  {!isActive && <div className="w-2 h-2 rounded-full bg-[#21262D] flex-shrink-0" />}
-                  {tab.label}
+                  <div className="flex-shrink-0 mt-0.5">
+                    {isActive && (
+                      <motion.div
+                        layoutId="tab-dot"
+                        className="w-2 h-2 rounded-full bg-[#C8102E]"
+                      />
+                    )}
+                    {!isActive && <div className="w-2 h-2 rounded-full bg-[#21262D]" />}
+                  </div>
+                  <div>
+                    <span className="block">{tab.label}</span>
+                    {isActive && (
+                      <motion.p
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: 'auto' }}
+                        className="text-xs text-[#8B949E] font-normal mt-1 leading-relaxed"
+                      >
+                        {tabDescriptions[tab.key]}
+                      </motion.p>
+                    )}
+                  </div>
                 </button>
               );
             })}

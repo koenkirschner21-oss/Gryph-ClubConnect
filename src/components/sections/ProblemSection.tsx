@@ -14,11 +14,12 @@ export default function ProblemSection() {
     <section className="py-24 bg-[#0D1117]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
+          <span className="text-xs font-mono text-[#C8102E] uppercase tracking-wider mb-3 block">The Problem</span>
           <h2 className="text-4xl sm:text-5xl font-extrabold text-[#F0F6FC] font-[Syne,sans-serif] mb-4">
             Your club runs on chaos.
           </h2>
           <p className="text-[#8B949E] text-lg max-w-xl mx-auto">
-            You're doing great work with terrible tools.
+            You're doing great work — with terrible tools. Here's what we hear from club leaders every day.
           </p>
         </AnimatedSection>
 

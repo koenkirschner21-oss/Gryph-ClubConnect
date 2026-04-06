@@ -1,12 +1,14 @@
 import { testimonials } from '../../data/index';
 import { StaggerContainer, StaggerItem } from '../ui/AnimatedSection';
 import AnimatedSection from '../ui/AnimatedSection';
+import { Star } from 'lucide-react';
 
 export default function TestimonialsSection() {
   return (
     <section className="py-24 bg-[#0D1117]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
+          <span className="text-xs font-mono text-[#D4A017] uppercase tracking-wider mb-3 block">Testimonials</span>
           <h2 className="text-4xl sm:text-5xl font-extrabold text-[#F0F6FC] font-[Syne,sans-serif] mb-4">
             Trusted by club leaders
           </h2>
@@ -21,18 +23,25 @@ export default function TestimonialsSection() {
         >
           {testimonials.map((t) => (
             <StaggerItem key={t.name}>
-              <div className="bg-[#1A1F26] border border-[#21262D] hover:border-[#C8102E]/20 rounded-2xl p-6 h-full flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] relative overflow-hidden">
+              <div className="bg-[#1A1F26] border border-[#21262D] hover:border-[#C8102E]/30 rounded-2xl p-6 h-full flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(200,16,46,0.1)] relative overflow-hidden group">
                 {/* Large quote decoration */}
                 <div
-                  className="absolute -top-2 -left-1 text-7xl font-serif leading-none select-none pointer-events-none"
+                  className="absolute -top-2 -left-1 text-7xl font-serif leading-none select-none pointer-events-none transition-opacity duration-300 group-hover:opacity-[0.2]"
                   style={{ color: t.avatarColor, opacity: 0.12 }}
                   aria-hidden="true"
                 >
                   "
                 </div>
 
+                {/* Star rating */}
+                <div className="flex items-center gap-0.5 mb-3 relative">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={14} className="text-[#D4A017] fill-[#D4A017]" />
+                  ))}
+                </div>
+
                 {/* Quote */}
-                <blockquote className="relative text-[#8B949E] text-sm leading-relaxed italic mb-5 flex-1 pt-4">
+                <blockquote className="relative text-[#8B949E] text-sm leading-relaxed italic mb-5 flex-1">
                   "{t.quote}"
                 </blockquote>
 
@@ -53,7 +62,7 @@ export default function TestimonialsSection() {
                 {/* Author */}
                 <div className="flex items-center gap-3 pt-4 border-t border-[#21262D]">
                   <div
-                    className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0"
+                    className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0 shadow-lg"
                     style={{ backgroundColor: t.avatarColor }}
                   >
                     {t.avatar}

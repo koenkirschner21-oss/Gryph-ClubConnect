@@ -27,11 +27,12 @@ export default function FeaturesSection() {
     <section id="features" className="py-24 bg-[#0D1117]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-16">
+          <span className="text-xs font-mono text-[#D4A017] uppercase tracking-wider mb-3 block">Features</span>
           <h2 className="text-4xl sm:text-5xl font-extrabold text-[#F0F6FC] font-[Syne,sans-serif] mb-4">
             Everything your club needs
           </h2>
           <p className="text-[#8B949E] text-lg max-w-lg mx-auto">
-            6 powerful tools, one unified platform
+            6 powerful tools, one unified platform — designed for how student clubs actually work.
           </p>
         </AnimatedSection>
 

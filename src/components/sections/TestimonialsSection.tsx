@@ -7,12 +7,12 @@ export default function TestimonialsSection() {
   return (
     <section className="py-24 bg-[#0D1117]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <AnimatedSection className="text-center mb-16">
-          <span className="text-xs font-mono text-[#D4A017] uppercase tracking-wider mb-3 block">Testimonials</span>
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-[#F0F6FC] font-[Syne,sans-serif] mb-4">
+        <AnimatedSection className="text-center mb-20">
+          <span className="text-sm font-mono text-[#D4A017] uppercase tracking-wider mb-5 block">Testimonials</span>
+          <h2 className="text-[2.75rem] sm:text-[3.5rem] font-extrabold text-[#F0F6FC] font-[Syne,sans-serif] mb-5">
             Trusted by club leaders
           </h2>
-          <p className="text-[#8B949E] text-lg max-w-lg mx-auto">
+          <p className="text-[#9DA5AE] text-xl max-w-xl mx-auto">
             Hear from the executives actually running their clubs on GCC.
           </p>
         </AnimatedSection>
@@ -23,7 +23,7 @@ export default function TestimonialsSection() {
         >
           {testimonials.map((t) => (
             <StaggerItem key={t.name}>
-              <div className="bg-[#1A1F26] border border-[#21262D] hover:border-[#C8102E]/30 rounded-2xl p-6 h-full flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(200,16,46,0.1)] relative overflow-hidden group">
+              <div className="bg-[#1A1F26] border border-[#21262D] hover:border-[#C8102E]/30 rounded-2xl p-7 h-full flex flex-col transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_20px_50px_rgba(200,16,46,0.1)] relative overflow-hidden group">
                 {/* Large quote decoration */}
                 <div
                   className="absolute -top-2 -left-1 text-7xl font-serif leading-none select-none pointer-events-none transition-opacity duration-300 group-hover:opacity-[0.2]"
@@ -34,14 +34,14 @@ export default function TestimonialsSection() {
                 </div>
 
                 {/* Star rating */}
-                <div className="flex items-center gap-0.5 mb-3 relative">
+                <div className="flex items-center gap-0.5 mb-4 relative">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={14} className="text-[#D4A017] fill-[#D4A017]" />
+                    <Star key={i} size={16} className="text-[#D4A017] fill-[#D4A017]" />
                   ))}
                 </div>
 
                 {/* Quote */}
-                <blockquote className="relative text-[#8B949E] text-sm leading-relaxed italic mb-5 flex-1">
+                <blockquote className="relative text-[#9DA5AE] text-base leading-relaxed italic mb-5 flex-1">
                   "{t.quote}"
                 </blockquote>
 
@@ -68,8 +68,8 @@ export default function TestimonialsSection() {
                     {t.avatar}
                   </div>
                   <div>
-                    <p className="text-[#F0F6FC] text-sm font-semibold">{t.name}</p>
-                    <p className="text-[#6E7681] text-xs">{t.role}</p>
+                    <p className="text-[#F0F6FC] text-base font-semibold">{t.name}</p>
+                    <p className="text-[#8B949E] text-sm">{t.role}</p>
                   </div>
                 </div>
               </div>

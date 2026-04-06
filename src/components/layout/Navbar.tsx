@@ -120,7 +120,7 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
 
           {/* Mobile hamburger */}
           <button
-            className="md:hidden p-2 text-[#8B949E] hover:text-[#F0F6FC] transition-colors focus:outline-none focus:ring-2 focus:ring-[#C8102E] rounded-lg"
+            className="md:hidden p-2.5 text-[#8B949E] hover:text-[#F0F6FC] transition-colors focus:outline-none focus:ring-2 focus:ring-[#C8102E] rounded-lg"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
@@ -161,7 +161,7 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
                     key={link.label}
                     href={link.href}
                     onClick={(e) => { handleNavClick(e, link.href); setMenuOpen(false); }}
-                    className={`block px-4 py-3.5 rounded-xl text-sm font-medium transition-all ${
+                    className={`block px-4 py-3.5 rounded-xl text-[15px] font-medium transition-all ${
                       active
                         ? 'text-[#F0F6FC] bg-[#C8102E]/10 border border-[#C8102E]/20'
                         : 'text-[#8B949E] hover:text-[#F0F6FC] hover:bg-[#21262D]'

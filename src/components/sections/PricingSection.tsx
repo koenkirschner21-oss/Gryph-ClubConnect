@@ -7,12 +7,12 @@ export default function PricingSection() {
   return (
     <section id="pricing" className="py-24 bg-[#161B22]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <AnimatedSection className="text-center mb-16">
-          <span className="text-xs font-mono text-[#D4A017] uppercase tracking-wider mb-3 block">Pricing</span>
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-[#F0F6FC] font-[Syne,sans-serif] mb-4">
+        <AnimatedSection className="text-center mb-20">
+          <span className="text-sm font-mono text-[#D4A017] uppercase tracking-wider mb-5 block">Pricing</span>
+          <h2 className="text-[2.75rem] sm:text-[3.5rem] font-extrabold text-[#F0F6FC] font-[Syne,sans-serif] mb-5">
             Simple, transparent pricing
           </h2>
-          <p className="text-[#8B949E] text-lg">
+          <p className="text-[#9DA5AE] text-xl">
             Start free. Upgrade when you need more. No surprises.
           </p>
         </AnimatedSection>
@@ -44,17 +44,17 @@ export default function PricingSection() {
 
                 <div className="mb-6">
                   <h3 className="text-[#F0F6FC] font-bold text-xl font-[Syne,sans-serif] mb-1">{tier.name}</h3>
-                  <p className="text-[#8B949E] text-sm mb-4">{tier.description}</p>
+                  <p className="text-[#9DA5AE] text-[15px] mb-4">{tier.description}</p>
                   <div className="flex items-end gap-1.5">
                     <span className="text-4xl font-extrabold text-[#F0F6FC] font-[Syne,sans-serif]">{tier.price}</span>
                     {tier.period !== 'forever' && tier.period !== 'contact us' && (
-                      <span className="text-[#6E7681] text-sm mb-1">/{tier.period}</span>
+                      <span className="text-[#8B949E] text-sm mb-1">/{tier.period}</span>
                     )}
                     {tier.period === 'forever' && (
                       <span className="text-[#22C55E] text-sm mb-1 font-medium">forever</span>
                     )}
                     {tier.period === 'contact us' && (
-                      <span className="text-[#6E7681] text-sm mb-1">contact us</span>
+                      <span className="text-[#8B949E] text-sm mb-1">contact us</span>
                     )}
                   </div>
                 </div>
@@ -62,16 +62,16 @@ export default function PricingSection() {
                 <ul className="space-y-3 mb-8 flex-1">
                   {tier.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-2.5">
-                      <div className={`w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
+                      <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
                         tier.featured ? 'bg-[#D4A017]/20' : 'bg-[#C8102E]/10'
                       }`}>
                         <Check
-                          size={10}
+                          size={12}
                           className={tier.featured ? 'text-[#D4A017]' : 'text-[#C8102E]'}
                           strokeWidth={3}
                         />
                       </div>
-                      <span className="text-[#8B949E] text-sm">{feature}</span>
+                      <span className="text-[#9DA5AE] text-[15px]">{feature}</span>
                     </li>
                   ))}
                 </ul>
@@ -85,7 +85,7 @@ export default function PricingSection() {
         </StaggerContainer>
 
         <AnimatedSection delay={0.3} className="text-center mt-10">
-          <p className="text-[#6E7681] text-sm">
+          <p className="text-[#8B949E] text-sm">
             All plans require a @uoguelph.ca email address. No credit card needed for Free plan.
           </p>
         </AnimatedSection>

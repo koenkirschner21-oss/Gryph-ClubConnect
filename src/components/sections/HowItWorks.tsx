@@ -13,12 +13,12 @@ export default function HowItWorks() {
   return (
     <section id="how-it-works" className="py-24 bg-[#0D1117]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <AnimatedSection className="text-center mb-16">
-          <span className="text-xs font-mono text-[#22C55E] uppercase tracking-wider mb-3 block">Getting Started</span>
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-[#F0F6FC] font-[Syne,sans-serif] mb-4">
+        <AnimatedSection className="text-center mb-20">
+          <span className="text-sm font-mono text-[#22C55E] uppercase tracking-wider mb-5 block">Getting Started</span>
+          <h2 className="text-[2.75rem] sm:text-[3.5rem] font-extrabold text-[#F0F6FC] font-[Syne,sans-serif] mb-5">
             Up and running in minutes
           </h2>
-          <p className="text-[#8B949E] text-lg max-w-lg mx-auto">
+          <p className="text-[#9DA5AE] text-xl max-w-xl mx-auto">
             No complicated setup. No IT department required. Just sign up and go.
           </p>
         </AnimatedSection>
@@ -47,11 +47,11 @@ export default function HowItWorks() {
                     <div className={`pb-10 ${isLast ? 'pb-0' : ''}`}>
                       <div className="flex items-center gap-2 mb-1.5">
                         <Icon size={16} className="text-[#C8102E]" />
-                        <h3 className="text-[#F0F6FC] font-semibold text-lg font-[Syne,sans-serif]">
+                        <h3 className="text-[#F0F6FC] font-bold text-xl font-[Syne,sans-serif]">
                           {step.title}
                         </h3>
                       </div>
-                      <p className="text-[#8B949E] text-sm leading-relaxed">{step.description}</p>
+                      <p className="text-[#9DA5AE] text-[15px] leading-relaxed">{step.description}</p>
                     </div>
                   </div>
                 );
@@ -69,7 +69,7 @@ export default function HowItWorks() {
                   <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
                   <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
                 </div>
-                <span className="ml-2 text-xs text-[#6E7681] font-mono">Setup Wizard</span>
+                <span className="ml-2 text-sm text-[#8B949E] font-mono">Setup Wizard</span>
               </div>
 
               <div className="p-6 space-y-5">
@@ -85,17 +85,17 @@ export default function HowItWorks() {
                       {i < 3 && <div className="flex-1 h-px bg-[#21262D] w-6" />}
                     </div>
                   ))}
-                  <span className="ml-auto text-xs text-[#6E7681] font-mono">Step 1 of 4</span>
+                  <span className="ml-auto text-sm text-[#8B949E] font-mono">Step 1 of 4</span>
                 </div>
 
                 <div>
                   <h3 className="text-[#F0F6FC] font-semibold text-base mb-1">Create Your Club</h3>
-                  <p className="text-[#8B949E] text-xs">Tell us about your club to get started.</p>
+                  <p className="text-[#9DA5AE] text-sm">Tell us about your club to get started.</p>
                 </div>
 
                 <div className="space-y-3">
                   <div>
-                    <label className="block text-xs text-[#8B949E] mb-1.5">Club Name</label>
+                    <label className="block text-sm text-[#9DA5AE] mb-1.5">Club Name</label>
                     <div className="bg-[#0D1117] border border-[#C8102E]/40 rounded-lg px-3 py-2.5 text-sm text-[#F0F6FC] flex items-center justify-between">
                       <span>Guelph Robotics Club</span>
                       <span className="w-px h-4 bg-[#C8102E] animate-pulse" />
@@ -103,17 +103,17 @@ export default function HowItWorks() {
                   </div>
 
                   <div>
-                    <label className="block text-xs text-[#8B949E] mb-1.5">University Email</label>
-                    <div className="bg-[#0D1117] border border-[#21262D] rounded-lg px-3 py-2.5 text-sm text-[#6E7681]">
+                    <label className="block text-sm text-[#9DA5AE] mb-1.5">University Email</label>
+                    <div className="bg-[#0D1117] border border-[#21262D] rounded-lg px-3 py-2.5 text-sm text-[#8B949E]">
                       president@uoguelph.ca
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs text-[#8B949E] mb-1.5">Category</label>
-                    <div className="bg-[#0D1117] border border-[#21262D] rounded-lg px-3 py-2.5 text-sm text-[#6E7681] flex items-center justify-between">
+                    <label className="block text-sm text-[#9DA5AE] mb-1.5">Category</label>
+                    <div className="bg-[#0D1117] border border-[#21262D] rounded-lg px-3 py-2.5 text-sm text-[#8B949E] flex items-center justify-between">
                       <span>Engineering</span>
-                      <span className="text-[#6E7681]">▾</span>
+                      <span className="text-[#8B949E]">▾</span>
                     </div>
                   </div>
 

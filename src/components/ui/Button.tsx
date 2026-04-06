@@ -22,9 +22,9 @@ const variantClasses: Record<Variant, string> = {
 };
 
 const sizeClasses: Record<Size, string> = {
-  sm: 'px-3 py-1.5 text-sm',
-  md: 'px-5 py-2.5 text-sm',
-  lg: 'px-7 py-3.5 text-base',
+  sm: 'px-4 py-2 text-sm',
+  md: 'px-6 py-3 text-sm',
+  lg: 'px-8 py-4 text-base',
 };
 
 const focusClasses = 'focus:outline-none focus:ring-2 focus:ring-[#C8102E] focus:ring-offset-2 focus:ring-offset-[#0D1117]';

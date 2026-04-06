@@ -44,10 +44,10 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
       >
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center group" onClick={() => setMenuOpen(false)}>
+          <Link to="/" className="flex items-center group" onClick={() => setMenuOpen(false)} aria-label="ClubConnect Home">
             <img
               src={`${import.meta.env.BASE_URL}logo-transparent.png`}
-              alt="ClubConnect"
+              alt="ClubConnect — Every Club. One Platform."
               className="h-10 w-auto"
             />
           </Link>

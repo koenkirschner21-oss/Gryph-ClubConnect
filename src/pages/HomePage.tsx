@@ -4,25 +4,19 @@ import ProblemSection from '../components/sections/ProblemSection';
 import FeaturesSection from '../components/sections/FeaturesSection';
 import AppShowcase from '../components/sections/AppShowcase';
 import HowItWorks from '../components/sections/HowItWorks';
-import PricingSection from '../components/sections/PricingSection';
-import TestimonialsSection from '../components/sections/TestimonialsSection';
+import LearningSection from '../components/sections/LearningSection';
 import FinalCTA from '../components/sections/FinalCTA';
 
-interface HomePageProps {
-  onGetStarted: () => void;
-}
-
-export default function HomePage({ onGetStarted }: HomePageProps) {
+export default function HomePage() {
   return (
     <div className="page-transition">
-      <Hero onGetStarted={onGetStarted} />
+      <Hero />
       <Ticker />
       <ProblemSection />
       <FeaturesSection />
       <AppShowcase />
       <HowItWorks />
-      <PricingSection />
-      <TestimonialsSection />
+      <LearningSection />
       <FinalCTA />
     </div>
   );

@@ -1,8 +1,7 @@
+import { lazy, Suspense } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
-import { lazy, Suspense, useState } from 'react';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
-import Modal from './components/ui/Modal';
 import ErrorBoundary from './components/ui/ErrorBoundary';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
@@ -20,24 +19,22 @@ const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
 function PageLoader() {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center gap-4">
-      <div className="w-8 h-8 border-2 border-[#C8102E] border-t-transparent rounded-full animate-spin" />
-      <p className="text-[#6E7681] text-sm font-mono">Loading…</p>
+      <div className="w-8 h-8 border-2 border-[#E51937] border-t-transparent rounded-full animate-spin" />
+      <p className="text-[#777777] text-sm font-sans">Loading…</p>
     </div>
   );
 }
 
 export default function App() {
-  const [modalOpen, setModalOpen] = useState(false);
-
   return (
     <HashRouter>
       <ErrorBoundary>
-        <div className="bg-[#0D1117] min-h-screen text-[#F0F6FC]">
-          <Navbar onGetStarted={() => setModalOpen(true)} />
+        <div className="bg-[#0B0B0B] min-h-screen text-[#F5F5F5]">
+          <Navbar />
           <main>
             <Suspense fallback={<PageLoader />}>
               <Routes>
-                <Route path="/" element={<HomePage onGetStarted={() => setModalOpen(true)} />} />
+                <Route path="/" element={<HomePage />} />
                 <Route path="/features" element={<FeaturesPage />} />
                 <Route path="/how-it-works" element={<HowItWorksPage />} />
                 <Route path="/pricing" element={<PricingPage />} />
@@ -52,7 +49,6 @@ export default function App() {
             </Suspense>
           </main>
           <Footer />
-          <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
         </div>
       </ErrorBoundary>
     </HashRouter>

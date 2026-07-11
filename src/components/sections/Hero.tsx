@@ -1,62 +1,21 @@
 import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Shield, Clock, CreditCard } from 'lucide-react';
+import { Shield, Users, GraduationCap } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import Badge from '../ui/Badge';
 import Button from '../ui/Button';
+import { goToSection, JOIN_TESTING_ID, REQUEST_WALKTHROUGH_ID } from '../../lib/cta';
 
-interface StatItem {
-  value: string;
-  label: string;
-  numericEnd: number;
-  prefix?: string;
-  suffix?: string;
-}
-
-const stats: StatItem[] = [
-  { value: '50+', label: 'Active Clubs', numericEnd: 50, suffix: '+' },
-  { value: '2,400+', label: 'Students', numericEnd: 2400, suffix: '+' },
-  { value: 'Free', label: 'To Start', numericEnd: 0 },
-];
-
-function useCounter(end: number, duration = 1500, start = false) {
-  const [count, setCount] = useState(0);
-  useEffect(() => {
-    if (!start || end === 0) return;
-    const startTime = performance.now();
-    const tick = (now: number) => {
-      const progress = Math.min((now - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.round(eased * end));
-      if (progress < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }, [end, duration, start]);
-  return count;
-}
-
-function StatCounter({ item, animate }: { item: StatItem; animate: boolean }) {
-  const count = useCounter(item.numericEnd, 1500, animate);
-  const display = item.numericEnd === 0 ? item.value : `${count.toLocaleString()}${item.suffix ?? ''}`;
-  return (
-    <div className="text-center sm:text-left">
-      <div className="text-[28px] font-bold text-[#F0F6FC] font-['JetBrains_Mono',monospace] tabular-nums">{display}</div>
-      <div className="text-sm text-[rgba(240,246,252,0.45)] mt-0.5 uppercase tracking-[0.08em]">{item.label}</div>
-    </div>
-  );
-}
-
-const trustedClubs = [
-  'Guelph Coding Society',
-  'MSA Guelph',
-  'Gryphon Racing',
-  'Girl Talk',
-  'Wildlife Club',
+const trustItems = [
+  { icon: GraduationCap, label: 'Student-built' },
+  { icon: Users, label: 'Built for UofG club life' },
+  { icon: Shield, label: 'Testing with students and club leaders' },
 ];
 
 const chatMessages = [
-  { user: 'Priya S.', color: '#C8102E', msg: 'Hackathon kickoff is this Friday! Who\'s in? 🚀', time: '9:14 AM' },
+  { user: 'Priya S.', color: '#E51937', msg: 'Hackathon kickoff is this Friday! Who\'s in?', time: '9:14 AM' },
   { user: 'Amir K.', color: '#3B82F6', msg: 'Definitely in! Should we bring our own laptops?', time: '9:16 AM' },
-  { user: 'Priya S.', color: '#C8102E', msg: 'Yes! Room 104 AC @ 5pm. RSVPs due by tomorrow.', time: '9:17 AM' },
+  { user: 'Priya S.', color: '#E51937', msg: 'Yes! Room 104 AC @ 5pm. RSVPs due by tomorrow.', time: '9:17 AM' },
 ];
 
 function TypingIndicator() {
@@ -65,7 +24,7 @@ function TypingIndicator() {
       {[0, 1, 2].map((i) => (
         <motion.div
           key={i}
-          className="w-1.5 h-1.5 rounded-full bg-[#6E7681]"
+          className="w-1.5 h-1.5 rounded-full bg-[#777777]"
           animate={{ opacity: [0.3, 1, 0.3] }}
           transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }}
         />
@@ -74,28 +33,16 @@ function TypingIndicator() {
   );
 }
 
-export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
-  const [statsVisible, setStatsVisible] = useState(false);
-  const statsRef = useRef<HTMLDivElement>(null);
+export default function Hero() {
+  const navigate = useNavigate();
   const [visibleMessages, setVisibleMessages] = useState(0);
   const [showTyping, setShowTyping] = useState(false);
+  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setStatsVisible(true); },
-      { threshold: 0.3 }
-    );
-    if (statsRef.current) observer.observe(statsRef.current);
-    return () => observer.disconnect();
-  }, []);
-
-  // Staggered chat message animation
   useEffect(() => {
     const timers: ReturnType<typeof setTimeout>[] = [];
     const showMessage = (index: number) => {
-      // Show typing indicator
       timers.push(setTimeout(() => setShowTyping(true), index === 0 ? 800 : 800 + index * 1000));
-      // Hide typing, show message
       timers.push(setTimeout(() => {
         setShowTyping(false);
         setVisibleMessages(index + 1);
@@ -104,19 +51,15 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
     for (let i = 0; i < chatMessages.length; i++) {
       showMessage(i);
     }
+    timersRef.current = timers;
     return () => timers.forEach(clearTimeout);
   }, []);
 
-  const handleSeeItInAction = () => {
-    const el = document.getElementById('app-showcase');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const handleJoin = () => goToSection(JOIN_TESTING_ID, { navigate, pathname: '/' });
+  const handleWalkthrough = () => goToSection(REQUEST_WALKTHROUGH_ID, { navigate, pathname: '/' });
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0D1117]">
-      {/* Dot grid background */}
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0B0B0B]">
       <div
         className="absolute inset-0"
         style={{
@@ -124,16 +67,11 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
           backgroundSize: '40px 40px',
         }}
       />
-      {/* Radial glow top-right (red) */}
-      <div className="absolute -top-40 -right-40 w-[700px] h-[700px] rounded-full bg-[#C8102E] opacity-[0.08] blur-[120px] pointer-events-none" />
-      {/* Radial glow bottom-left (gold) */}
-      <div className="absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full bg-[#D4A017] opacity-[0.08] blur-[120px] pointer-events-none" />
-      {/* Secondary accent */}
-      <div className="absolute top-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-[#D4A017] opacity-[0.04] blur-[100px] pointer-events-none" />
+      <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#E51937] opacity-[0.05] blur-[100px] pointer-events-none" />
+      <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#FFC429] opacity-[0.04] blur-[100px] pointer-events-none" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          {/* Left column */}
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             animate={{ opacity: 1, x: 0 }}
@@ -141,216 +79,102 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
             className="flex flex-col gap-6"
           >
             <div>
-              <Badge variant="green" dot>Now Live — Free for all UofG clubs</Badge>
+              <Badge variant="green" dot>Currently in early testing</Badge>
             </div>
 
-            <h1 className="font-[Syne,sans-serif] font-extrabold leading-[1.04] tracking-tight" style={{ fontSize: 'clamp(2.75rem, 6.5vw, 5rem)' }}>
-              <span className="block text-[#F0F6FC]">Every Club.</span>
-              <span className="block bg-gradient-to-r from-[#D4A017] to-[#F0B820] bg-clip-text text-transparent">
-                One Platform.
+            <h1 className="font-sans font-extrabold leading-[1.04] tracking-tight" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.25rem)' }}>
+              <span className="block text-[#F5F5F5]">Discover campus life.</span>
+              <span className="block bg-gradient-to-r from-[#FFC429] to-[#FFD45C] bg-clip-text text-transparent">
+                Manage club life.
               </span>
             </h1>
 
-            <p className="text-[#9DA5AE] text-xl sm:text-[22px]" style={{ maxWidth: '460px', lineHeight: '1.65' }}>
-              Manage your entire club — communication, tasks, events — in one place. Built for UofG student organizations.
+            <p className="text-[#9CA3AF] text-xl sm:text-[22px]" style={{ maxWidth: '520px', lineHeight: '1.65' }}>
+              Gryph ClubConnect helps UofG students find clubs, events, and opportunities while giving club leaders one workspace to manage members, announcements, events, tasks, hiring, and more.
             </p>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-              <Button variant="red" size="lg" onClick={onGetStarted}>
-                Get Started Free →
+              <Button variant="red" size="lg" onClick={handleJoin}>
+                Join Testing
               </Button>
-              <Button variant="ghost" size="lg" onClick={handleSeeItInAction}>
-                See It In Action
+              <Button variant="ghost" size="lg" onClick={handleWalkthrough}>
+                Request a Walkthrough
               </Button>
             </div>
 
-            {/* Trust bar with Lucide icons */}
-            <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-              <p className="text-[#8B949E] text-sm font-mono flex items-center gap-2">
-                <Shield size={15} className="text-[#8B949E]" />
-                @uoguelph.ca emails only
-              </p>
-              <span className="text-[#21262D]">·</span>
-              <p className="text-[#8B949E] text-sm font-mono flex items-center gap-2">
-                <Clock size={15} className="text-[#8B949E]" />
-                Setup in under 2 minutes
-              </p>
-              <span className="text-[#21262D]">·</span>
-              <p className="text-[#8B949E] text-sm font-mono flex items-center gap-2">
-                <CreditCard size={15} className="text-[#8B949E]" />
-                No credit card
-              </p>
-            </div>
-
-            {/* Separator line */}
             <div className="w-full h-px bg-[rgba(255,255,255,0.06)]" />
 
-            {/* Stats row */}
-            <div ref={statsRef} className="flex flex-wrap items-center gap-8">
-              {stats.map((stat, i) => (
-                <div key={i} className="flex items-center gap-8">
-                  <StatCounter item={stat} animate={statsVisible} />
-                  {i < stats.length - 1 && (
-                    <div className="h-10 w-px bg-[#21262D]" />
-                  )}
-                </div>
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-x-6 sm:gap-y-2">
+              {trustItems.map(({ icon: Icon, label }) => (
+                <p key={label} className="text-[#9CA3AF] text-sm font-sans flex items-center gap-2">
+                  <Icon size={15} className="text-[#9CA3AF] shrink-0" />
+                  {label}
+                </p>
               ))}
             </div>
-
-            {/* Social proof */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
-              className="flex items-center gap-4 pt-1"
-            >
-              <div className="flex -space-x-2">
-                {['#C8102E', '#3B82F6', '#D4A017', '#22C55E', '#A855F7'].map((color, i) => (
-                  <div
-                    key={i}
-                    className="w-9 h-9 rounded-full border-2 border-[#0D1117] flex items-center justify-center text-[11px] font-bold text-white shadow-sm"
-                    style={{ backgroundColor: color }}
-                  >
-                    {trustedClubs[i][0]}
-                  </div>
-                ))}
-              </div>
-              <p className="text-[#8B949E] text-sm">
-                Trusted by <span className="text-[#9DA5AE] font-medium">50+ UofG clubs</span>
-              </p>
-            </motion.div>
           </motion.div>
 
-          {/* Right column: App mock UI */}
+          {/* Product mock — structure preserved; visual alignment comes later */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             className="relative justify-center lg:justify-end hidden sm:flex"
           >
-            {/* Ambient glow behind the mock */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-[90%] h-[80%] rounded-3xl bg-[#C8102E] opacity-[0.06] blur-[60px]" />
+              <div className="w-[90%] h-[80%] rounded-3xl bg-[#E51937] opacity-[0.04] blur-[50px]" />
             </div>
 
-            {/* Floating stat cards */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
-              className="absolute -top-4 -left-4 z-20 bg-[#161B22]/95 backdrop-blur-sm border border-[#21262D] rounded-xl px-3 py-2.5 shadow-xl hidden md:block"
-            >
-              <div className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-full bg-[#22C55E]/20 flex items-center justify-center">
-                  <div className="w-2.5 h-2.5 rounded-full bg-[#22C55E] animate-pulse" />
-                </div>
-                <div>
-                  <div className="text-xs font-semibold text-[#F0F6FC]">204 members</div>
-                  <div className="text-[10px] text-[#6E7681]">Guelph Coding Society</div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.95, duration: 0.5 }}
-              className="absolute -bottom-4 -right-4 z-20 bg-[#161B22]/95 backdrop-blur-sm border border-[#21262D] rounded-xl px-3 py-2.5 shadow-xl hidden md:block"
-            >
-              <div className="flex items-center gap-2">
-                <div className="text-lg">📅</div>
-                <div>
-                  <div className="text-xs font-semibold text-[#F0F6FC]">Next event in 2 days</div>
-                  <div className="text-[10px] text-[#6E7681]">Hackathon Kickoff</div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Task completed notification — constrained within mock area */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 1.1, duration: 0.5 }}
-              className="absolute top-1/3 right-2 z-20 bg-[#161B22]/95 backdrop-blur-sm border border-[#22C55E]/30 rounded-xl px-3 py-2.5 shadow-xl hidden lg:block"
-            >
-              <div className="flex items-center gap-2">
-                <span className="text-sm">✅</span>
-                <div>
-                  <div className="text-[10px] font-semibold text-[#22C55E]">Task completed</div>
-                  <div className="text-[10px] text-[#6E7681]">Book venue — Amir K.</div>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Dark card container with gradient border */}
             <div className="w-full max-w-[520px] relative">
-              <div className="rounded-2xl p-px bg-gradient-to-br from-[#C8102E]/30 via-[#21262D] to-[#D4A017]/20 shadow-xl shadow-black/30">
-                <div className="bg-[#161B22] rounded-2xl overflow-hidden">
-                  {/* Titlebar */}
-                  <div className="flex items-center gap-2 px-4 py-3 border-b border-[#21262D] bg-[#0D1117]">
+              <div className="rounded-[12px] border border-[#222222] shadow-[0_8px_32px_rgba(0,0,0,0.45)]">
+                <div className="bg-[#131313] rounded-[12px] overflow-hidden">
+                  <div className="flex items-center gap-2 px-4 py-3 border-b border-[#222222] bg-[#0B0B0B]">
                     <div className="flex gap-1.5">
                       <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
                       <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
                       <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
                     </div>
                     <div className="flex-1 flex justify-center">
-                      <span className="text-xs font-mono text-white/50">gryphclubconnect.ca</span>
+                      <span className="text-xs font-sans text-white/50">gryphclubconnect.com</span>
                     </div>
                   </div>
 
                   <div className="flex h-[340px]">
-                    {/* Sidebar */}
-                    <div className="w-44 bg-[#0D1117] border-r border-[#21262D] flex flex-col">
-                      <div className="px-3 py-3 border-b border-[#21262D]">
+                    <div className="w-44 bg-[#0B0B0B] border-r border-[#222222] flex flex-col">
+                      <div className="px-3 py-3 border-b border-[#222222]">
                         <div className="flex items-center gap-2">
-                          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#C8102E] to-[#D4A017] flex items-center justify-center text-xs font-bold text-white">
+                          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#E51937] to-[#FFC429] flex items-center justify-center text-xs font-bold text-white">
                             GC
                           </div>
                           <div>
-                            <div className="text-xs font-semibold text-[#F0F6FC] leading-none">Guelph Coding</div>
-                            <div className="text-[10px] text-[#6E7681] mt-0.5">204 members</div>
+                            <div className="text-xs font-semibold text-[#F5F5F5] leading-none">Club Workspace</div>
+                            <div className="text-[10px] text-[#777777] mt-0.5">Preview</div>
                           </div>
                         </div>
                       </div>
 
                       <div className="flex-1 px-2 py-2 overflow-y-auto">
                         <div className="mb-2">
-                          <p className="text-[10px] text-[#6E7681] uppercase tracking-wider px-2 mb-1 font-mono">Channels</p>
+                          <p className="text-[10px] text-[#777777] uppercase tracking-wider px-2 mb-1 font-sans">Channels</p>
                           {['# general', '# exec', '# events', '# resources'].map((ch, i) => (
                             <div
                               key={ch}
                               className={`flex items-center gap-1.5 px-2 py-1 rounded text-xs cursor-pointer transition-colors ${
                                 i === 0
-                                  ? 'bg-[#C8102E]/20 text-[#F0F6FC]'
-                                  : 'text-[#8B949E] hover:bg-[#21262D]'
+                                  ? 'bg-[#E51937]/20 text-[#F5F5F5]'
+                                  : 'text-[#9CA3AF] hover:bg-[#222222]'
                               }`}
                             >
                               {ch}
                             </div>
                           ))}
                         </div>
-                        <div>
-                          <p className="text-[10px] text-[#6E7681] uppercase tracking-wider px-2 mb-1 font-mono">Direct</p>
-                          {['Priya S.', 'James O.'].map((name) => (
-                            <div
-                              key={name}
-                              className="flex items-center gap-1.5 px-2 py-1 rounded text-xs text-[#8B949E] hover:bg-[#21262D] cursor-pointer"
-                            >
-                              <div className="w-4 h-4 rounded-full bg-[#21262D] flex items-center justify-center text-[8px] font-bold text-[#F0F6FC]">
-                                {name[0]}
-                              </div>
-                              {name}
-                            </div>
-                          ))}
-                        </div>
                       </div>
                     </div>
 
-                    {/* Chat area */}
                     <div className="flex-1 flex flex-col">
-                      <div className="px-4 py-2.5 border-b border-[#21262D] flex items-center gap-2">
-                        <span className="text-[#8B949E] text-xs font-mono"># general</span>
-                        <span className="ml-auto text-[10px] text-[#6E7681]">204 members</span>
+                      <div className="px-4 py-2.5 border-b border-[#222222] flex items-center gap-2">
+                        <span className="text-[#9CA3AF] text-xs font-sans"># general</span>
                       </div>
                       <div className="flex-1 px-4 py-3 space-y-3 overflow-y-auto">
                         <AnimatePresence>
@@ -370,10 +194,10 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
                               </div>
                               <div>
                                 <div className="flex items-baseline gap-2">
-                                  <span className="text-xs font-semibold text-[#F0F6FC]">{m.user}</span>
-                                  <span className="text-[10px] text-[#6E7681]">{m.time}</span>
+                                  <span className="text-xs font-semibold text-[#F5F5F5]">{m.user}</span>
+                                  <span className="text-[10px] text-[#777777]">{m.time}</span>
                                 </div>
-                                <p className="text-xs text-[#8B949E] mt-0.5 leading-relaxed">{m.msg}</p>
+                                <p className="text-xs text-[#9CA3AF] mt-0.5 leading-relaxed">{m.msg}</p>
                               </div>
                             </motion.div>
                           ))}
@@ -395,9 +219,9 @@ export default function Hero({ onGetStarted }: { onGetStarted?: () => void }) {
                           </motion.div>
                         )}
                       </div>
-                      <div className="px-4 py-3 border-t border-[#21262D]">
-                        <div className="flex items-center gap-2 bg-[#0D1117] border border-[#21262D] rounded-lg px-3 py-2">
-                          <span className="text-xs text-[#6E7681]">Message #general...</span>
+                      <div className="px-4 py-3 border-t border-[#222222]">
+                        <div className="flex items-center gap-2 bg-[#0B0B0B] border border-[#222222] rounded-lg px-3 py-2">
+                          <span className="text-xs text-[#777777]">Message #general...</span>
                         </div>
                       </div>
                     </div>

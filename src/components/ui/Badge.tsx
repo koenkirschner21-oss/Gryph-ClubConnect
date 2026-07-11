@@ -11,19 +11,19 @@ interface BadgeProps {
 
 const variantClasses: Record<BadgeVariant, { container: string; dot: string }> = {
   red: {
-    container: 'bg-[rgba(200,16,46,0.15)] text-[#C8102E] border border-[#C8102E]/30',
-    dot: 'bg-[#C8102E]',
+    container: 'bg-[rgba(229,25,55,0.12)] text-[#E51937] border border-[#E51937]/25',
+    dot: 'bg-[#E51937]',
   },
   gold: {
-    container: 'bg-[rgba(212,160,23,0.15)] text-[#D4A017] border border-[#D4A017]/30',
-    dot: 'bg-[#D4A017]',
+    container: 'bg-[rgba(255,196,41,0.12)] text-[#FFC429] border border-[#FFC429]/25',
+    dot: 'bg-[#FFC429]',
   },
   ghost: {
-    container: 'bg-[#21262D] text-[#8B949E] border border-[#21262D]',
-    dot: 'bg-[#8B949E]',
+    container: 'bg-[#1A1A1A] text-[#9CA3AF] border border-[#222222]',
+    dot: 'bg-[#9CA3AF]',
   },
   green: {
-    container: 'bg-[rgba(34,197,94,0.15)] text-[#22C55E] border border-[#22C55E]/30',
+    container: 'bg-[rgba(34,197,94,0.12)] text-[#22C55E] border border-[#22C55E]/25',
     dot: 'bg-[#22C55E]',
   },
 };
@@ -36,7 +36,7 @@ export default function Badge({ variant = 'ghost', children, dot = false, classN
       initial={{ opacity: 0, scale: 0.9 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.3 }}
-      className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-mono font-medium ${container} ${className}`}
+      className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium ${container} ${className}`}
     >
       {dot && (
         <span className="relative flex h-1.5 w-1.5">

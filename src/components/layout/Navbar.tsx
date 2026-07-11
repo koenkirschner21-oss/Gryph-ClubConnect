@@ -4,7 +4,8 @@ import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { navLinks } from '../../data/index';
 import Button from '../ui/Button';
-import Modal from '../ui/Modal';
+import BrandLogo from '../ui/BrandLogo';
+import { goToSection, JOIN_TESTING_ID, REQUEST_WALKTHROUGH_ID } from '../../lib/cta';
 
 function useScrollPosition() {
   const [scrollY, setScrollY] = useState(0);
@@ -16,17 +17,16 @@ function useScrollPosition() {
   return scrollY;
 }
 
-interface NavbarProps {
-  onGetStarted?: () => void;
-}
+type NavItem = {
+  label: string;
+  href: string;
+  hash?: string;
+};
 
-export default function Navbar({ onGetStarted }: NavbarProps) {
+export default function Navbar() {
   const scrollY = useScrollPosition();
   const scrolled = scrollY > 20;
   const [menuOpen, setMenuOpen] = useState(false);
-  const [localModalOpen, setLocalModalOpen] = useState(false);
-  const modalOpen = localModalOpen;
-  const handleGetStarted = onGetStarted ?? (() => setLocalModalOpen(true));
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -36,112 +36,115 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
     return () => { document.body.style.overflow = ''; };
   }, [menuOpen]);
 
-  // Scroll to top on route change
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [location.pathname]);
 
-  const isActive = (href: string) => {
-    const path = href.replace('/#', '');
+  const isActive = (link: NavItem) => {
+    if (link.hash) return location.pathname === '/' && typeof window !== 'undefined';
+    const path = link.href.replace('/#', '');
     return location.pathname === path;
   };
 
-  const handleNavClick = (e: React.MouseEvent, href: string) => {
+  const handleNavClick = (e: React.MouseEvent, link: NavItem) => {
     e.preventDefault();
-    const path = href.replace('/#', '');
+    setMenuOpen(false);
+    if (link.hash) {
+      goToSection(link.hash, { navigate, pathname: location.pathname });
+      return;
+    }
+    const path = link.href.replace('/#', '');
     navigate(path);
   };
 
-  // Dynamic opacity: 70% at top → 95% when scrolled past 60px (rate = 0.25 / 40px)
+  const handleJoinTesting = () => {
+    setMenuOpen(false);
+    goToSection(JOIN_TESTING_ID, { navigate, pathname: location.pathname });
+  };
+
+  const handleLogIn = () => {
+    setMenuOpen(false);
+    goToSection(REQUEST_WALKTHROUGH_ID, { navigate, pathname: location.pathname });
+  };
+
   const OPACITY_TRANSITION_RATE = 0.00625;
   const bgOpacity = scrolled ? Math.min(0.95, 0.7 + (scrollY - 20) * OPACITY_TRANSITION_RATE) : 0;
 
   return (
-    <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          scrolled
-            ? 'backdrop-blur-xl border-b border-[#21262D] shadow-lg shadow-black/20'
-            : 'bg-transparent backdrop-blur-md'
-        }`}
-        style={scrolled ? { backgroundColor: `rgba(13,17,23,${bgOpacity})` } : undefined}
-      >
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[76px] flex items-center justify-between py-2">
-          {/* Logo — no background, transparent PNG only */}
-          <Link
-            to="/"
-            className="flex items-center group transition-transform duration-200 hover:scale-[1.03]"
-            onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-            aria-label="Gryph Club Connect Home"
-          >
-            <img
-              src={`${import.meta.env.BASE_URL}logo-transparent.png`}
-              alt="Gryph Club Connect"
-              className="h-[68px] sm:h-20 w-auto drop-shadow-[0_0_8px_rgba(200,16,46,0.15)]"
-            />
-          </Link>
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'backdrop-blur-xl border-b border-[#222222] shadow-lg shadow-black/20'
+          : 'bg-transparent backdrop-blur-md'
+      }`}
+      style={scrolled ? { backgroundColor: `rgba(11,11,11,${bgOpacity})` } : undefined}
+    >
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[64px] sm:h-[72px] flex items-center justify-between py-2">
+        <Link
+          to="/"
+          className="flex items-center group transition-opacity duration-200 hover:opacity-90"
+          onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
+          aria-label="Gryph ClubConnect Home"
+        >
+          <BrandLogo variant="nav" />
+        </Link>
 
-          {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-1.5">
-            {navLinks.map((link) => {
-              const active = isActive(link.href);
-              return (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={(e) => handleNavClick(e, link.href)}
-                  className={`relative px-4 py-2.5 text-[15px] font-medium transition-colors rounded-lg ${
-                    active
-                      ? 'text-[#F0F6FC]'
-                      : 'text-[#8B949E] hover:text-[#F0F6FC] hover:bg-[#21262D]/50'
-                  }`}
-                  aria-current={active ? 'page' : undefined}
-                >
-                  {link.label}
-                  {active && (
-                    <motion.div
-                      layoutId="nav-underline"
-                      className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#C8102E] rounded-full"
-                      transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
-                    />
-                  )}
-                </a>
-              );
-            })}
-          </div>
-
-          {/* Desktop actions */}
-          <div className="hidden md:flex items-center gap-3">
-            <Button variant="ghost" size="md" onClick={handleGetStarted}>Sign In</Button>
-            <Button variant="red" size="md" onClick={handleGetStarted} className="shadow-[0_2px_12px_rgba(200,16,46,0.3)]">
-              Get Started
-            </Button>
-          </div>
-
-          {/* Mobile hamburger */}
-          <button
-            className="md:hidden p-2.5 text-[#8B949E] hover:text-[#F0F6FC] transition-colors focus:outline-none focus:ring-2 focus:ring-[#C8102E] rounded-lg"
-            onClick={() => setMenuOpen((v) => !v)}
-            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-            aria-expanded={menuOpen}
-          >
-            <AnimatePresence mode="wait" initial={false}>
-              <motion.span
-                key={menuOpen ? 'close' : 'open'}
-                initial={{ opacity: 0, rotate: -90 }}
-                animate={{ opacity: 1, rotate: 0 }}
-                exit={{ opacity: 0, rotate: 90 }}
-                transition={{ duration: 0.15 }}
-                className="block"
+        <div className="hidden md:flex items-center gap-1.5">
+          {navLinks.map((link) => {
+            const active = !link.hash && isActive(link);
+            return (
+              <a
+                key={link.label}
+                href={link.hash ? `/#/#${link.hash}` : link.href}
+                onClick={(e) => handleNavClick(e, link)}
+                className={`relative px-4 py-2.5 text-[15px] font-medium transition-colors rounded-lg ${
+                  active
+                    ? 'text-[#F5F5F5]'
+                    : 'text-[#9CA3AF] hover:text-[#F5F5F5] hover:bg-[#222222]/50'
+                }`}
+                aria-current={active ? 'page' : undefined}
               >
-                {menuOpen ? <X size={24} /> : <Menu size={24} />}
-              </motion.span>
-            </AnimatePresence>
-          </button>
-        </nav>
-      </header>
+                {link.label}
+                {active && (
+                  <motion.div
+                    layoutId="nav-underline"
+                    className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#E51937] rounded-full"
+                    transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
+                  />
+                )}
+              </a>
+            );
+          })}
+        </div>
 
-      {/* Mobile menu */}
+        <div className="hidden md:flex items-center gap-3">
+          <Button variant="ghost" size="md" onClick={handleLogIn}>Log In</Button>
+          <Button variant="red" size="md" onClick={handleJoinTesting} className="shadow-[0_2px_12px_rgba(229,25,55,0.3)]">
+            Join Testing
+          </Button>
+        </div>
+
+        <button
+          className="md:hidden p-2.5 text-[#9CA3AF] hover:text-[#F5F5F5] transition-colors focus:outline-none focus:ring-2 focus:ring-[#E51937] rounded-lg"
+          onClick={() => setMenuOpen((v) => !v)}
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+        >
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={menuOpen ? 'close' : 'open'}
+              initial={{ opacity: 0, rotate: -90 }}
+              animate={{ opacity: 1, rotate: 0 }}
+              exit={{ opacity: 0, rotate: 90 }}
+              transition={{ duration: 0.15 }}
+              className="block"
+            >
+              {menuOpen ? <X size={24} /> : <Menu size={24} />}
+            </motion.span>
+          </AnimatePresence>
+        </button>
+      </nav>
+
       <AnimatePresence>
         {menuOpen && (
           <motion.div
@@ -149,22 +152,22 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-[76px] z-40 bg-[#161B22]/95 backdrop-blur-lg border-b border-[#21262D] shadow-2xl md:hidden"
+            className="fixed inset-x-0 top-[64px] sm:top-[72px] z-40 bg-[#111111]/95 backdrop-blur-lg border-b border-[#222222] shadow-2xl md:hidden"
             role="navigation"
             aria-label="Mobile navigation"
           >
             <div className="px-4 py-5 space-y-1">
               {navLinks.map((link) => {
-                const active = isActive(link.href);
+                const active = !link.hash && isActive(link);
                 return (
                   <a
                     key={link.label}
-                    href={link.href}
-                    onClick={(e) => { handleNavClick(e, link.href); setMenuOpen(false); }}
+                    href={link.hash ? `/#/#${link.hash}` : link.href}
+                    onClick={(e) => handleNavClick(e, link)}
                     className={`block px-4 py-3.5 rounded-xl text-[15px] font-medium transition-all ${
                       active
-                        ? 'text-[#F0F6FC] bg-[#C8102E]/10 border border-[#C8102E]/20'
-                        : 'text-[#8B949E] hover:text-[#F0F6FC] hover:bg-[#21262D]'
+                        ? 'text-[#F5F5F5] bg-[#E51937]/10 border border-[#E51937]/20'
+                        : 'text-[#9CA3AF] hover:text-[#F5F5F5] hover:bg-[#222222]'
                     }`}
                     aria-current={active ? 'page' : undefined}
                   >
@@ -172,23 +175,21 @@ export default function Navbar({ onGetStarted }: NavbarProps) {
                   </a>
                 );
               })}
-              <div className="pt-4 border-t border-[#21262D] flex flex-col gap-2.5">
-                <Button variant="ghost" size="md" className="w-full justify-center" onClick={() => { setMenuOpen(false); handleGetStarted(); }}>Sign In</Button>
+              <div className="pt-4 border-t border-[#222222] flex flex-col gap-2.5">
+                <Button variant="ghost" size="md" className="w-full justify-center" onClick={handleLogIn}>Log In</Button>
                 <Button
                   variant="red"
                   size="md"
                   className="w-full justify-center"
-                  onClick={() => { setMenuOpen(false); handleGetStarted(); }}
+                  onClick={handleJoinTesting}
                 >
-                  Get Started Free
+                  Join Testing
                 </Button>
               </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
-
-      <Modal isOpen={modalOpen} onClose={() => setLocalModalOpen(false)} />
-    </>
+    </header>
   );
 }

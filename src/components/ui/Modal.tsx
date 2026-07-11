@@ -2,72 +2,73 @@ import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 import { useForm } from 'react-hook-form';
-import { categories } from '../../data/index';
+import BrandLogo from './BrandLogo';
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
+  initialTab?: 'testing' | 'walkthrough';
 }
 
-type ActiveTab = 'join' | 'create';
+type InterestTab = 'testing' | 'walkthrough';
 
-interface JoinFormData {
+interface InterestFormData {
   name: string;
   email: string;
-  club: string;
-}
-
-interface CreateFormData {
+  role: string;
   clubName: string;
-  email: string;
-  category: string;
-  description: string;
+  interest: string;
+  message: string;
 }
 
-const clubs = [
-  'Guelph Coding Society',
-  "Muslim Students' Association",
-  'Girl Talk Guelph',
-  'Gryphon Racing',
-  'The Wildlife Club',
-  'Guelph Debate Club',
-  'International Students Club',
-  'Guelph Women in STEM',
-  'Guelph Fitness & Wellness',
-  'Off-Campus University Students',
-];
-
-function JoinForm({ onSuccess }: { onSuccess: () => void }) {
+function InterestForm({
+  tab,
+  onSuccess,
+}: {
+  tab: InterestTab;
+  onSuccess: () => void;
+}) {
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm<JoinFormData>();
+  } = useForm<InterestFormData>({
+    defaultValues: {
+      interest: tab === 'walkthrough' ? 'Request a walkthrough' : 'Join early testing',
+    },
+  });
 
-  const onSubmit = async (_data: JoinFormData) => {
-    await new Promise((r) => setTimeout(r, 800));
+  const onSubmit = async (_data: InterestFormData) => {
+    // Placeholder only — no backend in this cleanup pass
+    await new Promise((r) => setTimeout(r, 600));
     onSuccess();
   };
 
   const inputClass =
-    'w-full bg-[#0D1117] border border-[#21262D] rounded-lg px-4 py-2.5 text-[#F0F6FC] text-sm placeholder:text-[#6E7681] focus:outline-none focus:ring-2 focus:ring-[#C8102E] focus:border-[#C8102E] transition-colors';
-  const labelClass = 'block text-sm font-medium text-[#8B949E] mb-1.5';
-  const errorClass = 'text-xs text-[#C8102E] mt-1';
+    'w-full bg-[#0B0B0B] border border-[#222222] rounded-lg px-4 py-2.5 text-[#F5F5F5] text-sm placeholder:text-[#777777] focus:outline-none focus:ring-2 focus:ring-[#E51937] focus:border-[#E51937] transition-colors';
+  const labelClass = 'block text-sm font-medium text-[#9CA3AF] mb-1.5';
+  const errorClass = 'text-xs text-[#E51937] mt-1';
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+      <p className="text-sm text-[#9CA3AF] leading-relaxed">
+        {tab === 'walkthrough'
+          ? 'Request a walkthrough of Gryph ClubConnect. This form does not create an account.'
+          : 'Express interest in early testing. This form does not create an account or club workspace.'}
+      </p>
+
       <div>
-        <label className={labelClass}>Full Name</label>
+        <label className={labelClass}>Name</label>
         <input
           className={inputClass}
-          placeholder="Your full name"
+          placeholder="Your name"
           {...register('name', { required: 'Name is required' })}
         />
         {errors.name && <p className={errorClass}>{errors.name.message}</p>}
       </div>
 
       <div>
-        <label className={labelClass}>University Email</label>
+        <label className={labelClass}>Email</label>
         <input
           className={inputClass}
           placeholder="you@uoguelph.ca"
@@ -75,8 +76,8 @@ function JoinForm({ onSuccess }: { onSuccess: () => void }) {
           {...register('email', {
             required: 'Email is required',
             pattern: {
-              value: /^[^@]+@uoguelph\.ca$/i,
-              message: 'Must be a @uoguelph.ca email address',
+              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/i,
+              message: 'Enter a valid email address',
             },
           })}
         />
@@ -84,113 +85,62 @@ function JoinForm({ onSuccess }: { onSuccess: () => void }) {
       </div>
 
       <div>
-        <label className={labelClass}>Select Club</label>
+        <label className={labelClass}>Are you a student or club leader?</label>
         <select
           className={inputClass}
-          {...register('club', { required: 'Please select a club' })}
+          {...register('role', { required: 'Please select an option' })}
         >
-          <option value="">Choose a club...</option>
-          {clubs.map((c) => (
-            <option key={c} value={c}>{c}</option>
-          ))}
+          <option value="">Select…</option>
+          <option value="student">Student</option>
+          <option value="club-leader">Club leader</option>
+          <option value="both">Both</option>
+          <option value="other">Other</option>
         </select>
-        {errors.club && <p className={errorClass}>{errors.club.message}</p>}
+        {errors.role && <p className={errorClass}>{errors.role.message}</p>}
       </div>
 
-      <button
-        type="submit"
-        disabled={isSubmitting}
-        className="w-full bg-[#C8102E] hover:bg-[#A00C24] text-white font-semibold py-3 rounded-lg transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#C8102E] focus:ring-offset-2 focus:ring-offset-[#0D1117]"
-      >
-        {isSubmitting ? 'Joining...' : 'Join Club'}
-      </button>
-    </form>
-  );
-}
-
-function CreateForm({ onSuccess }: { onSuccess: () => void }) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors, isSubmitting },
-  } = useForm<CreateFormData>();
-
-  const onSubmit = async (_data: CreateFormData) => {
-    await new Promise((r) => setTimeout(r, 800));
-    onSuccess();
-  };
-
-  const inputClass =
-    'w-full bg-[#0D1117] border border-[#21262D] rounded-lg px-4 py-2.5 text-[#F0F6FC] text-sm placeholder:text-[#6E7681] focus:outline-none focus:ring-2 focus:ring-[#C8102E] focus:border-[#C8102E] transition-colors';
-  const labelClass = 'block text-sm font-medium text-[#8B949E] mb-1.5';
-  const errorClass = 'text-xs text-[#C8102E] mt-1';
-
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
       <div>
-        <label className={labelClass}>Club Name</label>
+        <label className={labelClass}>Club name (if applicable)</label>
         <input
           className={inputClass}
-          placeholder="e.g. Guelph Robotics Club"
-          {...register('clubName', { required: 'Club name is required', minLength: { value: 3, message: 'Minimum 3 characters' } })}
+          placeholder="Optional"
+          {...register('clubName')}
         />
-        {errors.clubName && <p className={errorClass}>{errors.clubName.message}</p>}
       </div>
 
       <div>
-        <label className={labelClass}>University Email</label>
-        <input
-          className={inputClass}
-          placeholder="you@uoguelph.ca"
-          type="email"
-          {...register('email', {
-            required: 'Email is required',
-            pattern: {
-              value: /^[^@]+@uoguelph\.ca$/i,
-              message: 'Must be a @uoguelph.ca email address',
-            },
-          })}
-        />
-        {errors.email && <p className={errorClass}>{errors.email.message}</p>}
-      </div>
-
-      <div>
-        <label className={labelClass}>Category</label>
-        <select
-          className={inputClass}
-          {...register('category', { required: 'Please select a category' })}
-        >
-          <option value="">Choose a category...</option>
-          {categories.map((c) => (
-            <option key={c} value={c}>{c}</option>
-          ))}
+        <label className={labelClass}>What would you like to test or see?</label>
+        <select className={inputClass} {...register('interest')}>
+          <option value="Join early testing">Join early testing</option>
+          <option value="Request a walkthrough">Request a walkthrough</option>
+          <option value="Student discovery features">Student discovery features</option>
+          <option value="Club leader workspace">Club leader workspace</option>
+          <option value="Events and hiring">Events and hiring</option>
         </select>
-        {errors.category && <p className={errorClass}>{errors.category.message}</p>}
       </div>
 
       <div>
-        <label className={labelClass}>Description</label>
+        <label className={labelClass}>Optional message</label>
         <textarea
           className={`${inputClass} resize-none`}
           rows={3}
-          placeholder="What is your club about?"
-          {...register('description', { required: 'Description is required', minLength: { value: 20, message: 'At least 20 characters' } })}
+          placeholder="Anything else we should know?"
+          {...register('message')}
         />
-        {errors.description && <p className={errorClass}>{errors.description.message}</p>}
       </div>
 
       <button
         type="submit"
         disabled={isSubmitting}
-        className="w-full bg-[#C8102E] hover:bg-[#A00C24] text-white font-semibold py-3 rounded-lg transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#C8102E] focus:ring-offset-2 focus:ring-offset-[#0D1117]"
+        className="w-full bg-[#E51937] hover:bg-[#C4122E] text-white font-semibold py-3 rounded-lg transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#E51937] focus:ring-offset-2 focus:ring-offset-[#0B0B0B]"
       >
-        {isSubmitting ? 'Creating...' : 'Create Club'}
+        {isSubmitting ? 'Sending…' : tab === 'walkthrough' ? 'Request Walkthrough' : 'Join Testing Interest'}
       </button>
     </form>
   );
 }
 
-function SuccessState({ tab, onClose }: { tab: ActiveTab; onClose: () => void }) {
+function SuccessState({ onClose }: { onClose: () => void }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.9 }}
@@ -202,17 +152,19 @@ function SuccessState({ tab, onClose }: { tab: ActiveTab; onClose: () => void })
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
       </div>
-      <h3 className="text-xl font-semibold text-[#F0F6FC] mb-2">
-        {tab === 'join' ? "You're in!" : 'Club Created!'}
+      <h3 className="text-xl font-semibold text-[#F5F5F5] mb-2">
+        Interest noted
       </h3>
-      <p className="text-[#8B949E] text-sm mb-6 max-w-xs">
-        {tab === 'join'
-          ? "Check your @uoguelph.ca inbox for a confirmation link to complete your registration."
-          : "Your club has been created. Check your @uoguelph.ca inbox to verify and activate it."}
+      <p className="text-[#9CA3AF] text-sm mb-6 max-w-xs">
+        This is a placeholder confirmation — no account was created. Email{' '}
+        <a href="mailto:hello@gryphclubconnect.com" className="text-[#9CA3AF] underline underline-offset-2">
+          hello@gryphclubconnect.com
+        </a>{' '}
+        if you want to follow up directly.
       </p>
       <button
         onClick={onClose}
-        className="px-6 py-2.5 bg-[#21262D] hover:bg-[#30363D] text-[#F0F6FC] rounded-lg text-sm font-medium transition-colors"
+        className="px-6 py-2.5 bg-[#222222] hover:bg-[#2A2A2A] text-[#F5F5F5] rounded-lg text-sm font-medium transition-colors"
       >
         Close
       </button>
@@ -220,13 +172,16 @@ function SuccessState({ tab, onClose }: { tab: ActiveTab; onClose: () => void })
   );
 }
 
-export default function Modal({ isOpen, onClose }: ModalProps) {
-  const [activeTab, setActiveTab] = useState<ActiveTab>('join');
+export default function Modal({ isOpen, onClose, initialTab = 'testing' }: ModalProps) {
+  const [activeTab, setActiveTab] = useState<InterestTab>(initialTab);
   const [success, setSuccess] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
   const modalRef = useRef<HTMLDivElement>(null);
 
-  // Close on Escape
+  useEffect(() => {
+    if (isOpen) setActiveTab(initialTab);
+  }, [isOpen, initialTab]);
+
   useEffect(() => {
     if (!isOpen) return;
     const handler = (e: KeyboardEvent) => {
@@ -236,7 +191,6 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
     return () => document.removeEventListener('keydown', handler);
   }, [isOpen, onClose]);
 
-  // Lock body scroll
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
@@ -247,7 +201,6 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
     return () => { document.body.style.overflow = ''; };
   }, [isOpen]);
 
-  // Focus trap
   useEffect(() => {
     if (!isOpen || !modalRef.current) return;
     const focusable = modalRef.current.querySelectorAll<HTMLElement>(
@@ -293,41 +246,41 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
             transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
-            className="relative w-full max-w-md bg-[#161B22] border border-[#21262D] rounded-2xl shadow-2xl overflow-hidden"
+            className="relative w-full max-w-md bg-[#111111] border border-[#222222] rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto"
           >
-            {/* Header */}
-            <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-[#21262D]">
-              <div className="flex items-center gap-2">
-                <span className="text-[#C8102E] font-bold italic text-lg font-serif">Club</span>
-                <span className="text-[#D4A017] font-bold italic text-lg font-serif">Connect</span>
-                <span className="text-base">🦅</span>
+            <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-[#222222]">
+              <div className="flex flex-col gap-2">
+                <BrandLogo variant="footer" />
+                <p className="text-[#777777] text-xs">Early testing interest · No account is created</p>
               </div>
               <button
                 onClick={onClose}
                 tabIndex={0}
-                className="text-[#6E7681] hover:text-[#F0F6FC] transition-colors p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#C8102E]"
+                className="text-[#777777] hover:text-[#F5F5F5] transition-colors p-1 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E51937]"
                 aria-label="Close modal"
               >
                 <X size={18} />
               </button>
             </div>
 
-            {/* Tabs */}
             {!success && (
-              <div className="flex border-b border-[#21262D]">
-                {(['join', 'create'] as const).map((tab) => (
+              <div className="flex border-b border-[#222222]">
+                {([
+                  { key: 'testing' as const, label: 'Join Testing' },
+                  { key: 'walkthrough' as const, label: 'Walkthrough' },
+                ]).map((tab) => (
                   <button
-                    key={tab}
-                    onClick={() => setActiveTab(tab)}
-                    className={`flex-1 py-3 text-sm font-medium transition-colors relative focus:outline-none focus:ring-inset focus:ring-2 focus:ring-[#C8102E] ${
-                      activeTab === tab ? 'text-[#F0F6FC]' : 'text-[#6E7681] hover:text-[#8B949E]'
+                    key={tab.key}
+                    onClick={() => setActiveTab(tab.key)}
+                    className={`flex-1 py-3 text-sm font-medium transition-colors relative focus:outline-none focus:ring-inset focus:ring-2 focus:ring-[#E51937] ${
+                      activeTab === tab.key ? 'text-[#F5F5F5]' : 'text-[#777777] hover:text-[#9CA3AF]'
                     }`}
                   >
-                    {tab === 'join' ? 'Join as Member' : 'Create Club'}
-                    {activeTab === tab && (
+                    {tab.label}
+                    {activeTab === tab.key && (
                       <motion.div
                         layoutId="tab-indicator"
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#C8102E]"
+                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#E51937]"
                       />
                     )}
                   </button>
@@ -335,32 +288,30 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
               </div>
             )}
 
-            {/* Body */}
             <div className="px-6 py-5">
               {success ? (
-                <SuccessState tab={activeTab} onClose={onClose} />
+                <SuccessState onClose={onClose} />
               ) : (
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeTab}
-                    initial={{ opacity: 0, x: activeTab === 'join' ? -16 : 16 }}
+                    initial={{ opacity: 0, x: activeTab === 'testing' ? -16 : 16 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: activeTab === 'join' ? 16 : -16 }}
+                    exit={{ opacity: 0, x: activeTab === 'testing' ? 16 : -16 }}
                     transition={{ duration: 0.2 }}
                   >
-                    {activeTab === 'join' ? (
-                      <JoinForm onSuccess={() => setSuccess(true)} />
-                    ) : (
-                      <CreateForm onSuccess={() => setSuccess(true)} />
-                    )}
+                    <InterestForm tab={activeTab} onSuccess={() => setSuccess(true)} />
                   </motion.div>
                 </AnimatePresence>
               )}
             </div>
 
             {!success && (
-              <p className="px-6 pb-5 text-xs text-[#6E7681] text-center">
-                🔒 @uoguelph.ca email required · University of Guelph students only
+              <p className="px-6 pb-5 text-xs text-[#777777] text-center">
+                Or email{' '}
+                <a href="mailto:hello@gryphclubconnect.com" className="underline underline-offset-2 hover:text-[#9CA3AF]">
+                  hello@gryphclubconnect.com
+                </a>
               </p>
             )}
           </motion.div>

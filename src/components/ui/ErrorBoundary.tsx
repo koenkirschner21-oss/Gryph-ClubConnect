@@ -26,13 +26,13 @@ export default class ErrorBoundary extends React.Component<ErrorBoundaryProps, E
   render() {
     if (this.state.hasError) {
       return (
-        <div className="min-h-[60vh] flex items-center justify-center bg-[#0D1117] px-4">
+        <div className="min-h-[60vh] flex items-center justify-center bg-[#0B0B0B] px-4">
           <div className="text-center max-w-md">
             <div className="text-5xl mb-6">⚠️</div>
-            <h1 className="text-2xl font-bold text-[#F0F6FC] font-[Syne,sans-serif] mb-3">
+            <h1 className="text-2xl font-bold text-[#F5F5F5] font-sans mb-3">
               Something went wrong
             </h1>
-            <p className="text-[#8B949E] text-base mb-6">
+            <p className="text-[#9CA3AF] text-base mb-6">
               An unexpected error occurred. Please try refreshing the page.
             </p>
             <Button variant="red" onClick={() => window.location.reload()}>

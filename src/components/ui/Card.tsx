@@ -10,28 +10,26 @@ interface CardProps {
 
 export default function Card({ children, className = '', featured = false, onClick }: CardProps) {
   const borderBase = featured
-    ? 'border border-[#D4A017]/50'
-    : 'border border-[#21262D]';
+    ? 'border border-[#FFC429]/40'
+    : 'border border-[#222222]';
 
   const shadowBase = featured
-    ? 'shadow-[0_0_30px_rgba(212,160,23,0.12)]'
+    ? 'shadow-[0_4px_20px_rgba(0,0,0,0.45)]'
     : '';
 
   return (
     <motion.div
       onClick={onClick}
       whileHover={{
-        y: -4,
-        borderColor: featured ? 'rgba(212,160,23,0.7)' : 'rgba(200,16,46,0.3)',
-        boxShadow: featured
-          ? '0 0 40px rgba(212,160,23,0.2), 0 20px 40px rgba(0,0,0,0.3)'
-          : '0 0 30px rgba(200,16,46,0.12), 0 20px 40px rgba(0,0,0,0.3)',
+        y: -2,
+        borderColor: featured ? 'rgba(255,196,41,0.55)' : 'rgba(229,25,55,0.35)',
+        boxShadow: '0 8px 24px rgba(0,0,0,0.4)',
         transition: { duration: 0.2 },
       }}
-      className={`bg-[#1A1F26] ${borderBase} ${shadowBase} rounded-xl overflow-hidden ${onClick ? 'cursor-pointer' : ''} ${className}`}
+      className={`bg-[#1A1A1A] ${borderBase} ${shadowBase} rounded-[12px] overflow-hidden ${onClick ? 'cursor-pointer' : ''} ${className}`}
     >
       {featured && (
-        <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#D4A017]/5 to-transparent pointer-events-none" />
+        <div className="absolute inset-0 rounded-[12px] bg-gradient-to-br from-[#FFC429]/[0.04] to-transparent pointer-events-none" />
       )}
       {children}
     </motion.div>

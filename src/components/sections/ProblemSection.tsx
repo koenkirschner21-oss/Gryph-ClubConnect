@@ -11,15 +11,15 @@ const iconMap: Record<string, LucideIcon> = {
 
 export default function ProblemSection() {
   return (
-    <section className="py-24 bg-[#0D1117]">
+    <section className="py-24 bg-[#0B0B0B]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="text-center mb-20">
-          <span className="text-sm font-mono text-[#C8102E] uppercase tracking-wider mb-5 block">The Problem</span>
-          <h2 className="text-[2.75rem] sm:text-[3.5rem] font-extrabold text-[#F0F6FC] font-[Syne,sans-serif] mb-5">
-            Your club runs on chaos.
+          <span className="text-sm font-sans text-[#E51937] uppercase tracking-wider mb-5 block">The Problem</span>
+          <h2 className="text-[2.75rem] sm:text-[3.5rem] font-extrabold text-[#F5F5F5] font-sans mb-5">
+            Club life is harder than it should be.
           </h2>
-          <p className="text-[#9DA5AE] text-xl max-w-xl mx-auto">
-            You're doing great work — with terrible tools. Here's what we hear from club leaders every day.
+          <p className="text-[#9CA3AF] text-xl max-w-xl mx-auto">
+            Students struggle to discover opportunities. Club leaders juggle too many tools. We&apos;re building for both.
           </p>
         </AnimatedSection>
 
@@ -28,25 +28,20 @@ export default function ProblemSection() {
             const Icon = iconMap[problem.icon] ?? MessageCircle;
             return (
               <StaggerItem key={problem.title}>
-                <div className="group relative bg-[#1A1F26] border border-[#21262D] hover:border-[#C8102E]/40 rounded-xl p-7 transition-all duration-300 hover:shadow-[0_0_30px_rgba(200,16,46,0.08)] h-full">
-                  {/* Subtle glow on hover */}
-                  <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#C8102E]/0 to-[#C8102E]/0 group-hover:from-[#C8102E]/[0.03] group-hover:to-transparent transition-all duration-300 pointer-events-none" />
+                <div className="group relative bg-[#131313] border border-[#222222] hover:border-[#E51937]/35 rounded-[12px] p-7 transition-all duration-300 hover:shadow-[0_8px_24px_rgba(0,0,0,0.4)] h-full">
+                  <div className="absolute inset-0 rounded-[12px] pointer-events-none" />
 
                   <div className="relative">
-                    <div className="w-[52px] h-[52px] rounded-xl bg-[rgba(200,16,46,0.1)] border border-[#C8102E]/20 flex items-center justify-center mb-6">
-                      <Icon size={26} className="text-[#C8102E]" />
+                    <div className="w-[52px] h-[52px] rounded-[10px] bg-[rgba(229,25,55,0.1)] border border-[#E51937]/20 flex items-center justify-center mb-6">
+                      <Icon size={26} className="text-[#E51937]" />
                     </div>
 
-                    <h3 className="text-[#F0F6FC] font-bold text-xl mb-3 font-[Syne,sans-serif]">
+                    <h3 className="text-[#F5F5F5] font-bold text-xl mb-3 font-sans">
                       {problem.title}
                     </h3>
-                    <p className="text-[#9DA5AE] text-[15px] leading-relaxed mb-5">
+                    <p className="text-[#9CA3AF] text-[15px] leading-relaxed">
                       {problem.description}
                     </p>
-
-                    <span className="inline-flex items-center px-3 py-1.5 rounded-full text-sm font-mono font-medium bg-[rgba(200,16,46,0.12)] text-[#C8102E] border border-[#C8102E]/20">
-                      {problem.pain}
-                    </span>
                   </div>
                 </div>
               </StaggerItem>

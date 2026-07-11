@@ -1,88 +1,91 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import AnimatedSection from '../ui/AnimatedSection';
 import Button from '../ui/Button';
 import Modal from '../ui/Modal';
-
-const trustedClubs = [
-  { name: 'Guelph Coding Society', color: '#C8102E' },
-  { name: 'MSA Guelph', color: '#D4A017' },
-  { name: 'Girl Talk', color: '#3B82F6' },
-  { name: 'Gryphon Racing', color: '#22C55E' },
-  { name: 'Wildlife Club', color: '#A855F7' },
-];
+import { goToSection, JOIN_TESTING_ID, REQUEST_WALKTHROUGH_ID } from '../../lib/cta';
 
 export default function FinalCTA() {
+  const navigate = useNavigate();
   const [modalOpen, setModalOpen] = useState(false);
+  const [modalTab, setModalTab] = useState<'testing' | 'walkthrough'>('testing');
+
+  const openTesting = () => {
+    setModalTab('testing');
+    setModalOpen(true);
+  };
+
+  const openWalkthrough = () => {
+    setModalTab('walkthrough');
+    setModalOpen(true);
+  };
 
   return (
     <>
-      <section className="relative py-28 overflow-hidden bg-[#0D1117]">
-        {/* Red glow background */}
+      <section id={JOIN_TESTING_ID} className="relative py-28 overflow-hidden bg-[#0B0B0B] scroll-mt-24">
         <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] rounded-full bg-[#C8102E] opacity-[0.08] blur-[100px]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[200px] rounded-full bg-[#D4A017] opacity-[0.05] blur-[80px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[320px] rounded-full bg-[#E51937] opacity-[0.05] blur-[90px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[360px] h-[180px] rounded-full bg-[#FFC429] opacity-[0.03] blur-[70px]" />
         </div>
 
-        {/* Grid overlay */}
         <div
           className="absolute inset-0 opacity-[0.03] pointer-events-none"
           style={{
-            backgroundImage: `linear-gradient(#F0F6FC 1px, transparent 1px), linear-gradient(90deg, #F0F6FC 1px, transparent 1px)`,
+            backgroundImage: `linear-gradient(#F5F5F5 1px, transparent 1px), linear-gradient(90deg, #F5F5F5 1px, transparent 1px)`,
             backgroundSize: '50px 50px',
           }}
         />
 
         <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedSection>
+            <span className="text-sm font-sans text-[#E51937] uppercase tracking-wider mb-5 block">Early access</span>
             <h2
-              className="font-extrabold text-[#F0F6FC] font-[Syne,sans-serif] mb-5 leading-tight"
+              className="font-extrabold text-[#F5F5F5] font-sans mb-5 leading-tight"
               style={{ fontSize: 'clamp(2.25rem, 5.5vw, 3.75rem)' }}
             >
-              Your club deserves better<br className="hidden sm:block" /> than a group chat.
+              Join the early testing group
             </h2>
-            <p className="text-[#9DA5AE] text-xl max-w-2xl mx-auto mb-8">
-              Join 50+ University of Guelph clubs already using Gryph Club Connect to stay organized and connected.
+            <p className="text-[#9CA3AF] text-xl max-w-2xl mx-auto mb-8">
+              Help shape Gryph ClubConnect with students and club leaders. We&apos;re looking for people willing to try real workflows and share honest feedback.
             </p>
+
+            <div id={REQUEST_WALKTHROUGH_ID} className="scroll-mt-28" />
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-              <Button variant="red" size="lg" onClick={() => setModalOpen(true)}>
-                Get Started Free →
+              <Button
+                variant="red"
+                size="lg"
+                onClick={() => {
+                  goToSection(JOIN_TESTING_ID, { navigate, pathname: '/' });
+                  openTesting();
+                }}
+              >
+                Join Testing
               </Button>
-              <Button variant="ghost" size="lg">
-                Book a Demo
+              <Button
+                variant="ghost"
+                size="lg"
+                onClick={() => {
+                  goToSection(REQUEST_WALKTHROUGH_ID, { navigate, pathname: '/' });
+                  openWalkthrough();
+                }}
+              >
+                Request a Walkthrough
               </Button>
             </div>
 
-            <p className="text-[#8B949E] text-sm font-mono mb-8">
-              🔒 @uoguelph.ca emails only · No credit card required
+            <p className="text-[#9CA3AF] text-sm max-w-lg mx-auto">
+              Prefer email? Reach us at{' '}
+              <a href="mailto:hello@gryphclubconnect.com" className="text-[#9CA3AF] hover:text-[#F5F5F5] underline underline-offset-2">
+                hello@gryphclubconnect.com
+              </a>
+              {' '}and tell us whether you&apos;re a student or club leader. Interest forms on this site do not create an account.
             </p>
-
-            {/* Social proof avatars */}
-            <div className="flex flex-col items-center gap-3">
-              <div className="flex -space-x-2">
-                {trustedClubs.map((club, i) => (
-                  <div
-                    key={i}
-                    className="w-9 h-9 rounded-full border-2 border-[#0D1117] flex items-center justify-center text-[11px] font-bold text-white shadow-lg"
-                    style={{ backgroundColor: club.color }}
-                    title={club.name}
-                  >
-                    {club.name[0]}
-                  </div>
-                ))}
-                <div className="w-9 h-9 rounded-full border-2 border-[#0D1117] bg-[#21262D] flex items-center justify-center text-[11px] font-medium text-[#8B949E]">
-                  +45
-                </div>
-              </div>
-              <p className="text-[#8B949E] text-sm">
-                Trusted by <span className="text-[#9DA5AE] font-medium">2,400+ students</span> across campus
-              </p>
-            </div>
           </AnimatedSection>
         </div>
       </section>
 
-      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} />
+      <Modal isOpen={modalOpen} onClose={() => setModalOpen(false)} initialTab={modalTab} />
     </>
   );
 }

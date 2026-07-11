@@ -15,10 +15,10 @@ interface ButtonProps {
 }
 
 const variantClasses: Record<Variant, string> = {
-  red: 'bg-[#C8102E] hover:bg-[#A00C24] text-white font-semibold rounded-lg transition-all hover:-translate-y-px hover:shadow-[0_4px_20px_rgba(200,16,46,0.4)] active:scale-[0.98]',
-  gold: 'bg-[#D4A017] hover:bg-[#B8860B] text-[#0D1117] font-semibold rounded-lg transition-all hover:-translate-y-px hover:shadow-[0_4px_20px_rgba(212,160,23,0.4)] active:scale-[0.98]',
-  ghost: 'bg-transparent border border-[rgba(255,255,255,0.25)] hover:bg-[rgba(255,255,255,0.06)] hover:border-[rgba(255,255,255,0.35)] text-[#F0F6FC] font-semibold rounded-lg transition-all',
-  outline: 'bg-transparent border-2 border-[#C8102E] text-[#C8102E] hover:bg-[#C8102E] hover:text-white font-semibold rounded-lg transition-all hover:-translate-y-px active:scale-[0.98]',
+  red: 'bg-[#E51937] hover:bg-[#C4122E] text-white font-semibold rounded-[10px] transition-colors active:scale-[0.98]',
+  gold: 'bg-[#FFC429] hover:bg-[#E0A800] text-[#0B0B0B] font-semibold rounded-[10px] transition-colors active:scale-[0.98]',
+  ghost: 'bg-transparent border border-[rgba(255,255,255,0.12)] hover:bg-[rgba(255,255,255,0.05)] hover:border-[rgba(255,255,255,0.2)] text-[#F5F5F5] font-semibold rounded-[10px] transition-colors',
+  outline: 'bg-transparent border border-[#E51937] text-[#E51937] hover:bg-[#E51937] hover:text-white font-semibold rounded-[10px] transition-colors active:scale-[0.98]',
 };
 
 const sizeClasses: Record<Size, string> = {
@@ -27,7 +27,7 @@ const sizeClasses: Record<Size, string> = {
   lg: 'px-8 py-4 text-base',
 };
 
-const focusClasses = 'focus:outline-none focus:ring-2 focus:ring-[#C8102E] focus:ring-offset-2 focus:ring-offset-[#0D1117]';
+const focusClasses = 'focus:outline-none focus:ring-2 focus:ring-[#E51937] focus:ring-offset-2 focus:ring-offset-[#0B0B0B]';
 
 export default function Button({
   variant = 'red',
@@ -44,7 +44,7 @@ export default function Button({
     sizeClasses[size],
     focusClasses,
     disabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : 'cursor-pointer',
-    'inline-flex items-center justify-center gap-2',
+    'inline-flex items-center justify-center gap-2 font-[Inter,ui-sans-serif,system-ui,sans-serif]',
     className,
   ].join(' ');
 

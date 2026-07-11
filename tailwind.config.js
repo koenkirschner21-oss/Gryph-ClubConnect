@@ -8,29 +8,39 @@ export default {
     extend: {
       colors: {
         red: {
-          DEFAULT: '#C8102E',
-          dark: '#A00C24',
-          light: '#E8203E',
+          DEFAULT: '#E51937',
+          dark: '#C4122E',
+          light: '#FF2A4A',
         },
         gold: {
-          DEFAULT: '#D4A017',
-          dark: '#B8860B',
-          light: '#F0B820',
+          DEFAULT: '#FFC429',
+          dark: '#E0A800',
+          light: '#FFD45C',
         },
         navy: {
-          DEFAULT: '#0D1117',
-          light: '#161B22',
-          border: '#21262D',
+          DEFAULT: '#0B0B0B',
+          light: '#111111',
+          border: '#222222',
         },
         slate: {
-          card: '#1A1F26',
-          hover: '#1E242C',
+          card: '#1A1A1A',
+          hover: '#242424',
+        },
+        surface: {
+          DEFAULT: '#131313',
+          raised: '#1A1A1A',
+          overlay: '#242424',
         },
       },
       fontFamily: {
-        syne: ['Syne', 'sans-serif'],
-        dm: ['DM Sans', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        sans: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        inter: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        mono: ['Inter', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      },
+      borderRadius: {
+        lg: '10px',
+        xl: '12px',
+        '2xl': '14px',
       },
       animation: {
         ticker: 'ticker 30s linear infinite',
@@ -58,8 +68,8 @@ export default {
           '50%': { transform: 'translateY(-25px) rotate(2deg)' },
         },
         pulseGlow: {
-          '0%, 100%': { boxShadow: '0 0 20px rgba(200, 16, 46, 0.3)' },
-          '50%': { boxShadow: '0 0 40px rgba(200, 16, 46, 0.6)' },
+          '0%, 100%': { boxShadow: '0 0 16px rgba(229, 25, 55, 0.2)' },
+          '50%': { boxShadow: '0 0 28px rgba(229, 25, 55, 0.35)' },
         },
       },
       backgroundImage: {

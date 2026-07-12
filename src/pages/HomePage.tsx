@@ -1,5 +1,4 @@
 import Hero from '../components/sections/Hero';
-import Ticker from '../components/sections/Ticker';
 import ProductSplit from '../components/sections/ProductSplit';
 import ProblemSection from '../components/sections/ProblemSection';
 import StudentShowcase from '../components/sections/StudentShowcase';
@@ -13,7 +12,6 @@ export default function HomePage() {
   return (
     <div className="page-transition">
       <Hero />
-      <Ticker />
       <ProductSplit />
       <ProblemSection />
       <StudentShowcase />

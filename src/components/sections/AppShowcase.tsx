@@ -8,12 +8,12 @@ const tabs: { key: TabKey; label: string; description: string }[] = [
   {
     key: 'dashboard',
     label: 'Dashboard',
-    description: 'Track upcoming events, announcements, tasks, and applications from one place.',
+    description: 'Track clubs, events, tasks, applications, and inbox updates from one place.',
   },
   {
     key: 'explore',
     label: 'Explore',
-    description: 'Browse clubs, club profiles, events, and open roles.',
+    description: 'Browse clubs, public profiles, events, and open roles.',
   },
   {
     key: 'workspace',
@@ -22,23 +22,23 @@ const tabs: { key: TabKey; label: string; description: string }[] = [
   },
   {
     key: 'events',
-    label: 'Events',
-    description: 'Create events, manage sign-ups, and track who is coming.',
+    label: 'Events & RSVPs',
+    description: 'Create events, collect RSVP answers, and manage attendees.',
   },
   {
     key: 'tasks',
     label: 'Tasks',
-    description: 'Assign work, set due dates, and review progress.',
+    description: 'Assign work, track progress, and review completion.',
   },
   {
     key: 'hiring',
     label: 'Hiring',
-    description: 'Post roles, review applicants, and move people through a pipeline.',
+    description: 'Post roles, review applicants, and manage candidate statuses.',
   },
   {
     key: 'members',
-    label: 'Members',
-    description: 'Manage members, roles, invites, and permissions.',
+    label: 'Members & Roles',
+    description: 'Manage members, role titles, invites, org structure, and permissions.',
   },
 ];
 
@@ -55,7 +55,7 @@ export default function AppShowcase() {
         const idx = keys.indexOf(prev);
         return keys[(idx + 1) % keys.length];
       });
-    }, 4500);
+    }, 5000);
     return () => clearInterval(interval);
   }, [isHovered]);
 
@@ -69,33 +69,32 @@ export default function AppShowcase() {
           <h2 className="text-[2.1rem] sm:text-[2.75rem] font-extrabold text-[#F5F5F5] font-sans mb-4 leading-tight">
             See how Gryph ClubConnect works
           </h2>
-          <p className="text-[#9CA3AF] text-base sm:text-lg leading-relaxed">
-            Real workflows for students and club leaders. Demo data shown.
-          </p>
         </div>
 
         <div
-          className="grid grid-cols-1 lg:grid-cols-[240px_1fr] gap-6 lg:gap-8 items-start"
+          className="grid grid-cols-1 lg:grid-cols-[220px_1fr] gap-6 lg:gap-8 items-start"
           onMouseEnter={() => setIsHovered(true)}
           onMouseLeave={() => setIsHovered(false)}
         >
-          <div className="lg:sticky lg:top-24 space-y-1.5">
+          <div className="lg:sticky lg:top-24 space-y-1">
             {tabs.map((tab) => {
               const isActive = activeTab === tab.key;
               return (
                 <button
                   key={tab.key}
                   onClick={() => setActiveTab(tab.key)}
-                  className={`w-full rounded-[10px] border px-3.5 py-3 text-left transition-colors ${
+                  className={`w-full rounded-[10px] border px-3.5 py-2.5 text-left transition-colors ${
                     isActive
                       ? 'bg-[#131313] border-[#E51937]/45 text-[#F5F5F5]'
                       : 'bg-transparent border-transparent text-[#9CA3AF] hover:bg-[#131313] hover:border-[#222222] hover:text-[#F5F5F5]'
                   }`}
                 >
                   <span className="block text-sm font-semibold">{tab.label}</span>
-                  <span className={`mt-1 block text-[12px] leading-snug ${isActive ? 'text-[#777777]' : 'text-[#555555]'}`}>
-                    {tab.description}
-                  </span>
+                  {isActive && (
+                    <span className="mt-1 block text-[12px] leading-snug text-[#777777]">
+                      {tab.description}
+                    </span>
+                  )}
                 </button>
               );
             })}
@@ -111,16 +110,14 @@ export default function AppShowcase() {
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
               >
                 <div className="mb-4">
-                  <div className="flex flex-wrap items-baseline gap-x-2 gap-y-1 mb-1.5">
-                    <h3 className="text-lg sm:text-xl font-bold text-[#F5F5F5]">
-                      {active.label} view
-                    </h3>
-                    <span className="text-[11px] uppercase tracking-[0.14em] text-[#777777]">
-                      Demo data shown.
-                    </span>
-                  </div>
-                  <p className="text-sm text-[#9CA3AF] leading-relaxed max-w-2xl">
+                  <h3 className="text-lg sm:text-xl font-bold text-[#F5F5F5] mb-1">
+                    {active.label} view
+                  </h3>
+                  <p className="text-sm text-[#9CA3AF] leading-relaxed max-w-xl mb-1">
                     {active.description}
+                  </p>
+                  <p className="text-[11px] uppercase tracking-[0.14em] text-[#777777]">
+                    Demo data shown.
                   </p>
                 </div>
                 <div className="rounded-[12px] border border-[#242424] bg-[#131313] p-2 sm:p-2.5 shadow-[0_16px_48px_rgba(0,0,0,0.4)]">

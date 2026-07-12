@@ -6,7 +6,7 @@ const buildingAround = [
     number: '01',
     label: 'Discovery',
     accent: 'red' as const,
-    title: 'Easier discovery for students',
+    title: 'Discovery',
     description:
       'Students need one place to find clubs, events, roles, and updates without digging through scattered links and group chats.',
   },
@@ -14,15 +14,15 @@ const buildingAround = [
     number: '02',
     label: 'Operations',
     accent: 'gold' as const,
-    title: 'Cleaner operations for club leaders',
+    title: 'Operations',
     description:
-      'Club leaders need a single workspace for members, announcements, events, tasks, hiring, and day-to-day coordination.',
+      'Club leaders need a workspace for events, RSVP answers, tasks, meetings, documents, members, hiring, analytics, and day-to-day coordination.',
   },
   {
     number: '03',
     label: 'Trust',
     accent: 'neutral' as const,
-    title: 'Trust through roles and permissions',
+    title: 'Trust',
     description:
       'Role-based access helps clubs give the right people control without exposing every setting to every member.',
   },

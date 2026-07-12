@@ -1,7 +1,6 @@
 import Hero from '../components/sections/Hero';
 import ProductSplit from '../components/sections/ProductSplit';
 import ProblemSection from '../components/sections/ProblemSection';
-import FounderLine from '../components/sections/FounderLine';
 import StudentShowcase from '../components/sections/StudentShowcase';
 import LeaderShowcase from '../components/sections/LeaderShowcase';
 import AppShowcase from '../components/sections/AppShowcase';
@@ -15,7 +14,6 @@ export default function HomePage() {
       <Hero />
       <ProductSplit />
       <ProblemSection />
-      <FounderLine />
       <StudentShowcase />
       <LeaderShowcase />
       <AppShowcase />

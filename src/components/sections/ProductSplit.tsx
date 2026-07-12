@@ -9,8 +9,13 @@ const audiences = [
     accent: 'red' as const,
     label: 'For students',
     title: 'For students',
-    body: 'Find clubs, discover events, apply for roles, and keep track of the groups you care about from one account.',
-    features: ['Explore clubs', 'Discover events', 'Apply for roles', 'Track involvement'],
+    body: 'Discover clubs, browse events, view public club profiles, apply for roles, and track your involvement from one dashboard.',
+    features: [
+      'Explore clubs and profiles',
+      'Sign up for events',
+      'Apply for roles',
+      'Track clubs, tasks, and applications',
+    ],
     cta: 'Explore student features',
     icon: Compass,
   },
@@ -19,8 +24,13 @@ const audiences = [
     accent: 'gold' as const,
     label: 'For club leaders',
     title: 'For club leaders',
-    body: 'Coordinate the work behind the club: members, announcements, events, tasks, hiring, and permissions.',
-    features: ['Manage operations', 'Review requests', 'Assign tasks', 'Coordinate events'],
+    body: 'Run the work behind your club with tools for events, RSVPs, announcements, tasks, meetings, documents, members, hiring, analytics, and permissions.',
+    features: [
+      'Manage events and RSVPs',
+      'Assign tasks and host meetings',
+      'Review applicants and members',
+      'Control roles, analytics, and permissions',
+    ],
     cta: 'Explore club leader tools',
     icon: LayoutGrid,
   },
@@ -30,7 +40,7 @@ const accentStyles = {
   red: {
     bar: 'bg-[#E51937]',
     iconWrap: 'bg-[rgba(229,25,55,0.12)] border-[#E51937]/30 text-[#E51937]',
-    chip: 'border-[#E51937]/20 bg-[rgba(229,25,55,0.08)] text-[#F5F5F5]',
+    bullet: 'bg-[#E51937]',
     hover:
       'hover:border-[#E51937]/50 hover:bg-[#161616] hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(229,25,55,0.12)]',
     cta: 'text-[#E51937] group-hover:text-[#FF6B7D]',
@@ -38,7 +48,7 @@ const accentStyles = {
   gold: {
     bar: 'bg-[#FFC429]',
     iconWrap: 'bg-[rgba(255,196,41,0.12)] border-[#FFC429]/30 text-[#FFC429]',
-    chip: 'border-[#FFC429]/20 bg-[rgba(255,196,41,0.08)] text-[#F5F5F5]',
+    bullet: 'bg-[#FFC429]',
     hover:
       'hover:border-[#FFC429]/45 hover:bg-[#161616] hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(255,196,41,0.1)]',
     cta: 'text-[#FFC429] group-hover:text-[#FFD45C]',
@@ -70,36 +80,34 @@ export default function ProductSplit() {
                 <Link
                   to={audience.to}
                   id={audience.id}
-                  className={`group relative flex h-full min-h-[320px] sm:min-h-[360px] flex-col overflow-hidden rounded-[14px] border border-[#222222] bg-[#131313] p-8 sm:p-10 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111111] ${styles.hover}`}
+                  className={`group relative flex h-full flex-col overflow-hidden rounded-[14px] border border-[#222222] bg-[#131313] p-8 sm:p-9 transition-all duration-200 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111111] ${styles.hover}`}
                 >
                   <span className={`absolute inset-x-0 top-0 h-[2px] ${styles.bar}`} aria-hidden />
 
-                  <div className="flex items-center gap-3.5 mb-6">
-                    <div className={`w-12 h-12 rounded-[10px] border flex items-center justify-center ${styles.iconWrap}`}>
-                      <Icon size={22} />
+                  <div className="flex items-center gap-3 mb-5">
+                    <div className={`w-10 h-10 rounded-[10px] border flex items-center justify-center ${styles.iconWrap}`}>
+                      <Icon size={20} />
                     </div>
                     <span className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#777777]">
                       {audience.label}
                     </span>
                   </div>
 
-                  <h3 className="text-[1.75rem] sm:text-[2rem] font-bold text-[#F5F5F5] font-sans mb-4 tracking-tight">
+                  <h3 className="text-[1.5rem] sm:text-[1.75rem] font-bold text-[#F5F5F5] font-sans mb-3 tracking-tight">
                     {audience.title}
                   </h3>
-                  <p className="text-[#9CA3AF] text-base sm:text-[17px] leading-relaxed mb-8 max-w-md">
+                  <p className="text-[#9CA3AF] text-[15px] sm:text-base leading-relaxed mb-6 max-w-md">
                     {audience.body}
                   </p>
 
-                  <div className="flex flex-wrap gap-2.5 mb-10">
+                  <ul className="space-y-2.5 mb-8 flex-1">
                     {audience.features.map((item) => (
-                      <span
-                        key={item}
-                        className={`inline-flex rounded-[8px] border px-3 py-2 text-[13px] sm:text-sm ${styles.chip}`}
-                      >
-                        {item}
-                      </span>
+                      <li key={item} className="flex items-start gap-2.5 text-[14px] text-[#F5F5F5]">
+                        <span className={`mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full ${styles.bullet}`} />
+                        <span className="leading-snug">{item}</span>
+                      </li>
                     ))}
-                  </div>
+                  </ul>
 
                   <div className={`mt-auto inline-flex items-center gap-1.5 text-[15px] font-semibold ${styles.cta}`}>
                     {audience.cta}

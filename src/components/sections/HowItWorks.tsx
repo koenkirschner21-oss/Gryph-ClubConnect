@@ -13,30 +13,32 @@ const onboardingSteps = [
     step: '02',
     title: 'Walk through the right workflows',
     description:
-      'See the student discovery flow, club workspace, events, tasks, hiring, members, and permissions.',
+      'See student discovery, the club workspace, events and RSVPs, tasks, hiring, members, meetings, documents, analytics, and permissions.',
   },
   {
     step: '03',
     title: 'Set up your club workspace',
     description:
-      'Prepare your club profile, members, announcements, events, and roles before launch.',
+      'Prepare your profile, members, announcements, events, roles, documents, and core settings before launch.',
   },
   {
     step: '04',
     title: 'Share feedback before rollout',
-    description: 'Help shape the platform around how UofG clubs actually operate.',
+    description: 'Help shape the platform around how student clubs actually operate.',
   },
 ];
 
 const includedItems = [
   'Club profile setup',
-  'Events and sign-ups',
-  'Announcements',
+  'Events and RSVP management',
+  'Announcements and chat',
   'Tasks and ownership',
+  'Meetings and follow-ups',
   'Members and roles',
   'Hiring and applications',
+  'Documents and resources',
+  'Analytics',
   'Permissions',
-  'Student discovery',
 ];
 
 export default function HowItWorks() {
@@ -58,7 +60,7 @@ export default function HowItWorks() {
             Start with a walkthrough. Build toward launch.
           </h2>
           <p className="text-[#9CA3AF] text-base sm:text-lg leading-relaxed">
-            Gryph ClubConnect is onboarding UofG clubs ahead of launch. We&apos;ll help you understand the platform, choose the right workflows, and set up your club workspace.
+            Gryph ClubConnect is onboarding UofG clubs ahead of launch. We&apos;ll help you understand the platform, choose the right workflows, and prepare your club workspace.
           </p>
         </AnimatedSection>
 

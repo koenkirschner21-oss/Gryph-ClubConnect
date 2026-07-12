@@ -9,12 +9,6 @@ import {
   setClubFormInterest,
 } from '../../lib/cta';
 
-const trustItems = [
-  'Student-built',
-  'Built for UofG club life',
-  'Early club onboarding now open',
-];
-
 export default function Hero() {
   const navigate = useNavigate();
 
@@ -69,7 +63,7 @@ export default function Hero() {
               className="text-[#9CA3AF] text-lg sm:text-xl max-w-[34rem]"
               style={{ lineHeight: '1.65' }}
             >
-              Gryph ClubConnect helps UofG students find clubs, events, and opportunities while giving club leaders one workspace to manage members, announcements, events, tasks, hiring, and more.
+              Gryph ClubConnect helps students discover clubs, events, and opportunities while giving club leaders one workspace for members, announcements, events, tasks, hiring, meetings, documents, analytics, and permissions.
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-0.5">
@@ -86,23 +80,11 @@ export default function Hero() {
               </Button>
             </div>
 
-            <div className="pt-1">
+            <div className="pt-0.5">
               <div className="h-px w-full max-w-md bg-[#222222]" />
-              <ul className="mt-3 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-y-2">
-                {trustItems.map((label, index) => (
-                  <li
-                    key={label}
-                    className="flex items-center text-[13px] text-[#9CA3AF] font-medium tracking-tight"
-                  >
-                    {index > 0 && (
-                      <span className="hidden sm:inline mx-3 text-[#444444]" aria-hidden>
-                        ·
-                      </span>
-                    )}
-                    <span>{label}</span>
-                  </li>
-                ))}
-              </ul>
+              <p className="mt-2.5 text-[12px] sm:text-[13px] text-[#9CA3AF] font-medium tracking-tight">
+                Student-built · Built for UofG club life · Early club onboarding now open
+              </p>
             </div>
           </motion.div>
 

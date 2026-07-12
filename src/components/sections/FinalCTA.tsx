@@ -105,7 +105,7 @@ export default function FinalCTA() {
                 Bring your club onto Gryph ClubConnect.
               </h2>
               <p className="text-[#9CA3AF] text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
-                We&apos;re onboarding UofG clubs ahead of launch. Request a demo, see how the platform works, and get your club set up for a cleaner way to manage events, members, tasks, hiring, announcements, and permissions.
+                We&apos;re onboarding UofG clubs ahead of launch. Request a demo, see how the platform works, and get your club set up for a cleaner way to manage events, members, tasks, hiring, announcements, meetings, documents, analytics, and permissions.
               </p>
 
               <div className="rounded-[12px] border border-[#222222] bg-[#131313] p-5 sm:p-6 max-w-md">
@@ -127,10 +127,10 @@ export default function FinalCTA() {
               <p className="mt-6 text-sm text-[#777777] max-w-md">
                 Prefer email? Reach us at{' '}
                 <a
-                  href="mailto:hello@gryphclubconnect.com"
+                  href="mailto:gryphclubconnect@gmail.com"
                   className="text-[#9CA3AF] hover:text-[#F5F5F5] underline underline-offset-2"
                 >
-                  hello@gryphclubconnect.com
+                  gryphclubconnect@gmail.com
                 </a>
                 .
               </p>
@@ -283,10 +283,10 @@ export default function FinalCTA() {
               <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-8 items-start">
                 <div>
                   <h3 className="text-2xl sm:text-[1.75rem] font-extrabold text-[#F5F5F5] font-sans mb-3">
-                    Want student access?
+                    For students
                   </h3>
                   <p className="text-[#9CA3AF] text-base leading-relaxed max-w-md">
-                    Students can request access to discover clubs, events, and opportunities as Gryph ClubConnect prepares for launch.
+                    Students can request access to explore clubs, events, roles, and opportunities as Gryph ClubConnect prepares for launch.
                   </p>
                 </div>
 

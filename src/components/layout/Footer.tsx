@@ -102,11 +102,11 @@ export default function Footer() {
             <h4 className="text-[#F5F5F5] text-sm font-semibold mb-3">Contact</h4>
             <div className="space-y-3">
               <a
-                href="mailto:hello@gryphclubconnect.com"
+                href="mailto:gryphclubconnect@gmail.com"
                 className="inline-flex items-center gap-2 text-sm text-[#9CA3AF] hover:text-[#F5F5F5] transition-colors"
               >
                 <Mail size={15} className="shrink-0" />
-                hello@gryphclubconnect.com
+                gryphclubconnect@gmail.com
               </a>
               <button
                 type="button"

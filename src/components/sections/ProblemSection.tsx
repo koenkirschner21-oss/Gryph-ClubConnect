@@ -11,13 +11,13 @@ const problemCards = [
   {
     label: 'Ownership gap',
     title: 'Work falls through the cracks',
-    body: 'Exec teams lose track of who owns what, what is overdue, and what still needs review.',
+    body: 'Exec teams lose track of who owns what, what is overdue, what still needs review, and what was decided in the last meeting.',
     accent: 'gold' as const,
   },
   {
     label: 'Operations gap',
     title: 'Club work gets spread everywhere',
-    body: 'Events, sign-ups, reminders, members, and applications end up spread across too many tools.',
+    body: 'Events, RSVP answers, reminders, members, documents, applications, and follow-ups end up spread across too many tools.',
     accent: 'neutral' as const,
   },
 ];
@@ -49,7 +49,7 @@ export default function ProblemSection() {
             Club life is harder than it should be.
           </h2>
           <p className="text-[#9CA3AF] text-base sm:text-lg max-w-2xl mx-auto leading-relaxed">
-            Students struggle to find the right opportunities. Club leaders are left coordinating across chats, spreadsheets, forms, and email. Gryph ClubConnect brings both sides into one organized platform.
+            Students struggle to find the right opportunities. Club leaders are left coordinating across chats, spreadsheets, forms, and email.
           </p>
         </AnimatedSection>
 
@@ -79,7 +79,7 @@ export default function ProblemSection() {
 
         <AnimatedSection delay={0.15} className="mt-10 sm:mt-12 text-center">
           <p className="mx-auto max-w-xl text-sm sm:text-[15px] leading-relaxed text-[#777777]">
-            Gryph ClubConnect brings discovery and club operations into one organized platform.
+            One platform for students to discover club life and for club leaders to manage it.
           </p>
         </AnimatedSection>
       </div>

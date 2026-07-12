@@ -1,15 +1,13 @@
 import { motion } from 'framer-motion';
-import { Sparkles, Users, GraduationCap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import Badge from '../ui/Badge';
 import Button from '../ui/Button';
 import MockupImage from '../mockups/MockupImage';
 import { goToSection, ONBOARD_CLUB_ID, REQUEST_DEMO_ID } from '../../lib/cta';
 
 const trustItems = [
-  { icon: GraduationCap, label: 'Student-built' },
-  { icon: Users, label: 'Built for UofG club life' },
-  { icon: Sparkles, label: 'Early club onboarding now open' },
+  'Student-built',
+  'Built for UofG club life',
+  'Early club onboarding now open',
 ];
 
 export default function Hero() {
@@ -19,42 +17,58 @@ export default function Hero() {
   const handleDemo = () => goToSection(REQUEST_DEMO_ID, { navigate, pathname: '/' });
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0B0B0B]">
+    <section className="relative flex items-center overflow-hidden bg-[#0B0B0B] min-h-[calc(100vh-1px)]">
       <div
-        className="absolute inset-0"
+        className="absolute inset-0 pointer-events-none"
         style={{
-          backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px)`,
-          backgroundSize: '40px 40px',
+          backgroundImage: `radial-gradient(circle, rgba(255,255,255,0.025) 1px, transparent 1px)`,
+          backgroundSize: '32px 32px',
         }}
       />
-      <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#E51937] opacity-[0.05] blur-[100px] pointer-events-none" />
-      <div className="absolute -bottom-40 -left-40 w-[500px] h-[500px] rounded-full bg-[#FFC429] opacity-[0.04] blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[480px] h-[480px] rounded-full bg-[#E51937] opacity-[0.035] blur-[120px] pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-14 sm:pb-20 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 xl:gap-16 items-center">
           <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col gap-6"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col gap-5 sm:gap-6"
           >
-            <div>
-              <Badge variant="gold" dot>Now onboarding UofG clubs for early access.</Badge>
+            <div className="flex flex-col gap-2.5">
+              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#FFC429]">
+                Early access
+              </p>
+              <div className="flex items-start gap-2.5">
+                <span className="mt-[7px] h-px w-5 shrink-0 bg-[#E51937]" aria-hidden />
+                <p className="text-[13px] sm:text-sm text-[#9CA3AF] leading-snug max-w-md">
+                  Early access onboarding is open for UofG clubs.
+                </p>
+              </div>
             </div>
 
-            <h1 className="font-sans font-extrabold leading-[1.04] tracking-tight" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.25rem)' }}>
+            <h1
+              className="font-sans font-extrabold leading-[1.05] tracking-tight"
+              style={{ fontSize: 'clamp(2.35rem, 5.2vw, 4rem)' }}
+            >
               <span className="block text-[#F5F5F5]">Discover campus life.</span>
-              <span className="block bg-gradient-to-r from-[#FFC429] to-[#FFD45C] bg-clip-text text-transparent">
-                Manage club life.
-              </span>
+              <span className="block text-[#FFC429]">Manage club life.</span>
             </h1>
 
-            <p className="text-[#9CA3AF] text-xl sm:text-[22px]" style={{ maxWidth: '520px', lineHeight: '1.65' }}>
+            <p
+              className="text-[#9CA3AF] text-lg sm:text-xl max-w-[34rem]"
+              style={{ lineHeight: '1.65' }}
+            >
               Gryph ClubConnect helps UofG students find clubs, events, and opportunities while giving club leaders one workspace to manage members, announcements, events, tasks, hiring, and more.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-              <Button variant="red" size="lg" onClick={handleOnboard}>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
+              <Button
+                variant="red"
+                size="lg"
+                onClick={handleOnboard}
+                className="shadow-[0_8px_24px_rgba(229,25,55,0.22)]"
+              >
                 Onboard Your Club
               </Button>
               <Button variant="ghost" size="lg" onClick={handleDemo}>
@@ -62,29 +76,37 @@ export default function Hero() {
               </Button>
             </div>
 
-            <div className="w-full h-px bg-[rgba(255,255,255,0.06)]" />
-
-            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-x-6 sm:gap-y-2">
-              {trustItems.map(({ icon: Icon, label }) => (
-                <p key={label} className="text-[#9CA3AF] text-sm font-sans flex items-center gap-2">
-                  <Icon size={15} className="text-[#9CA3AF] shrink-0" />
-                  {label}
-                </p>
-              ))}
+            <div className="pt-2">
+              <div className="h-px w-full max-w-md bg-[#222222]" />
+              <ul className="mt-4 flex flex-col sm:flex-row sm:flex-wrap gap-y-2.5 gap-x-0 sm:items-center">
+                {trustItems.map((label, index) => (
+                  <li
+                    key={label}
+                    className="flex items-center text-[13px] text-[#9CA3AF] font-medium tracking-tight"
+                  >
+                    {index > 0 && (
+                      <span
+                        className="hidden sm:inline-block mx-3.5 h-1 w-1 rounded-full bg-[#333333]"
+                        aria-hidden
+                      />
+                    )}
+                    <span>{label}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="relative hidden sm:block"
+            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.12 }}
+            className="relative hidden sm:block lg:pl-2"
           >
-            <div className="absolute -inset-4 rounded-[20px] bg-[#E51937]/[0.06] blur-3xl pointer-events-none" />
             <MockupImage
               name="dashboard"
               alt="Gryph ClubConnect student dashboard"
-              className="relative shadow-[0_24px_64px_rgba(0,0,0,0.55)] ring-1 ring-white/[0.06]"
+              className="relative rounded-[12px] border border-[#242424] bg-[#131313] shadow-[0_20px_50px_rgba(0,0,0,0.55)] ring-1 ring-white/[0.04]"
             />
           </motion.div>
         </div>

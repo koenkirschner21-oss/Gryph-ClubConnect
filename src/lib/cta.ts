@@ -36,3 +36,13 @@ export const JOIN_TESTING_ID = ONBOARD_CLUB_ID;
 export const REQUEST_WALKTHROUGH_ID = REQUEST_DEMO_ID;
 
 export const APP_LOGIN_URL = 'https://app.gryphclubconnect.com/login';
+
+export type ClubInterestOption = 'Request a demo' | 'Onboard my club' | 'Ask a question';
+
+export const CLUB_INTEREST_EVENT = 'gcc:set-club-interest';
+
+/** Homepage-only helper: preselect club form interest before scrolling to the form. */
+export function setClubFormInterest(interest: ClubInterestOption) {
+  if (typeof window === 'undefined') return;
+  window.dispatchEvent(new CustomEvent(CLUB_INTEREST_EVENT, { detail: interest }));
+}

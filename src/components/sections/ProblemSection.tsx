@@ -1,27 +1,23 @@
-import { MessageCircle, ClipboardList, Calendar } from 'lucide-react';
 import { StaggerContainer, StaggerItem } from '../ui/AnimatedSection';
 import AnimatedSection from '../ui/AnimatedSection';
 
 const problemCards = [
   {
-    label: 'Communication gap',
-    title: 'Updates get scattered',
-    body: 'Announcements, reminders, and important context get buried across group chats, DMs, and email.',
-    icon: MessageCircle,
+    label: 'Discovery gap',
+    title: 'Students miss what is happening',
+    body: 'Students miss events, roles, and club updates because everything lives across Instagram posts, group chats, and scattered links.',
     accent: 'red' as const,
   },
   {
     label: 'Ownership gap',
-    title: 'Tasks fall through cracks',
+    title: 'Work falls through the cracks',
     body: 'Exec teams lose track of who owns what, what is overdue, and what still needs review.',
-    icon: ClipboardList,
     accent: 'gold' as const,
   },
   {
-    label: 'Planning gap',
-    title: 'Events are harder to run than they should be',
-    body: 'Sign-ups, reminders, attendance, and follow-ups often live in separate tools instead of one shared workflow.',
-    icon: Calendar,
+    label: 'Operations gap',
+    title: 'Club work gets spread everywhere',
+    body: 'Events, sign-ups, reminders, members, and applications end up spread across too many tools.',
     accent: 'neutral' as const,
   },
 ];
@@ -29,17 +25,14 @@ const problemCards = [
 const accentStyles = {
   red: {
     bar: 'bg-[#E51937]',
-    icon: 'bg-[rgba(229,25,55,0.1)] border-[#E51937]/25 text-[#E51937]',
     hover: 'hover:border-[rgba(229,25,55,0.28)]',
   },
   gold: {
     bar: 'bg-[#FFC429]',
-    icon: 'bg-[rgba(255,196,41,0.1)] border-[#FFC429]/25 text-[#FFC429]',
     hover: 'hover:border-[rgba(255,196,41,0.28)]',
   },
   neutral: {
     bar: 'bg-[rgba(255,255,255,0.22)]',
-    icon: 'bg-[#1A1A1A] border-[#222222] text-[#9CA3AF]',
     hover: 'hover:border-[rgba(255,255,255,0.14)]',
   },
 };
@@ -62,7 +55,6 @@ export default function ProblemSection() {
 
         <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6" staggerDelay={0.1}>
           {problemCards.map((card) => {
-            const Icon = card.icon;
             const styles = accentStyles[card.accent];
             return (
               <StaggerItem key={card.title}>
@@ -70,11 +62,6 @@ export default function ProblemSection() {
                   className={`relative flex h-full flex-col overflow-hidden rounded-[12px] border border-[#222222] bg-[#131313] p-6 sm:p-7 transition-colors duration-200 ${styles.hover}`}
                 >
                   <span className={`absolute inset-x-0 top-0 h-[2px] ${styles.bar}`} aria-hidden />
-
-                  <div className={`mb-5 flex h-11 w-11 items-center justify-center rounded-[10px] border ${styles.icon}`}>
-                    <Icon size={20} />
-                  </div>
-
                   <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#777777]">
                     {card.label}
                   </p>
@@ -92,7 +79,7 @@ export default function ProblemSection() {
 
         <AnimatedSection delay={0.15} className="mt-10 sm:mt-12 text-center">
           <p className="mx-auto max-w-xl text-sm sm:text-[15px] leading-relaxed text-[#777777]">
-            One platform for students to discover club life and for club leaders to manage it.
+            Gryph ClubConnect brings discovery and club operations into one organized platform.
           </p>
         </AnimatedSection>
       </div>

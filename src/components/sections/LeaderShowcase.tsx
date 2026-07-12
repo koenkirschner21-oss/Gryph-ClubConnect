@@ -1,5 +1,8 @@
+import { useNavigate } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import AnimatedSection from '../ui/AnimatedSection';
 import MockupImage from '../mockups/MockupImage';
+import { goToSection, ONBOARD_CLUB_ID, setClubFormInterest } from '../../lib/cta';
 
 const workflowSteps = [
   {
@@ -45,6 +48,13 @@ const workflowSteps = [
 ];
 
 export default function LeaderShowcase() {
+  const navigate = useNavigate();
+
+  const handleOnboard = () => {
+    setClubFormInterest('Onboard my club');
+    goToSection(ONBOARD_CLUB_ID, { navigate, pathname: '/' });
+  };
+
   return (
     <section id="for-clubs-home" className="py-16 sm:py-20 bg-[#111111] scroll-mt-24 border-t border-[#222222]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -71,7 +81,7 @@ export default function LeaderShowcase() {
             </div>
             <div className="mt-4 px-1">
               <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#FFC429] mb-1.5">
-                Club leader command center
+                Club leader Command Center
               </p>
               <p className="text-[#777777] text-sm leading-relaxed max-w-md">
                 Review pending actions, tasks, events, members, and hiring from one workspace.
@@ -102,6 +112,14 @@ export default function LeaderShowcase() {
                 </li>
               ))}
             </ol>
+            <button
+              type="button"
+              onClick={handleOnboard}
+              className="mt-5 inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#FFC429] hover:text-[#FFD45C] transition-colors"
+            >
+              Onboard Your Club
+              <ArrowRight size={16} />
+            </button>
           </AnimatedSection>
         </div>
       </div>

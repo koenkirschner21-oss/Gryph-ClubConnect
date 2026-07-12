@@ -2,7 +2,12 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import Button from '../ui/Button';
 import MockupImage from '../mockups/MockupImage';
-import { goToSection, ONBOARD_CLUB_ID, REQUEST_DEMO_ID } from '../../lib/cta';
+import {
+  goToSection,
+  ONBOARD_CLUB_ID,
+  REQUEST_DEMO_ID,
+  setClubFormInterest,
+} from '../../lib/cta';
 
 const trustItems = [
   'Student-built',
@@ -13,11 +18,18 @@ const trustItems = [
 export default function Hero() {
   const navigate = useNavigate();
 
-  const handleOnboard = () => goToSection(ONBOARD_CLUB_ID, { navigate, pathname: '/' });
-  const handleDemo = () => goToSection(REQUEST_DEMO_ID, { navigate, pathname: '/' });
+  const handleOnboard = () => {
+    setClubFormInterest('Onboard my club');
+    goToSection(ONBOARD_CLUB_ID, { navigate, pathname: '/' });
+  };
+
+  const handleDemo = () => {
+    setClubFormInterest('Request a demo');
+    goToSection(REQUEST_DEMO_ID, { navigate, pathname: '/' });
+  };
 
   return (
-    <section className="relative flex items-center overflow-hidden bg-[#0B0B0B] min-h-[calc(100vh-1px)]">
+    <section className="relative flex items-center overflow-hidden bg-[#0B0B0B] min-h-[88vh] lg:min-h-[calc(100vh-4rem)]">
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
@@ -25,26 +37,24 @@ export default function Hero() {
           backgroundSize: '32px 32px',
         }}
       />
-      <div className="absolute top-0 right-0 w-[480px] h-[480px] rounded-full bg-[#E51937] opacity-[0.035] blur-[120px] pointer-events-none" />
+      <div className="absolute top-0 right-0 w-[420px] h-[420px] rounded-full bg-[#E51937] opacity-[0.03] blur-[120px] pointer-events-none" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 pb-14 sm:pb-20 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 xl:gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 lg:pt-24 pb-12 sm:pb-16 w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-14 items-center">
           <motion.div
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
-            className="flex flex-col gap-5 sm:gap-6"
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+            className="flex flex-col gap-4 sm:gap-5"
           >
-            <div className="flex flex-col gap-2.5">
-              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#FFC429]">
+            <div className="flex items-center gap-2.5">
+              <span className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#FFC429]">
                 Early access
+              </span>
+              <span className="h-px w-4 bg-[#E51937] shrink-0" aria-hidden />
+              <p className="text-[13px] text-[#9CA3AF] leading-snug">
+                Early access onboarding is open for UofG clubs.
               </p>
-              <div className="flex items-start gap-2.5">
-                <span className="mt-[7px] h-px w-5 shrink-0 bg-[#E51937]" aria-hidden />
-                <p className="text-[13px] sm:text-sm text-[#9CA3AF] leading-snug max-w-md">
-                  Early access onboarding is open for UofG clubs.
-                </p>
-              </div>
             </div>
 
             <h1
@@ -62,7 +72,7 @@ export default function Hero() {
               Gryph ClubConnect helps UofG students find clubs, events, and opportunities while giving club leaders one workspace to manage members, announcements, events, tasks, hiring, and more.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-0.5">
               <Button
                 variant="red"
                 size="lg"
@@ -76,19 +86,18 @@ export default function Hero() {
               </Button>
             </div>
 
-            <div className="pt-2">
+            <div className="pt-1">
               <div className="h-px w-full max-w-md bg-[#222222]" />
-              <ul className="mt-4 flex flex-col sm:flex-row sm:flex-wrap gap-y-2.5 gap-x-0 sm:items-center">
+              <ul className="mt-3 flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-y-2">
                 {trustItems.map((label, index) => (
                   <li
                     key={label}
                     className="flex items-center text-[13px] text-[#9CA3AF] font-medium tracking-tight"
                   >
                     {index > 0 && (
-                      <span
-                        className="hidden sm:inline-block mx-3.5 h-1 w-1 rounded-full bg-[#333333]"
-                        aria-hidden
-                      />
+                      <span className="hidden sm:inline mx-3 text-[#444444]" aria-hidden>
+                        ·
+                      </span>
                     )}
                     <span>{label}</span>
                   </li>
@@ -98,9 +107,9 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.12 }}
+            transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
             className="relative hidden sm:block lg:pl-2"
           >
             <MockupImage

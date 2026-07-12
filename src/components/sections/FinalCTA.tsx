@@ -1,9 +1,11 @@
-import { useState, type FormEvent } from 'react';
+import { useState, useEffect, type FormEvent } from 'react';
 import AnimatedSection from '../ui/AnimatedSection';
 import {
   ONBOARD_CLUB_ID,
   REQUEST_DEMO_ID,
   STUDENT_ACCESS_ID,
+  CLUB_INTEREST_EVENT,
+  type ClubInterestOption,
 } from '../../lib/cta';
 
 const inputClass =
@@ -59,6 +61,17 @@ export default function FinalCTA() {
   const [studentSubmitted, setStudentSubmitted] = useState(false);
   const [clubSubmitting, setClubSubmitting] = useState(false);
   const [studentSubmitting, setStudentSubmitting] = useState(false);
+
+  useEffect(() => {
+    const handler = (event: Event) => {
+      const detail = (event as CustomEvent<ClubInterestOption>).detail;
+      if (!detail || !interestOptions.includes(detail)) return;
+      setClubForm((f) => ({ ...f, interest: detail }));
+      setClubSubmitted(false);
+    };
+    window.addEventListener(CLUB_INTEREST_EVENT, handler);
+    return () => window.removeEventListener(CLUB_INTEREST_EVENT, handler);
+  }, []);
 
   const handleClubSubmit = async (e: FormEvent) => {
     e.preventDefault();

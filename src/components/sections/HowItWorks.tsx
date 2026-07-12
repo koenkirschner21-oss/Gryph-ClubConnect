@@ -1,4 +1,7 @@
+import { useNavigate } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import AnimatedSection from '../ui/AnimatedSection';
+import { goToSection, REQUEST_DEMO_ID, setClubFormInterest } from '../../lib/cta';
 
 const onboardingSteps = [
   {
@@ -37,6 +40,13 @@ const includedItems = [
 ];
 
 export default function HowItWorks() {
+  const navigate = useNavigate();
+
+  const handleDemo = () => {
+    setClubFormInterest('Request a demo');
+    goToSection(REQUEST_DEMO_ID, { navigate, pathname: '/' });
+  };
+
   return (
     <section id="how-it-works" className="py-16 sm:py-20 bg-[#0B0B0B] border-t border-[#222222]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -76,6 +86,14 @@ export default function HowItWorks() {
                 </li>
               ))}
             </ol>
+            <button
+              type="button"
+              onClick={handleDemo}
+              className="mt-5 inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#E51937] hover:text-[#FF6B7D] transition-colors"
+            >
+              Ready to see it? Request a demo
+              <ArrowRight size={16} />
+            </button>
           </AnimatedSection>
 
           <AnimatedSection delay={0.1}>

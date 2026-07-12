@@ -3,7 +3,7 @@ import { Shield, Users, GraduationCap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Badge from '../ui/Badge';
 import Button from '../ui/Button';
-import { DashboardMock } from '../mockups/ProductMocks';
+import MockupImage from '../mockups/MockupImage';
 import { goToSection, JOIN_TESTING_ID, REQUEST_WALKTHROUGH_ID } from '../../lib/cta';
 
 const trustItems = [
@@ -84,7 +84,10 @@ export default function Hero() {
               <div className="w-[90%] h-[80%] rounded-3xl bg-[#E51937] opacity-[0.04] blur-[50px]" />
             </div>
             <div className="relative">
-              <DashboardMock />
+              <MockupImage
+                name="dashboard"
+                alt="Gryph ClubConnect student dashboard mockup"
+              />
             </div>
           </motion.div>
         </div>

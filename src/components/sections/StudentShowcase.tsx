@@ -3,7 +3,7 @@ import {
 } from 'lucide-react';
 import { studentFeatures } from '../../data/index';
 import AnimatedSection, { StaggerContainer, StaggerItem } from '../ui/AnimatedSection';
-import { ExploreMock } from '../mockups/ProductMocks';
+import MockupImage from '../mockups/MockupImage';
 
 const iconMap: Record<string, LucideIcon> = {
   Compass, Building2, Calendar, Briefcase, LayoutDashboard, Bookmark,
@@ -44,7 +44,10 @@ export default function StudentShowcase() {
           </div>
 
           <AnimatedSection delay={0.15} className="lg:sticky lg:top-28">
-            <ExploreMock />
+            <MockupImage
+              name="explore"
+              alt="Gryph ClubConnect explore clubs mockup"
+            />
           </AnimatedSection>
         </div>
       </div>

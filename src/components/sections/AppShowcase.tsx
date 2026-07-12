@@ -1,14 +1,12 @@
 import { useState, useEffect, type ComponentType } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
-  DashboardMock,
-  ExploreMock,
-  WorkspaceMock,
   EventsMock,
   TasksMock,
   HiringMock,
   MembersMock,
 } from '../mockups/ProductMocks';
+import MockupImage from '../mockups/MockupImage';
 
 type TabKey = 'dashboard' | 'explore' | 'workspace' | 'events' | 'tasks' | 'hiring' | 'members';
 
@@ -50,10 +48,37 @@ const tabs: { key: TabKey; label: string; description: string }[] = [
   },
 ];
 
+function DashboardTab() {
+  return (
+    <MockupImage
+      name="dashboard"
+      alt="Gryph ClubConnect student dashboard mockup"
+    />
+  );
+}
+
+function ExploreTab() {
+  return (
+    <MockupImage
+      name="explore"
+      alt="Gryph ClubConnect explore clubs mockup"
+    />
+  );
+}
+
+function WorkspaceTab() {
+  return (
+    <MockupImage
+      name="workspace"
+      alt="Gryph ClubConnect club workspace mockup"
+    />
+  );
+}
+
 const mockComponents: Record<TabKey, ComponentType> = {
-  dashboard: DashboardMock,
-  explore: ExploreMock,
-  workspace: WorkspaceMock,
+  dashboard: DashboardTab,
+  explore: ExploreTab,
+  workspace: WorkspaceTab,
   events: EventsMock,
   tasks: TasksMock,
   hiring: HiringMock,

@@ -3,7 +3,7 @@ import {
 } from 'lucide-react';
 import { leaderFeatures } from '../../data/index';
 import AnimatedSection, { StaggerContainer, StaggerItem } from '../ui/AnimatedSection';
-import { WorkspaceMock } from '../mockups/ProductMocks';
+import MockupImage from '../mockups/MockupImage';
 
 const iconMap: Record<string, LucideIcon> = {
   LayoutGrid, Megaphone, CalendarPlus, CheckSquare, Users, UserCheck, Shield,
@@ -15,7 +15,10 @@ export default function LeaderShowcase() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           <AnimatedSection delay={0.1} className="order-2 lg:order-1 lg:sticky lg:top-28">
-            <WorkspaceMock />
+            <MockupImage
+              name="workspace"
+              alt="Gryph ClubConnect club workspace mockup"
+            />
           </AnimatedSection>
 
           <div className="order-1 lg:order-2">

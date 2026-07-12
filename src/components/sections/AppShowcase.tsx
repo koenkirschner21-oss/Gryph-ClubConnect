@@ -1,14 +1,8 @@
-import { useState, useEffect, type ComponentType } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import {
-  EventsMock,
-  TasksMock,
-  HiringMock,
-  MembersMock,
-} from '../mockups/ProductMocks';
-import MockupImage from '../mockups/MockupImage';
+import MockupImage, { type MockupKey } from '../mockups/MockupImage';
 
-type TabKey = 'dashboard' | 'explore' | 'workspace' | 'events' | 'tasks' | 'hiring' | 'members';
+type TabKey = MockupKey;
 
 const tabs: { key: TabKey; label: string; description: string }[] = [
   {
@@ -48,47 +42,9 @@ const tabs: { key: TabKey; label: string; description: string }[] = [
   },
 ];
 
-function DashboardTab() {
-  return (
-    <MockupImage
-      name="dashboard"
-      alt="Gryph ClubConnect student dashboard mockup"
-    />
-  );
-}
-
-function ExploreTab() {
-  return (
-    <MockupImage
-      name="explore"
-      alt="Gryph ClubConnect explore clubs mockup"
-    />
-  );
-}
-
-function WorkspaceTab() {
-  return (
-    <MockupImage
-      name="workspace"
-      alt="Gryph ClubConnect club workspace mockup"
-    />
-  );
-}
-
-const mockComponents: Record<TabKey, ComponentType> = {
-  dashboard: DashboardTab,
-  explore: ExploreTab,
-  workspace: WorkspaceTab,
-  events: EventsMock,
-  tasks: TasksMock,
-  hiring: HiringMock,
-  members: MembersMock,
-};
-
 export default function AppShowcase() {
   const [activeTab, setActiveTab] = useState<TabKey>('dashboard');
   const [isHovered, setIsHovered] = useState(false);
-  const MockComponent = mockComponents[activeTab];
 
   useEffect(() => {
     if (isHovered) return;
@@ -162,7 +118,7 @@ export default function AppShowcase() {
                 exit={{ opacity: 0, x: -16 }}
                 transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
               >
-                <MockComponent />
+                <MockupImage name={activeTab} />
               </motion.div>
             </AnimatePresence>
           </div>

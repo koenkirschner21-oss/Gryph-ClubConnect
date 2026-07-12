@@ -17,7 +17,7 @@ export default function LeaderShowcase() {
           <AnimatedSection delay={0.1} className="order-2 lg:order-1 lg:sticky lg:top-28">
             <MockupImage
               name="workspace"
-              alt="Gryph ClubConnect club workspace mockup"
+              alt="Gryph ClubConnect club command center"
             />
           </AnimatedSection>
 

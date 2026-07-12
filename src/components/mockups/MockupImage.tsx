@@ -1,38 +1,48 @@
-const MOCKUPS = {
-  dashboard: 'mockups/student-dashboard.png',
-  explore: 'mockups/explore-clubs.png',
-  workspace: 'mockups/club-workspace.png',
+const SCREENSHOTS = {
+  dashboard: 'screenshots/01-hero-student-dashboard-adam.png',
+  explore: 'screenshots/explore-clubs-grid.png',
+  workspace: 'screenshots/command-center-president-top.png',
+  events: 'screenshots/events-management-outdoor.png',
+  tasks: 'screenshots/tasks-assigned-to-me.png',
+  hiring: 'screenshots/hiring-management-applicant-review.png',
+  members: 'screenshots/members-president-view-invites-code.png',
 } as const;
 
-export type MockupKey = keyof typeof MOCKUPS;
+export type MockupKey = keyof typeof SCREENSHOTS;
 
 const ALTS: Record<MockupKey, string> = {
-  dashboard: 'Gryph ClubConnect student dashboard mockup',
-  explore: 'Gryph ClubConnect explore clubs mockup',
-  workspace: 'Gryph ClubConnect club workspace mockup',
+  dashboard: 'Gryph ClubConnect student dashboard',
+  explore: 'Gryph ClubConnect explore clubs',
+  workspace: 'Gryph ClubConnect club command center',
+  events: 'Gryph ClubConnect events management',
+  tasks: 'Gryph ClubConnect tasks assigned to me',
+  hiring: 'Gryph ClubConnect hiring and applicant review',
+  members: 'Gryph ClubConnect members and invite code',
 };
 
 export function mockupSrc(key: MockupKey): string {
-  return `${import.meta.env.BASE_URL}${MOCKUPS[key]}`;
+  return `${import.meta.env.BASE_URL}${SCREENSHOTS[key]}`;
 }
 
 export default function MockupImage({
   name,
   alt,
   className = '',
+  imgClassName = '',
 }: {
   name: MockupKey;
   alt?: string;
   className?: string;
+  imgClassName?: string;
 }) {
   return (
     <div
-      className={`rounded-[12px] border border-[#222222] bg-[#131313] overflow-hidden shadow-[0_8px_32px_rgba(0,0,0,0.45)] ${className}`}
+      className={`rounded-[12px] border border-[#222222] bg-[#131313] overflow-hidden shadow-[0_12px_40px_rgba(0,0,0,0.5)] ${className}`}
     >
       <img
         src={mockupSrc(name)}
         alt={alt ?? ALTS[name]}
-        className="w-full h-auto block"
+        className={`w-full h-auto block object-contain ${imgClassName}`}
         loading="lazy"
         decoding="async"
       />

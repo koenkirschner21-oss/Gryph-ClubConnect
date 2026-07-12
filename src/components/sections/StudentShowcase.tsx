@@ -46,7 +46,7 @@ export default function StudentShowcase() {
           <AnimatedSection delay={0.15} className="lg:sticky lg:top-28">
             <MockupImage
               name="explore"
-              alt="Gryph ClubConnect explore clubs mockup"
+              alt="Gryph ClubConnect explore clubs"
             />
           </AnimatedSection>
         </div>

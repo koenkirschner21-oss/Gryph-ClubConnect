@@ -80,24 +80,12 @@ export default function Hero() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             className="relative hidden sm:block"
           >
-            <div className="absolute -inset-6 rounded-[28px] bg-gradient-to-br from-[#E51937]/15 via-transparent to-[#FFC429]/10 blur-2xl pointer-events-none" />
-            <div className="relative rounded-[16px] p-[1px] bg-gradient-to-b from-[rgba(255,255,255,0.12)] to-[rgba(255,255,255,0.03)] shadow-[0_24px_80px_rgba(0,0,0,0.65)]">
-              <div className="rounded-[15px] overflow-hidden border border-[#222222] bg-[#0B0B0B]">
-                <div className="flex items-center gap-2 px-3.5 py-2.5 border-b border-[#222222] bg-[#111111]">
-                  <div className="flex gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-[#333]" />
-                    <span className="w-2 h-2 rounded-full bg-[#333]" />
-                    <span className="w-2 h-2 rounded-full bg-[#333]" />
-                  </div>
-                  <span className="text-[11px] text-[#777777] font-medium tracking-wide">Student Dashboard</span>
-                </div>
-                <MockupImage
-                  name="dashboard"
-                  alt="Gryph ClubConnect student dashboard mockup"
-                  className="!rounded-none !border-0 !shadow-none"
-                />
-              </div>
-            </div>
+            <div className="absolute -inset-4 rounded-[20px] bg-[#E51937]/[0.06] blur-3xl pointer-events-none" />
+            <MockupImage
+              name="dashboard"
+              alt="Gryph ClubConnect student dashboard"
+              className="relative shadow-[0_24px_64px_rgba(0,0,0,0.55)] ring-1 ring-white/[0.06]"
+            />
           </motion.div>
         </div>
       </div>

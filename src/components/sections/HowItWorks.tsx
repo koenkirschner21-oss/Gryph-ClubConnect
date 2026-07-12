@@ -1,100 +1,107 @@
-import { Plus, UserPlus, MessageSquare, Globe, type LucideIcon } from 'lucide-react';
-import { whatYouCanTest } from '../../data/index';
 import AnimatedSection from '../ui/AnimatedSection';
-
-const iconMap: Record<string, LucideIcon> = {
-  Plus,
-  UserPlus,
-  MessageSquare,
-  Globe,
-};
 
 const onboardingSteps = [
   {
     step: '01',
-    title: 'Request onboarding or demo',
-    description: 'Tell us about your club or student interest and what you want to see first.',
-    icon: 'Plus',
+    title: 'Request a demo or onboarding',
+    description: 'Tell us about your club, your role, and what you want to manage better.',
   },
   {
     step: '02',
     title: 'Walk through the right workflows',
-    description: 'See student discovery or club leader operations with a guided walkthrough of the product.',
-    icon: 'UserPlus',
+    description:
+      'See the student discovery flow, club workspace, events, tasks, hiring, members, and permissions.',
   },
   {
     step: '03',
-    title: 'Set up your club or student access',
-    description: 'Get early access configured for your role so you can start using the workflows that matter.',
-    icon: 'MessageSquare',
+    title: 'Set up your club workspace',
+    description:
+      'Prepare your club profile, members, announcements, events, and roles before launch.',
   },
   {
     step: '04',
-    title: 'Share feedback before launch',
-    description: 'Help shape the launch version with clear notes on what works and what still needs polish.',
-    icon: 'Globe',
+    title: 'Share feedback before rollout',
+    description: 'Help shape the platform around how UofG clubs actually operate.',
   },
+];
+
+const includedItems = [
+  'Club profile setup',
+  'Events and sign-ups',
+  'Announcements',
+  'Tasks and ownership',
+  'Members and roles',
+  'Hiring and applications',
+  'Permissions',
+  'Student discovery',
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-24 bg-[#0B0B0B]">
+    <section id="how-it-works" className="py-16 sm:py-20 bg-[#0B0B0B] border-t border-[#222222]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <AnimatedSection className="text-center mb-16">
-          <span className="text-sm font-sans text-[#E51937] uppercase tracking-wider mb-5 block">How onboarding works</span>
-          <h2 className="text-[2.75rem] sm:text-[3.5rem] font-extrabold text-[#F5F5F5] font-sans mb-5">
+        <AnimatedSection className="mb-10 sm:mb-12 max-w-3xl">
+          <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
             How early access works
+          </p>
+          <h2 className="text-[2.1rem] sm:text-[2.75rem] font-extrabold text-[#F5F5F5] font-sans mb-4 leading-tight">
+            Start with a walkthrough. Build toward launch.
           </h2>
-          <p className="text-[#9CA3AF] text-xl max-w-xl mx-auto">
-            Gryph ClubConnect is onboarding UofG clubs ahead of launch. Here&apos;s how it works.
+          <p className="text-[#9CA3AF] text-base sm:text-lg leading-relaxed">
+            Gryph ClubConnect is onboarding UofG clubs ahead of launch. We&apos;ll help you understand the platform, choose the right workflows, and set up your club workspace.
           </p>
         </AnimatedSection>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start mb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           <AnimatedSection>
-            <div className="relative">
-              {onboardingSteps.map((step, index) => {
-                const Icon = iconMap[step.icon] ?? Plus;
-                const isLast = index === onboardingSteps.length - 1;
-                return (
-                  <div key={step.step} className="relative flex gap-5">
-                    {!isLast && (
-                      <div className="absolute left-[19px] top-[48px] bottom-[-8px] w-0.5 bg-gradient-to-b from-[#E51937]/40 to-[#222222]" />
-                    )}
-                    <div className="relative flex-shrink-0">
-                      <div className="w-10 h-10 rounded-full bg-[#E51937] flex items-center justify-center text-white font-bold text-sm font-sans z-10 relative">
-                        {step.step}
-                      </div>
-                    </div>
-                    <div className={`pb-10 ${isLast ? 'pb-0' : ''}`}>
-                      <div className="flex items-center gap-2 mb-1.5">
-                        <Icon size={16} className="text-[#E51937]" />
-                        <h3 className="text-[#F5F5F5] font-bold text-xl font-sans">{step.title}</h3>
-                      </div>
-                      <p className="text-[#9CA3AF] text-[15px] leading-relaxed">{step.description}</p>
-                    </div>
+            <ol className="relative space-y-0 rounded-[12px] border border-[#222222] bg-[#131313] overflow-hidden">
+              {onboardingSteps.map((step, index) => (
+                <li
+                  key={step.step}
+                  className={`relative flex gap-4 px-5 py-5 sm:px-6 sm:py-6 ${
+                    index < onboardingSteps.length - 1 ? 'border-b border-[#222222]' : ''
+                  }`}
+                >
+                  <span className="shrink-0 flex h-9 w-9 items-center justify-center rounded-full border border-[#E51937]/35 bg-[rgba(229,25,55,0.12)] text-[12px] font-bold tabular-nums text-[#E51937]">
+                    {step.step}
+                  </span>
+                  <div className="min-w-0 pt-0.5">
+                    <h3 className="text-[#F5F5F5] font-semibold text-base sm:text-lg mb-1.5">
+                      {step.title}
+                    </h3>
+                    <p className="text-[#9CA3AF] text-[14px] sm:text-[15px] leading-relaxed">
+                      {step.description}
+                    </p>
                   </div>
-                );
-              })}
-            </div>
+                </li>
+              ))}
+            </ol>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.15}>
-            <div className="bg-[#131313] border border-[#222222] rounded-[12px] p-6">
-              <h3 className="text-[#F5F5F5] font-bold text-lg font-sans mb-2">What&apos;s included</h3>
-              <p className="text-[#9CA3AF] text-sm mb-5">
-                Depending on your role, early access can include these workflows:
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                {whatYouCanTest.map((item) => (
-                  <div
-                    key={item}
-                    className="flex items-center gap-2.5 bg-[#0B0B0B] border border-[#222222] rounded-[10px] px-3 py-2.5"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#FFC429] shrink-0" />
-                    <span className="text-[13px] text-[#F5F5F5]">{item}</span>
-                  </div>
-                ))}
+          <AnimatedSection delay={0.1}>
+            <div className="rounded-[12px] border border-[#222222] bg-[#131313] overflow-hidden h-full">
+              <div className="h-[2px] bg-[#FFC429]" aria-hidden />
+              <div className="p-6 sm:p-7">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#FFC429] mb-2">
+                  Early access
+                </p>
+                <h3 className="text-[#F5F5F5] font-bold text-xl font-sans mb-2">
+                  What your club can use
+                </h3>
+                <p className="text-[#9CA3AF] text-sm leading-relaxed mb-5">
+                  Early access can include the workflows that matter most to your team.
+                </p>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                  {includedItems.map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-center gap-2.5 rounded-[10px] border border-[#222222] bg-[#0B0B0B] px-3 py-2.5"
+                    >
+                      <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-[#E51937]" />
+                      <span className="text-[13px] text-[#F5F5F5]">{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </AnimatedSection>

@@ -81,7 +81,7 @@ export function DashboardMock({ compact = false }: { compact?: boolean }) {
               <p className="text-[13px] font-bold text-[#F5F5F5]">Good afternoon</p>
               <p className="text-[10px] text-[#777777]">Your campus involvement at a glance</p>
             </div>
-            <StatusPill label="Early testing" tone="gold" />
+            <StatusPill label="Early access" tone="gold" />
           </div>
 
           <div className="grid grid-cols-3 gap-2">
@@ -440,6 +440,120 @@ export function AnnouncementsMock() {
             <p className="text-[11px] text-[#9CA3AF] leading-relaxed">{a.body}</p>
           </div>
         ))}
+      </div>
+    </MockChrome>
+  );
+}
+
+export function ChatMock() {
+  return (
+    <MockChrome title="Chat · Photography Club">
+      <div className="h-[320px] flex overflow-hidden">
+        <aside className="hidden sm:flex w-[130px] flex-col border-r border-[#222222] bg-[#0B0B0B] p-2 gap-0.5">
+          <p className="text-[9px] uppercase tracking-wider text-[#777777] px-2 py-1.5 font-semibold">Chats</p>
+          {[
+            { name: 'Club chat', active: true },
+            { name: 'Exec team', active: false },
+            { name: 'A. Chen', active: false },
+          ].map((c) => (
+            <div
+              key={c.name}
+              className={`px-2 py-1.5 rounded-[8px] text-[11px] ${
+                c.active
+                  ? 'bg-[rgba(229,25,55,0.12)] text-[#F5F5F5] border-l-2 border-[#E51937]'
+                  : 'text-[#9CA3AF]'
+              }`}
+            >
+              {c.name}
+            </div>
+          ))}
+        </aside>
+        <div className="flex-1 p-3 flex flex-col gap-2 overflow-hidden">
+          <div className="flex items-center justify-between pb-2 border-b border-[#222222]">
+            <div>
+              <p className="text-[12px] font-semibold text-[#F5F5F5]">Club chat</p>
+              <p className="text-[10px] text-[#777777]">12 members</p>
+            </div>
+            <StatusPill label="Add member" tone="muted" />
+          </div>
+          <div className="flex-1 space-y-2 overflow-hidden">
+            <div className="bg-[#1A1A1A] border border-[#222222] rounded-[10px] p-2.5 max-w-[85%]">
+              <p className="text-[10px] text-[#E51937] font-semibold mb-0.5">M. Patel</p>
+              <p className="text-[11px] text-[#F5F5F5]">Poster draft is ready for review</p>
+              <div className="mt-1.5 flex gap-1">
+                <StatusPill label="👍 3" tone="muted" />
+                <StatusPill label="Reply" tone="gold" />
+              </div>
+            </div>
+            <div className="bg-[rgba(229,25,55,0.08)] border border-[#E51937]/20 rounded-[10px] p-2.5 max-w-[85%] ml-auto">
+              <p className="text-[10px] text-[#FFC429] font-semibold mb-0.5">You</p>
+              <p className="text-[11px] text-[#F5F5F5]">Looks good — posting after the meeting</p>
+            </div>
+            <div className="bg-[#1A1A1A] border border-[#222222] rounded-[10px] p-2.5 max-w-[85%]">
+              <p className="text-[10px] text-[#777777] mb-0.5">Replying to M. Patel</p>
+              <p className="text-[10px] text-[#E51937] font-semibold mb-0.5">J. Park</p>
+              <p className="text-[11px] text-[#F5F5F5]">Can we add the meet time on the poster?</p>
+            </div>
+          </div>
+          <div className="bg-[#0B0B0B] border border-[#222222] rounded-[10px] px-3 py-2 text-[11px] text-[#777777]">
+            Message the club…
+          </div>
+        </div>
+      </div>
+    </MockChrome>
+  );
+}
+
+export function PermissionsMock() {
+  const roles = [
+    { role: 'President / Co-President', access: 'Full club controls', tone: 'red' as const },
+    { role: 'Managerial Executive', access: 'Ops + hiring + members', tone: 'gold' as const },
+    { role: 'Executive', access: 'Events, tasks, announcements', tone: 'muted' as const },
+    { role: 'General Member', access: 'View + participate', tone: 'muted' as const },
+  ];
+  return (
+    <MockChrome title="Roles & Permissions">
+      <div className="h-[320px] p-3 space-y-3 overflow-hidden">
+        <div>
+          <p className="text-[13px] font-bold text-[#F5F5F5]">Access by role</p>
+          <p className="text-[10px] text-[#777777]">Give people the right level of control</p>
+        </div>
+        <div className="space-y-2">
+          {roles.map((r) => (
+            <div
+              key={r.role}
+              className="bg-[#1A1A1A] border border-[#222222] rounded-[10px] px-3 py-2.5 flex items-center justify-between gap-3"
+            >
+              <div className="min-w-0">
+                <p className="text-[12px] font-semibold text-[#F5F5F5] truncate">{r.role}</p>
+                <p className="text-[10px] text-[#777777] mt-0.5">{r.access}</p>
+              </div>
+              <StatusPill label={r.tone === 'red' ? 'Full' : r.tone === 'gold' ? 'Elevated' : 'Limited'} tone={r.tone} />
+            </div>
+          ))}
+        </div>
+        <div className="bg-[#0B0B0B] border border-[#222222] rounded-[10px] p-3">
+          <p className="text-[10px] text-[#777777] uppercase tracking-wide font-semibold mb-2">Permission matrix</p>
+          <div className="grid grid-cols-4 gap-1 text-center">
+            {['Manage', 'Hire', 'Events', 'Chat'].map((col) => (
+              <span key={col} className="text-[9px] text-[#777777]">{col}</span>
+            ))}
+            {['✓', '✓', '✓', '✓', '✓', '✓', '✓', '✓', '—', '—', '✓', '✓', '—', '—', 'view', '✓'].map((cell, i) => (
+              <span
+                key={`${cell}-${i}`}
+                className={`text-[10px] py-1 rounded ${
+                  cell === '✓'
+                    ? 'text-[#E51937] bg-[rgba(229,25,55,0.08)]'
+                    : cell === 'view'
+                      ? 'text-[#FFC429] bg-[rgba(255,196,41,0.08)]'
+                      : 'text-[#555555] bg-[#1A1A1A]'
+                }`}
+              >
+                {cell}
+              </span>
+            ))}
+          </div>
+        </div>
       </div>
     </MockChrome>
   );

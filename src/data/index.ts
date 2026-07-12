@@ -67,6 +67,11 @@ export const leaderFeatures = [
     description: "Post updates your members can actually find later.",
   },
   {
+    icon: "MessageSquare",
+    title: "Chat & Messaging",
+    description: "Club chat and direct messages with reactions and replies, so conversations stay with the work.",
+  },
+  {
     icon: "CalendarPlus",
     title: "Events & Sign-Ups",
     description: "Create events, add sign-up questions, and review who is coming.",

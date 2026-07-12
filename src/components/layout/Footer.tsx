@@ -1,5 +1,4 @@
 import { Instagram, Linkedin, Mail, ArrowRight } from 'lucide-react';
-import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { goToSection, ONBOARD_CLUB_ID } from '../../lib/cta';
 import BrandLogo from '../ui/BrandLogo';
@@ -23,30 +22,21 @@ const socialLinks = [
 ];
 
 export default function Footer() {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email.trim()) {
-      setSubscribed(true);
-      setEmail('');
-    }
-  };
-
   return (
     <footer className="bg-[#0B0B0B] border-t border-[#222222]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-          <div className="space-y-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+          <div className="space-y-3">
             <BrandLogo variant="footer" />
             <p className="text-[#9CA3AF] text-sm leading-relaxed">
-              Discover campus life. Manage club life.<br />
+              Discover campus life. Manage club life.
+              <br />
               A student-built platform for UofG club life.
             </p>
-            <div className="flex items-center gap-2 pt-1">
+            <div className="flex items-center gap-1.5 pt-0.5">
               {socialLinks.map(({ icon: Icon, href, label }) => (
                 <a
                   key={label}
@@ -54,17 +44,17 @@ export default function Footer() {
                   aria-label={label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[#9CA3AF] hover:text-[#F5F5F5] transition-all p-2.5 rounded-lg hover:bg-[#222222] hover:scale-110"
+                  className="text-[#9CA3AF] hover:text-[#F5F5F5] transition-colors p-2 rounded-lg hover:bg-[#222222]"
                 >
-                  <Icon size={18} />
+                  <Icon size={17} />
                 </a>
               ))}
             </div>
           </div>
 
           <div>
-            <h4 className="text-[#F5F5F5] text-base font-semibold mb-4">Platform</h4>
-            <ul className="space-y-3">
+            <h4 className="text-[#F5F5F5] text-sm font-semibold mb-3">Platform</h4>
+            <ul className="space-y-2">
               {platformLinks.map((link) => (
                 <li key={link.label}>
                   <a
@@ -88,8 +78,8 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-[#F5F5F5] text-base font-semibold mb-4">Company</h4>
-            <ul className="space-y-3">
+            <h4 className="text-[#F5F5F5] text-sm font-semibold mb-3">Company</h4>
+            <ul className="space-y-2">
               {companyLinks.map((link) => (
                 <li key={link.label}>
                   <a
@@ -109,48 +99,15 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-[#F5F5F5] text-base font-semibold mb-4">Stay Updated</h4>
-            {subscribed ? (
-              <div className="bg-[#22C55E]/10 border border-[#22C55E]/20 rounded-lg px-4 py-3">
-                <p className="text-[#22C55E] text-sm font-medium">Thanks — we&apos;ll be in touch.</p>
-                <p className="text-[#9CA3AF] text-sm mt-1">This form is a placeholder for now.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubscribe} className="space-y-3">
-                <p className="text-[#9CA3AF] text-sm">Get occasional product updates. No spam.</p>
-                <div className="flex items-center gap-2">
-                  <div className="flex-1 relative">
-                    <Mail size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[#9CA3AF]" />
-                    <input
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      placeholder="you@uoguelph.ca"
-                      className="w-full bg-[#111111] border border-[#222222] rounded-lg pl-9 pr-3 py-2.5 text-sm text-[#F5F5F5] placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#E51937] focus:border-[#E51937] transition-colors"
-                      required
-                      aria-label="Email for updates"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="bg-[#E51937] hover:bg-[#C4122E] text-white p-2.5 rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-[#E51937] focus:ring-offset-2 focus:ring-offset-[#0B0B0B]"
-                    aria-label="Subscribe"
-                  >
-                    <ArrowRight size={16} />
-                  </button>
-                </div>
-              </form>
-            )}
-
-            <div className="mt-5 space-y-3">
-              <div>
-                <span className="text-[#9CA3AF] text-sm uppercase tracking-wide font-sans">Email</span>
-                <p className="text-sm mt-0.5">
-                  <a href="mailto:hello@gryphclubconnect.com" className="text-[#9CA3AF] hover:text-[#F5F5F5] transition-colors">
-                    hello@gryphclubconnect.com
-                  </a>
-                </p>
-              </div>
+            <h4 className="text-[#F5F5F5] text-sm font-semibold mb-3">Contact</h4>
+            <div className="space-y-3">
+              <a
+                href="mailto:hello@gryphclubconnect.com"
+                className="inline-flex items-center gap-2 text-sm text-[#9CA3AF] hover:text-[#F5F5F5] transition-colors"
+              >
+                <Mail size={15} className="shrink-0" />
+                hello@gryphclubconnect.com
+              </a>
               <button
                 type="button"
                 onClick={() => goToSection(ONBOARD_CLUB_ID, { navigate, pathname: location.pathname })}
@@ -167,9 +124,9 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="border-t border-[#222222] px-4 sm:px-6 lg:px-8 py-5">
-        <div className="max-w-7xl mx-auto flex flex-col gap-3">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div className="border-t border-[#222222] px-4 sm:px-6 lg:px-8 py-4">
+        <div className="max-w-7xl mx-auto flex flex-col gap-2.5">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-2">
             <p className="text-[#9CA3AF] text-sm text-center sm:text-left">
               © 2026 Gryph ClubConnect.
             </p>

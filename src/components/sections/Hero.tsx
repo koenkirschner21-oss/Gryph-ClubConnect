@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Shield, Users, GraduationCap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Badge from '../ui/Badge';
 import Button from '../ui/Button';
+import { DashboardMock } from '../mockups/ProductMocks';
 import { goToSection, JOIN_TESTING_ID, REQUEST_WALKTHROUGH_ID } from '../../lib/cta';
 
 const trustItems = [
@@ -12,48 +12,8 @@ const trustItems = [
   { icon: Shield, label: 'Testing with students and club leaders' },
 ];
 
-const chatMessages = [
-  { user: 'Priya S.', color: '#E51937', msg: 'Hackathon kickoff is this Friday! Who\'s in?', time: '9:14 AM' },
-  { user: 'Amir K.', color: '#3B82F6', msg: 'Definitely in! Should we bring our own laptops?', time: '9:16 AM' },
-  { user: 'Priya S.', color: '#E51937', msg: 'Yes! Room 104 AC @ 5pm. RSVPs due by tomorrow.', time: '9:17 AM' },
-];
-
-function TypingIndicator() {
-  return (
-    <div className="flex gap-1 items-center px-2 py-1">
-      {[0, 1, 2].map((i) => (
-        <motion.div
-          key={i}
-          className="w-1.5 h-1.5 rounded-full bg-[#777777]"
-          animate={{ opacity: [0.3, 1, 0.3] }}
-          transition={{ duration: 0.8, repeat: Infinity, delay: i * 0.15 }}
-        />
-      ))}
-    </div>
-  );
-}
-
 export default function Hero() {
   const navigate = useNavigate();
-  const [visibleMessages, setVisibleMessages] = useState(0);
-  const [showTyping, setShowTyping] = useState(false);
-  const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
-
-  useEffect(() => {
-    const timers: ReturnType<typeof setTimeout>[] = [];
-    const showMessage = (index: number) => {
-      timers.push(setTimeout(() => setShowTyping(true), index === 0 ? 800 : 800 + index * 1000));
-      timers.push(setTimeout(() => {
-        setShowTyping(false);
-        setVisibleMessages(index + 1);
-      }, index === 0 ? 1200 : 1200 + index * 1000));
-    };
-    for (let i = 0; i < chatMessages.length; i++) {
-      showMessage(i);
-    }
-    timersRef.current = timers;
-    return () => timers.forEach(clearTimeout);
-  }, []);
 
   const handleJoin = () => goToSection(JOIN_TESTING_ID, { navigate, pathname: '/' });
   const handleWalkthrough = () => goToSection(REQUEST_WALKTHROUGH_ID, { navigate, pathname: '/' });
@@ -114,120 +74,17 @@ export default function Hero() {
             </div>
           </motion.div>
 
-          {/* Product mock — structure preserved; visual alignment comes later */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-            className="relative justify-center lg:justify-end hidden sm:flex"
+            className="relative hidden sm:block"
           >
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               <div className="w-[90%] h-[80%] rounded-3xl bg-[#E51937] opacity-[0.04] blur-[50px]" />
             </div>
-
-            <div className="w-full max-w-[520px] relative">
-              <div className="rounded-[12px] border border-[#222222] shadow-[0_8px_32px_rgba(0,0,0,0.45)]">
-                <div className="bg-[#131313] rounded-[12px] overflow-hidden">
-                  <div className="flex items-center gap-2 px-4 py-3 border-b border-[#222222] bg-[#0B0B0B]">
-                    <div className="flex gap-1.5">
-                      <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
-                      <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
-                      <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
-                    </div>
-                    <div className="flex-1 flex justify-center">
-                      <span className="text-xs font-sans text-white/50">gryphclubconnect.com</span>
-                    </div>
-                  </div>
-
-                  <div className="flex h-[340px]">
-                    <div className="w-44 bg-[#0B0B0B] border-r border-[#222222] flex flex-col">
-                      <div className="px-3 py-3 border-b border-[#222222]">
-                        <div className="flex items-center gap-2">
-                          <div className="w-7 h-7 rounded-lg bg-gradient-to-br from-[#E51937] to-[#FFC429] flex items-center justify-center text-xs font-bold text-white">
-                            GC
-                          </div>
-                          <div>
-                            <div className="text-xs font-semibold text-[#F5F5F5] leading-none">Club Workspace</div>
-                            <div className="text-[10px] text-[#777777] mt-0.5">Preview</div>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="flex-1 px-2 py-2 overflow-y-auto">
-                        <div className="mb-2">
-                          <p className="text-[10px] text-[#777777] uppercase tracking-wider px-2 mb-1 font-sans">Channels</p>
-                          {['# general', '# exec', '# events', '# resources'].map((ch, i) => (
-                            <div
-                              key={ch}
-                              className={`flex items-center gap-1.5 px-2 py-1 rounded text-xs cursor-pointer transition-colors ${
-                                i === 0
-                                  ? 'bg-[#E51937]/20 text-[#F5F5F5]'
-                                  : 'text-[#9CA3AF] hover:bg-[#222222]'
-                              }`}
-                            >
-                              {ch}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex-1 flex flex-col">
-                      <div className="px-4 py-2.5 border-b border-[#222222] flex items-center gap-2">
-                        <span className="text-[#9CA3AF] text-xs font-sans"># general</span>
-                      </div>
-                      <div className="flex-1 px-4 py-3 space-y-3 overflow-y-auto">
-                        <AnimatePresence>
-                          {chatMessages.slice(0, visibleMessages).map((m, i) => (
-                            <motion.div
-                              key={i}
-                              initial={{ opacity: 0, y: 10 }}
-                              animate={{ opacity: 1, y: 0 }}
-                              transition={{ duration: 0.3 }}
-                              className="flex gap-2.5"
-                            >
-                              <div
-                                className="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center text-[10px] font-bold text-white"
-                                style={{ backgroundColor: m.color }}
-                              >
-                                {m.user[0]}
-                              </div>
-                              <div>
-                                <div className="flex items-baseline gap-2">
-                                  <span className="text-xs font-semibold text-[#F5F5F5]">{m.user}</span>
-                                  <span className="text-[10px] text-[#777777]">{m.time}</span>
-                                </div>
-                                <p className="text-xs text-[#9CA3AF] mt-0.5 leading-relaxed">{m.msg}</p>
-                              </div>
-                            </motion.div>
-                          ))}
-                        </AnimatePresence>
-                        {showTyping && visibleMessages < chatMessages.length && (
-                          <motion.div
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="flex gap-2.5 items-center"
-                          >
-                            <div
-                              className="w-7 h-7 rounded-full flex-shrink-0 flex items-center justify-center text-[10px] font-bold text-white"
-                              style={{ backgroundColor: chatMessages[visibleMessages].color }}
-                            >
-                              {chatMessages[visibleMessages].user[0]}
-                            </div>
-                            <TypingIndicator />
-                          </motion.div>
-                        )}
-                      </div>
-                      <div className="px-4 py-3 border-t border-[#222222]">
-                        <div className="flex items-center gap-2 bg-[#0B0B0B] border border-[#222222] rounded-lg px-3 py-2">
-                          <span className="text-xs text-[#777777]">Message #general...</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <div className="relative">
+              <DashboardMock />
             </div>
           </motion.div>
         </div>

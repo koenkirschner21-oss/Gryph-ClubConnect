@@ -7,11 +7,6 @@ export const clubTypes = [
   { name: "Competitive teams", description: "Competitive academic, athletic, and project-based teams." },
 ];
 
-export const categories = [
-  "Academic", "Athletic", "Cultural", "Engineering",
-  "Faith", "Health", "Community", "Arts", "Social"
-];
-
 export const learningPoints = [
   {
     title: "Discovery in one place",
@@ -27,48 +22,74 @@ export const learningPoints = [
   },
 ];
 
-export const features = [
+export const studentFeatures = [
   {
-    icon: "MessageSquare",
-    title: "Team Channels",
-    description: "Organized conversations by topic — #general, #exec, #events, #announcements. No more buried messages in group chats.",
-    color: "red",
-    mockType: "chat",
+    icon: "Compass",
+    title: "Explore Clubs",
+    description: "Browse and search clubs by interest, category, and activity.",
   },
   {
-    icon: "CheckSquare",
-    title: "Task Tracker",
-    description: "Assign tasks, set deadlines, track progress. Boards built for club executives who need clear ownership.",
-    color: "gold",
-    mockType: "tasks",
+    icon: "Building2",
+    title: "Club Profiles",
+    description: "View public club pages with events, roles, and how to get involved.",
   },
   {
     icon: "Calendar",
-    title: "Event Calendar",
-    description: "RSVP management, reminders, and venue details — all in one shareable calendar your whole club can see.",
-    color: "blue",
-    mockType: "calendar",
+    title: "Events & Sign-Ups",
+    description: "Discover campus events and sign up without hunting through group chats.",
+  },
+  {
+    icon: "Briefcase",
+    title: "Role Applications",
+    description: "Apply for open club roles and track where your application stands.",
+  },
+  {
+    icon: "LayoutDashboard",
+    title: "Personal Dashboard",
+    description: "See upcoming events, applications, and club updates in one place.",
+  },
+  {
+    icon: "Bookmark",
+    title: "Saved / Followed Clubs",
+    description: "Keep an eye on clubs you care about before you join.",
+  },
+];
+
+export const leaderFeatures = [
+  {
+    icon: "LayoutGrid",
+    title: "Command Center",
+    description: "A workspace overview for checklist progress, requests, and quick actions.",
+  },
+  {
+    icon: "Megaphone",
+    title: "Announcements",
+    description: "Post updates your members can actually find later.",
+  },
+  {
+    icon: "CalendarPlus",
+    title: "Events & Sign-Ups",
+    description: "Create events, add sign-up questions, and review who is coming.",
+  },
+  {
+    icon: "CheckSquare",
+    title: "Tasks",
+    description: "Assign work, set due dates, and keep ownership clear across your exec team.",
   },
   {
     icon: "Users",
-    title: "Member Directory",
-    description: "Know exactly who's in your club, their roles, and how to reach them. No more lost email threads.",
-    color: "green",
-    mockType: "directory",
+    title: "Members & Org Chart",
+    description: "See who is in the club, their roles, and how leadership is structured.",
   },
   {
-    icon: "Layers",
-    title: "Multi-Club Support",
-    description: "Belong to multiple clubs? Switch between them in one account without mixing notifications or tasks.",
-    color: "purple",
-    mockType: "multi",
+    icon: "UserCheck",
+    title: "Hiring & Applications",
+    description: "Open roles, review applicants, and move people through a clear status pipeline.",
   },
   {
-    icon: "BarChart2",
-    title: "Admin Dashboard",
-    description: "Track membership activity, event participation, and task progress from one club workspace overview.",
-    color: "orange",
-    mockType: "admin",
+    icon: "Shield",
+    title: "Roles & Permissions",
+    description: "Control who can manage members, events, hiring, and club settings.",
   },
 ];
 
@@ -76,44 +97,53 @@ export const howItWorksSteps = [
   {
     step: "01",
     title: "Join the testing group",
-    description: "Share a bit about yourself — student or club leader — so we can invite you into early testing.",
+    description: "Tell us whether you are a student or club leader and what you want to try.",
     icon: "Plus",
   },
   {
     step: "02",
-    title: "Get oriented",
-    description: "We'll walk you through the product or give you guided access based on what you want to try.",
+    title: "Try student or club leader workflows",
+    description: "Explore clubs and events, or manage a workspace with members, announcements, tasks, and hiring.",
     icon: "UserPlus",
   },
   {
     step: "03",
-    title: "Try real workflows",
-    description: "Explore clubs and events as a student, or manage members, announcements, and tasks as a club leader.",
+    title: "Share feedback",
+    description: "Tell us what is clear, confusing, or missing so we can improve before a wider rollout.",
     icon: "MessageSquare",
   },
   {
     step: "04",
-    title: "Share feedback",
-    description: "Tell us what works and what doesn't. Early testing helps us improve before a wider rollout.",
+    title: "Help shape the launch version",
+    description: "Early testing helps prioritize the workflows that matter most for UofG club life.",
     icon: "Globe",
   },
+];
+
+export const whatYouCanTest = [
+  "Explore clubs",
+  "Sign up for events",
+  "Manage a club workspace",
+  "Review applications",
+  "Assign tasks",
+  "Manage members and roles",
 ];
 
 export const problems = [
   {
     icon: "MessageCircle",
     title: "Communication Is Scattered",
-    description: "Your club runs across iMessage, WhatsApp, Instagram DMs, and email blasts. Important updates get buried. New members miss everything.",
+    description: "Club updates live across group chats, DMs, and email. Important information gets buried and new members miss context.",
   },
   {
     icon: "ClipboardList",
     title: "Tasks Fall Through Cracks",
-    description: "Someone was supposed to book the venue. Someone else forgot to send the sponsorship email. Nobody is sure who owns what.",
+    description: "Ownership is unclear when work lives in side conversations. Deadlines slip because nobody has a shared source of truth.",
   },
   {
     icon: "Calendar",
     title: "Events Are Stressful to Plan",
-    description: "Google Forms for RSVPs, a separate calendar link, reminder emails you send manually. There's no single source of truth.",
+    description: "Forms, calendars, reminders, and RSVPs are usually separate tools. Coordinating an event becomes a logistics project.",
   },
 ];
 

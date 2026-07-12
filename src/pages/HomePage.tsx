@@ -1,7 +1,9 @@
 import Hero from '../components/sections/Hero';
 import Ticker from '../components/sections/Ticker';
+import ProductSplit from '../components/sections/ProductSplit';
 import ProblemSection from '../components/sections/ProblemSection';
-import FeaturesSection from '../components/sections/FeaturesSection';
+import StudentShowcase from '../components/sections/StudentShowcase';
+import LeaderShowcase from '../components/sections/LeaderShowcase';
 import AppShowcase from '../components/sections/AppShowcase';
 import HowItWorks from '../components/sections/HowItWorks';
 import LearningSection from '../components/sections/LearningSection';
@@ -12,8 +14,10 @@ export default function HomePage() {
     <div className="page-transition">
       <Hero />
       <Ticker />
+      <ProductSplit />
       <ProblemSection />
-      <FeaturesSection />
+      <StudentShowcase />
+      <LeaderShowcase />
       <AppShowcase />
       <HowItWorks />
       <LearningSection />

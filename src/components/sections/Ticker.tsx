@@ -1,14 +1,14 @@
 const items = [
+  'Student Dashboard',
   'Explore Clubs',
-  'Events & Sign-ups',
+  'Event Sign-Ups',
+  'Role Applications',
+  'Club Workspace',
   'Announcements',
   'Tasks & Assignments',
-  'Member Directory',
-  'Roles & Permissions',
+  'Members & Org Chart',
   'Hiring & Applications',
-  'Club Workspace',
-  'Student Dashboard',
-  'Early Testing',
+  'Roles & Permissions',
 ];
 
 const tripled = [...items, ...items, ...items];

@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { navLinks } from '../../data/index';
 import Button from '../ui/Button';
 import BrandLogo from '../ui/BrandLogo';
-import { goToSection, JOIN_TESTING_ID, REQUEST_WALKTHROUGH_ID } from '../../lib/cta';
+import { goToSection, ONBOARD_CLUB_ID, APP_LOGIN_URL } from '../../lib/cta';
 
 function useScrollPosition() {
   const [scrollY, setScrollY] = useState(0);
@@ -57,14 +57,14 @@ export default function Navbar() {
     navigate(path);
   };
 
-  const handleJoinTesting = () => {
+  const handleOnboard = () => {
     setMenuOpen(false);
-    goToSection(JOIN_TESTING_ID, { navigate, pathname: location.pathname });
+    goToSection(ONBOARD_CLUB_ID, { navigate, pathname: location.pathname });
   };
 
   const handleLogIn = () => {
     setMenuOpen(false);
-    goToSection(REQUEST_WALKTHROUGH_ID, { navigate, pathname: location.pathname });
+    window.location.href = APP_LOGIN_URL;
   };
 
   const OPACITY_TRANSITION_RATE = 0.00625;
@@ -119,8 +119,8 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-3">
           <Button variant="ghost" size="md" onClick={handleLogIn}>Log In</Button>
-          <Button variant="red" size="md" onClick={handleJoinTesting} className="shadow-[0_2px_12px_rgba(229,25,55,0.3)]">
-            Join Testing
+          <Button variant="red" size="md" onClick={handleOnboard} className="shadow-[0_2px_12px_rgba(229,25,55,0.3)]">
+            Onboard Your Club
           </Button>
         </div>
 
@@ -181,9 +181,9 @@ export default function Navbar() {
                   variant="red"
                   size="md"
                   className="w-full justify-center"
-                  onClick={handleJoinTesting}
+                  onClick={handleOnboard}
                 >
-                  Join Testing
+                  Onboard Your Club
                 </Button>
               </div>
             </div>

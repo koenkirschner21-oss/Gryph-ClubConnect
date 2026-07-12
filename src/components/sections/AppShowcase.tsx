@@ -111,7 +111,7 @@ export default function AppShowcase() {
             See how Gryph ClubConnect works
           </h2>
           <p className="text-[#9CA3AF] text-lg max-w-2xl mx-auto">
-            App-style previews of the workflows students and club leaders can test. Demo data only.
+            See the real workflows for students and club leaders. Demo data shown.
           </p>
         </div>
 

@@ -1,22 +1,22 @@
 import { motion } from 'framer-motion';
-import { Shield, Users, GraduationCap } from 'lucide-react';
+import { Sparkles, Users, GraduationCap } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Badge from '../ui/Badge';
 import Button from '../ui/Button';
 import MockupImage from '../mockups/MockupImage';
-import { goToSection, JOIN_TESTING_ID, REQUEST_WALKTHROUGH_ID } from '../../lib/cta';
+import { goToSection, ONBOARD_CLUB_ID, REQUEST_DEMO_ID } from '../../lib/cta';
 
 const trustItems = [
   { icon: GraduationCap, label: 'Student-built' },
   { icon: Users, label: 'Built for UofG club life' },
-  { icon: Shield, label: 'Testing with students and club leaders' },
+  { icon: Sparkles, label: 'Early club onboarding now open' },
 ];
 
 export default function Hero() {
   const navigate = useNavigate();
 
-  const handleJoin = () => goToSection(JOIN_TESTING_ID, { navigate, pathname: '/' });
-  const handleWalkthrough = () => goToSection(REQUEST_WALKTHROUGH_ID, { navigate, pathname: '/' });
+  const handleOnboard = () => goToSection(ONBOARD_CLUB_ID, { navigate, pathname: '/' });
+  const handleDemo = () => goToSection(REQUEST_DEMO_ID, { navigate, pathname: '/' });
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden bg-[#0B0B0B]">
@@ -39,7 +39,7 @@ export default function Hero() {
             className="flex flex-col gap-6"
           >
             <div>
-              <Badge variant="green" dot>Currently in early testing</Badge>
+              <Badge variant="gold" dot>Now onboarding UofG clubs for early access.</Badge>
             </div>
 
             <h1 className="font-sans font-extrabold leading-[1.04] tracking-tight" style={{ fontSize: 'clamp(2.5rem, 5.5vw, 4.25rem)' }}>
@@ -54,11 +54,11 @@ export default function Hero() {
             </p>
 
             <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
-              <Button variant="red" size="lg" onClick={handleJoin}>
-                Join Testing
+              <Button variant="red" size="lg" onClick={handleOnboard}>
+                Onboard Your Club
               </Button>
-              <Button variant="ghost" size="lg" onClick={handleWalkthrough}>
-                Request a Walkthrough
+              <Button variant="ghost" size="lg" onClick={handleDemo}>
+                Request a Demo
               </Button>
             </div>
 
@@ -80,14 +80,23 @@ export default function Hero() {
             transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
             className="relative hidden sm:block"
           >
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-[90%] h-[80%] rounded-3xl bg-[#E51937] opacity-[0.04] blur-[50px]" />
-            </div>
-            <div className="relative">
-              <MockupImage
-                name="dashboard"
-                alt="Gryph ClubConnect student dashboard mockup"
-              />
+            <div className="absolute -inset-6 rounded-[28px] bg-gradient-to-br from-[#E51937]/15 via-transparent to-[#FFC429]/10 blur-2xl pointer-events-none" />
+            <div className="relative rounded-[16px] p-[1px] bg-gradient-to-b from-[rgba(255,255,255,0.12)] to-[rgba(255,255,255,0.03)] shadow-[0_24px_80px_rgba(0,0,0,0.65)]">
+              <div className="rounded-[15px] overflow-hidden border border-[#222222] bg-[#0B0B0B]">
+                <div className="flex items-center gap-2 px-3.5 py-2.5 border-b border-[#222222] bg-[#111111]">
+                  <div className="flex gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-[#333]" />
+                    <span className="w-2 h-2 rounded-full bg-[#333]" />
+                    <span className="w-2 h-2 rounded-full bg-[#333]" />
+                  </div>
+                  <span className="text-[11px] text-[#777777] font-medium tracking-wide">Student Dashboard</span>
+                </div>
+                <MockupImage
+                  name="dashboard"
+                  alt="Gryph ClubConnect student dashboard mockup"
+                  className="!rounded-none !border-0 !shadow-none"
+                />
+              </div>
             </div>
           </motion.div>
         </div>

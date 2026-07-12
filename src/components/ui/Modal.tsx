@@ -4,13 +4,13 @@ import { X } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import BrandLogo from './BrandLogo';
 
+export type InterestTab = 'onboard' | 'demo' | 'student';
+
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  initialTab?: 'testing' | 'walkthrough';
+  initialTab?: InterestTab;
 }
-
-type InterestTab = 'testing' | 'walkthrough';
 
 interface InterestFormData {
   name: string;
@@ -21,6 +21,24 @@ interface InterestFormData {
   message: string;
 }
 
+const tabCopy: Record<InterestTab, { intro: string; defaultInterest: string; submit: string }> = {
+  onboard: {
+    intro: 'Request club onboarding for Gryph ClubConnect. This form does not create an account or club workspace.',
+    defaultInterest: 'Onboard my club',
+    submit: 'Request Club Onboarding',
+  },
+  demo: {
+    intro: 'Request a demo of Gryph ClubConnect. This form does not create an account.',
+    defaultInterest: 'Request a demo',
+    submit: 'Request Demo',
+  },
+  student: {
+    intro: 'Request student access to discover clubs, events, and opportunities. This form does not create an account.',
+    defaultInterest: 'Get student access',
+    submit: 'Request Student Access',
+  },
+};
+
 function InterestForm({
   tab,
   onSuccess,
@@ -28,18 +46,20 @@ function InterestForm({
   tab: InterestTab;
   onSuccess: () => void;
 }) {
+  const copy = tabCopy[tab];
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
   } = useForm<InterestFormData>({
     defaultValues: {
-      interest: tab === 'walkthrough' ? 'Request a walkthrough' : 'Join early testing',
+      interest: copy.defaultInterest,
+      role: tab === 'student' ? 'student' : tab === 'onboard' ? 'club-leader' : '',
     },
   });
 
   const onSubmit = async (_data: InterestFormData) => {
-    // Placeholder only — no backend in this cleanup pass
+    // Placeholder only — no backend
     await new Promise((r) => setTimeout(r, 600));
     onSuccess();
   };
@@ -51,11 +71,7 @@ function InterestForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <p className="text-sm text-[#9CA3AF] leading-relaxed">
-        {tab === 'walkthrough'
-          ? 'Request a walkthrough of Gryph ClubConnect. This form does not create an account.'
-          : 'Express interest in early testing. This form does not create an account or club workspace.'}
-      </p>
+      <p className="text-sm text-[#9CA3AF] leading-relaxed">{copy.intro}</p>
 
       <div>
         <label className={labelClass}>Name</label>
@@ -109,10 +125,11 @@ function InterestForm({
       </div>
 
       <div>
-        <label className={labelClass}>What would you like to test or see?</label>
+        <label className={labelClass}>What are you interested in?</label>
         <select className={inputClass} {...register('interest')}>
-          <option value="Join early testing">Join early testing</option>
-          <option value="Request a walkthrough">Request a walkthrough</option>
+          <option value="Onboard my club">Onboard my club</option>
+          <option value="Request a demo">Request a demo</option>
+          <option value="Get student access">Get student access</option>
           <option value="Student discovery features">Student discovery features</option>
           <option value="Club leader workspace">Club leader workspace</option>
           <option value="Events and hiring">Events and hiring</option>
@@ -134,7 +151,7 @@ function InterestForm({
         disabled={isSubmitting}
         className="w-full bg-[#E51937] hover:bg-[#C4122E] text-white font-semibold py-3 rounded-lg transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-60 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-[#E51937] focus:ring-offset-2 focus:ring-offset-[#0B0B0B]"
       >
-        {isSubmitting ? 'Sending…' : tab === 'walkthrough' ? 'Request Walkthrough' : 'Join Testing Interest'}
+        {isSubmitting ? 'Sending…' : copy.submit}
       </button>
     </form>
   );
@@ -147,8 +164,8 @@ function SuccessState({ onClose }: { onClose: () => void }) {
       animate={{ opacity: 1, scale: 1 }}
       className="flex flex-col items-center justify-center py-10 text-center"
     >
-      <div className="w-16 h-16 rounded-full bg-[rgba(34,197,94,0.15)] border border-[#22C55E]/30 flex items-center justify-center mb-4">
-        <svg className="w-8 h-8 text-[#22C55E]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <div className="w-16 h-16 rounded-full bg-[rgba(255,196,41,0.12)] border border-[#FFC429]/30 flex items-center justify-center mb-4">
+        <svg className="w-8 h-8 text-[#FFC429]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
         </svg>
       </div>
@@ -172,7 +189,13 @@ function SuccessState({ onClose }: { onClose: () => void }) {
   );
 }
 
-export default function Modal({ isOpen, onClose, initialTab = 'testing' }: ModalProps) {
+const tabs: { key: InterestTab; label: string }[] = [
+  { key: 'onboard', label: 'Onboard Club' },
+  { key: 'demo', label: 'Request Demo' },
+  { key: 'student', label: 'Student Access' },
+];
+
+export default function Modal({ isOpen, onClose, initialTab = 'onboard' }: ModalProps) {
   const [activeTab, setActiveTab] = useState<InterestTab>(initialTab);
   const [success, setSuccess] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
@@ -251,7 +274,7 @@ export default function Modal({ isOpen, onClose, initialTab = 'testing' }: Modal
             <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-[#222222]">
               <div className="flex flex-col gap-2">
                 <BrandLogo variant="footer" />
-                <p className="text-[#777777] text-xs">Early testing interest · No account is created</p>
+                <p className="text-[#777777] text-xs">Early access interest · No account is created</p>
               </div>
               <button
                 onClick={onClose}
@@ -265,14 +288,11 @@ export default function Modal({ isOpen, onClose, initialTab = 'testing' }: Modal
 
             {!success && (
               <div className="flex border-b border-[#222222]">
-                {([
-                  { key: 'testing' as const, label: 'Join Testing' },
-                  { key: 'walkthrough' as const, label: 'Walkthrough' },
-                ]).map((tab) => (
+                {tabs.map((tab) => (
                   <button
                     key={tab.key}
                     onClick={() => setActiveTab(tab.key)}
-                    className={`flex-1 py-3 text-sm font-medium transition-colors relative focus:outline-none focus:ring-inset focus:ring-2 focus:ring-[#E51937] ${
+                    className={`flex-1 py-3 px-1 text-xs sm:text-sm font-medium transition-colors relative focus:outline-none focus:ring-inset focus:ring-2 focus:ring-[#E51937] ${
                       activeTab === tab.key ? 'text-[#F5F5F5]' : 'text-[#777777] hover:text-[#9CA3AF]'
                     }`}
                   >
@@ -295,9 +315,9 @@ export default function Modal({ isOpen, onClose, initialTab = 'testing' }: Modal
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeTab}
-                    initial={{ opacity: 0, x: activeTab === 'testing' ? -16 : 16 }}
+                    initial={{ opacity: 0, x: 12 }}
                     animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: activeTab === 'testing' ? 16 : -16 }}
+                    exit={{ opacity: 0, x: -12 }}
                     transition={{ duration: 0.2 }}
                   >
                     <InterestForm tab={activeTab} onSuccess={() => setSuccess(true)} />
@@ -312,6 +332,7 @@ export default function Modal({ isOpen, onClose, initialTab = 'testing' }: Modal
                 <a href="mailto:hello@gryphclubconnect.com" className="underline underline-offset-2 hover:text-[#9CA3AF]">
                   hello@gryphclubconnect.com
                 </a>
+                . Interest forms on this site do not create an account.
               </p>
             )}
           </motion.div>

@@ -1,7 +1,7 @@
 import { Instagram, Linkedin, Mail, ArrowRight } from 'lucide-react';
 import { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { goToSection, JOIN_TESTING_ID } from '../../lib/cta';
+import { goToSection, ONBOARD_CLUB_ID } from '../../lib/cta';
 import BrandLogo from '../ui/BrandLogo';
 
 const platformLinks: { label: string; href?: string; hash?: string }[] = [
@@ -153,14 +153,14 @@ export default function Footer() {
               </div>
               <button
                 type="button"
-                onClick={() => goToSection(JOIN_TESTING_ID, { navigate, pathname: location.pathname })}
+                onClick={() => goToSection(ONBOARD_CLUB_ID, { navigate, pathname: location.pathname })}
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-sans bg-[rgba(229,25,55,0.12)] text-[#E51937] border border-[#E51937]/20 hover:bg-[rgba(229,25,55,0.2)] transition-colors"
               >
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E51937] opacity-75" />
                   <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-[#E51937]" />
                 </span>
-                Early testing
+                Early access
               </button>
             </div>
           </div>

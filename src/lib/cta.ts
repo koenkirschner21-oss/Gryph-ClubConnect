@@ -26,5 +26,13 @@ export function goToSection(
   setTimeout(scroll, 120);
 }
 
-export const JOIN_TESTING_ID = 'join-testing';
-export const REQUEST_WALKTHROUGH_ID = 'request-walkthrough';
+export const ONBOARD_CLUB_ID = 'onboard-your-club';
+export const REQUEST_DEMO_ID = 'request-demo';
+export const STUDENT_ACCESS_ID = 'student-access';
+
+/** @deprecated Prefer ONBOARD_CLUB_ID — kept so non-homepage pages keep scrolling to the primary CTA. */
+export const JOIN_TESTING_ID = ONBOARD_CLUB_ID;
+/** @deprecated Prefer REQUEST_DEMO_ID — kept so non-homepage pages keep scrolling to the demo CTA. */
+export const REQUEST_WALKTHROUGH_ID = REQUEST_DEMO_ID;
+
+export const APP_LOGIN_URL = 'https://app.gryphclubconnect.com/login';

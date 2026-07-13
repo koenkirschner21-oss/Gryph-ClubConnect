@@ -1,7 +1,8 @@
 /**
  * Marketing CTA routing for the early-access funnel.
  *
- * Demo / onboard → /demo#request-demo
+ * Homepage demo CTAs → #homepage-demo-form
+ * Other pages demo/onboard → /demo#demo-form
  * Student access → /for-students#student-access
  * Log In → APP_LOGIN_URL
  */
@@ -19,14 +20,19 @@ export const FOR_STUDENTS_PATH = '/for-students';
 export const FOR_CLUBS_PATH = '/for-clubs';
 export const FEATURES_PATH = '/features';
 
+export const HOMEPAGE_DEMO_FORM_ID = 'homepage-demo-form';
+export const DEMO_FORM_ID = 'demo-form';
+
+/** @deprecated Prefer DEMO_FORM_ID */
+export const REQUEST_DEMO_ID = DEMO_FORM_ID;
+/** Onboard CTAs share the demo form targets. */
 export const ONBOARD_CLUB_ID = 'onboard-your-club';
-export const REQUEST_DEMO_ID = 'request-demo';
 export const STUDENT_ACCESS_ID = 'student-access';
 
-/** @deprecated Prefer REQUEST_DEMO_ID — onboard now scrolls to the demo form. */
-export const JOIN_TESTING_ID = REQUEST_DEMO_ID;
-/** @deprecated Prefer REQUEST_DEMO_ID */
-export const REQUEST_WALKTHROUGH_ID = REQUEST_DEMO_ID;
+/** @deprecated Prefer goToDemoForm */
+export const JOIN_TESTING_ID = DEMO_FORM_ID;
+/** @deprecated Prefer goToDemoForm */
+export const REQUEST_WALKTHROUGH_ID = DEMO_FORM_ID;
 
 export type ClubInterestOption = 'Request a demo' | 'Onboard my club' | 'Ask a question';
 
@@ -66,12 +72,6 @@ type GoOptions = {
   pathname?: string;
 };
 
-const FORM_TARGETS: Record<string, { path: string; scrollId: string }> = {
-  [REQUEST_DEMO_ID]: { path: DEMO_PATH, scrollId: REQUEST_DEMO_ID },
-  [ONBOARD_CLUB_ID]: { path: DEMO_PATH, scrollId: REQUEST_DEMO_ID },
-  [STUDENT_ACCESS_ID]: { path: FOR_STUDENTS_PATH, scrollId: STUDENT_ACCESS_ID },
-};
-
 function scrollToId(sectionId: string) {
   const el = document.getElementById(sectionId);
   if (el) {
@@ -79,27 +79,20 @@ function scrollToId(sectionId: string) {
   }
 }
 
-/** Scroll to a section by id. Form CTAs route to Demo / For Students pages. */
+/** Scroll to a section by id. Student access routes to For Students. */
 export function goToSection(sectionId: string, options?: GoOptions) {
-  const formTarget = FORM_TARGETS[sectionId];
+  if (
+    sectionId === DEMO_FORM_ID ||
+    sectionId === REQUEST_DEMO_ID ||
+    sectionId === ONBOARD_CLUB_ID ||
+    sectionId === HOMEPAGE_DEMO_FORM_ID
+  ) {
+    goToDemoForm(options);
+    return;
+  }
 
-  if (formTarget) {
-    const { path, scrollId } = formTarget;
-    const onTargetPage = options?.pathname === path;
-
-    if (onTargetPage) {
-      scrollToId(scrollId);
-      return;
-    }
-
-    if (options?.navigate) {
-      options.navigate({ pathname: path, hash: scrollId });
-      setTimeout(() => scrollToId(scrollId), 350);
-      return;
-    }
-
-    window.location.hash = `#${path}`;
-    setTimeout(() => scrollToId(scrollId), 350);
+  if (sectionId === STUDENT_ACCESS_ID) {
+    goToStudentAccess(options);
     return;
   }
 
@@ -120,15 +113,56 @@ export function goToSection(sectionId: string, options?: GoOptions) {
   setTimeout(scroll, 120);
 }
 
+/**
+ * Homepage → scroll to #homepage-demo-form
+ * Demo page → scroll to #demo-form
+ * Other pages → /demo#demo-form
+ */
 export function goToDemoForm(
   options?: GoOptions & { interest?: ClubInterestOption }
 ) {
   if (options?.interest) {
     setClubFormInterest(options.interest);
   }
-  goToSection(REQUEST_DEMO_ID, options);
+
+  const pathname = options?.pathname ?? '/';
+  const onHome = pathname === '/';
+  const onDemo = pathname === DEMO_PATH;
+
+  if (onHome) {
+    scrollToId(HOMEPAGE_DEMO_FORM_ID);
+    return;
+  }
+
+  if (onDemo) {
+    scrollToId(DEMO_FORM_ID);
+    return;
+  }
+
+  if (options?.navigate) {
+    options.navigate({ pathname: DEMO_PATH, hash: DEMO_FORM_ID });
+    setTimeout(() => scrollToId(DEMO_FORM_ID), 350);
+    return;
+  }
+
+  window.location.hash = `#${DEMO_PATH}`;
+  setTimeout(() => scrollToId(DEMO_FORM_ID), 350);
 }
 
 export function goToStudentAccess(options?: GoOptions) {
-  goToSection(STUDENT_ACCESS_ID, options);
+  const onTarget = options?.pathname === FOR_STUDENTS_PATH;
+
+  if (onTarget) {
+    scrollToId(STUDENT_ACCESS_ID);
+    return;
+  }
+
+  if (options?.navigate) {
+    options.navigate({ pathname: FOR_STUDENTS_PATH, hash: STUDENT_ACCESS_ID });
+    setTimeout(() => scrollToId(STUDENT_ACCESS_ID), 350);
+    return;
+  }
+
+  window.location.hash = `#${FOR_STUDENTS_PATH}`;
+  setTimeout(() => scrollToId(STUDENT_ACCESS_ID), 350);
 }

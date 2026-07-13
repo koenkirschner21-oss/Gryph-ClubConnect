@@ -3,9 +3,13 @@
  * Replace REPLACE_* IDs with real Formspree form IDs before launch.
  */
 export const DEMO_FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_DEMO_FORM_ID';
+/** Shared demo/onboarding Formspree endpoint used by homepage + Demo page forms. */
+export const DEMO_FORM_ENDPOINT = DEMO_FORMSPREE_ENDPOINT;
+
 export const STUDENT_ACCESS_FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_STUDENT_FORM_ID';
 
 export const DEMO_FORM_SOURCE = 'Gryph ClubConnect website demo form';
+export const HOMEPAGE_DEMO_FORM_SOURCE = 'Gryph ClubConnect website homepage demo form';
 export const STUDENT_FORM_SOURCE = 'Gryph ClubConnect website student access form';
 
 export const DEMO_WORKFLOW_OPTIONS = [

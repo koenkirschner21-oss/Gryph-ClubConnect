@@ -1,11 +1,16 @@
 import { Link, useNavigate } from 'react-router-dom';
 import AnimatedSection from '../ui/AnimatedSection';
 import Button from '../ui/Button';
-import { DEMO_PATH, FOR_STUDENTS_PATH, goToDemoForm, goToStudentAccess } from '../../lib/cta';
+import DemoInterestForm from '../forms/DemoInterestForm';
+import {
+  FOR_STUDENTS_PATH,
+  HOMEPAGE_DEMO_FORM_ID,
+  goToStudentAccess,
+} from '../../lib/cta';
 
 const nextSteps = [
   'We review your club info',
-  'We focus a walkthrough on the workflows you care about',
+  'We focus the walkthrough on the workflows you care about',
   'We help prepare your club workspace for early access',
 ];
 
@@ -14,7 +19,10 @@ export default function FinalCTA() {
 
   return (
     <>
-      <section className="relative py-16 sm:py-20 overflow-hidden bg-[#0B0B0B] scroll-mt-24 border-t border-[#222222]">
+      <section
+        id={HOMEPAGE_DEMO_FORM_ID}
+        className="relative py-16 sm:py-20 overflow-hidden bg-[#0B0B0B] scroll-mt-28 border-t border-[#222222]"
+      >
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
             <AnimatedSection>
@@ -25,7 +33,7 @@ export default function FinalCTA() {
                 Bring your club onto Gryph ClubConnect.
               </h2>
               <p className="text-[#9CA3AF] text-base sm:text-lg leading-relaxed mb-8 max-w-xl">
-                We&apos;re onboarding UofG clubs ahead of launch. Request a demo, see how the platform works, and get your club set up for a cleaner way to manage events, members, tasks, hiring, announcements, meetings, documents, analytics, and permissions.
+                We&apos;re onboarding UofG clubs ahead of launch. Request a demo, walk through the workflows your club uses, and prepare your workspace for early access — events, members, tasks, hiring, announcements, meetings, documents, analytics, and permissions.
               </p>
 
               <div className="rounded-[12px] border border-[#222222] bg-[#131313] p-5 sm:p-6 max-w-md mb-8">
@@ -44,28 +52,7 @@ export default function FinalCTA() {
                 </ol>
               </div>
 
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-                <Button
-                  variant="red"
-                  size="lg"
-                  onClick={() =>
-                    goToDemoForm({ interest: 'Onboard my club', navigate, pathname: '/' })
-                  }
-                >
-                  Onboard Your Club
-                </Button>
-                <Button
-                  variant="ghost"
-                  size="lg"
-                  onClick={() =>
-                    goToDemoForm({ interest: 'Request a demo', navigate, pathname: '/' })
-                  }
-                >
-                  Request a Demo
-                </Button>
-              </div>
-
-              <p className="mt-6 text-sm text-[#777777] max-w-md">
+              <p className="text-sm text-[#777777] max-w-md">
                 Prefer email? Reach us at{' '}
                 <a
                   href="mailto:gryphclubconnect@gmail.com"
@@ -79,21 +66,13 @@ export default function FinalCTA() {
 
             <AnimatedSection delay={0.08}>
               <div className="rounded-[14px] border border-[#222222] bg-[#131313] p-6 sm:p-7 shadow-[0_16px_48px_rgba(0,0,0,0.35)]">
-                <h3 className="text-xl font-bold text-[#F5F5F5] font-sans mb-2">
+                <h3 className="text-xl font-bold text-[#F5F5F5] font-sans mb-1">
                   Request a demo or club onboarding
                 </h3>
-                <p className="text-[#777777] text-sm mb-6 leading-relaxed">
-                  Use the demo form to tell us about your club, what you want to see, and how we can help.
+                <p className="text-[#777777] text-sm mb-5 leading-relaxed">
+                  Tell us about your club so we can follow up with the right next step.
                 </p>
-                <Link
-                  to={{ pathname: DEMO_PATH, hash: 'request-demo' }}
-                  className="inline-flex w-full items-center justify-center rounded-[10px] bg-[#E51937] hover:bg-[#C4122E] text-white font-semibold py-3 text-sm transition-colors"
-                >
-                  Go to demo form
-                </Link>
-                <p className="mt-4 text-[12px] text-[#777777] leading-relaxed">
-                  Submitting the form does not create an account or officially register your club.
-                </p>
+                <DemoInterestForm variant="compact" idPrefix="homepage-demo" />
               </div>
             </AnimatedSection>
           </div>

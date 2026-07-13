@@ -17,8 +17,8 @@ import {
 import AnimatedSection, { StaggerContainer, StaggerItem } from '../components/ui/AnimatedSection';
 import Button from '../components/ui/Button';
 import FeatureScreenshotPlaceholder from '../components/features/FeatureScreenshotPlaceholder';
-import DemoRequestForm from '../components/forms/DemoRequestForm';
-import { goToDemoForm, REQUEST_DEMO_ID } from '../lib/cta';
+import DemoInterestForm from '../components/forms/DemoInterestForm';
+import { goToDemoForm, DEMO_FORM_ID } from '../lib/cta';
 
 const walkthroughCards: {
   icon: LucideIcon;
@@ -194,9 +194,9 @@ export default function DemoPage() {
 
   useEffect(() => {
     const hash = location.hash.replace(/^#/, '');
-    if (hash === REQUEST_DEMO_ID) {
+    if (hash === DEMO_FORM_ID || hash === 'request-demo') {
       const t = window.setTimeout(() => {
-        document.getElementById(REQUEST_DEMO_ID)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        document.getElementById(DEMO_FORM_ID)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 80);
       return () => window.clearTimeout(t);
     }
@@ -440,7 +440,7 @@ export default function DemoPage() {
 
       {/* 7. Request form */}
       <section
-        id={REQUEST_DEMO_ID}
+        id={DEMO_FORM_ID}
         className="relative py-16 sm:py-20 overflow-hidden bg-[#0B0B0B] border-t border-[#222222] scroll-mt-28"
       >
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -476,12 +476,12 @@ export default function DemoPage() {
             <AnimatedSection delay={0.08}>
               <div className="rounded-[14px] border border-[#222222] bg-[#131313] p-6 sm:p-7 shadow-[0_16px_48px_rgba(0,0,0,0.35)]">
                 <h3 className="text-xl font-bold text-[#F5F5F5] font-sans mb-1">
-                  Demo / onboarding request
+                  Request a demo or club onboarding
                 </h3>
                 <p className="text-[#777777] text-sm mb-6 leading-relaxed">
                   Tell us about your club so we can focus the walkthrough on what matters most.
                 </p>
-                <DemoRequestForm />
+                <DemoInterestForm variant="full" idPrefix="demo-page" />
               </div>
             </AnimatedSection>
           </div>

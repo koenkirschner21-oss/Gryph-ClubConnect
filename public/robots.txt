@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://koenkirschner21-oss.github.io/Gryph-ClubConnect/sitemap.xml
+Sitemap: https://gryphclubconnect.com/sitemap.xml

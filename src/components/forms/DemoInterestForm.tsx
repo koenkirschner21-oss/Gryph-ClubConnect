@@ -1,10 +1,10 @@
 import { useEffect, useId, useState, type FormEvent } from 'react';
 import {
   DEMO_FORM_ENDPOINT,
-  DEMO_FORM_SOURCE,
+  DEMO_FORM_SOURCE_DEMO_PAGE,
+  DEMO_FORM_SOURCE_HOMEPAGE,
   DEMO_INTEREST_OPTIONS,
   DEMO_WORKFLOW_OPTIONS,
-  HOMEPAGE_DEMO_FORM_SOURCE,
 } from '../../lib/forms';
 import { CLUB_INTEREST_EVENT, consumeClubFormInterest, type ClubInterestOption } from '../../lib/cta';
 
@@ -25,8 +25,10 @@ export default function DemoInterestForm({
   const reactId = useId().replace(/:/g, '');
   const prefix = idPrefix ?? (variant === 'compact' ? `home-${reactId}` : `demo-${reactId}`);
   const isCompact = variant === 'compact';
+  const formSource = isCompact ? DEMO_FORM_SOURCE_HOMEPAGE : DEMO_FORM_SOURCE_DEMO_PAGE;
 
-  const [interest, setInterest] = useState<(typeof DEMO_INTEREST_OPTIONS)[number]>('Request a demo');
+  const [requestType, setRequestType] =
+    useState<(typeof DEMO_INTEREST_OPTIONS)[number]>('Request a demo');
   const [workflows, setWorkflows] = useState<string[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -35,7 +37,7 @@ export default function DemoInterestForm({
   useEffect(() => {
     const pending = consumeClubFormInterest();
     if (pending) {
-      setInterest(pending);
+      setRequestType(pending);
       setSubmitted(false);
       setError(null);
     }
@@ -43,7 +45,7 @@ export default function DemoInterestForm({
     const handler = (event: Event) => {
       const detail = (event as CustomEvent<ClubInterestOption>).detail;
       if (!detail || !(DEMO_INTEREST_OPTIONS as readonly string[]).includes(detail)) return;
-      setInterest(detail);
+      setRequestType(detail);
       setSubmitted(false);
       setError(null);
     };
@@ -64,12 +66,14 @@ export default function DemoInterestForm({
 
     const form = e.currentTarget;
     const data = new FormData(form);
-    data.set('interest', interest);
+    data.set('requestType', requestType);
+    data.set('formSource', formSource);
+
+    // Ensure workflow values are present even if FormData misses controlled checkboxes
     if (!isCompact) {
+      data.delete('workflows');
       workflows.forEach((w) => data.append('workflows', w));
     }
-    data.set('_source', isCompact ? HOMEPAGE_DEMO_FORM_SOURCE : DEMO_FORM_SOURCE);
-    data.set('formVariant', variant);
 
     try {
       const res = await fetch(DEMO_FORM_ENDPOINT, {
@@ -82,7 +86,7 @@ export default function DemoInterestForm({
         setSubmitted(true);
         form.reset();
         setWorkflows([]);
-        setInterest('Request a demo');
+        setRequestType('Request a demo');
       } else {
         setError('Something went wrong. Please try again or email gryphclubconnect@gmail.com.');
       }
@@ -97,7 +101,7 @@ export default function DemoInterestForm({
     return (
       <div className="rounded-[10px] border border-[#FFC429]/25 bg-[rgba(255,196,41,0.08)] px-4 py-5">
         <p className="text-[#F5F5F5] font-semibold mb-2">
-          Thanks — your request was submitted. We&apos;ll follow up using the email you provided.
+          Thanks — your request was sent. We&apos;ll follow up soon.
         </p>
         <button
           type="button"
@@ -121,8 +125,8 @@ export default function DemoInterestForm({
       className={fieldGap}
       noValidate
     >
-      <input type="hidden" name="_source" value={isCompact ? HOMEPAGE_DEMO_FORM_SOURCE : DEMO_FORM_SOURCE} />
-      <input type="hidden" name="formVariant" value={variant} />
+      <input type="hidden" name="formSource" value={formSource} />
+      <input type="hidden" name="requestType" value={requestType} />
 
       <div>
         <label htmlFor={`${prefix}-full-name`} className={labelClass}>
@@ -173,21 +177,21 @@ export default function DemoInterestForm({
       </div>
 
       <div>
-        <p className={labelClass} id={`${prefix}-interest-label`}>
+        <p className={labelClass} id={`${prefix}-request-type-label`}>
           What are you interested in?
         </p>
         <div
           className="grid grid-cols-1 sm:grid-cols-3 gap-2"
           role="group"
-          aria-labelledby={`${prefix}-interest-label`}
+          aria-labelledby={`${prefix}-request-type-label`}
         >
           {DEMO_INTEREST_OPTIONS.map((option) => {
-            const selected = interest === option;
+            const selected = requestType === option;
             return (
               <button
                 key={option}
                 type="button"
-                onClick={() => setInterest(option)}
+                onClick={() => setRequestType(option)}
                 className={`rounded-[10px] border px-3 py-2.5 text-[12px] sm:text-[13px] font-medium transition-colors text-left ${
                   selected
                     ? 'border-[#E51937]/50 bg-[rgba(229,25,55,0.12)] text-[#F5F5F5]'
@@ -199,7 +203,6 @@ export default function DemoInterestForm({
             );
           })}
         </div>
-        <input type="hidden" name="interest" value={interest} />
       </div>
 
       {!isCompact && (
@@ -225,6 +228,8 @@ export default function DemoInterestForm({
                 >
                   <input
                     type="checkbox"
+                    name="workflows"
+                    value={option}
                     className="mt-0.5 rounded border-[#444] bg-[#0B0B0B] text-[#E51937] focus:ring-[#E51937]"
                     checked={selected}
                     onChange={() => toggleWorkflow(option)}
@@ -264,7 +269,7 @@ export default function DemoInterestForm({
       </button>
 
       <p className="text-[12px] text-[#777777] leading-relaxed">
-        Submitting this form does not create an account or officially register your club. It helps us follow up with the right next step.
+        Submitting this form does not create an account or officially register your club.
       </p>
     </form>
   );

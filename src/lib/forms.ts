@@ -1,15 +1,20 @@
 /**
  * Formspree endpoints for early-access intake.
- * Replace REPLACE_* IDs with real Formspree form IDs before launch.
  */
-export const DEMO_FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_DEMO_FORM_ID';
-/** Shared demo/onboarding Formspree endpoint used by homepage + Demo page forms. */
-export const DEMO_FORM_ENDPOINT = DEMO_FORMSPREE_ENDPOINT;
+/** Shared demo/onboarding Formspree endpoint (homepage + Demo page). */
+export const DEMO_FORM_ENDPOINT = 'https://formspree.io/f/xvzeooek';
+/** @deprecated Prefer DEMO_FORM_ENDPOINT */
+export const DEMO_FORMSPREE_ENDPOINT = DEMO_FORM_ENDPOINT;
 
 export const STUDENT_ACCESS_FORMSPREE_ENDPOINT = 'https://formspree.io/f/REPLACE_STUDENT_FORM_ID';
 
-export const DEMO_FORM_SOURCE = 'Gryph ClubConnect website demo form';
-export const HOMEPAGE_DEMO_FORM_SOURCE = 'Gryph ClubConnect website homepage demo form';
+export const DEMO_FORM_SOURCE_DEMO_PAGE = 'Demo page';
+export const DEMO_FORM_SOURCE_HOMEPAGE = 'Homepage';
+/** @deprecated Prefer DEMO_FORM_SOURCE_DEMO_PAGE */
+export const DEMO_FORM_SOURCE = DEMO_FORM_SOURCE_DEMO_PAGE;
+/** @deprecated Prefer DEMO_FORM_SOURCE_HOMEPAGE */
+export const HOMEPAGE_DEMO_FORM_SOURCE = DEMO_FORM_SOURCE_HOMEPAGE;
+
 export const STUDENT_FORM_SOURCE = 'Gryph ClubConnect website student access form';
 
 export const DEMO_WORKFLOW_OPTIONS = [

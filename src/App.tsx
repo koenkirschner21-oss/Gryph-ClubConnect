@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ErrorBoundary from './components/ui/ErrorBoundary';
@@ -29,7 +29,7 @@ function PageLoader() {
 
 export default function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <ErrorBoundary>
         <div className="bg-[#0B0B0B] min-h-screen text-[#F5F5F5] overflow-x-hidden">
           <Navbar />
@@ -55,6 +55,6 @@ export default function App() {
           <Footer />
         </div>
       </ErrorBoundary>
-    </HashRouter>
+    </BrowserRouter>
   );
 }

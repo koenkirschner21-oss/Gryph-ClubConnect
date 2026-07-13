@@ -59,7 +59,7 @@ export default function Footer() {
               {platformLinks.map((link) => (
                 <li key={link.label}>
                   <a
-                    href={`/#${link.href}`}
+                    href={link.href}
                     onClick={(e) => {
                       e.preventDefault();
                       navigate(link.href);
@@ -80,7 +80,7 @@ export default function Footer() {
               {companyLinks.map((link) => (
                 <li key={link.label}>
                   <a
-                    href={`/#${link.href}`}
+                    href={link.href}
                     onClick={(e) => {
                       e.preventDefault();
                       navigate(link.href);

@@ -18,8 +18,8 @@ export default function NotFoundPage() {
               Looks like this page flew the coop. Let's get you back on track.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button variant="red" href="/#/">Go Home</Button>
-              <Button variant="ghost" href="/#/features">View Features</Button>
+              <Button variant="red" href="/">Go Home</Button>
+              <Button variant="ghost" href="/features">View Features</Button>
             </div>
           </AnimatedSection>
         </div>

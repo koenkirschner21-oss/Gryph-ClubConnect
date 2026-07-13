@@ -43,8 +43,7 @@ export default function Navbar() {
 
   const isActive = (link: NavItem) => {
     if (link.hash) return location.pathname === '/' && typeof window !== 'undefined';
-    const path = link.href.replace('/#', '');
-    return location.pathname === path;
+    return location.pathname === link.href;
   };
 
   const handleNavClick = (e: React.MouseEvent, link: NavItem) => {
@@ -54,8 +53,7 @@ export default function Navbar() {
       goToSection(link.hash, { navigate, pathname: location.pathname });
       return;
     }
-    const path = link.href.replace('/#', '');
-    navigate(path);
+    navigate(link.href);
   };
 
   const handleOnboard = () => {
@@ -96,7 +94,7 @@ export default function Navbar() {
             return (
               <a
                 key={link.label}
-                href={link.hash ? `/#/#${link.hash}` : link.href}
+                href={link.hash ? `/#${link.hash}` : link.href}
                 onClick={(e) => handleNavClick(e, link)}
                 className={`relative px-3 xl:px-4 py-2.5 text-[14px] xl:text-[15px] font-medium transition-colors rounded-lg whitespace-nowrap ${
                   active
@@ -163,7 +161,7 @@ export default function Navbar() {
                 return (
                   <a
                     key={link.label}
-                    href={link.hash ? `/#/#${link.hash}` : link.href}
+                    href={link.hash ? `/#${link.hash}` : link.href}
                     onClick={(e) => handleNavClick(e, link)}
                     className={`block px-4 py-3.5 rounded-xl text-[15px] font-medium transition-all ${
                       active

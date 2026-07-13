@@ -111,7 +111,7 @@ export function goToSection(sectionId: string, options?: GoOptions) {
     return;
   }
 
-  window.location.hash = '#/';
+  window.location.assign('/');
   setTimeout(scroll, 120);
 }
 
@@ -147,7 +147,7 @@ export function goToDemoForm(
     return;
   }
 
-  window.location.hash = `#${DEMO_PATH}`;
+  window.location.assign(`${DEMO_PATH}#${DEMO_FORM_ID}`);
   setTimeout(() => scrollToId(DEMO_FORM_ID), 350);
 }
 
@@ -177,6 +177,6 @@ export function goToStudentAccess(options?: GoOptions) {
     return;
   }
 
-  window.location.hash = `#${FOR_STUDENTS_PATH}`;
+  window.location.assign(`${FOR_STUDENTS_PATH}#${STUDENT_ACCESS_ID}`);
   setTimeout(() => scrollToId(STUDENT_ACCESS_ID), 350);
 }

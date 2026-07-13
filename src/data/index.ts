@@ -152,10 +152,10 @@ export const problems = [
   },
 ];
 
-export const navLinks = [
+export const navLinks: { label: string; href: string; hash?: string }[] = [
   { label: "Features", href: "/#/features" },
   { label: "For Students", href: "/#/for-students" },
   { label: "For Clubs", href: "/#/for-clubs" },
-  { label: "Demo", href: "/#/", hash: "app-showcase" },
+  { label: "Demo", href: "/#/demo" },
   { label: "About", href: "/#/about" },
 ];

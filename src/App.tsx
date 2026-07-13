@@ -10,6 +10,7 @@ const HowItWorksPage = lazy(() => import('./pages/HowItWorksPage'));
 const PricingPage = lazy(() => import('./pages/PricingPage'));
 const ForClubsPage = lazy(() => import('./pages/ForClubsPage'));
 const ForStudentsPage = lazy(() => import('./pages/ForStudentsPage'));
+const DemoPage = lazy(() => import('./pages/DemoPage'));
 const AboutPage = lazy(() => import('./pages/AboutPage'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const CareersPage = lazy(() => import('./pages/CareersPage'));
@@ -41,6 +42,7 @@ export default function App() {
                 <Route path="/pricing" element={<PricingPage />} />
                 <Route path="/for-clubs" element={<ForClubsPage />} />
                 <Route path="/for-students" element={<ForStudentsPage />} />
+                <Route path="/demo" element={<DemoPage />} />
                 <Route path="/about" element={<AboutPage />} />
                 <Route path="/blog" element={<BlogPage />} />
                 <Route path="/careers" element={<CareersPage />} />

@@ -6,7 +6,7 @@ import BrandLogo from '../ui/BrandLogo';
 const platformLinks: { label: string; href?: string; hash?: string }[] = [
   { label: 'Features', href: '/features' },
   { label: 'For Clubs', href: '/for-clubs' },
-  { label: 'Demo', hash: 'app-showcase' },
+  { label: 'Demo', href: '/demo' },
   { label: 'About', href: '/about' },
 ];
 

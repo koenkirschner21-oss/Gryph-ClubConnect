@@ -1,12 +1,7 @@
-import { Link, useNavigate } from 'react-router-dom';
 import AnimatedSection from '../ui/AnimatedSection';
-import Button from '../ui/Button';
 import DemoInterestForm from '../forms/DemoInterestForm';
-import {
-  FOR_STUDENTS_PATH,
-  HOMEPAGE_DEMO_FORM_ID,
-  goToStudentAccess,
-} from '../../lib/cta';
+import StudentAccessForm from '../forms/StudentAccessForm';
+import { HOMEPAGE_DEMO_FORM_ID, HOMEPAGE_STUDENT_ACCESS_ID } from '../../lib/cta';
 
 const nextSteps = [
   'We review your club info',
@@ -15,8 +10,6 @@ const nextSteps = [
 ];
 
 export default function FinalCTA() {
-  const navigate = useNavigate();
-
   return (
     <>
       <section
@@ -79,40 +72,31 @@ export default function FinalCTA() {
         </div>
       </section>
 
-      <section className="relative pb-16 sm:pb-20 pt-2 overflow-hidden bg-[#0B0B0B] scroll-mt-24">
+      <section
+        id={HOMEPAGE_STUDENT_ACCESS_ID}
+        className="relative pb-16 sm:pb-20 pt-2 overflow-hidden bg-[#0B0B0B] scroll-mt-28"
+      >
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection>
-            <div className="rounded-[14px] border border-[#222222] bg-[#131313] p-6 sm:p-8">
-              <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 items-center">
-                <div>
-                  <h3 className="text-2xl sm:text-[1.75rem] font-extrabold text-[#F5F5F5] font-sans mb-3">
-                    For students
-                  </h3>
-                  <p className="text-[#9CA3AF] text-base leading-relaxed max-w-md mb-4">
-                    Students can request access to explore clubs, events, roles, and opportunities as Gryph ClubConnect prepares for launch.
-                  </p>
-                  <p className="text-[12px] text-[#777777] leading-relaxed max-w-md">
-                    Submitting a student access request does not create an account automatically.
-                  </p>
-                </div>
-                <div className="flex flex-col sm:flex-row lg:flex-col gap-3">
-                  <Button
-                    variant="red"
-                    size="lg"
-                    onClick={() => goToStudentAccess({ navigate, pathname: '/' })}
-                  >
-                    Get Student Access
-                  </Button>
-                  <Link
-                    to={FOR_STUDENTS_PATH}
-                    className="inline-flex items-center justify-center rounded-[10px] border border-[rgba(255,255,255,0.12)] hover:bg-[rgba(255,255,255,0.05)] px-8 py-4 text-base font-semibold text-[#F5F5F5] transition-colors"
-                  >
-                    Explore For Students
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start rounded-[14px] border border-[#222222] bg-[#131313] p-6 sm:p-8">
+            <AnimatedSection>
+              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#FFC429] mb-3">
+                For students
+              </p>
+              <h3 className="text-2xl sm:text-[1.75rem] font-extrabold text-[#F5F5F5] font-sans mb-3">
+                Request student access
+              </h3>
+              <p className="text-[#9CA3AF] text-base leading-relaxed max-w-md mb-4">
+                Students can request access to explore clubs, events, roles, and opportunities as Gryph ClubConnect prepares for launch.
+              </p>
+              <p className="text-[12px] text-[#777777] leading-relaxed max-w-md">
+                Submitting a student access request does not create an account automatically.
+              </p>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.06}>
+              <StudentAccessForm sourcePage="Homepage" idPrefix="homepage-student" />
+            </AnimatedSection>
+          </div>
         </div>
       </section>
     </>

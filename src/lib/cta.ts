@@ -3,7 +3,8 @@
  *
  * Homepage demo CTAs → #homepage-demo-form
  * Other pages demo/onboard → /demo#demo-form
- * Student access → /for-students#student-access
+ * Homepage student CTAs → #homepage-student-access
+ * Other pages student access → /for-students#student-access
  * Log In → APP_LOGIN_URL
  */
 
@@ -22,12 +23,13 @@ export const FEATURES_PATH = '/features';
 
 export const HOMEPAGE_DEMO_FORM_ID = 'homepage-demo-form';
 export const DEMO_FORM_ID = 'demo-form';
+export const HOMEPAGE_STUDENT_ACCESS_ID = 'homepage-student-access';
+export const STUDENT_ACCESS_ID = 'student-access';
 
 /** @deprecated Prefer DEMO_FORM_ID */
 export const REQUEST_DEMO_ID = DEMO_FORM_ID;
 /** Onboard CTAs share the demo form targets. */
 export const ONBOARD_CLUB_ID = 'onboard-your-club';
-export const STUDENT_ACCESS_ID = 'student-access';
 
 /** @deprecated Prefer goToDemoForm */
 export const JOIN_TESTING_ID = DEMO_FORM_ID;
@@ -149,10 +151,22 @@ export function goToDemoForm(
   setTimeout(() => scrollToId(DEMO_FORM_ID), 350);
 }
 
+/**
+ * Homepage → scroll to #homepage-student-access
+ * For Students → scroll to #student-access
+ * Other pages → /for-students#student-access
+ */
 export function goToStudentAccess(options?: GoOptions) {
-  const onTarget = options?.pathname === FOR_STUDENTS_PATH;
+  const pathname = options?.pathname ?? '/';
+  const onHome = pathname === '/';
+  const onForStudents = pathname === FOR_STUDENTS_PATH;
 
-  if (onTarget) {
+  if (onHome) {
+    scrollToId(HOMEPAGE_STUDENT_ACCESS_ID);
+    return;
+  }
+
+  if (onForStudents) {
     scrollToId(STUDENT_ACCESS_ID);
     return;
   }

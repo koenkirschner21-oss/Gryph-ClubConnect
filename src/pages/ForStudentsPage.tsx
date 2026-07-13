@@ -630,7 +630,7 @@ export default function ForStudentsPage() {
                 <p className="text-[#777777] text-sm mb-6 leading-relaxed">
                   Tell us a bit about yourself so we can follow up as access opens.
                 </p>
-                <StudentAccessForm />
+                <StudentAccessForm sourcePage="For Students" idPrefix="for-students" />
               </div>
             </AnimatedSection>
           </div>

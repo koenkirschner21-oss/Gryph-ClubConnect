@@ -87,11 +87,11 @@ export default function AboutPage() {
             <p className="text-[#9CA3AF] text-lg max-w-2xl mx-auto leading-relaxed mb-8">
               Gryph ClubConnect is an independent student-built platform helping students discover campus opportunities and helping club teams manage the work behind them.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-5">
-              <Button variant="red" size="lg" onClick={handleOnboard}>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 mb-5">
+              <Button variant="red" size="lg" onClick={handleOnboard} className="w-full sm:w-auto">
                 Onboard Your Club
               </Button>
-              <Button variant="ghost" size="lg" onClick={handleDemo}>
+              <Button variant="ghost" size="lg" onClick={handleDemo} className="w-full sm:w-auto">
                 Request a Demo
               </Button>
             </div>
@@ -258,11 +258,11 @@ export default function AboutPage() {
             <p className="text-[#9CA3AF] text-base mb-8 max-w-xl mx-auto leading-relaxed">
               Request a demo or onboard your club to see how Gryph ClubConnect can help students discover opportunities and help club teams manage operations from one workspace.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button variant="red" size="lg" onClick={handleOnboard}>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4">
+              <Button variant="red" size="lg" onClick={handleOnboard} className="w-full sm:w-auto">
                 Onboard Your Club
               </Button>
-              <Button variant="ghost" size="lg" onClick={handleDemo}>
+              <Button variant="ghost" size="lg" onClick={handleDemo} className="w-full sm:w-auto">
                 Request a Demo
               </Button>
             </div>

@@ -230,11 +230,11 @@ export default function DemoPage() {
               <p className="text-[#9CA3AF] text-lg leading-relaxed mb-8 max-w-xl">
                 Book a walkthrough of the student discovery flow and club workspace. We&apos;ll show how clubs can manage events, RSVPs, tasks, meetings, members, hiring, documents, analytics, roles, and permissions from one organized platform.
               </p>
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 mb-5">
-                <Button variant="red" size="lg" onClick={handleDemo}>
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-5">
+                <Button variant="red" size="lg" onClick={handleDemo} className="w-full sm:w-auto">
                   Request a Demo
                 </Button>
-                <Button variant="ghost" size="lg" onClick={handleOnboard}>
+                <Button variant="ghost" size="lg" onClick={handleOnboard} className="w-full sm:w-auto">
                   Onboard Your Club
                 </Button>
               </div>

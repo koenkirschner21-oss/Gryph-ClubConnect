@@ -93,7 +93,7 @@ export function goToSection(sectionId: string, options?: GoOptions) {
     return;
   }
 
-  if (sectionId === STUDENT_ACCESS_ID) {
+  if (sectionId === STUDENT_ACCESS_ID || sectionId === HOMEPAGE_STUDENT_ACCESS_ID) {
     goToStudentAccess(options);
     return;
   }

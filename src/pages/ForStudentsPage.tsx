@@ -268,10 +268,10 @@ export default function ForStudentsPage() {
                 Gryph ClubConnect gives students one place to explore clubs, view public profiles, discover events, RSVP, apply for roles, follow updates, and keep track of involvement from one account.
               </p>
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-5">
-                <Button variant="red" size="lg" onClick={handleStudentAccess}>
+                <Button variant="red" size="lg" onClick={handleStudentAccess} className="w-full sm:w-auto">
                   Get Student Access
                 </Button>
-                <Button variant="ghost" size="lg" onClick={() => navigate('/features')}>
+                <Button variant="ghost" size="lg" onClick={() => navigate('/features')} className="w-full sm:w-auto">
                   Explore Clubs
                 </Button>
               </div>

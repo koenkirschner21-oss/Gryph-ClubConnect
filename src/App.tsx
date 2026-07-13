@@ -31,9 +31,9 @@ export default function App() {
   return (
     <HashRouter>
       <ErrorBoundary>
-        <div className="bg-[#0B0B0B] min-h-screen text-[#F5F5F5]">
+        <div className="bg-[#0B0B0B] min-h-screen text-[#F5F5F5] overflow-x-hidden">
           <Navbar />
-          <main>
+          <main className="min-w-0">
             <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route path="/" element={<HomePage />} />

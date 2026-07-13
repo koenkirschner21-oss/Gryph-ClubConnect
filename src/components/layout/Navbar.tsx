@@ -83,14 +83,14 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-[64px] sm:h-[72px] flex items-center justify-between py-2">
         <Link
           to="/"
-          className="flex items-center group transition-opacity duration-200 hover:opacity-90"
+          className="flex items-center group transition-opacity duration-200 hover:opacity-90 min-w-0 shrink"
           onClick={() => { setMenuOpen(false); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
           aria-label="Gryph ClubConnect Home"
         >
-          <BrandLogo variant="nav" />
+          <BrandLogo variant="nav" className="min-w-0" />
         </Link>
 
-        <div className="hidden md:flex items-center gap-1.5">
+        <div className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => {
             const active = !link.hash && isActive(link);
             return (
@@ -98,7 +98,7 @@ export default function Navbar() {
                 key={link.label}
                 href={link.hash ? `/#/#${link.hash}` : link.href}
                 onClick={(e) => handleNavClick(e, link)}
-                className={`relative px-4 py-2.5 text-[15px] font-medium transition-colors rounded-lg ${
+                className={`relative px-3 xl:px-4 py-2.5 text-[14px] xl:text-[15px] font-medium transition-colors rounded-lg whitespace-nowrap ${
                   active
                     ? 'text-[#F5F5F5]'
                     : 'text-[#9CA3AF] hover:text-[#F5F5F5] hover:bg-[#222222]/50'
@@ -109,7 +109,7 @@ export default function Navbar() {
                 {active && (
                   <motion.div
                     layoutId="nav-underline"
-                    className="absolute bottom-0 left-4 right-4 h-0.5 bg-[#E51937] rounded-full"
+                    className="absolute bottom-0 left-3 right-3 xl:left-4 xl:right-4 h-0.5 bg-[#E51937] rounded-full"
                     transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
                   />
                 )}
@@ -118,15 +118,15 @@ export default function Navbar() {
           })}
         </div>
 
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3 shrink-0">
           <Button variant="ghost" size="md" onClick={handleLogIn}>Log In</Button>
-          <Button variant="red" size="md" onClick={handleOnboard} className="shadow-[0_2px_12px_rgba(229,25,55,0.3)]">
+          <Button variant="red" size="md" onClick={handleOnboard} className="shadow-[0_2px_12px_rgba(229,25,55,0.3)] whitespace-nowrap">
             Onboard Your Club
           </Button>
         </div>
 
         <button
-          className="md:hidden p-2.5 text-[#9CA3AF] hover:text-[#F5F5F5] transition-colors focus:outline-none focus:ring-2 focus:ring-[#E51937] rounded-lg"
+          className="lg:hidden p-2.5 text-[#9CA3AF] hover:text-[#F5F5F5] transition-colors focus:outline-none focus:ring-2 focus:ring-[#E51937] rounded-lg"
           onClick={() => setMenuOpen((v) => !v)}
           aria-label={menuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={menuOpen}
@@ -153,7 +153,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.2 }}
-            className="fixed inset-x-0 top-[64px] sm:top-[72px] z-40 bg-[#111111]/95 backdrop-blur-lg border-b border-[#222222] shadow-2xl md:hidden"
+            className="fixed inset-x-0 top-[64px] sm:top-[72px] z-40 bg-[#111111]/95 backdrop-blur-lg border-b border-[#222222] shadow-2xl lg:hidden max-h-[calc(100dvh-64px)] sm:max-h-[calc(100dvh-72px)] overflow-y-auto"
             role="navigation"
             aria-label="Mobile navigation"
           >

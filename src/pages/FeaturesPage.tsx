@@ -454,10 +454,10 @@ export default function FeaturesPage() {
                 From discovering clubs to running events, reviewing applications, assigning tasks, managing members, hosting meetings, tracking analytics, and controlling permissions — one organized platform.
               </p>
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-5">
-                <Button variant="red" size="lg" onClick={handleOnboard}>
+                <Button variant="red" size="lg" onClick={handleOnboard} className="w-full sm:w-auto">
                   Onboard Your Club
                 </Button>
-                <Button variant="ghost" size="lg" onClick={handleDemo}>
+                <Button variant="ghost" size="lg" onClick={handleDemo} className="w-full sm:w-auto">
                   Request a Demo
                 </Button>
               </div>
@@ -798,11 +798,11 @@ export default function FeaturesPage() {
             <p className="text-[#9CA3AF] text-base mb-8 max-w-2xl mx-auto leading-relaxed">
               Gryph ClubConnect is onboarding UofG clubs ahead of launch. Request a demo, see the workflows, and get your club ready for a cleaner way to manage members, events, RSVPs, tasks, meetings, documents, hiring, announcements, analytics, and permissions.
             </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button variant="red" size="lg" onClick={handleOnboard}>
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4">
+              <Button variant="red" size="lg" onClick={handleOnboard} className="w-full sm:w-auto">
                 Onboard Your Club
               </Button>
-              <Button variant="ghost" size="lg" onClick={handleDemo}>
+              <Button variant="ghost" size="lg" onClick={handleDemo} className="w-full sm:w-auto">
                 Request a Demo
               </Button>
             </div>

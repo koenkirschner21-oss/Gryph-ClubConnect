@@ -1,4 +1,6 @@
 import { useEffect, useId, useState, type FormEvent } from 'react';
+import { Link } from 'react-router-dom';
+import { Check } from 'lucide-react';
 import {
   DEMO_FORM_ENDPOINT,
   DEMO_FORM_SOURCE_DEMO_PAGE,
@@ -7,10 +9,18 @@ import {
   DEMO_WORKFLOW_OPTIONS,
 } from '../../lib/forms';
 import { CLUB_INTEREST_EVENT, consumeClubFormInterest, type ClubInterestOption } from '../../lib/cta';
+import BrandLogo from '../ui/BrandLogo';
 
 const inputClass =
   'w-full min-w-0 bg-[#0B0B0B] border border-[#222222] rounded-[10px] px-3.5 py-2.5 text-sm text-[#F5F5F5] placeholder:text-[#777777] focus:outline-none focus:ring-2 focus:ring-[#E51937] focus:border-[#E51937] transition-colors';
 const labelClass = 'block text-[13px] font-medium text-[#9CA3AF] mb-1.5';
+
+const nextSteps = [
+  'We review your club info',
+  'We focus the walkthrough on the workflows you care about',
+  'We follow up by email',
+  'If it makes sense, we help prepare your club for early access',
+];
 
 type DemoInterestFormProps = {
   /** compact = homepage fields; full = Demo page with workflow checkboxes */
@@ -99,17 +109,79 @@ export default function DemoInterestForm({
 
   if (submitted) {
     return (
-      <div className="rounded-[10px] border border-[#FFC429]/25 bg-[rgba(255,196,41,0.08)] px-4 py-5">
-        <p className="text-[#F5F5F5] font-semibold mb-2">
-          Thanks — your request was sent. We&apos;ll follow up soon.
-        </p>
-        <button
-          type="button"
-          onClick={() => setSubmitted(false)}
-          className="mt-4 text-sm font-medium text-[#FFC429] hover:text-[#FFD45C]"
-        >
-          Submit another request
-        </button>
+      <div
+        className="relative overflow-hidden rounded-[12px] border border-white/[0.08] bg-[#0B0B0B] px-5 py-6 sm:px-6 sm:py-7"
+        role="status"
+        aria-live="polite"
+      >
+        <span className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-[#E51937] via-[#FFC429] to-[#E51937]" aria-hidden />
+        <div className="absolute -top-16 right-0 h-32 w-32 rounded-full bg-[#E51937] opacity-[0.08] blur-[48px] pointer-events-none" aria-hidden />
+
+        <div className="relative">
+          <div className="mb-5 flex items-center justify-between gap-3">
+            <BrandLogo variant="footer" />
+            <span className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-[#E51937]/35 bg-[rgba(229,25,55,0.14)] text-[#E51937]">
+              <Check size={18} strokeWidth={2.5} aria-hidden />
+            </span>
+          </div>
+
+          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#FFC429] mb-2">
+            Request received
+          </p>
+          <h3 className="text-xl sm:text-[1.35rem] font-extrabold text-[#F5F5F5] font-sans mb-2 leading-tight">
+            Request sent successfully
+          </h3>
+          <p className="text-[#9CA3AF] text-sm leading-relaxed mb-6">
+            Thanks — your request was sent. We&apos;ll follow up soon using the email you provided. No account was created.
+          </p>
+
+          <div className="rounded-[10px] border border-[#222222] bg-[#131313] p-4 sm:p-5 mb-6">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#777777] mb-3">
+              What happens next
+            </p>
+            <ol className="space-y-3">
+              {nextSteps.map((step, index) => (
+                <li key={step} className="flex gap-3 text-sm">
+                  <span
+                    className={`shrink-0 w-6 h-6 rounded-full border text-[11px] font-bold flex items-center justify-center ${
+                      index % 2 === 0
+                        ? 'border-[#E51937]/35 bg-[rgba(229,25,55,0.12)] text-[#E51937]'
+                        : 'border-[#FFC429]/35 bg-[rgba(255,196,41,0.12)] text-[#FFC429]'
+                    }`}
+                  >
+                    {index + 1}
+                  </span>
+                  <span className="pt-0.5 text-[#9CA3AF] leading-relaxed">{step}</span>
+                </li>
+              ))}
+            </ol>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-3">
+            <button
+              type="button"
+              onClick={() => setSubmitted(false)}
+              className="inline-flex flex-1 items-center justify-center rounded-[10px] bg-[#E51937] hover:bg-[#C4122E] text-white font-semibold px-5 py-3 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-[#E51937] focus:ring-offset-2 focus:ring-offset-[#0B0B0B]"
+            >
+              Submit another request
+            </button>
+            {isCompact ? (
+              <Link
+                to="/demo"
+                className="inline-flex flex-1 items-center justify-center rounded-[10px] border border-[rgba(255,255,255,0.12)] hover:bg-[rgba(255,255,255,0.05)] hover:border-[rgba(255,255,255,0.2)] text-[#F5F5F5] font-semibold px-5 py-3 text-sm transition-colors"
+              >
+                Back to demo page
+              </Link>
+            ) : (
+              <Link
+                to="/features"
+                className="inline-flex flex-1 items-center justify-center rounded-[10px] border border-[rgba(255,255,255,0.12)] hover:bg-[rgba(255,255,255,0.05)] hover:border-[rgba(255,255,255,0.2)] text-[#F5F5F5] font-semibold px-5 py-3 text-sm transition-colors"
+              >
+                Explore features
+              </Link>
+            )}
+          </div>
+        </div>
       </div>
     );
   }
@@ -181,7 +253,7 @@ export default function DemoInterestForm({
           What are you interested in?
         </p>
         <div
-          className="grid grid-cols-1 sm:grid-cols-3 gap-2"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-2 min-w-0"
           role="group"
           aria-labelledby={`${prefix}-request-type-label`}
         >
@@ -192,7 +264,7 @@ export default function DemoInterestForm({
                 key={option}
                 type="button"
                 onClick={() => setRequestType(option)}
-                className={`rounded-[10px] border px-3 py-2.5 text-[12px] sm:text-[13px] font-medium transition-colors text-left ${
+                className={`rounded-[10px] border px-3 py-2.5 text-[12px] sm:text-[13px] font-medium transition-colors text-left min-w-0 break-words ${
                   selected
                     ? 'border-[#E51937]/50 bg-[rgba(229,25,55,0.12)] text-[#F5F5F5]'
                     : 'border-[#222222] bg-[#0B0B0B] text-[#9CA3AF] hover:border-[rgba(255,255,255,0.14)]'

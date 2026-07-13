@@ -64,11 +64,11 @@ export default function Hero() {
                 variant="red"
                 size="lg"
                 onClick={handleOnboard}
-                className="shadow-[0_8px_24px_rgba(229,25,55,0.22)]"
+                className="w-full sm:w-auto shadow-[0_8px_24px_rgba(229,25,55,0.22)]"
               >
                 Onboard Your Club
               </Button>
-              <Button variant="ghost" size="lg" onClick={handleDemo}>
+              <Button variant="ghost" size="lg" onClick={handleDemo} className="w-full sm:w-auto">
                 Request a Demo
               </Button>
             </div>

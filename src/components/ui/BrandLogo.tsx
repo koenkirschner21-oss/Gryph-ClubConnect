@@ -25,7 +25,7 @@ export default function BrandLogo({
 
   return (
     <span
-      className={`inline-flex items-center ${isNav ? 'gap-2.5 sm:gap-3' : 'gap-2 sm:gap-2.5'} ${className}`}
+      className={`inline-flex items-center min-w-0 ${isNav ? 'gap-2.5 sm:gap-3' : 'gap-2 sm:gap-2.5'} ${className}`}
     >
       <img
         src={`${import.meta.env.BASE_URL}gryph-icon.png`}
@@ -33,7 +33,10 @@ export default function BrandLogo({
         className={`shrink-0 object-contain ${iconHeight}`}
         aria-hidden
       />
-      <span className={textClass} style={{ fontFamily: "'Inter', ui-sans-serif, system-ui, sans-serif" }}>
+      <span
+        className={`${textClass} truncate`}
+        style={{ fontFamily: "'Inter', ui-sans-serif, system-ui, sans-serif" }}
+      >
         <span style={{ color: '#E51937' }}>Club</span>
         <span style={{ color: '#FFC429' }}>Connect</span>
       </span>

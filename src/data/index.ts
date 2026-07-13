@@ -154,7 +154,7 @@ export const problems = [
 
 export const navLinks = [
   { label: "Features", href: "/#/features" },
-  { label: "For Students", href: "/#/", hash: "for-students" },
+  { label: "For Students", href: "/#/for-students" },
   { label: "For Clubs", href: "/#/for-clubs" },
   { label: "Demo", href: "/#/", hash: "app-showcase" },
   { label: "About", href: "/#/about" },

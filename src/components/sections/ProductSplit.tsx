@@ -5,7 +5,7 @@ import AnimatedSection, { StaggerContainer, StaggerItem } from '../ui/AnimatedSe
 const audiences = [
   {
     id: 'for-students',
-    to: '/features',
+    to: '/for-students',
     accent: 'red' as const,
     label: 'For students',
     title: 'For students',

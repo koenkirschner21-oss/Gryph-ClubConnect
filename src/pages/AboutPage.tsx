@@ -2,10 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import AnimatedSection, { StaggerContainer, StaggerItem } from '../components/ui/AnimatedSection';
 import Button from '../components/ui/Button';
 import {
-  goToSection,
-  ONBOARD_CLUB_ID,
-  REQUEST_DEMO_ID,
-  setClubFormInterest,
+  goToDemoForm,
 } from '../lib/cta';
 
 const frictionCards = [
@@ -64,13 +61,11 @@ export default function AboutPage() {
   const navigate = useNavigate();
 
   const handleOnboard = () => {
-    setClubFormInterest('Onboard my club');
-    goToSection(ONBOARD_CLUB_ID, { navigate, pathname: '/about' });
+    goToDemoForm({ interest: 'Onboard my club', navigate, pathname: '/about' });
   };
 
   const handleDemo = () => {
-    setClubFormInterest('Request a demo');
-    goToSection(REQUEST_DEMO_ID, { navigate, pathname: '/about' });
+    goToDemoForm({ interest: 'Request a demo', navigate, pathname: '/about' });
   };
 
   return (
@@ -78,14 +73,6 @@ export default function AboutPage() {
       {/* 1. Hero */}
       <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-20 overflow-hidden bg-[#0B0B0B]">
         <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full bg-[#E51937] opacity-[0.04] blur-[140px] pointer-events-none" />
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage:
-              'linear-gradient(#F5F5F5 1px, transparent 1px), linear-gradient(90deg, #F5F5F5 1px, transparent 1px)',
-            backgroundSize: '50px 50px',
-          }}
-        />
         <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedSection>
             <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-4">

@@ -20,10 +20,7 @@ import ClubWorkflowSlideshow, {
   type ClubWorkflowStep,
 } from '../components/clubs/ClubWorkflowSlideshow';
 import {
-  goToSection,
-  ONBOARD_CLUB_ID,
-  REQUEST_DEMO_ID,
-  setClubFormInterest,
+  goToDemoForm,
 } from '../lib/cta';
 
 const problemCards = [
@@ -348,13 +345,11 @@ export default function ForClubsPage() {
   const navigate = useNavigate();
 
   const handleOnboard = () => {
-    setClubFormInterest('Onboard my club');
-    goToSection(ONBOARD_CLUB_ID, { navigate, pathname: '/for-clubs' });
+    goToDemoForm({ interest: 'Onboard my club', navigate, pathname: '/for-clubs' });
   };
 
   const handleDemo = () => {
-    setClubFormInterest('Request a demo');
-    goToSection(REQUEST_DEMO_ID, { navigate, pathname: '/for-clubs' });
+    goToDemoForm({ interest: 'Request a demo', navigate, pathname: '/for-clubs' });
   };
 
   return (

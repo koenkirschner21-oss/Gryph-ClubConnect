@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import {
   Compass,
@@ -18,13 +18,15 @@ import {
   Ticket,
   type LucideIcon,
 } from 'lucide-react';
+import { useEffect } from 'react';
 import AnimatedSection, { StaggerContainer, StaggerItem } from '../components/ui/AnimatedSection';
 import Button from '../components/ui/Button';
 import FeatureScreenshotPlaceholder from '../components/features/FeatureScreenshotPlaceholder';
 import ClubWorkflowSlideshow, {
   type ClubWorkflowStep,
 } from '../components/clubs/ClubWorkflowSlideshow';
-import { goToSection, STUDENT_ACCESS_ID } from '../lib/cta';
+import StudentAccessForm from '../components/forms/StudentAccessForm';
+import { goToStudentAccess, STUDENT_ACCESS_ID } from '../lib/cta';
 
 const problemCards = [
   {
@@ -229,9 +231,20 @@ const audienceHover = {
 
 export default function ForStudentsPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const hash = location.hash.replace(/^#/, '');
+    if (hash === STUDENT_ACCESS_ID) {
+      const t = window.setTimeout(() => {
+        document.getElementById(STUDENT_ACCESS_ID)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+      return () => window.clearTimeout(t);
+    }
+  }, [location.hash, location.pathname]);
 
   const handleStudentAccess = () => {
-    goToSection(STUDENT_ACCESS_ID, { navigate, pathname: '/for-students' });
+    goToStudentAccess({ navigate, pathname: '/for-students' });
   };
 
   return (
@@ -583,20 +596,23 @@ export default function ForStudentsPage() {
         </div>
       </section>
 
-      {/* Final CTA */}
-      <section className="relative py-16 sm:py-20 overflow-hidden bg-[#0B0B0B] border-t border-[#222222]">
-        <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
-          <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#F5F5F5] font-sans mb-4">
-              Ready to find more of what is happening on campus?
-            </h2>
-            <p className="text-[#9CA3AF] text-base mb-8 max-w-xl mx-auto leading-relaxed">
-              Request student access to follow Gryph ClubConnect as it prepares for launch and get a clearer way to discover clubs, events, and roles.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button variant="red" size="lg" onClick={handleStudentAccess}>
-                Get Student Access
-              </Button>
+      {/* Student access form */}
+      <section
+        id={STUDENT_ACCESS_ID}
+        className="relative py-16 sm:py-20 overflow-hidden bg-[#0B0B0B] border-t border-[#222222] scroll-mt-28"
+      >
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+            <AnimatedSection>
+              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
+                Student access
+              </p>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-4">
+                Ready to find more of what is happening on campus?
+              </h2>
+              <p className="text-[#9CA3AF] text-base leading-relaxed mb-6 max-w-xl">
+                Request student access to follow Gryph ClubConnect as it prepares for launch and get a clearer way to discover clubs, events, and roles.
+              </p>
               <Link
                 to="/features"
                 className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#E51937] hover:text-[#FF6B7D] transition-colors"
@@ -604,11 +620,20 @@ export default function ForStudentsPage() {
                 Explore Club Features
                 <ArrowRight size={16} />
               </Link>
-            </div>
-            <p className="mt-6 text-[13px] text-[#777777]">
-              Submitting a student access request does not create an account automatically.
-            </p>
-          </AnimatedSection>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.08}>
+              <div className="rounded-[14px] border border-[#222222] bg-[#131313] p-6 sm:p-7 shadow-[0_16px_48px_rgba(0,0,0,0.35)]">
+                <h3 className="text-xl font-bold text-[#F5F5F5] font-sans mb-1">
+                  Get student access
+                </h3>
+                <p className="text-[#777777] text-sm mb-6 leading-relaxed">
+                  Tell us a bit about yourself so we can follow up as access opens.
+                </p>
+                <StudentAccessForm />
+              </div>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
     </div>

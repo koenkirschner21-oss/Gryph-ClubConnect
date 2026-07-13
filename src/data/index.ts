@@ -153,9 +153,9 @@ export const problems = [
 ];
 
 export const navLinks: { label: string; href: string; hash?: string }[] = [
-  { label: "Features", href: "/#/features" },
-  { label: "For Students", href: "/#/for-students" },
   { label: "For Clubs", href: "/#/for-clubs" },
+  { label: "For Students", href: "/#/for-students" },
+  { label: "Features", href: "/#/features" },
   { label: "Demo", href: "/#/demo" },
   { label: "About", href: "/#/about" },
 ];

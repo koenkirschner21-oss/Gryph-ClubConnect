@@ -2,24 +2,17 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import Button from '../ui/Button';
 import MockupImage from '../mockups/MockupImage';
-import {
-  goToSection,
-  ONBOARD_CLUB_ID,
-  REQUEST_DEMO_ID,
-  setClubFormInterest,
-} from '../../lib/cta';
+import { goToDemoForm } from '../../lib/cta';
 
 export default function Hero() {
   const navigate = useNavigate();
 
   const handleOnboard = () => {
-    setClubFormInterest('Onboard my club');
-    goToSection(ONBOARD_CLUB_ID, { navigate, pathname: '/' });
+    goToDemoForm({ interest: 'Onboard my club', navigate, pathname: '/' });
   };
 
   const handleDemo = () => {
-    setClubFormInterest('Request a demo');
-    goToSection(REQUEST_DEMO_ID, { navigate, pathname: '/' });
+    goToDemoForm({ interest: 'Request a demo', navigate, pathname: '/' });
   };
 
   return (

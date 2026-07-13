@@ -1,4 +1,5 @@
-import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ArrowRight, Check } from 'lucide-react';
 import {
   Compass,
@@ -16,12 +17,8 @@ import {
 import AnimatedSection, { StaggerContainer, StaggerItem } from '../components/ui/AnimatedSection';
 import Button from '../components/ui/Button';
 import FeatureScreenshotPlaceholder from '../components/features/FeatureScreenshotPlaceholder';
-import {
-  goToSection,
-  ONBOARD_CLUB_ID,
-  REQUEST_DEMO_ID,
-  setClubFormInterest,
-} from '../lib/cta';
+import DemoRequestForm from '../components/forms/DemoRequestForm';
+import { goToDemoForm, REQUEST_DEMO_ID } from '../lib/cta';
 
 const walkthroughCards: {
   icon: LucideIcon;
@@ -153,6 +150,13 @@ const prepareChecklist = [
   'Who needs access to what',
 ];
 
+const afterRequestSteps = [
+  'We review your club and role',
+  'We focus the walkthrough on the workflows you care about',
+  'We show how your club could manage events, tasks, hiring, members, permissions, and updates',
+  'If it makes sense, we help prepare your club for early access',
+];
+
 const accentBar = {
   red: 'bg-[#E51937]',
   gold: 'bg-[#FFC429]',
@@ -186,15 +190,24 @@ function TextCta({ label, onClick }: { label: string; onClick: () => void }) {
 
 export default function DemoPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const hash = location.hash.replace(/^#/, '');
+    if (hash === REQUEST_DEMO_ID) {
+      const t = window.setTimeout(() => {
+        document.getElementById(REQUEST_DEMO_ID)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 80);
+      return () => window.clearTimeout(t);
+    }
+  }, [location.hash, location.pathname]);
 
   const handleDemo = () => {
-    setClubFormInterest('Request a demo');
-    goToSection(REQUEST_DEMO_ID, { navigate, pathname: '/demo' });
+    goToDemoForm({ interest: 'Request a demo', navigate, pathname: '/demo' });
   };
 
   const handleOnboard = () => {
-    setClubFormInterest('Onboard my club');
-    goToSection(ONBOARD_CLUB_ID, { navigate, pathname: '/demo' });
+    goToDemoForm({ interest: 'Onboard my club', navigate, pathname: '/demo' });
   };
 
   return (
@@ -202,14 +215,6 @@ export default function DemoPage() {
       {/* 1. Hero */}
       <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-20 overflow-hidden bg-[#0B0B0B]">
         <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full bg-[#E51937] opacity-[0.04] blur-[140px] pointer-events-none" />
-        <div
-          className="absolute inset-0 opacity-[0.03] pointer-events-none"
-          style={{
-            backgroundImage:
-              'linear-gradient(#F5F5F5 1px, transparent 1px), linear-gradient(90deg, #F5F5F5 1px, transparent 1px)',
-            backgroundSize: '50px 50px',
-          }}
-        />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             <AnimatedSection>
@@ -433,28 +438,53 @@ export default function DemoPage() {
         </div>
       </section>
 
-      {/* 7. Final CTA */}
-      <section className="relative py-16 sm:py-20 overflow-hidden bg-[#0B0B0B] border-t border-[#222222]">
-        <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
-          <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#F5F5F5] font-sans mb-4">
-              Ready to see how Gryph ClubConnect works?
-            </h2>
-            <p className="text-[#9CA3AF] text-base mb-8 max-w-xl mx-auto leading-relaxed">
-              Request a walkthrough and see how your club could use Gryph ClubConnect to manage discovery, events, RSVPs, tasks, meetings, hiring, members, documents, analytics, roles, and permissions from one workspace.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button variant="red" size="lg" onClick={handleDemo}>
-                Request a Demo
-              </Button>
-              <Button variant="ghost" size="lg" onClick={handleOnboard}>
-                Onboard Your Club
-              </Button>
-            </div>
-            <p className="mt-6 text-[13px] text-[#777777]">
-              Submitting interest does not create an account or officially register your club.
-            </p>
-          </AnimatedSection>
+      {/* 7. Request form */}
+      <section
+        id={REQUEST_DEMO_ID}
+        className="relative py-16 sm:py-20 overflow-hidden bg-[#0B0B0B] border-t border-[#222222] scroll-mt-28"
+      >
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+            <AnimatedSection>
+              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
+                Request a demo
+              </p>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-4">
+                Ready to see how Gryph ClubConnect works?
+              </h2>
+              <p className="text-[#9CA3AF] text-base leading-relaxed mb-8 max-w-xl">
+                Request a walkthrough and see how your club could use Gryph ClubConnect to manage discovery, events, RSVPs, tasks, meetings, hiring, members, documents, analytics, roles, and permissions from one workspace.
+              </p>
+
+              <div className="rounded-[12px] border border-[#222222] bg-[#131313] p-5 sm:p-6 max-w-md">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#FFC429] mb-3">
+                  What happens after you request a demo
+                </p>
+                <ol className="space-y-3">
+                  {afterRequestSteps.map((step, index) => (
+                    <li key={step} className="flex gap-3 text-sm">
+                      <span className="shrink-0 w-6 h-6 rounded-full border border-[#E51937]/35 bg-[rgba(229,25,55,0.12)] text-[11px] font-bold text-[#E51937] flex items-center justify-center">
+                        {index + 1}
+                      </span>
+                      <span className="pt-0.5 text-[#9CA3AF] leading-relaxed">{step}</span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.08}>
+              <div className="rounded-[14px] border border-[#222222] bg-[#131313] p-6 sm:p-7 shadow-[0_16px_48px_rgba(0,0,0,0.35)]">
+                <h3 className="text-xl font-bold text-[#F5F5F5] font-sans mb-1">
+                  Demo / onboarding request
+                </h3>
+                <p className="text-[#777777] text-sm mb-6 leading-relaxed">
+                  Tell us about your club so we can focus the walkthrough on what matters most.
+                </p>
+                <DemoRequestForm />
+              </div>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
     </div>

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { goToSection, REQUEST_DEMO_ID, setClubFormInterest } from '../../lib/cta';
+import { goToDemoForm } from '../../lib/cta';
 
 const ROTATE_MS = 6000;
 
@@ -151,8 +151,7 @@ export default function AppShowcase() {
   };
 
   const handleDemo = () => {
-    setClubFormInterest('Request a demo');
-    goToSection(REQUEST_DEMO_ID, { navigate, pathname: '/' });
+    goToDemoForm({ interest: 'Request a demo', navigate, pathname: '/' });
   };
 
   return (

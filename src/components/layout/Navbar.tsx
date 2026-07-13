@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { navLinks } from '../../data/index';
 import Button from '../ui/Button';
 import BrandLogo from '../ui/BrandLogo';
-import { goToSection, ONBOARD_CLUB_ID, APP_LOGIN_URL } from '../../lib/cta';
+import { goToSection, goToDemoForm, APP_LOGIN_URL } from '../../lib/cta';
 
 function useScrollPosition() {
   const [scrollY, setScrollY] = useState(0);
@@ -37,8 +37,9 @@ export default function Navbar() {
   }, [menuOpen]);
 
   useEffect(() => {
+    if (location.hash) return;
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
 
   const isActive = (link: NavItem) => {
     if (link.hash) return location.pathname === '/' && typeof window !== 'undefined';
@@ -59,7 +60,7 @@ export default function Navbar() {
 
   const handleOnboard = () => {
     setMenuOpen(false);
-    goToSection(ONBOARD_CLUB_ID, { navigate, pathname: location.pathname });
+    goToDemoForm({ interest: 'Onboard my club', navigate, pathname: location.pathname });
   };
 
   const handleLogIn = () => {

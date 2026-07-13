@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import AnimatedSection from '../ui/AnimatedSection';
 import RotatingWorkflowShowcase, { type WorkflowStep } from '../ui/RotatingWorkflowShowcase';
-import { goToSection, ONBOARD_CLUB_ID, setClubFormInterest } from '../../lib/cta';
+import { goToDemoForm } from '../../lib/cta';
 
 const workflowSteps: WorkflowStep[] = [
   {
@@ -53,8 +53,7 @@ export default function LeaderShowcase() {
   const navigate = useNavigate();
 
   const handleOnboard = () => {
-    setClubFormInterest('Onboard my club');
-    goToSection(ONBOARD_CLUB_ID, { navigate, pathname: '/' });
+    goToDemoForm({ interest: 'Onboard my club', navigate, pathname: '/' });
   };
 
   return (

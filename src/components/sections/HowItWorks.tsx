@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import AnimatedSection from '../ui/AnimatedSection';
-import { goToSection, REQUEST_DEMO_ID, setClubFormInterest } from '../../lib/cta';
+import { goToDemoForm } from '../../lib/cta';
 
 const onboardingSteps = [
   {
@@ -45,8 +45,7 @@ export default function HowItWorks() {
   const navigate = useNavigate();
 
   const handleDemo = () => {
-    setClubFormInterest('Request a demo');
-    goToSection(REQUEST_DEMO_ID, { navigate, pathname: '/' });
+    goToDemoForm({ interest: 'Request a demo', navigate, pathname: '/' });
   };
 
   return (

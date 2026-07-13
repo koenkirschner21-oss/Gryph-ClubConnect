@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import AnimatedSection from '../components/ui/AnimatedSection';
 import Button from '../components/ui/Button';
-import { goToSection, JOIN_TESTING_ID } from '../lib/cta';
+import { goToDemoForm } from '../lib/cta';
 
 export default function BlogPage() {
   const navigate = useNavigate();
@@ -16,7 +16,7 @@ export default function BlogPage() {
               Blog
             </h1>
             <p className="text-[#9CA3AF] text-lg max-w-2xl mx-auto leading-relaxed mb-8">
-              We do not have published posts yet. Check back later, or join early testing to follow along as we build.
+              We do not have published posts yet. Check back later, or request early access to follow along as we build.
             </p>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#111111] border border-[#222222] text-[#FFC429] text-sm font-sans">
               Coming soon
@@ -29,12 +29,17 @@ export default function BlogPage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <AnimatedSection delay={0.1}>
             <h2 className="text-2xl font-bold text-[#F5F5F5] font-sans mb-4">Want updates?</h2>
-            <p className="text-[#9CA3AF] mb-6">Email us or join the early testing group.</p>
+            <p className="text-[#9CA3AF] mb-6">Email us or request early access.</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Button variant="red" onClick={() => goToSection(JOIN_TESTING_ID, { navigate, pathname: '/blog' })}>
-                Join Testing
+              <Button
+                variant="red"
+                onClick={() =>
+                  goToDemoForm({ interest: 'Ask a question', navigate, pathname: '/blog' })
+                }
+              >
+                Request Access
               </Button>
-              <Button variant="ghost" href="mailto:hello@gryphclubconnect.com?subject=Blog updates">
+              <Button variant="ghost" href="mailto:gryphclubconnect@gmail.com?subject=Blog updates">
                 Email Us
               </Button>
             </div>

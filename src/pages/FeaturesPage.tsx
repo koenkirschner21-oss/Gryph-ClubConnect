@@ -31,11 +31,8 @@ import AnimatedSection, { StaggerContainer, StaggerItem } from '../components/ui
 import Button from '../components/ui/Button';
 import FeatureScreenshotPlaceholder from '../components/features/FeatureScreenshotPlaceholder';
 import {
-  goToSection,
-  ONBOARD_CLUB_ID,
-  REQUEST_DEMO_ID,
-  STUDENT_ACCESS_ID,
-  setClubFormInterest,
+  goToDemoForm,
+  goToStudentAccess,
 } from '../lib/cta';
 
 const pillars = [
@@ -425,17 +422,15 @@ export default function FeaturesPage() {
   const navigate = useNavigate();
 
   const handleOnboard = () => {
-    setClubFormInterest('Onboard my club');
-    goToSection(ONBOARD_CLUB_ID, { navigate, pathname: '/features' });
+    goToDemoForm({ interest: 'Onboard my club', navigate, pathname: '/features' });
   };
 
   const handleDemo = () => {
-    setClubFormInterest('Request a demo');
-    goToSection(REQUEST_DEMO_ID, { navigate, pathname: '/features' });
+    goToDemoForm({ interest: 'Request a demo', navigate, pathname: '/features' });
   };
 
   const handleStudentAccess = () => {
-    goToSection(STUDENT_ACCESS_ID, { navigate, pathname: '/features' });
+    goToStudentAccess({ navigate, pathname: '/features' });
   };
 
   return (
@@ -581,11 +576,7 @@ export default function FeaturesPage() {
                 ))}
               </ul>
               <Link
-                to="/"
-                onClick={(e) => {
-                  e.preventDefault();
-                  goToSection('for-students', { navigate, pathname: '/features' });
-                }}
+                to="/for-students"
                 className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#E51937] hover:text-[#FF6B7D] transition-colors"
               >
                 Explore student features

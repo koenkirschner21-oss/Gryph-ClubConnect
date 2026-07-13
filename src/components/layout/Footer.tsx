@@ -1,11 +1,12 @@
 import { Instagram, Linkedin, Mail, ArrowRight } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { goToSection, ONBOARD_CLUB_ID } from '../../lib/cta';
+import { goToDemoForm } from '../../lib/cta';
 import BrandLogo from '../ui/BrandLogo';
 
-const platformLinks: { label: string; href?: string; hash?: string }[] = [
-  { label: 'Features', href: '/features' },
+const platformLinks: { label: string; href: string }[] = [
   { label: 'For Clubs', href: '/for-clubs' },
+  { label: 'For Students', href: '/for-students' },
+  { label: 'Features', href: '/features' },
   { label: 'Demo', href: '/demo' },
   { label: 'About', href: '/about' },
 ];
@@ -58,14 +59,10 @@ export default function Footer() {
               {platformLinks.map((link) => (
                 <li key={link.label}>
                   <a
-                    href={link.hash ? `/#/#${link.hash}` : `/#${link.href}`}
+                    href={`/#${link.href}`}
                     onClick={(e) => {
                       e.preventDefault();
-                      if (link.hash) {
-                        goToSection(link.hash, { navigate, pathname: location.pathname });
-                        return;
-                      }
-                      if (link.href) navigate(link.href);
+                      navigate(link.href);
                     }}
                     className="text-[#9CA3AF] hover:text-[#F5F5F5] text-sm transition-colors inline-flex items-center gap-1 group"
                   >
@@ -110,7 +107,13 @@ export default function Footer() {
               </a>
               <button
                 type="button"
-                onClick={() => goToSection(ONBOARD_CLUB_ID, { navigate, pathname: location.pathname })}
+                onClick={() =>
+                  goToDemoForm({
+                    interest: 'Onboard my club',
+                    navigate,
+                    pathname: location.pathname,
+                  })
+                }
                 className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-sans bg-[rgba(229,25,55,0.12)] text-[#E51937] border border-[#E51937]/20 hover:bg-[rgba(229,25,55,0.2)] transition-colors"
               >
                 <span className="relative flex h-1.5 w-1.5">

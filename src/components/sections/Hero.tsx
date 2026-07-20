@@ -127,13 +127,13 @@ export default function Hero() {
               ease: [0.22, 1, 0.36, 1],
               delay: 0.1,
             }}
-            className="relative block lg:pl-2"
+            className="relative block lg:-mr-16 xl:-mr-24"
           >
             <MockupImage
               name="heroHero"
               alt="Gryph ClubConnect homepage hero"
               className="relative !overflow-visible !rounded-none !border-0 !bg-transparent !shadow-none !ring-0"
-              imgClassName="h-auto w-full object-contain"
+              imgClassName="h-auto w-full scale-[1.18] object-contain lg:scale-[1.28]"
             />
           </motion.div>
         </div>

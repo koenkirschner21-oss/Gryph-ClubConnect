@@ -1,10 +1,12 @@
-import { useState, useEffect, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { AnimatedScreenshotPlaceholder } from './ScreenshotPlaceholder';
 
 export type WorkflowStep = {
   title: string;
   description: string;
   placeholderLabel: string;
+  imageSrc?: string;
+  imageAlt?: string;
 };
 
 type Accent = 'red' | 'gold';
@@ -43,29 +45,39 @@ export default function RotatingWorkflowShowcase({
 }: RotatingWorkflowShowcaseProps) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+
   const styles = accentStyles[accent];
   const activeStep = steps[activeIndex];
 
   useEffect(() => {
-    if (paused) return;
-    const interval = setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % steps.length);
+    if (paused || steps.length <= 1) {
+      return;
+    }
+
+    const interval = window.setInterval(() => {
+      setActiveIndex((previousIndex) => {
+        return (previousIndex + 1) % steps.length;
+      });
     }, intervalMs);
-    return () => clearInterval(interval);
+
+    return () => window.clearInterval(interval);
   }, [paused, steps.length, intervalMs]);
 
   const stepsPanel = (
     <div>
-      <ol className="space-y-0 rounded-[12px] border border-[#222222] bg-[#131313] overflow-hidden">
+      <ol className="space-y-0 overflow-hidden rounded-[12px] border border-[#222222] bg-[#131313]">
         {steps.map((step, index) => {
           const isActive = index === activeIndex;
+
           return (
             <li key={step.title}>
               <button
                 type="button"
                 onClick={() => setActiveIndex(index)}
-                className={`w-full flex gap-4 px-5 py-4 sm:px-6 sm:py-4 text-left border-l-2 transition-colors ${
-                  index < steps.length - 1 ? 'border-b border-[#222222]' : ''
+                className={`flex w-full gap-4 border-l-2 px-5 py-4 text-left transition-colors sm:px-6 sm:py-4 ${
+                  index < steps.length - 1
+                    ? 'border-b border-[#222222]'
+                    : ''
                 } ${
                   isActive
                     ? `${styles.activeBorder} ${styles.activeBg}`
@@ -73,22 +85,24 @@ export default function RotatingWorkflowShowcase({
                 }`}
               >
                 <span
-                  className={`shrink-0 w-8 text-[13px] font-semibold tabular-nums pt-0.5 ${
+                  className={`w-8 shrink-0 pt-0.5 text-[13px] font-semibold tabular-nums ${
                     isActive ? styles.stepNum : 'text-[#555555]'
                   }`}
                 >
                   {String(index + 1).padStart(2, '0')}
                 </span>
+
                 <div className="min-w-0">
                   <h3
-                    className={`font-semibold text-[15px] sm:text-base mb-1 ${
+                    className={`mb-1 text-[15px] font-semibold sm:text-base ${
                       isActive ? 'text-[#F5F5F5]' : 'text-[#9CA3AF]'
                     }`}
                   >
                     {step.title}
                   </h3>
+
                   <p
-                    className={`text-[13px] sm:text-[14px] leading-relaxed ${
+                    className={`text-[13px] leading-relaxed sm:text-[14px] ${
                       isActive ? 'text-[#9CA3AF]' : 'text-[#666666]'
                     }`}
                   >
@@ -100,21 +114,38 @@ export default function RotatingWorkflowShowcase({
           );
         })}
       </ol>
+
       {footer}
     </div>
   );
 
   const screenshotPanel = (
-    <div onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
-      <AnimatedScreenshotPlaceholder
-        label={activeStep.placeholderLabel}
-        subtitle={placeholderSubtitle}
-      />
+    <div
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
+      {activeStep.imageSrc ? (
+        <div className="overflow-hidden rounded-[12px] border border-[#222222] bg-[#131313] shadow-[0_16px_48px_rgba(0,0,0,0.4)]">
+          <img
+            key={activeStep.imageSrc}
+            src={`${import.meta.env.BASE_URL}${activeStep.imageSrc}`}
+            alt={activeStep.imageAlt ?? activeStep.placeholderLabel}
+            className="block h-auto w-full object-contain"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      ) : (
+        <AnimatedScreenshotPlaceholder
+          label={activeStep.placeholderLabel}
+          subtitle={placeholderSubtitle}
+        />
+      )}
     </div>
   );
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 xl:gap-14 items-start">
+    <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-14">
       {screenshotSide === 'left' ? (
         <>
           <div className="order-1">{screenshotPanel}</div>

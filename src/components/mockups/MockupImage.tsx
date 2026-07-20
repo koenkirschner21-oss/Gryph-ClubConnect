@@ -7,6 +7,7 @@ const SCREENSHOTS = {
   hiring: 'screenshots/hiring-management-applicant-review.png',
   members: 'screenshots/members-president-view-invites-code.png',
   heroHero: 'screenshots/clubconnect-homepage-hero.png',
+  clubHero: 'screenshots/clubconnect-club-command-center-hero.png',
 } as const;
 
 export type MockupKey = keyof typeof SCREENSHOTS;
@@ -20,6 +21,7 @@ const ALTS: Record<MockupKey, string> = {
   hiring: 'Gryph ClubConnect hiring and applicant review',
   members: 'Gryph ClubConnect members and invite code',
   heroHero: 'Gryph ClubConnect homepage hero',
+  clubHero: 'Gryph ClubConnect club command center hero',
 };
 
 export function mockupSrc(key: MockupKey): string {

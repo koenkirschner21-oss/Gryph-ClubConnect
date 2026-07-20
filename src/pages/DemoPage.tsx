@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import AnimatedSection, { StaggerContainer, StaggerItem } from '../components/ui/AnimatedSection';
 import Button from '../components/ui/Button';
-import FeatureScreenshotPlaceholder from '../components/features/FeatureScreenshotPlaceholder';
+import MockupImage from '../components/mockups/MockupImage';
 import DemoInterestForm from '../components/forms/DemoInterestForm';
 import { goToDemoForm, DEMO_FORM_ID } from '../lib/cta';
 
@@ -242,10 +242,12 @@ export default function DemoPage() {
                 Requesting a demo does not create an account or officially register your club.
               </p>
             </AnimatedSection>
-            <AnimatedSection delay={0.08}>
-              <FeatureScreenshotPlaceholder
-                label="Demo walkthrough preview"
-                subtext="Command Center, events, tasks, hiring, members, permissions, and student discovery."
+            <AnimatedSection delay={0.08} className="relative lg:-mr-10 xl:-mr-16">
+              <MockupImage
+                name="demoHero"
+                alt="Gryph ClubConnect demo walkthrough preview"
+                className="relative !overflow-visible !rounded-none !border-0 !bg-transparent !shadow-none !ring-0"
+                imgClassName="h-auto w-full scale-[1.08] object-contain lg:scale-[1.16]"
               />
             </AnimatedSection>
           </div>

@@ -16,6 +16,7 @@ import {
 import AnimatedSection, { StaggerContainer, StaggerItem } from '../components/ui/AnimatedSection';
 import Button from '../components/ui/Button';
 import FeatureScreenshotPlaceholder from '../components/features/FeatureScreenshotPlaceholder';
+import MockupImage from '../components/mockups/MockupImage';
 import ClubWorkflowSlideshow, {
   type ClubWorkflowStep,
 } from '../components/clubs/ClubWorkflowSlideshow';
@@ -387,10 +388,12 @@ export default function ForClubsPage() {
                 Student-built for UofG club life. Independent from the University of Guelph.
               </p>
             </AnimatedSection>
-            <AnimatedSection delay={0.1}>
-              <FeatureScreenshotPlaceholder
-                label="Club Command Center"
-                subtext="Command Center with pending actions, setup progress, events, tasks, hiring, join requests, quick actions, and team responsibilities."
+            <AnimatedSection delay={0.1} className="relative lg:-mr-10 xl:-mr-16">
+              <MockupImage
+                name="workspace"
+                alt="Gryph ClubConnect club command center"
+                className="relative !overflow-visible !rounded-none !border-0 !bg-transparent !shadow-none !ring-0"
+                imgClassName="h-auto w-full scale-[1.08] object-contain lg:scale-[1.16]"
               />
             </AnimatedSection>
           </div>

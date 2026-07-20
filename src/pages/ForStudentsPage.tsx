@@ -21,7 +21,6 @@ import {
 import { useEffect } from 'react';
 import AnimatedSection, { StaggerContainer, StaggerItem } from '../components/ui/AnimatedSection';
 import Button from '../components/ui/Button';
-import FeatureScreenshotPlaceholder from '../components/features/FeatureScreenshotPlaceholder';
 import MockupImage from '../components/mockups/MockupImage';
 import ClubWorkflowSlideshow, {
   type ClubWorkflowStep,

@@ -22,6 +22,7 @@ import { useEffect } from 'react';
 import AnimatedSection, { StaggerContainer, StaggerItem } from '../components/ui/AnimatedSection';
 import Button from '../components/ui/Button';
 import FeatureScreenshotPlaceholder from '../components/features/FeatureScreenshotPlaceholder';
+import MockupImage from '../components/mockups/MockupImage';
 import ClubWorkflowSlideshow, {
   type ClubWorkflowStep,
 } from '../components/clubs/ClubWorkflowSlideshow';
@@ -279,10 +280,12 @@ export default function ForStudentsPage() {
                 Student access requests do not create an account automatically.
               </p>
             </AnimatedSection>
-            <AnimatedSection delay={0.1}>
-              <FeatureScreenshotPlaceholder
-                label="Student Dashboard"
-                subtext="Student dashboard with saved clubs, upcoming events, applications, tasks, and inbox updates."
+            <AnimatedSection delay={0.1} className="relative lg:-mr-10 xl:-mr-16">
+              <MockupImage
+                name="studentHero"
+                alt="Gryph ClubConnect student dashboard and club discovery"
+                className="relative !overflow-visible !rounded-none !border-0 !bg-transparent !shadow-none !ring-0"
+                imgClassName="h-auto w-full scale-[1.08] object-contain lg:scale-[1.16]"
               />
             </AnimatedSection>
           </div>

@@ -56,7 +56,7 @@ export default function Hero() {
               className="text-[#9CA3AF] text-lg sm:text-xl max-w-[34rem]"
               style={{ lineHeight: '1.65' }}
             >
-              Gryph ClubConnect helps students discover clubs, events, and opportunities while giving club leaders one workspace for members, announcements, events, tasks, hiring, meetings, documents, analytics, and permissions.
+              Gryph ClubConnect helps students discover clubs, events, and opportunities while giving club leaders one workspace for members, announcements, events, tasks, hiring, meetings, docume[...]
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-0.5">
@@ -88,8 +88,8 @@ export default function Hero() {
             className="relative hidden sm:block lg:pl-2"
           >
             <MockupImage
-              name="dashboard"
-              alt="Gryph ClubConnect student dashboard"
+              name="heroHero"
+              alt="Gryph ClubConnect homepage hero"
               className="relative rounded-[12px] border border-[#242424] bg-[#131313] shadow-[0_20px_50px_rgba(0,0,0,0.55)] ring-1 ring-white/[0.04]"
             />
           </motion.div>

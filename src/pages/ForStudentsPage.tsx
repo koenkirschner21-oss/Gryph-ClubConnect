@@ -260,41 +260,63 @@ export default function ForStudentsPage() {
   return (
     <div className="page-transition">
       {/* Hero */}
-      <section className="relative pt-28 sm:pt-32 pb-14 sm:pb-16 overflow-hidden bg-[#0B0B0B]">
-        <div className="absolute -top-40 left-0 w-[500px] h-[500px] rounded-full bg-[#E51937] opacity-[0.04] blur-[100px] pointer-events-none" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-            <AnimatedSection>
-              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-4">
+      <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-[#0B0B0B] lg:min-h-[calc(100vh-4rem)]">
+        <div className="pointer-events-none absolute -top-40 left-0 h-[500px] w-[500px] rounded-full bg-[#E51937] opacity-[0.04] blur-[100px]" />
+
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-12 pt-20 sm:px-6 sm:pb-16 sm:pt-24 lg:px-8 lg:pt-24">
+          <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-10 xl:gap-14">
+            <AnimatedSection className="flex min-w-0 flex-col gap-4 sm:gap-5">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
                 For students
               </p>
+
               <h1
-                className="font-sans font-extrabold text-[#F5F5F5] mb-5 leading-tight"
-                style={{ fontSize: 'clamp(2.1rem, 4.5vw, 3.4rem)' }}
+                className="max-w-[38rem] font-sans font-extrabold leading-[1.04] tracking-tight text-[#F5F5F5]"
+                style={{ fontSize: 'clamp(2.2rem, 3.9vw, 3.55rem)' }}
               >
-                Find clubs, events, and roles without hunting through group chats.
+                Find clubs, events, and club hiring positions all in one place.
               </h1>
-              <p className="text-[#9CA3AF] text-base sm:text-lg max-w-xl leading-relaxed mb-7">
-                Gryph ClubConnect gives students one place to explore clubs, view public profiles, discover events, RSVP, apply for roles, follow updates, and keep track of involvement from one account.
+
+              <p
+                className="max-w-[36rem] text-lg text-[#9CA3AF] sm:text-xl"
+                style={{ lineHeight: '1.6' }}
+              >
+                Explore University of Guelph clubs, discover upcoming events,
+                apply for open positions, and keep track of your involvement
+                from one organized account.
               </p>
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-5">
-                <Button variant="red" size="lg" onClick={handleStudentAccess} className="w-full sm:w-auto">
-                  Get Student Access
+
+              <div className="flex flex-col items-stretch gap-3 pt-0.5 sm:flex-row sm:items-center">
+                <Button
+                  variant="red"
+                  size="lg"
+                  onClick={handleStudentAccess}
+                  className="w-full shadow-[0_8px_24px_rgba(229,25,55,0.22)] sm:w-auto"
+                >
+                  Request Student Access
                 </Button>
-                <Button variant="ghost" size="lg" onClick={() => navigate('/features')} className="w-full sm:w-auto">
-                  Explore Clubs
+
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  onClick={() => navigate('/features')}
+                  className="w-full sm:w-auto"
+                >
+                  Explore Features
                 </Button>
               </div>
+
               <p className="text-[13px] text-[#777777]">
                 Student access requests do not create an account automatically.
               </p>
             </AnimatedSection>
-            <AnimatedSection delay={0.1} className="relative lg:-mr-10 xl:-mr-16">
+
+            <AnimatedSection delay={0.1} className="relative min-w-0">
               <MockupImage
                 name="studentHero"
                 alt="Gryph ClubConnect student dashboard and club discovery"
                 className="relative !overflow-visible !rounded-none !border-0 !bg-transparent !shadow-none !ring-0"
-                imgClassName="h-auto w-full scale-[1.08] object-contain lg:scale-[1.16]"
+                imgClassName="mx-auto h-auto w-full max-w-[620px] object-contain lg:scale-[0.94]"
               />
             </AnimatedSection>
           </div>

@@ -194,8 +194,15 @@ export default function RotatingWorkflowShowcase({
     </div>
   );
 
+  const desktopGridClass =
+    screenshotSide === 'left'
+      ? 'lg:grid-cols-[1.18fr_0.82fr] xl:grid-cols-[1.22fr_0.78fr]'
+      : 'lg:grid-cols-[0.82fr_1.18fr] xl:grid-cols-[0.78fr_1.22fr]';
+
   return (
-    <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:gap-10 xl:grid-cols-[0.78fr_1.22fr] xl:gap-12">
+    <div
+      className={`grid grid-cols-1 items-start gap-8 lg:gap-10 xl:gap-12 ${desktopGridClass}`}
+    >
       {screenshotSide === 'left' ? (
         <>
           <div className="order-1">{screenshotPanel}</div>

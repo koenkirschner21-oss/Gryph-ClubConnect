@@ -1,13 +1,20 @@
 import { motion } from 'framer-motion';
+import { Check } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import Button from '../ui/Button';
 import MockupImage from '../mockups/MockupImage';
 import { goToDemoForm } from '../../lib/cta';
 
+const trustPoints = [
+  'Student-built',
+  'Designed for UofG club life',
+  'Early club onboarding open',
+];
+
 export default function Hero() {
   const navigate = useNavigate();
 
-  const handleOnboard = () => {
+  const handleGetStarted = () => {
     goToDemoForm({
       interest: 'Onboard my club',
       navigate,
@@ -47,7 +54,7 @@ export default function Hero() {
             }}
             className="flex flex-col gap-4 sm:gap-5"
           >
-            <div className="flex items-center gap-2.5">
+            <div className="flex flex-wrap items-center gap-2.5">
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FFC429] sm:text-xs">
                 Early access
               </span>
@@ -58,14 +65,14 @@ export default function Hero() {
               />
 
               <p className="text-[13px] leading-snug text-[#9CA3AF]">
-                Early access onboarding is open for UofG clubs.
+                Early access onboarding is open for University of Guelph clubs.
               </p>
             </div>
 
             <h1
               className="font-sans font-extrabold leading-[1.05] tracking-tight"
               style={{
-                fontSize: 'clamp(2.35rem, 5.2vw, 4rem)',
+                fontSize: 'clamp(2.25rem, 4.6vw, 3.55rem)',
               }}
             >
               <span className="block text-[#F5F5F5]">
@@ -78,25 +85,24 @@ export default function Hero() {
             </h1>
 
             <p
-              className="max-w-[34rem] text-lg text-[#9CA3AF] sm:text-xl"
+              className="max-w-[36rem] text-lg text-[#9CA3AF] sm:text-xl"
               style={{
-                lineHeight: '1.65',
+                lineHeight: '1.6',
               }}
             >
               Gryph ClubConnect helps students discover clubs, events, and
-              opportunities while giving club leaders one workspace for
-              members, announcements, events, tasks, hiring, meetings, and
-              documents.
+              opportunities while giving club leaders one organized workspace
+              to manage their team and operations.
             </p>
 
             <div className="flex flex-col items-stretch gap-3 pt-0.5 sm:flex-row sm:items-center">
               <Button
                 variant="red"
                 size="lg"
-                onClick={handleOnboard}
+                onClick={handleGetStarted}
                 className="w-full shadow-[0_8px_24px_rgba(229,25,55,0.22)] sm:w-auto"
               >
-                Onboard Your Club
+                Get Your Club Started
               </Button>
 
               <Button
@@ -110,12 +116,24 @@ export default function Hero() {
             </div>
 
             <div className="pt-0.5">
-              <div className="h-px w-full max-w-md bg-[#222222]" />
+              <div className="h-px w-full max-w-xl bg-[#222222]" />
 
-              <p className="mt-2.5 text-[12px] font-medium tracking-tight text-[#9CA3AF] sm:text-[13px]">
-                Student-built · Built for UofG club life · Early club
-                onboarding now open
-              </p>
+              <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
+                {trustPoints.map((point) => (
+                  <div
+                    key={point}
+                    className="flex items-center gap-1.5 text-[12px] font-medium text-[#9CA3AF] sm:text-[13px]"
+                  >
+                    <Check
+                      size={14}
+                      strokeWidth={2}
+                      className="shrink-0 text-[#E51937]"
+                      aria-hidden
+                    />
+                    <span>{point}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </motion.div>
 
@@ -131,9 +149,9 @@ export default function Hero() {
           >
             <MockupImage
               name="heroHero"
-              alt="Gryph ClubConnect homepage hero"
+              alt="Gryph ClubConnect dashboard on a laptop with the mobile club discovery experience beside it"
               className="relative !overflow-visible !rounded-none !border-0 !bg-transparent !shadow-none !ring-0"
-              imgClassName="h-auto w-full scale-[1.12] object-contain lg:scale-[1.20]"
+              imgClassName="h-auto w-full scale-[1.08] object-contain lg:scale-[1.15]"
             />
           </motion.div>
         </div>

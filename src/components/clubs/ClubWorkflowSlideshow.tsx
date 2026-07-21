@@ -7,6 +7,8 @@ export type ClubWorkflowStep = {
   description: string;
   placeholderLabel: string;
   placeholderSubtext: string;
+  imageSrc?: string;
+  imageAlt?: string;
 };
 
 type Accent = 'red' | 'gold';
@@ -49,23 +51,27 @@ export default function ClubWorkflowSlideshow({
   }, [steps.length]);
 
   useEffect(() => {
-    if (paused) return;
-    const interval = setInterval(advance, intervalMs);
-    return () => clearInterval(interval);
-  }, [paused, advance, intervalMs, activeIndex]);
+    if (paused || steps.length <= 1) return;
+
+    const interval = window.setInterval(advance, intervalMs);
+    return () => window.clearInterval(interval);
+  }, [paused, advance, intervalMs, activeIndex, steps.length]);
 
   const stepsPanel = (
     <div>
-      <ol className="space-y-0 rounded-[12px] border border-white/[0.08] bg-[#131313] overflow-hidden">
+      <ol className="space-y-0 overflow-hidden rounded-[12px] border border-white/[0.08] bg-[#131313]">
         {steps.map((step, index) => {
           const isActive = index === activeIndex;
+
           return (
             <li key={step.title}>
               <button
                 type="button"
                 onClick={() => setActiveIndex(index)}
-                className={`w-full flex gap-4 px-5 py-4 text-left border-l-2 transition-colors cursor-pointer ${
-                  index < steps.length - 1 ? 'border-b border-white/[0.08]' : ''
+                className={`flex w-full cursor-pointer gap-4 border-l-2 px-5 py-4 text-left transition-colors ${
+                  index < steps.length - 1
+                    ? 'border-b border-white/[0.08]'
+                    : ''
                 } ${
                   isActive
                     ? `${styles.activeBorder} ${styles.activeBg}`
@@ -73,20 +79,22 @@ export default function ClubWorkflowSlideshow({
                 }`}
               >
                 <span
-                  className={`shrink-0 w-8 text-[13px] font-semibold tabular-nums pt-0.5 ${
+                  className={`w-8 shrink-0 pt-0.5 text-[13px] font-semibold tabular-nums ${
                     isActive ? styles.stepNum : 'text-[#555555]'
                   }`}
                 >
                   {String(index + 1).padStart(2, '0')}
                 </span>
+
                 <div className="min-w-0">
                   <h3
-                    className={`font-semibold text-[15px] mb-1 ${
+                    className={`mb-1 text-[15px] font-semibold ${
                       isActive ? 'text-[#F5F5F5]' : 'text-[#9CA3AF]'
                     }`}
                   >
                     {step.title}
                   </h3>
+
                   <p
                     className={`text-[13px] leading-relaxed ${
                       isActive ? 'text-[#9CA3AF]' : 'text-[#666666]'
@@ -100,31 +108,45 @@ export default function ClubWorkflowSlideshow({
           );
         })}
       </ol>
+
       {footer}
     </div>
   );
 
   const screenshotPanel = (
-    <div onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+    <div
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+    >
       <AnimatePresence mode="wait">
         <motion.div
-          key={active.placeholderLabel}
+          key={active.imageSrc ?? active.placeholderLabel}
           initial={{ opacity: 0, y: 6 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -6 }}
           transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
         >
-          <FeatureScreenshotPlaceholder
-            label={active.placeholderLabel}
-            subtext={active.placeholderSubtext}
-          />
+          {active.imageSrc ? (
+            <img
+              src={`${import.meta.env.BASE_URL}${active.imageSrc}`}
+              alt={active.imageAlt ?? active.placeholderLabel}
+              className="block h-auto w-full rounded-[12px] border border-white/[0.08] bg-[#131313] object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <FeatureScreenshotPlaceholder
+              label={active.placeholderLabel}
+              subtext={active.placeholderSubtext}
+            />
+          )}
         </motion.div>
       </AnimatePresence>
     </div>
   );
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
+    <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-12">
       {screenshotSide === 'left' ? (
         <>
           <div className="order-1">{screenshotPanel}</div>

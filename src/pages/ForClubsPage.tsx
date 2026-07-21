@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import {
@@ -11,6 +12,8 @@ import {
   BarChart3,
   Shield,
   Network,
+  MessagesSquare,
+  Workflow,
   type LucideIcon,
 } from 'lucide-react';
 import AnimatedSection, { StaggerContainer, StaggerItem } from '../components/ui/AnimatedSection';
@@ -25,22 +28,25 @@ import {
 
 const problemCards = [
   {
-    title: 'Scattered updates',
-    body: 'Announcements, reminders, and decisions get buried in group chats.',
+    title: 'Scattered communication',
+    body: 'Announcements, reminders, and decisions get buried across chats and social platforms.',
+    icon: MessagesSquare,
     accent: 'red' as const,
     hover:
       'hover:border-[#E51937]/45 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(229,25,55,0.1)]',
   },
   {
     title: 'Unclear ownership',
-    body: 'Exec teams lose track of who owns what, what is overdue, what still needs review, and who is responsible.',
+    body: 'Teams lose track of who owns each task, what is overdue, and what still needs review.',
+    icon: UserCheck,
     accent: 'gold' as const,
     hover:
       'hover:border-[#FFC429]/40 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(255,196,41,0.08)]',
   },
   {
     title: 'Disconnected workflows',
-    body: 'Events, RSVP answers, hiring, meetings, documents, member records, and follow-ups end up living in separate tools.',
+    body: 'Events, applications, meetings, documents, and member records live in separate tools.',
+    icon: Workflow,
     accent: 'neutral' as const,
     hover:
       'hover:border-white/[0.16] hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(0,0,0,0.3)]',
@@ -48,13 +54,11 @@ const problemCards = [
 ];
 
 const commandCenterPoints = [
-  'Setup checklist and workspace progress',
-  'Pending join requests and applications',
+  'Setup progress and pending approvals',
   'Upcoming events and meetings',
-  'Overdue tasks and tasks needing review',
-  'Low RSVPs or event attention items',
-  'Quick actions for announcements, events, tasks, and hiring',
-  'Visibility into what the exec team needs to handle next',
+  'Tasks, deadlines, and work awaiting review',
+  'Applications, RSVPs, and member actions',
+  'Quick access to the workflows your team uses most',
 ];
 
 const accessLevels = [
@@ -65,43 +69,65 @@ const accessLevels = [
   },
   {
     title: 'Managerial Executive',
-    body: 'Elevated access for overseeing teams, workflows, members, hiring, events, or operations.',
+    body: 'Oversee teams and manage higher-level workflows across members, hiring, events, and operations.',
     tone: 'gold' as const,
   },
   {
     title: 'Executive',
-    body: 'Workflow-level access for responsibilities like events, announcements, tasks, meetings, documents, or hiring review.',
+    body: 'Manage the workflows connected to a specific executive responsibility.',
     tone: 'neutral' as const,
   },
   {
     title: 'General Member',
-    body: 'Member-level access to view appropriate updates, RSVP, complete assigned tasks, and stay involved.',
+    body: 'View relevant updates, RSVP for events, complete assigned tasks, and stay involved.',
     tone: 'muted' as const,
   },
 ];
 
-const execWorkflows: {
-  icon: LucideIcon;
-  title: string;
+const execWorkflowGroups: {
+  label: string;
   description: string;
-  accent: 'red' | 'gold' | 'neutral';
+  items: {
+    icon: LucideIcon;
+    title: string;
+    description: string;
+    accent: 'red' | 'gold' | 'neutral';
+  }[];
 }[] = [
-  { icon: Megaphone, title: 'Announcements', description: 'Post important updates members can find later.', accent: 'red' },
-  { icon: CalendarPlus, title: 'Events & RSVPs', description: 'Create events, collect sign-up answers, and track who is coming.', accent: 'gold' },
-  { icon: ListTodo, title: 'Event planning tasks', description: 'Connect planning work directly to the event it supports.', accent: 'gold' },
-  { icon: CheckSquare, title: 'Tasks & review', description: 'Assign work, set due dates, track status, and review completion.', accent: 'red' },
-  { icon: NotebookPen, title: 'Meetings & notes', description: 'Prepare agendas, capture decisions, and assign follow-ups.', accent: 'gold' },
-  { icon: Network, title: 'Members, roles, and reporting', description: 'Promote members, assign titles, set reporting lines, and keep club structure clear.', accent: 'red' },
-  { icon: UserCheck, title: 'Hiring pipeline', description: 'Post open roles, review applicants, and move candidates through statuses.', accent: 'gold' },
-  { icon: FolderOpen, title: 'Documents & resources', description: 'Keep files, links, forms, and resources organized by visibility.', accent: 'neutral' },
-  { icon: BarChart3, title: 'Analytics', description: 'Track member growth, events, tasks, announcements, hiring, and profile activity.', accent: 'gold' },
-  { icon: Shield, title: 'Permissions', description: 'Control who can manage events, hiring, members, settings, chat, documents, and club content.', accent: 'red' },
+  {
+    label: 'Communicate',
+    description: 'Keep information, decisions, and resources easy to find.',
+    items: [
+      { icon: Megaphone, title: 'Announcements', description: 'Post important updates members can find later.', accent: 'red' },
+      { icon: NotebookPen, title: 'Meetings & notes', description: 'Prepare agendas, capture decisions, and assign follow-ups.', accent: 'gold' },
+      { icon: FolderOpen, title: 'Documents & resources', description: 'Organize files, links, forms, and resources by visibility.', accent: 'neutral' },
+    ],
+  },
+  {
+    label: 'Coordinate',
+    description: 'Connect people, responsibilities, and day-to-day club work.',
+    items: [
+      { icon: CalendarPlus, title: 'Events & RSVPs', description: 'Create events, collect sign-up answers, and manage attendees.', accent: 'gold' },
+      { icon: ListTodo, title: 'Planning tasks', description: 'Connect planning work directly to the event it supports.', accent: 'gold' },
+      { icon: CheckSquare, title: 'Tasks & review', description: 'Assign work, track status, and review completion.', accent: 'red' },
+      { icon: Network, title: 'Members, roles & reporting', description: 'Assign titles, access, teams, and reporting relationships.', accent: 'red' },
+    ],
+  },
+  {
+    label: 'Manage and improve',
+    description: 'Support club growth, leadership, and better decisions.',
+    items: [
+      { icon: UserCheck, title: 'Hiring pipeline', description: 'Post positions, review applicants, and manage candidate statuses.', accent: 'gold' },
+      { icon: BarChart3, title: 'Analytics', description: 'Review activity across members, events, tasks, hiring, and engagement.', accent: 'gold' },
+      { icon: Shield, title: 'Permissions', description: 'Control who can view and manage each club workflow.', accent: 'red' },
+    ],
+  },
 ];
 
 const eventSteps: ClubWorkflowStep[] = [
   {
     title: 'Create the event',
-    description: 'Set event details, visibility, location, date, and event information.',
+    description: 'Set the date, location, visibility, details, and RSVP settings.',
     placeholderLabel: 'Create Event',
     placeholderSubtext: 'Event creation flow with event details, date, location, visibility, and description.',
     imageSrc: 'screenshots/for-clubs-events-create-event.png',
@@ -116,16 +142,16 @@ const eventSteps: ClubWorkflowStep[] = [
     imageAlt: 'Gryph ClubConnect RSVP questions screen',
   },
   {
-    title: 'Review attendees',
-    description: 'View who is coming and review RSVP answers.',
+    title: 'Manage attendees',
+    description: 'Review attendance, RSVP answers, and response status.',
     placeholderLabel: 'RSVP Answers',
     placeholderSubtext: 'Attendee list with RSVP responses, answers, and event status.',
     imageSrc: 'screenshots/for-clubs-events-review-attendees.png',
     imageAlt: 'Gryph ClubConnect event attendee and RSVP response screen',
   },
   {
-    title: 'Assign planning tasks',
-    description: 'Create event-linked tasks so planning work stays connected.',
+    title: 'Connect planning tasks',
+    description: 'Keep event preparation linked to the event it supports.',
     placeholderLabel: 'Event-Linked Tasks',
     placeholderSubtext: 'Tasks connected to an event with owners, due dates, and review status.',
     imageSrc: 'screenshots/for-clubs-events-planning-tasks.png',
@@ -135,8 +161,8 @@ const eventSteps: ClubWorkflowStep[] = [
 
 const taskSteps: ClubWorkflowStep[] = [
   {
-    title: 'Create a task',
-    description: 'Add title, description, owner, due date, and priority.',
+    title: 'Create and assign tasks',
+    description: 'Add the task details, owner, due date, priority, and context.',
     placeholderLabel: 'Create Task',
     placeholderSubtext: 'Task creation with owner, due date, priority, and linked context.',
     imageSrc: 'screenshots/for-clubs-tasks-create-task.png',
@@ -151,15 +177,15 @@ const taskSteps: ClubWorkflowStep[] = [
     imageAlt: 'Gryph ClubConnect task progress screen',
   },
   {
-    title: 'Review work',
+    title: 'Review completed work',
     description: 'Send work back, approve completion, or leave comments.',
     placeholderLabel: 'Task Review',
-    placeholderSubtext: 'Review workflow with comments, send-back states, and completion controls.',
+    placeholderSubtext: 'Review completed workflow with comments, send-back states, and completion controls.',
     imageSrc: 'screenshots/for-clubs-tasks-review-work.png',
     imageAlt: 'Gryph ClubConnect task review screen',
   },
   {
-    title: 'Connect work to events',
+    title: 'Connect tasks to events',
     description: 'Keep event planning tasks tied to the event they support.',
     placeholderLabel: 'Event Task Context',
     placeholderSubtext: 'Event-linked task view showing planning work connected to a specific event.',
@@ -170,7 +196,7 @@ const taskSteps: ClubWorkflowStep[] = [
 
 const meetingSteps: ClubWorkflowStep[] = [
   {
-    title: 'Schedule the meeting',
+    title: 'Schedule a meeting',
     description: 'Create a meeting with date, time, location, visibility, and attendees.',
     placeholderLabel: 'Meeting Setup',
     placeholderSubtext: 'Meeting setup with date, location, attendees, and visibility.',
@@ -194,8 +220,8 @@ const meetingSteps: ClubWorkflowStep[] = [
     imageAlt: 'Gryph ClubConnect meeting notes and decisions screen',
   },
   {
-    title: 'Assign follow-ups',
-    description: 'Turn meeting outcomes into tasks with owners and due dates.',
+    title: 'Assign follow-up actions',
+    description: 'Turn meeting outcomes into assigned actions with owners and due dates.',
     placeholderLabel: 'Meeting Follow-Ups',
     placeholderSubtext: 'Follow-up tasks created from meeting notes and assigned to owners.',
     imageSrc: 'screenshots/for-clubs-meetings-follow-ups.png',
@@ -205,8 +231,8 @@ const meetingSteps: ClubWorkflowStep[] = [
 
 const hiringSteps: ClubWorkflowStep[] = [
   {
-    title: 'Post the role',
-    description: 'Create an open role with responsibilities, requirements, and application details.',
+    title: 'Post an open position',
+    description: 'Publish a position with responsibilities, requirements, and application details.',
     placeholderLabel: 'Create Role',
     placeholderSubtext: 'Role posting setup with title, description, requirements, and application questions.',
     imageSrc: 'screenshots/for-clubs-hiring-post-role.png',
@@ -229,46 +255,72 @@ const hiringSteps: ClubWorkflowStep[] = [
     imageAlt: 'Gryph ClubConnect applicant review screen',
   },
   {
-    title: 'Move through statuses',
+    title: 'Manage application statuses',
     description: 'Track candidates across Pending, Reviewed, Interview, Accepted, and Rejected.',
     placeholderLabel: 'Hiring Pipeline',
     placeholderSubtext: 'Candidate pipeline with statuses and application progress.',
   },
 ];
 
-const memberLifecycle = [
-  { title: 'Join request', description: 'A student asks to join or is invited.' },
-  { title: 'Member', description: 'They participate, RSVP, view updates, and complete assigned tasks.' },
-  { title: 'Executive role', description: 'They can be promoted into a role with a custom title and workflow access.' },
-  { title: 'Reporting structure', description: 'They can be assigned to a team, manager, or reporting line.' },
-  { title: 'Leadership transition', description: 'Access can be updated when responsibilities change.' },
-];
-
-const memberPoints = [
-  'Promote members into executive or managerial roles',
-  'Assign custom titles',
-  'Assign who someone reports to',
-  'Manage join requests and invite codes',
-  'Update access levels as leadership changes',
-  'Control who can manage events, hiring, members, settings, chat, documents, and announcements',
+const memberSteps: ClubWorkflowStep[] = [
+  {
+    title: 'Manage join requests',
+    description: 'Review requests, invitations, and invite-code activity.',
+    placeholderLabel: 'Join Requests',
+    placeholderSubtext: 'Pending requests, invitations, and invite-code activity.',
+  },
+  {
+    title: 'Organize members',
+    description: 'View active members, executives, and pending invitations.',
+    placeholderLabel: 'Members Overview',
+    placeholderSubtext: 'Member directory with roles, status, and invitations.',
+    imageSrc: 'screenshots/for-clubs-members-executive-role.png',
+    imageAlt: 'Gryph ClubConnect members and executive roles screen',
+  },
+  {
+    title: 'Assign roles and titles',
+    description: 'Promote members and give them custom leadership titles.',
+    placeholderLabel: 'Roles and Titles',
+    placeholderSubtext: 'Role assignment with custom titles and access levels.',
+  },
+  {
+    title: 'Build reporting structure',
+    description: 'Assign teams, managers, and reporting relationships.',
+    placeholderLabel: 'Reporting Structure',
+    placeholderSubtext: 'Organization structure with teams and reporting relationships.',
+  },
+  {
+    title: 'Manage leadership transitions',
+    description: 'Update ownership, responsibilities, and access as roles change.',
+    placeholderLabel: 'Leadership Transition',
+    placeholderSubtext: 'Ownership transfer and access updates during leadership turnover.',
+  },
 ];
 
 const analyticsPoints = [
   'Member growth',
-  'Event and RSVP trends',
+  'Event and RSVP activity',
   'Task completion',
-  'Announcement engagement',
-  'Hiring funnel',
-  'Profile views / interest signals',
+  'Hiring progress',
+  'Public profile engagement',
 ];
 
-const beforeAfter = [
-  { before: 'Group chats', after: 'Announcements, chat, tasks, and decisions in one workspace' },
-  { before: 'Google Forms', after: 'RSVPs, join requests, and applications inside the platform' },
-  { before: 'Spreadsheets', after: 'Members, roles, reporting, tasks, hiring, and event context in one place' },
-  { before: 'Shared drives', after: 'Documents and links organized by category and visibility' },
-  { before: 'Random meeting notes', after: 'Agendas, decisions, recaps, and follow-up tasks' },
-  { before: 'One shared admin login', after: 'Role-based access for presidents, executives, and members' },
+const beforeTools = [
+  'Group chats',
+  'Separate forms',
+  'Spreadsheets',
+  'Shared drives',
+  'Loose meeting notes',
+  'Shared admin accounts',
+];
+
+const connectedTools = [
+  'Connected communication and tasks',
+  'Built-in RSVPs, join requests, and applications',
+  'Organized members, roles, and reporting',
+  'Documents grouped by category and visibility',
+  'Meetings connected to decisions and follow-ups',
+  'Role-based access for every team member',
 ];
 
 const accentBar = {
@@ -277,12 +329,6 @@ const accentBar = {
   neutral: 'bg-[rgba(255,255,255,0.22)]',
 };
 
-const accessTone = {
-  red: 'border-[#E51937]/30 bg-[rgba(229,25,55,0.08)]',
-  gold: 'border-[#FFC429]/30 bg-[rgba(255,196,41,0.08)]',
-  neutral: 'border-white/[0.1] bg-[#131313]',
-  muted: 'border-white/[0.08] bg-[#0B0B0B]',
-};
 
 const workflowIconAccent = {
   red: 'bg-[rgba(229,25,55,0.12)] border-[#E51937]/25 text-[#E51937]',
@@ -363,6 +409,7 @@ function WorkflowSection({
             steps={steps}
             accent={accent}
             screenshotSide={screenshotSide}
+            intervalMs={7000}
             footer={<TextCta label={ctaLabel} onClick={onCta} />}
           />
         </AnimatedSection>
@@ -373,6 +420,7 @@ function WorkflowSection({
 
 export default function ForClubsPage() {
   const navigate = useNavigate();
+  const [activeAccessLevel, setActiveAccessLevel] = useState(0);
 
   const handleOnboard = () => {
     goToDemoForm({ interest: 'Onboard my club', navigate, pathname: '/for-clubs' });
@@ -384,45 +432,52 @@ export default function ForClubsPage() {
 
   return (
     <div className="page-transition">
-      {/* 1. Hero — keep mostly as-is */}
-      <section className="relative pt-28 sm:pt-32 pb-14 sm:pb-16 overflow-hidden bg-[#0B0B0B]">
-        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#E51937] opacity-[0.04] blur-[100px] pointer-events-none" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-            <AnimatedSection>
-              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#FFC429] mb-4">
+      {/* 1. Hero */}
+      <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-[#0B0B0B] lg:min-h-[calc(100vh-4rem)]">
+        <div className="pointer-events-none absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-[#E51937] opacity-[0.04] blur-[100px]" />
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-12 pt-20 sm:px-6 sm:pb-16 sm:pt-24 lg:px-8 lg:pt-24">
+          <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-10 xl:gap-14">
+            <AnimatedSection className="flex min-w-0 flex-col gap-4 sm:gap-5">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FFC429] sm:text-xs">
                 For clubs
               </p>
               <h1
-                className="font-sans font-extrabold text-[#F5F5F5] mb-3 leading-tight"
-                style={{ fontSize: 'clamp(2.1rem, 4.5vw, 3.5rem)' }}
+                className="max-w-[38rem] font-sans font-extrabold leading-[1.04] tracking-tight text-[#F5F5F5]"
+                style={{ fontSize: 'clamp(2.2rem, 3.9vw, 3.55rem)' }}
               >
-                Run your club from one workspace.
+                Run your club from one organized workspace.
               </h1>
-              <p className="text-[#9CA3AF] text-lg sm:text-xl mb-5 leading-snug">
-                without chasing group chats, forms, spreadsheets, and shared drives.
+              <p
+                className="max-w-[38rem] text-lg text-[#9CA3AF] sm:text-xl"
+                style={{ lineHeight: '1.6' }}
+              >
+                Manage events, members, tasks, meetings, hiring, documents,
+                announcements, permissions, and reporting from one connected
+                club workspace.
               </p>
-              <p className="text-[#9CA3AF] text-base max-w-xl leading-relaxed mb-7">
-                Gryph ClubConnect gives presidents, executives, and club teams one place to manage events, RSVPs, tasks, meetings, announcements, members, hiring, documents, analytics, setup, roles, reporting, and permissions.
-              </p>
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-5">
-                <Button variant="red" size="lg" onClick={handleOnboard} className="w-full sm:w-auto">
-                  Onboard Your Club
+              <div className="flex flex-col items-stretch gap-3 pt-0.5 sm:flex-row sm:items-center">
+                <Button
+                  variant="red"
+                  size="lg"
+                  onClick={handleOnboard}
+                  className="w-full shadow-[0_8px_24px_rgba(229,25,55,0.22)] sm:w-auto"
+                >
+                  Get Your Club Started
                 </Button>
                 <Button variant="ghost" size="lg" onClick={handleDemo} className="w-full sm:w-auto">
                   Request a Demo
                 </Button>
               </div>
               <p className="text-[13px] text-[#777777]">
-                Student-built for UofG club life. Independent from the University of Guelph.
+                Student-built for University of Guelph club teams. Independent from the University of Guelph.
               </p>
             </AnimatedSection>
-            <AnimatedSection delay={0.1} className="relative lg:-mr-10 xl:-mr-16">
+            <AnimatedSection delay={0.1} className="relative min-w-0">
               <MockupImage
                 name="workspace"
                 alt="Gryph ClubConnect club command center"
                 className="relative !overflow-visible !rounded-none !border-0 !bg-transparent !shadow-none !ring-0"
-                imgClassName="h-auto w-full scale-[1.08] object-contain lg:scale-[1.16]"
+                imgClassName="mx-auto h-auto w-full max-w-[680px] object-contain lg:scale-[0.94]"
               />
             </AnimatedSection>
           </div>
@@ -434,27 +489,33 @@ export default function ForClubsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-10 sm:mb-12 max-w-3xl">
             <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
-              The club ops problem
+              The challenge
             </p>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-4">
-              Club work gets scattered fast.
+              Club operations get scattered quickly.
             </h2>
             <p className="text-[#9CA3AF] text-base leading-relaxed">
-              Most clubs run across group chats, Google Forms, spreadsheets, shared drives, meeting notes, Instagram posts, and last-minute messages. Gryph ClubConnect brings the operational work into one workspace.
+              Most clubs run across group chats, Google Forms, spreadsheets, shared drives, meeting notes, Instagram posts, and last-minute messages. That makes it harder to keep responsibilities clear and workflows connected.
             </p>
           </AnimatedSection>
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-5" staggerDelay={0.08}>
-            {problemCards.map((card) => (
-              <StaggerItem key={card.title}>
-                <div
-                  className={`relative flex h-full flex-col overflow-hidden rounded-[12px] border border-white/[0.08] bg-[#131313] p-6 transition-all duration-200 ${card.hover}`}
-                >
-                  <span className={`absolute inset-x-0 top-0 h-[2px] ${accentBar[card.accent]}`} aria-hidden />
-                  <h3 className="text-lg font-bold text-[#F5F5F5] font-sans mb-2">{card.title}</h3>
-                  <p className="text-[#9CA3AF] text-sm leading-relaxed">{card.body}</p>
-                </div>
-              </StaggerItem>
-            ))}
+            {problemCards.map((card) => {
+              const Icon = card.icon;
+              return (
+                <StaggerItem key={card.title}>
+                  <div
+                    className={`relative flex h-full flex-col overflow-hidden rounded-[12px] border border-white/[0.08] bg-[#131313] p-6 transition-all duration-200 ${card.hover}`}
+                  >
+                    <span className={`absolute inset-x-0 top-0 h-[2px] ${accentBar[card.accent]}`} aria-hidden />
+                    <div className={`mb-4 flex h-10 w-10 items-center justify-center rounded-[9px] border ${workflowIconAccent[card.accent]}`}>
+                      <Icon size={18} />
+                    </div>
+                    <h3 className="text-lg font-bold text-[#F5F5F5] font-sans mb-2">{card.title}</h3>
+                    <p className="text-[#9CA3AF] text-sm leading-relaxed">{card.body}</p>
+                  </div>
+                </StaggerItem>
+              );
+            })}
           </StaggerContainer>
         </div>
       </section>
@@ -468,19 +529,19 @@ export default function ForClubsPage() {
                 Command Center
               </p>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-4 leading-tight">
-                Start every club workflow from one overview.
+                See what needs attention across your club.
               </h2>
               <p className="text-[#9CA3AF] text-base leading-relaxed mb-6">
-                The Command Center helps presidents and execs see what needs attention across setup, join requests, events, tasks, applications, meetings, and quick actions.
+                Give presidents and executives one overview for upcoming activity, pending decisions, assigned work, and the actions their team needs to handle next.
               </p>
               <FeatureList items={commandCenterPoints} />
-              <TextCta label="Request a demo of the club workspace" onClick={handleDemo} />
+              <TextCta label="See the Club Command Center" onClick={handleDemo} />
             </AnimatedSection>
             <AnimatedSection delay={0.08}>
               <img
                 src={`${import.meta.env.BASE_URL}screenshots/for-clubs-command-center-overview.png`}
                 alt="Gryph ClubConnect Command Center overview"
-                className="block h-auto w-full rounded-[12px] border border-white/[0.08] bg-[#131313] object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
+                className="block h-auto w-full rounded-[14px] border border-white/[0.08] bg-[#0B0B0B] p-3 object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)] sm:p-4"
                 loading="lazy"
                 decoding="async"
               />
@@ -498,16 +559,11 @@ export default function ForClubsPage() {
                 Access levels
               </p>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-4 leading-tight">
-                Give every role the right level of control.
+                Give every club role the right level of access.
               </h2>
               <p className="text-[#9CA3AF] text-base leading-relaxed mb-5">
-                Not every exec needs full admin access. Gryph ClubConnect helps clubs give presidents, managerial executives, executives, and general members the right permissions for the work they actually own.
+                Assign permissions based on responsibility so presidents, managerial executives, executives, and general members only see and manage the workflows relevant to them.
               </p>
-              <div className="rounded-[10px] border border-white/[0.08] bg-[#131313] px-4 py-3.5 mb-5">
-                <p className="text-[13px] text-[#F5F5F5] leading-relaxed">
-                  Promote members, assign titles, set reporting lines, and update access when leadership changes.
-                </p>
-              </div>
               <TextCta label="Talk through access levels" onClick={handleDemo} />
             </AnimatedSection>
             <AnimatedSection delay={0.08}>
@@ -521,16 +577,35 @@ export default function ForClubsPage() {
             </AnimatedSection>
           </div>
           <AnimatedSection>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
-              {accessLevels.map((level) => (
-                <div
-                  key={level.title}
-                  className={`rounded-[10px] border p-4 h-full ${accessTone[level.tone]}`}
-                >
-                  <h3 className="text-sm font-semibold text-[#F5F5F5] mb-2">{level.title}</h3>
-                  <p className="text-[12px] text-[#9CA3AF] leading-relaxed">{level.body}</p>
-                </div>
-              ))}
+            <div className="mx-auto max-w-4xl overflow-hidden rounded-[12px] border border-white/[0.08] bg-[#131313]">
+              {accessLevels.map((level, index) => {
+                const active = activeAccessLevel === index;
+                return (
+                  <div
+                    key={level.title}
+                    className={index < accessLevels.length - 1 ? 'border-b border-white/[0.08]' : ''}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setActiveAccessLevel(index)}
+                      className={`flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors ${
+                        active ? 'bg-[rgba(229,25,55,0.08)]' : 'hover:bg-white/[0.025]'
+                      }`}
+                      aria-expanded={active}
+                    >
+                      <span className="text-sm font-semibold text-[#F5F5F5]">{level.title}</span>
+                      <span className={`text-lg ${active ? 'text-[#E51937]' : 'text-[#777777]'}`}>
+                        {active ? '−' : '+'}
+                      </span>
+                    </button>
+                    {active && (
+                      <div className="border-t border-white/[0.06] px-5 py-4">
+                        <p className="text-sm leading-relaxed text-[#9CA3AF]">{level.body}</p>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </AnimatedSection>
         </div>
@@ -544,30 +619,38 @@ export default function ForClubsPage() {
               Exec workflows
             </p>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
-              Tools for the team running the club.
+              Give every executive a clear place to manage their responsibilities.
             </h2>
             <p className="text-[#9CA3AF] text-base leading-relaxed">
-              Give each executive a clearer way to own their part of club operations.
+              Organize the workflows your club uses most and give each executive the tools they need for their part of club operations.
             </p>
           </AnimatedSection>
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3" staggerDelay={0.04}>
-            {execWorkflows.map((w) => {
-              const Icon = w.icon;
-              return (
-                <StaggerItem key={w.title}>
-                  <div className="rounded-[10px] border border-white/[0.08] bg-[#131313] p-4 h-full transition-all duration-200 hover:border-white/[0.14] hover:bg-[#161616] hover:-translate-y-0.5">
-                    <div
-                      className={`w-8 h-8 rounded-[8px] border flex items-center justify-center mb-3 ${workflowIconAccent[w.accent]}`}
-                    >
-                      <Icon size={15} />
-                    </div>
-                    <h3 className="text-[#F5F5F5] font-semibold text-sm mb-1">{w.title}</h3>
-                    <p className="text-[#9CA3AF] text-[12px] leading-relaxed">{w.description}</p>
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-3">
+            {execWorkflowGroups.map((group) => (
+              <AnimatedSection key={group.label}>
+                <div className="h-full rounded-[14px] border border-white/[0.08] bg-[#131313] p-5 sm:p-6">
+                  <h3 className="mb-2 text-lg font-bold text-[#F5F5F5]">{group.label}</h3>
+                  <p className="mb-5 text-sm leading-relaxed text-[#9CA3AF]">{group.description}</p>
+                  <div className="space-y-4">
+                    {group.items.map((item) => {
+                      const Icon = item.icon;
+                      return (
+                        <div key={item.title} className="flex gap-3">
+                          <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-[8px] border ${workflowIconAccent[item.accent]}`}>
+                            <Icon size={15} />
+                          </div>
+                          <div>
+                            <p className="mb-1 text-sm font-semibold text-[#F5F5F5]">{item.title}</p>
+                            <p className="text-[12px] leading-relaxed text-[#9CA3AF]">{item.description}</p>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
-                </StaggerItem>
-              );
-            })}
-          </StaggerContainer>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -575,103 +658,65 @@ export default function ForClubsPage() {
       <WorkflowSection
         eyebrow="Event management"
         eyebrowColor="text-[#E51937]"
-        title="Run events from planning to follow-up."
-        body="Create events, collect RSVPs, review sign-up answers, manage attendees, and connect planning tasks to the event."
+        title="Manage every step of an event from setup to follow-up."
+        body="Create events, collect RSVPs, manage attendees, and keep preparation connected to the event."
         steps={eventSteps}
         accent="red"
         screenshotSide="right"
         dark={false}
-        ctaLabel="See how your club could manage events"
+        ctaLabel="Explore Event Management"
         onCta={handleDemo}
       />
 
       <WorkflowSection
-        eyebrow="Tasks"
+        eyebrow="Task management"
         title="Keep ownership visible."
-        body="Assign work, track progress, review completion, and keep exec responsibilities clear."
+        body="Assign work, track progress, review completion, and connect planning tasks to the workflows they support."
         steps={taskSteps}
         accent="gold"
         screenshotSide="left"
         dark
-        ctaLabel="Explore task workflows"
+        ctaLabel="Explore Task Management"
         onCta={handleDemo}
       />
 
       <WorkflowSection
         eyebrow="Meetings"
         eyebrowColor="text-[#E51937]"
-        title="Turn meetings into follow-through."
-        body="Plan agendas, capture notes, record decisions, and turn follow-ups into assigned work."
+        title="Turn meetings into clear next steps."
+        body="Plan agendas, record notes and decisions, and turn meeting outcomes into assigned follow-up work."
         steps={meetingSteps}
         accent="red"
         screenshotSide="right"
         dark={false}
-        ctaLabel="See how meetings stay organized"
+        ctaLabel="Explore Meeting Management"
         onCta={handleDemo}
       />
 
       <WorkflowSection
         eyebrow="Hiring"
-        title="Manage applications from posting to decision."
-        body="Post open roles, collect applications, review candidates, and move applicants through a clear pipeline."
+        title="Manage club hiring from posting to decision."
+        body="Publish open positions, collect applications, review candidates, and move applicants through a clear hiring process."
         steps={hiringSteps}
         accent="gold"
         screenshotSide="left"
         dark
-        ctaLabel="Review how hiring could work for your club"
+        ctaLabel="Explore Club Hiring"
         onCta={handleDemo}
       />
 
-      {/* 11. Member Management — unique layout */}
-      <section className="py-16 sm:py-20 bg-[#111111] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-8 sm:mb-10 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#FFC429] mb-3">
-              Member management
-            </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3 leading-tight">
-              Keep your club structure clear as people move into new roles.
-            </h2>
-            <p className="text-[#9CA3AF] text-base leading-relaxed">
-              As students join, apply, volunteer, and take on more responsibility, Gryph ClubConnect helps clubs update roles, reporting lines, and permissions without losing track of who owns what.
-            </p>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-start">
-            <AnimatedSection>
-              <ol className="rounded-[12px] border border-white/[0.08] bg-[#131313] overflow-hidden mb-6">
-                {memberLifecycle.map((step, index) => (
-                  <li
-                    key={step.title}
-                    className={`flex gap-4 px-5 py-4 ${
-                      index < memberLifecycle.length - 1 ? 'border-b border-white/[0.08]' : ''
-                    }`}
-                  >
-                    <span className="shrink-0 w-8 text-[13px] font-semibold tabular-nums text-[#E51937] pt-0.5">
-                      {String(index + 1).padStart(2, '0')}
-                    </span>
-                    <div>
-                      <p className="text-sm font-semibold text-[#F5F5F5] mb-1">{step.title}</p>
-                      <p className="text-[13px] text-[#9CA3AF] leading-relaxed">{step.description}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-              <FeatureList items={memberPoints} />
-              <TextCta label="Talk through access levels" onClick={handleDemo} />
-            </AnimatedSection>
-            <AnimatedSection delay={0.08}>
-              <img
-                src={`${import.meta.env.BASE_URL}screenshots/for-clubs-members-executive-role.png`}
-                alt="Gryph ClubConnect executive role and member management"
-                className="block h-auto w-full rounded-[12px] border border-white/[0.08] bg-[#131313] object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
-                loading="lazy"
-                decoding="async"
-              />
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
+      {/* 10. Member management */}
+      <WorkflowSection
+        eyebrow="Member management"
+        title="Keep your club structure clear as responsibilities change."
+        body="Manage join requests, roles, reporting relationships, and leadership transitions from one connected member workflow."
+        steps={memberSteps}
+        accent="gold"
+        screenshotSide="right"
+        dark={false}
+        ctaLabel="Explore Member Management"
+        onCta={handleDemo}
+      />
 
       {/* 12. Analytics */}
       <section className="py-16 sm:py-20 bg-[#0B0B0B] border-t border-[#222222]">
@@ -691,10 +736,10 @@ export default function ForClubsPage() {
                 Analytics
               </p>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-4 leading-tight">
-                See what is working across your club.
+                Understand how your club is performing.
               </h2>
               <p className="text-[#9CA3AF] text-base leading-relaxed mb-6">
-                Club leaders can review activity across members, events, RSVPs, tasks, announcements, hiring, and public profile interest.
+                Review activity across members, events, RSVPs, tasks, announcements, hiring, and public club engagement.
               </p>
               <FeatureList items={analyticsPoints} bullet="red" />
             </AnimatedSection>
@@ -702,43 +747,51 @@ export default function ForClubsPage() {
         </div>
       </section>
 
-      {/* 13. Before / After comparison */}
-      <section className="py-16 sm:py-20 bg-[#111111] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* 12. Before and after */}
+      <section className="border-t border-[#222222] bg-[#111111] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-8 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#FFC429] mb-3">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FFC429] sm:text-xs">
               Before / After
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans">
-              Replace scattered tools with connected workflows.
+            <h2 className="font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
+              Replace scattered tools with connected club workflows.
             </h2>
           </AnimatedSection>
-          <AnimatedSection>
-            <div className="rounded-[12px] border border-white/[0.08] bg-[#131313] overflow-hidden max-w-4xl">
-              <div className="grid grid-cols-2 border-b border-white/[0.08] bg-[#0B0B0B]">
-                <div className="px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#777777]">
+
+          <div className="grid grid-cols-1 gap-5 lg:grid-cols-2">
+            <AnimatedSection>
+              <div className="h-full rounded-[14px] border border-white/[0.08] bg-[#0B0B0B] p-6">
+                <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#777777]">
                   Before
-                </div>
-                <div className="px-5 py-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#777777] border-l border-white/[0.08]">
-                  After
-                </div>
+                </p>
+                <ul className="space-y-4">
+                  {beforeTools.map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-sm text-[#9CA3AF]">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#555555]" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              {beforeAfter.map((row, index) => (
-                <div
-                  key={row.before}
-                  className={`grid grid-cols-1 sm:grid-cols-2 ${
-                    index < beforeAfter.length - 1 ? 'border-b border-white/[0.08]' : ''
-                  }`}
-                >
-                  <div className="px-5 py-3.5 text-sm text-[#777777]">{row.before}</div>
-                  <div className="px-5 py-3.5 text-sm text-[#F5F5F5] sm:border-l border-white/[0.08] flex items-start gap-2">
-                    <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#E51937]" />
-                    {row.after}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </AnimatedSection>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.06}>
+              <div className="h-full rounded-[14px] border border-[#E51937]/20 bg-[#131313] p-6">
+                <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#E51937]">
+                  With Gryph ClubConnect
+                </p>
+                <ul className="space-y-4">
+                  {connectedTools.map((item) => (
+                    <li key={item} className="flex items-center gap-3 text-sm text-[#F5F5F5]">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#E51937]" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 
@@ -749,14 +802,14 @@ export default function ForClubsPage() {
             <div className="rounded-[14px] border border-white/[0.08] bg-[#131313] p-8 sm:p-10 text-center shadow-[0_20px_50px_rgba(0,0,0,0.35)]">
               <div className="h-[2px] w-16 bg-[#E51937] mx-auto mb-6 rounded-full" aria-hidden />
               <h2 className="text-3xl sm:text-4xl font-extrabold text-[#F5F5F5] font-sans mb-4">
-                Ready to map this to your club?
+                See how Gryph ClubConnect could work for your club.
               </h2>
               <p className="text-[#9CA3AF] text-base mb-8 max-w-2xl mx-auto leading-relaxed">
-                Request a demo and walk through how your club could manage events, RSVPs, tasks, meetings, members, hiring, roles, reporting, and permissions from one workspace.
+                Request a walkthrough focused on the workflows your team uses and see how your club could prepare for early access.
               </p>
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4">
                 <Button variant="red" size="lg" onClick={handleOnboard} className="w-full sm:w-auto">
-                  Onboard Your Club
+                  Get Your Club Started
                 </Button>
                 <Button variant="ghost" size="lg" onClick={handleDemo} className="w-full sm:w-auto">
                   Request a Demo

@@ -10,7 +10,7 @@ const workflowSteps: WorkflowStep[] = [
   {
     title: 'Start in the Command Center',
     description:
-      'See pending actions, upcoming activity, open tasks, applications, quick actions, and setup progress in one overview.',
+      'See pending actions, upcoming activity, open work, and setup progress from one clear overview.',
     placeholderLabel: 'Command Center',
     imageSrc: 'screenshots/homepage-club-command-center.png',
     imageAlt: 'Gryph ClubConnect club Command Center',
@@ -48,27 +48,27 @@ const workflowSteps: WorkflowStep[] = [
     imageAlt: 'Gryph ClubConnect meeting management screen',
   },
   {
-    title: 'Manage members and resources',
+    title: 'Manage members and roles',
     description:
-      'Use member lists, role titles, org structure, invite codes, documents, and resources to keep the club organized.',
-    placeholderLabel: 'Members & resources',
+      'Organize your member directory, role titles, access levels, invites, and club structure.',
+    placeholderLabel: 'Members & roles',
     imageSrc: 'screenshots/homepage-club-members-resources.png',
-    imageAlt: 'Gryph ClubConnect members and resources screen',
+    imageAlt: 'Gryph ClubConnect members and roles screen',
   },
   {
-    title: 'Review hiring and permissions',
+    title: 'Review applicants and manage hiring',
     description:
-      'Post roles, review applicants, move candidates through statuses, view analytics, and control who can access what.',
-    placeholderLabel: 'Hiring & permissions',
+      'Post roles, review applications, schedule interviews, and move candidates through a clear status pipeline.',
+    placeholderLabel: 'Hiring',
     imageSrc: 'screenshots/homepage-club-hiring-permissions.png',
-    imageAlt: 'Gryph ClubConnect hiring and permissions screen',
+    imageAlt: 'Gryph ClubConnect hiring and applicant management screen',
   },
 ];
 
 export default function LeaderShowcase() {
   const navigate = useNavigate();
 
-  const handleOnboard = () => {
+  const handleGetStarted = () => {
     goToDemoForm({
       interest: 'Onboard my club',
       navigate,
@@ -87,14 +87,13 @@ export default function LeaderShowcase() {
             For club leaders
           </p>
 
-          <h2 className="mb-4 font-sans text-[2.1rem] font-extrabold leading-tight text-[#F5F5F5] sm:text-[2.75rem]">
-            Run events, members, tasks, hiring, and meetings from one workspace.
+          <h2 className="mb-4 font-sans text-[2rem] font-extrabold leading-tight text-[#F5F5F5] sm:text-[2.55rem]">
+            Run your club from one organized workspace.
           </h2>
 
           <p className="text-base leading-relaxed text-[#9CA3AF] sm:text-lg">
-            Gryph ClubConnect gives club leaders a central workspace for the
-            moving pieces of club life: announcements, events, RSVPs, tasks,
-            meetings, documents, members, hiring, analytics, and permissions.
+            Gryph ClubConnect brings your club’s communication, planning,
+            members, and day-to-day work into one organized workspace.
           </p>
         </AnimatedSection>
 
@@ -106,10 +105,10 @@ export default function LeaderShowcase() {
           footer={
             <button
               type="button"
-              onClick={handleOnboard}
+              onClick={handleGetStarted}
               className="mt-5 inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#FFC429] transition-colors hover:text-[#FFD45C]"
             >
-              Onboard Your Club
+              Get Your Club Started
               <ArrowRight size={16} />
             </button>
           }

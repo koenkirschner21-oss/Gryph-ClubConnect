@@ -12,10 +12,6 @@ import {
   Search,
   Eye,
   UserPlus,
-  GraduationCap,
-  Sparkles,
-  Users,
-  Ticket,
   type LucideIcon,
 } from 'lucide-react';
 import { useEffect } from 'react';
@@ -60,7 +56,7 @@ const problemCards = [
 ];
 
 const journeySteps: { title: string; description: string; icon: LucideIcon; accent: 'red' | 'gold' | 'neutral' }[] = [
-  { title: 'Discover clubs', description: 'Find clubs by name, category, interest, or keyword.', icon: Search, accent: 'red' },
+  { title: 'Discover clubs', description: 'Search by category, interest, or keyword and compare clubs in one place.', icon: Search, accent: 'red' },
   { title: 'Explore club profiles', description: 'Learn what a club does, when it meets, and how to get involved.', icon: Eye, accent: 'gold' },
   { title: 'Join an event', description: 'View upcoming events and RSVP from one place.', icon: Calendar, accent: 'red' },
   { title: 'Apply for club positions', description: 'Find open positions and submit an application.', icon: Briefcase, accent: 'gold' },
@@ -108,32 +104,32 @@ const workflowSteps: ClubWorkflowStep[] = [
     imageAlt: 'Gryph ClubConnect Explore Clubs screen',
   },
   {
-    title: 'Club Profiles',
-    description: 'See what a club does, when it meets, what it posts, and how to get involved.',
+    title: 'View Club Profiles',
+    description: 'Learn what a club does, when it meets, what it has coming up, and how to get involved.',
     placeholderLabel: 'Club Profile',
     placeholderSubtext: 'Public club profile with meeting info, upcoming events, open roles, announcements, and join options.',
     imageSrc: 'screenshots/for-students-club-profiles.png',
     imageAlt: 'Gryph ClubConnect public club profile screen',
   },
   {
-    title: 'Event RSVP',
-    description: 'Sign up for events and answer event questions from one place.',
+    title: 'RSVP for Events',
+    description: 'View event details, answer sign-up questions, and confirm attendance.',
     placeholderLabel: 'Event RSVP',
     placeholderSubtext: 'Event detail and RSVP flow with sign-up questions and confirmation.',
     imageSrc: 'screenshots/for-students-event-rsvp.png',
     imageAlt: 'Gryph ClubConnect event RSVP screen',
   },
   {
-    title: 'Role Applications',
-    description: 'Apply for open roles and keep track of where your application stands.',
+    title: 'Apply for Club Positions',
+    description: 'Browse open positions, complete applications, and track your progress.',
     placeholderLabel: 'Role Application',
     placeholderSubtext: 'Open role page with application questions and application status.',
     imageSrc: 'screenshots/for-students-role-applications.png',
     imageAlt: 'Gryph ClubConnect role application screen',
   },
   {
-    title: 'Student Dashboard',
-    description: 'Keep saved clubs, upcoming events, applications, updates, and tasks organized.',
+    title: 'Use Your Student Dashboard',
+    description: 'Keep upcoming events, applications, saved clubs, updates, and tasks organized.',
     placeholderLabel: 'Student Dashboard',
     placeholderSubtext: 'Dashboard with saved clubs, upcoming events, applications, tasks, and inbox updates.',
     imageSrc: 'screenshots/for-students-student-dashboard.png',
@@ -148,77 +144,33 @@ const canDoGroups: {
   {
     label: 'Discover',
     cards: [
-      { title: 'Explore Clubs', description: 'Search clubs by name, category, interest, or keyword.', icon: Compass, accent: 'red' },
-      { title: 'View Public Profiles', description: 'See descriptions, meeting info, updates, events, and open roles.', icon: Building2, accent: 'gold' },
-      { title: 'Find Events', description: 'Browse events across clubs and see what is coming up.', icon: Calendar, accent: 'red' },
+      { title: 'Explore Clubs', description: 'Search by name, category, interest, or keyword.', icon: Compass, accent: 'red' },
+      { title: 'View Club Profiles', description: 'See club information, meeting details, events, updates, and open positions.', icon: Building2, accent: 'gold' },
+      { title: 'Find Events', description: 'Browse upcoming events from clubs across campus.', icon: Calendar, accent: 'red' },
     ],
   },
   {
     label: 'Take Action',
     cards: [
-      { title: 'RSVP', description: 'Sign up for events and answer event questions.', icon: ClipboardCheck, accent: 'gold' },
-      { title: 'Apply for Roles', description: 'Submit applications for open club positions.', icon: Briefcase, accent: 'red' },
-      { title: 'Track Applications', description: 'See where your applications stand.', icon: Search, accent: 'gold' },
+      { title: 'RSVP for Events', description: 'Register for events and complete sign-up questions.', icon: ClipboardCheck, accent: 'gold' },
+      { title: 'Apply for Club Positions', description: 'Submit applications for executive and leadership opportunities.', icon: Briefcase, accent: 'red' },
+      { title: 'Request to Join', description: 'Join open clubs or submit a request when approval is required.', icon: UserPlus, accent: 'gold' },
     ],
   },
   {
     label: 'Stay Organized',
     cards: [
-      { title: 'Follow or Save Clubs', description: 'Keep an eye on clubs before joining or while deciding.', icon: Bookmark, accent: 'neutral' },
-      { title: 'Student Dashboard', description: 'See upcoming events, applications, club updates, and tasks in one place.', icon: LayoutDashboard, accent: 'red' },
-      { title: 'Inbox & Alerts', description: 'Keep important updates and pending actions visible.', icon: Bell, accent: 'gold' },
+      { title: 'Save Clubs', description: 'Keep track of clubs you want to revisit or follow.', icon: Bookmark, accent: 'neutral' },
+      { title: 'Track Applications', description: 'See the status of every club position you apply for.', icon: Search, accent: 'red' },
+      { title: 'Manage Your Involvement', description: 'View events, updates, tasks, and club activity from your dashboard.', icon: LayoutDashboard, accent: 'gold' },
     ],
   },
 ];
 
-const audienceCards: {
-  title: string;
-  description: string;
-  icon: LucideIcon;
-  accent: 'red' | 'gold' | 'neutral';
-}[] = [
-  {
-    title: 'New students',
-    description: 'Find clubs, events, and communities before you already know where to look.',
-    icon: GraduationCap,
-    accent: 'red',
-  },
-  {
-    title: 'Students exploring interests',
-    description: 'Search by category, interest, or keyword and save clubs you want to revisit.',
-    icon: Sparkles,
-    accent: 'gold',
-  },
-  {
-    title: 'Event seekers',
-    description: 'See what is happening across clubs and RSVP before events pass you by.',
-    icon: Ticket,
-    accent: 'red',
-  },
-  {
-    title: 'Students applying for roles',
-    description: 'Find open positions, apply from one place, and keep track of application progress.',
-    icon: Briefcase,
-    accent: 'gold',
-  },
-  {
-    title: 'Active members',
-    description: 'Stay on top of events, updates, tasks, and announcements from the clubs you are part of.',
-    icon: Users,
-    accent: 'neutral',
-  },
-  {
-    title: 'Future execs',
-    description: 'Discover ways to get involved now and move toward leadership over time.',
-    icon: UserPlus,
-    accent: 'red',
-  },
-];
-
 const connectedFlow = [
-  { title: 'Student discovers', description: 'They find a club, event, or open role.' },
-  { title: 'Student takes action', description: 'They RSVP, apply, follow, or request to join.' },
-  { title: 'Club team follows up', description: 'Execs review responses and manage the next step.' },
+  { title: 'Students discover opportunities', description: 'They find a club, event, or open position.' },
+  { title: 'Students take action', description: 'They RSVP, apply, save a club, or request to join.' },
+  { title: 'Club teams manage the next step', description: 'Executives review responses, organize applicants, and follow up.' },
 ];
 
 const accentBar = {
@@ -491,10 +443,10 @@ export default function ForStudentsPage() {
               Student workflows
             </p>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
-              See the path from finding a club to getting involved.
+              See how students move from discovery to involvement.
             </h2>
             <p className="text-[#9CA3AF] text-base leading-relaxed">
-              Click through the student journey or let it rotate. Real product screenshots will be added as the demo set is finalized.
+              Explore the key steps students take—from finding a club to joining events, applying for positions, and staying organized.
             </p>
           </AnimatedSection>
           <AnimatedSection delay={0.05}>
@@ -516,8 +468,11 @@ export default function ForStudentsPage() {
               What students can do
             </p>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
-              Everything students need to find and follow club life.
+              Everything you need to explore and manage your club involvement.
             </h2>
+            <p className="text-[#9CA3AF] text-base leading-relaxed">
+              Use one account to discover opportunities, take action, and stay organized across every club you interact with.
+            </p>
           </AnimatedSection>
           <div className="space-y-8">
             {canDoGroups.map((group) => (
@@ -548,42 +503,6 @@ export default function ForStudentsPage() {
         </div>
       </section>
 
-      {/* Who it helps */}
-      <section className="py-16 sm:py-20 bg-[#0B0B0B] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-10 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#FFC429] mb-3">
-              Who it helps
-            </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
-              Whether you are new, involved, or trying to get more involved.
-            </h2>
-            <p className="text-[#9CA3AF] text-base leading-relaxed">
-              Gryph ClubConnect is built for students who want a clearer way to find clubs, keep up with events, and discover opportunities without needing to already know the right group chat or Instagram page.
-            </p>
-          </AnimatedSection>
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" staggerDelay={0.05}>
-            {audienceCards.map((card) => {
-              const Icon = card.icon;
-              return (
-                <StaggerItem key={card.title}>
-                  <div
-                    className={`relative overflow-hidden rounded-[12px] border border-white/[0.08] bg-[#131313] p-5 h-full transition-all duration-200 ${audienceHover[card.accent]}`}
-                  >
-                    <span className={`absolute inset-x-0 top-0 h-[2px] ${accentBar[card.accent]}`} aria-hidden />
-                    <div className={`w-9 h-9 rounded-[8px] border flex items-center justify-center mb-3 ${iconAccent[card.accent]}`}>
-                      <Icon size={16} />
-                    </div>
-                    <h3 className="text-[#F5F5F5] font-semibold mb-2">{card.title}</h3>
-                    <p className="text-[#9CA3AF] text-sm leading-relaxed">{card.description}</p>
-                  </div>
-                </StaggerItem>
-              );
-            })}
-          </StaggerContainer>
-        </div>
-      </section>
-
       {/* Connected club life */}
       <section className="py-16 sm:py-20 bg-[#111111] border-t border-[#222222]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -592,10 +511,10 @@ export default function ForStudentsPage() {
               Connected club life
             </p>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
-              What students do connects to how clubs manage.
+              Student actions connect directly to club operations.
             </h2>
             <p className="text-[#9CA3AF] text-base leading-relaxed">
-              When students RSVP, apply, follow, or request to join, club teams can review interest, manage attendees, organize applicants, and follow up from their workspace. Students get a clearer path in, and clubs get cleaner information to work with.
+              When students RSVP, apply, follow, or request to join, club leaders can review that activity and manage the next step from their workspace. Students get a clearer way to participate, while clubs receive organized information they can act on.
             </p>
           </AnimatedSection>
           <AnimatedSection>
@@ -642,16 +561,16 @@ export default function ForStudentsPage() {
                 Student access
               </p>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-4">
-                Ready to find more of what is happening on campus?
+                Get ready to explore club life in one organized place.
               </h2>
               <p className="text-[#9CA3AF] text-base leading-relaxed mb-6 max-w-xl">
-                Request student access to follow Gryph ClubConnect as it prepares for launch and get a clearer way to discover clubs, events, and roles.
+                Request student access to follow Gryph ClubConnect as it prepares for launch and be among the first students to explore clubs, events, and open positions.
               </p>
               <Link
                 to="/features"
                 className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#E51937] hover:text-[#FF6B7D] transition-colors"
               >
-                Explore Club Features
+                Explore Platform Features
                 <ArrowRight size={16} />
               </Link>
             </AnimatedSection>
@@ -659,10 +578,10 @@ export default function ForStudentsPage() {
             <AnimatedSection delay={0.08}>
               <div className="rounded-[14px] border border-[#222222] bg-[#131313] p-6 sm:p-7 shadow-[0_16px_48px_rgba(0,0,0,0.35)]">
                 <h3 className="text-xl font-bold text-[#F5F5F5] font-sans mb-1">
-                  Get student access
+                  Request student access
                 </h3>
                 <p className="text-[#777777] text-sm mb-6 leading-relaxed">
-                  Tell us a bit about yourself so we can follow up as access opens.
+                  Tell us a bit about yourself and we’ll follow up as student access becomes available.
                 </p>
                 <StudentAccessForm sourcePage="For Students" idPrefix="for-students" />
               </div>

@@ -60,12 +60,12 @@ const problemCards = [
 ];
 
 const journeySteps: { title: string; description: string; icon: LucideIcon; accent: 'red' | 'gold' | 'neutral' }[] = [
-  { title: 'Discover clubs', description: 'Search by name, category, interest, or keyword.', icon: Search, accent: 'red' },
-  { title: 'View club profiles', description: 'See what a club does, meeting info, upcoming events, open roles, and ways to get involved.', icon: Eye, accent: 'gold' },
-  { title: 'RSVP for events', description: 'Find events and sign up without digging through posts or group chats.', icon: Calendar, accent: 'red' },
-  { title: 'Apply for roles', description: 'Browse open club positions and submit applications from one account.', icon: Briefcase, accent: 'gold' },
-  { title: 'Follow or save clubs', description: 'Keep track of clubs you care about before or after joining.', icon: Bookmark, accent: 'neutral' },
-  { title: 'Stay organized', description: 'Use your dashboard to see upcoming events, applications, club updates, tasks, and inbox alerts.', icon: LayoutDashboard, accent: 'red' },
+  { title: 'Discover clubs', description: 'Find clubs by name, category, interest, or keyword.', icon: Search, accent: 'red' },
+  { title: 'Explore club profiles', description: 'Learn what a club does, when it meets, and how to get involved.', icon: Eye, accent: 'gold' },
+  { title: 'Join an event', description: 'View upcoming events and RSVP from one place.', icon: Calendar, accent: 'red' },
+  { title: 'Apply for club positions', description: 'Find open positions and submit an application.', icon: Briefcase, accent: 'gold' },
+  { title: 'Follow or join clubs', description: 'Save clubs, request to join, and keep track of the communities you care about.', icon: Bookmark, accent: 'neutral' },
+  { title: 'Stay involved', description: 'Use your dashboard to follow events, updates, applications, and club activity.', icon: LayoutDashboard, accent: 'red' },
 ];
 
 const missingCards: {
@@ -353,7 +353,7 @@ export default function ForStudentsPage() {
         </div>
       </section>
 
-      {/* Student journey */}
+      {/* How students get involved */}
       <section className="py-16 sm:py-20 bg-[#0B0B0B] border-t border-[#222222]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-10 sm:mb-12 max-w-3xl">
@@ -361,10 +361,10 @@ export default function ForStudentsPage() {
               Student journey
             </p>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
-              From discovering a club to staying involved.
+              From discovering a club to becoming part of it.
             </h2>
             <p className="text-[#9CA3AF] text-base leading-relaxed">
-              Gryph ClubConnect connects the steps students already take when getting involved on campus.
+              Gryph ClubConnect guides students through the full path of campus involvement—from finding the right club to attending events, applying for positions, and staying connected after joining.
             </p>
           </AnimatedSection>
 

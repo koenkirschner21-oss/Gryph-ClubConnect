@@ -14,7 +14,7 @@ const workflowSteps: WorkflowStep[] = [
   {
     title: 'View public club profiles',
     description:
-      'See what a club does, when it meets, upcoming events, open roles, and how to get involved.',
+      'See what a club does, when it meets, its upcoming events and open roles, and how to get involved.',
     placeholderLabel: 'Club profile',
     imageSrc: 'screenshots/homepage-workflow-club-profile.png',
     imageAlt: 'Gryph ClubConnect public club profile',
@@ -22,7 +22,7 @@ const workflowSteps: WorkflowStep[] = [
   {
     title: 'Sign up for events',
     description:
-      'Discover campus events, RSVP, answer sign-up questions, and keep track of what is coming up.',
+      'Browse campus events, view the details, and RSVP directly through the platform.',
     placeholderLabel: 'Event sign-up',
     imageSrc: 'screenshots/homepage-workflow-event-rsvp.png',
     imageAlt: 'Gryph ClubConnect event RSVP screen',
@@ -38,7 +38,7 @@ const workflowSteps: WorkflowStep[] = [
   {
     title: 'Stay organized',
     description:
-      'Use your dashboard to see clubs, events, tasks, applications, announcements, and inbox updates.',
+      'Keep your clubs, upcoming events, tasks, applications, and updates organized in one dashboard.',
     placeholderLabel: 'Student dashboard',
     imageSrc: 'screenshots/homepage-workflow-student-dashboard.png',
     imageAlt: 'Gryph ClubConnect student dashboard',
@@ -54,14 +54,14 @@ export default function StudentShowcase() {
             For students
           </p>
 
-          <h2 className="mb-4 font-sans text-[2.1rem] font-extrabold leading-tight text-[#F5F5F5] sm:text-[2.75rem]">
-            Find clubs, events, and roles without hunting through group chats.
+          <h2 className="mb-4 font-sans text-[2rem] font-extrabold leading-tight text-[#F5F5F5] sm:text-[2.55rem]">
+            Find clubs, events, and roles without searching across scattered
+            platforms.
           </h2>
 
           <p className="text-base leading-relaxed text-[#9CA3AF] sm:text-lg">
-            Gryph ClubConnect gives students one place to explore clubs, view
-            public profiles, sign up for events, apply for roles, and track
-            involvement across the clubs they care about.
+            Gryph ClubConnect brings club discovery, events, opportunities, and
+            club involvement into one organized experience.
           </p>
         </AnimatedSection>
 

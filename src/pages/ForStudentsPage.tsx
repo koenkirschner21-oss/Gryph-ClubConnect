@@ -31,28 +31,28 @@ import { goToStudentAccess, STUDENT_ACCESS_ID } from '../lib/cta';
 const problemCards = [
   {
     title: 'Missed clubs',
-    body: 'Students do not always know what clubs exist or where to find them.',
+    body: 'Students do not always know which clubs exist or where to find accurate information.',
     accent: 'red' as const,
     hover:
       'hover:border-[#E51937]/45 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(229,25,55,0.1)]',
   },
   {
     title: 'Scattered events',
-    body: 'Events get posted across different places, making it hard to know what is happening.',
+    body: 'Events are shared across different platforms, making it difficult to know what is happening.',
     accent: 'gold' as const,
     hover:
       'hover:border-[#FFC429]/40 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(255,196,41,0.08)]',
   },
   {
     title: 'Hidden opportunities',
-    body: 'Open roles, applications, and ways to get involved are easy to miss.',
+    body: 'Open positions and other ways to get involved are easy to miss.',
     accent: 'red' as const,
     hover:
       'hover:border-[#E51937]/45 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(229,25,55,0.1)]',
   },
   {
     title: 'Unclear next steps',
-    body: 'Students often do not know whether to RSVP, apply, message someone, or just show up.',
+    body: 'Students are often unsure whether to RSVP, apply, request to join, or contact an executive.',
     accent: 'neutral' as const,
     hover:
       'hover:border-white/[0.16] hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(0,0,0,0.3)]',
@@ -331,10 +331,10 @@ export default function ForStudentsPage() {
               The student problem
             </p>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-4">
-              Campus involvement is hard to find when everything is scattered.
+              Finding the right club should not depend on knowing where to look.
             </h2>
             <p className="text-[#9CA3AF] text-base leading-relaxed">
-              Students often hear about clubs through Instagram posts, group chats, friends, random links, or tabling. That makes it easy to miss events, roles, and communities that would have been a good fit.
+              Club information is spread across Instagram posts, group chats, friends, tabling, and separate forms. That makes it easy to miss events, open positions, and communities that could be a great fit.
             </p>
           </AnimatedSection>
           <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" staggerDelay={0.06}>

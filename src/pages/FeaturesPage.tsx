@@ -396,7 +396,6 @@ function FeatureDetailSection({
   bullets,
   whoUsesIt,
   label,
-  subtext,
   imageSrc,
   imageAlt,
   reverse,

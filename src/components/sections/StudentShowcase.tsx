@@ -28,7 +28,7 @@ const workflowSteps: WorkflowStep[] = [
     imageAlt: 'Gryph ClubConnect event RSVP screen',
   },
   {
-    title: 'Apply for roles',
+    title: 'Apply for club positions',
     description:
       'Browse open club positions, submit applications, and track application progress.',
     placeholderLabel: 'Role applications',
@@ -55,8 +55,8 @@ export default function StudentShowcase() {
           </p>
 
           <h2 className="mb-4 font-sans text-[2rem] font-extrabold leading-tight text-[#F5F5F5] sm:text-[2.55rem]">
-            Find clubs, events, and roles without searching across scattered
-            platforms.
+            Find clubs, events, and open club positions without searching across
+            scattered platforms.
           </h2>
 
           <p className="text-base leading-relaxed text-[#9CA3AF] sm:text-lg">

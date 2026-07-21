@@ -29,7 +29,6 @@ import {
 } from 'lucide-react';
 import AnimatedSection, { StaggerContainer, StaggerItem } from '../components/ui/AnimatedSection';
 import Button from '../components/ui/Button';
-import FeatureScreenshotPlaceholder from '../components/features/FeatureScreenshotPlaceholder';
 import {
   goToDemoForm,
   goToStudentAccess,
@@ -114,6 +113,8 @@ const featureDetails = [
     bullets: ['Cross-club overview', 'Upcoming events', 'Tasks and applications', 'Inbox updates and pending actions'],
     whoUsesIt: 'Students and members',
     label: 'Student Dashboard Overview',
+    imageSrc: 'screenshots/features-dashboard-cross-club-overview.png',
+    imageAlt: 'Gryph ClubConnect cross-club student dashboard',
     subtext: 'Student dashboard showing clubs, events, tasks, applications, and inbox updates.',
     reverse: false,
     dark: true,
@@ -126,6 +127,8 @@ const featureDetails = [
     bullets: ['Search by club name, category, or interest', 'Browse public club profiles', 'View meetings, events, roles, and join options', 'Save or follow clubs for later'],
     whoUsesIt: 'Students and prospective members',
     label: 'Explore Clubs',
+    imageSrc: 'screenshots/features-discovery-explore-clubs.png',
+    imageAlt: 'Gryph ClubConnect Explore Clubs discovery screen',
     subtext: 'Explore page with search, categories, club cards, and join states.',
     reverse: true,
     dark: false,
@@ -138,6 +141,8 @@ const featureDetails = [
     bullets: ['Event discovery and RSVP flows', 'Signup questions and responses', 'Attendee lists and approval states', 'Event-linked planning tasks'],
     whoUsesIt: 'Students, members, executives, and event leads',
     label: 'Events & RSVP Management',
+    imageSrc: 'screenshots/features-events-rsvp-management.png',
+    imageAlt: 'Gryph ClubConnect events and RSVP management screen',
     subtext: 'Event management view with RSVP answers, attendee list, and planning tasks.',
     reverse: false,
     dark: true,
@@ -150,6 +155,8 @@ const featureDetails = [
     bullets: ['Pending actions and requests', 'Quick actions for common work', 'Upcoming activity at a glance', 'Setup checklist and workspace progress'],
     whoUsesIt: 'Presidents, Co-Presidents, and executives',
     label: 'Club Command Center',
+    imageSrc: 'screenshots/features-command-center-operations.png',
+    imageAlt: 'Gryph ClubConnect club operations Command Center',
     subtext: 'President view with pending actions, quick actions, events, tasks, hiring, and setup progress.',
     reverse: true,
     dark: false,
@@ -162,6 +169,8 @@ const featureDetails = [
     bullets: ['Assigned to me and assigned by me views', 'Owners, due dates, and priority', 'Status tracking across work stages', 'Review, send-back, and completion flow'],
     whoUsesIt: 'Executives, members, and task owners',
     label: 'Tasks & Review',
+    imageSrc: 'screenshots/features-tasks-review-workflow.png',
+    imageAlt: 'Gryph ClubConnect tasks and review workflow',
     subtext: 'Tasks view with owners, due dates, statuses, comments, and review states.',
     reverse: false,
     dark: true,
@@ -174,6 +183,8 @@ const featureDetails = [
     bullets: ['Meeting scheduling', 'Agendas and notes', 'Decisions and recaps', 'Follow-up tasks'],
     whoUsesIt: 'Executives and meeting participants',
     label: 'Meetings & Notes',
+    imageSrc: 'screenshots/features-meetings-follow-through.png',
+    imageAlt: 'Gryph ClubConnect meetings and follow-through screen',
     subtext: 'Meeting detail view with agenda, notes, decisions, and follow-up tasks.',
     reverse: true,
     dark: false,
@@ -186,6 +197,8 @@ const featureDetails = [
     bullets: ['File and resource library', 'Categories and search', 'Visibility controls', 'Links to external resources'],
     whoUsesIt: 'Executives and members',
     label: 'Documents & Resources',
+    imageSrc: 'screenshots/features-documents-resource-library.png',
+    imageAlt: 'Gryph ClubConnect documents and resource library',
     subtext: 'Documents library with categories, files, resource links, and visibility settings.',
     reverse: false,
     dark: true,
@@ -198,6 +211,8 @@ const featureDetails = [
     bullets: ['Public role listings', 'Custom application questions', 'Candidate review', 'Status pipeline'],
     whoUsesIt: 'Students, applicants, reviewers, and hiring leads',
     label: 'Hiring Pipeline',
+    imageSrc: 'screenshots/features-hiring-candidate-pipeline.png',
+    imageAlt: 'Gryph ClubConnect hiring candidate pipeline',
     subtext: 'Hiring view with role listings, applications, reviewer notes, and candidate statuses.',
     reverse: true,
     dark: false,
@@ -210,6 +225,8 @@ const featureDetails = [
     bullets: ['Member directory', 'Invites and join codes', 'Role tiers and custom titles', 'Permission controls by access level'],
     whoUsesIt: 'Presidents, Co-Presidents, managerial executives, executives, and members',
     label: 'Members, Roles & Permissions',
+    imageSrc: 'screenshots/features-members-roles-permissions.png',
+    imageAlt: 'Gryph ClubConnect members roles and permissions screen',
     subtext: 'Member roster, org tiers, invites, and permission matrix.',
     reverse: false,
     dark: true,
@@ -222,6 +239,8 @@ const featureDetails = [
     bullets: ['Member growth', 'RSVP and event trends', 'Task completion', 'Announcement engagement', 'Hiring funnel', 'Public profile views'],
     whoUsesIt: 'Presidents and managerial executives',
     label: 'Club Analytics',
+    imageSrc: 'screenshots/features-analytics-club-insights.png',
+    imageAlt: 'Gryph ClubConnect club analytics insights dashboard',
     subtext: 'Analytics dashboard with member, event, task, announcement, hiring, and profile insights.',
     reverse: true,
     dark: false,
@@ -378,6 +397,8 @@ function FeatureDetailSection({
   whoUsesIt,
   label,
   subtext,
+  imageSrc,
+  imageAlt,
   reverse,
   dark,
 }: (typeof featureDetails)[number]) {
@@ -410,7 +431,13 @@ function FeatureDetailSection({
             </div>
           </AnimatedSection>
           <AnimatedSection delay={0.08} className={reverse ? 'order-2 lg:order-1' : ''}>
-            <FeatureScreenshotPlaceholder label={label} subtext={subtext} />
+            <img
+              src={`${import.meta.env.BASE_URL}${imageSrc}`}
+              alt={imageAlt ?? label}
+              className="block h-auto w-full rounded-[12px] border border-white/[0.08] bg-[#131313] object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
+              loading="lazy"
+              decoding="async"
+            />
           </AnimatedSection>
         </div>
       </div>
@@ -584,9 +611,12 @@ export default function FeaturesPage() {
               </Link>
             </AnimatedSection>
             <AnimatedSection delay={0.08}>
-              <FeatureScreenshotPlaceholder
-                label="Student Dashboard"
-                subtext="Student dashboard with clubs, events, tasks, applications, and inbox updates."
+              <img
+                src={`${import.meta.env.BASE_URL}screenshots/features-overview-student-dashboard.png`}
+                alt="Gryph ClubConnect student features overview"
+                className="block h-auto w-full rounded-[12px] border border-white/[0.08] bg-[#131313] object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
+                loading="lazy"
+                decoding="async"
               />
             </AnimatedSection>
           </div>
@@ -598,9 +628,12 @@ export default function FeaturesPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
             <AnimatedSection delay={0.08} className="order-2 lg:order-1">
-              <FeatureScreenshotPlaceholder
-                label="Club Command Center"
-                subtext="Command Center with pending actions, events, tasks, members, hiring, setup progress, and quick actions."
+              <img
+                src={`${import.meta.env.BASE_URL}screenshots/features-overview-club-command-center.png`}
+                alt="Gryph ClubConnect club leader features overview"
+                className="block h-auto w-full rounded-[12px] border border-white/[0.08] bg-[#131313] object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
+                loading="lazy"
+                decoding="async"
               />
             </AnimatedSection>
             <AnimatedSection className="order-1 lg:order-2">
@@ -653,9 +686,6 @@ export default function FeaturesPage() {
             </h2>
             <p className="text-[#9CA3AF] text-base leading-relaxed mb-3">
               Each workflow is designed around a real part of club life — from finding opportunities to managing events, tasks, meetings, members, hiring, and permissions.
-            </p>
-            <p className="text-[13px] text-[#777777]">
-              Screenshots will be added as the product demo set is finalized.
             </p>
           </AnimatedSection>
         </div>

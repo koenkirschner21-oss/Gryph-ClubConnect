@@ -6,7 +6,7 @@ const SCREENSHOTS = {
   tasks: 'screenshots/tasks-assigned-to-me.png',
   hiring: 'screenshots/hiring-management-applicant-review.png',
   members: 'screenshots/members-president-view-invites-code.png',
-  heroHero: 'screenshots/clubconnect-homepage-hero.png',
+  heroHero: 'screenshots/clubconnect-homepage-hero-phone-right.png',
   studentHero: 'screenshots/clubconnect-student-hero.png',
   demoHero: 'screenshots/clubconnect-demo-hero.png',
 } as const;
@@ -21,7 +21,7 @@ const ALTS: Record<MockupKey, string> = {
   tasks: 'Gryph ClubConnect tasks assigned to me',
   hiring: 'Gryph ClubConnect hiring and applicant review',
   members: 'Gryph ClubConnect members and invite code',
-  heroHero: 'Gryph ClubConnect homepage hero',
+  heroHero: 'Gryph ClubConnect homepage hero with laptop and phone',
   studentHero: 'Gryph ClubConnect student dashboard and club discovery',
   demoHero: 'Gryph ClubConnect demo walkthrough preview',
 };

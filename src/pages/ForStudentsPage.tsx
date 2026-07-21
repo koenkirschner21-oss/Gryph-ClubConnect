@@ -8,7 +8,6 @@ import {
   Briefcase,
   Bookmark,
   LayoutDashboard,
-  Bell,
   Search,
   Eye,
   UserPlus,
@@ -185,11 +184,6 @@ const iconAccent = {
   neutral: 'bg-[#1A1A1A] border-white/[0.1] text-[#9CA3AF]',
 };
 
-const audienceHover = {
-  red: 'hover:border-[#E51937]/40 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(229,25,55,0.1)]',
-  gold: 'hover:border-[#FFC429]/35 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(255,196,41,0.08)]',
-  neutral: 'hover:border-white/[0.14] hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(0,0,0,0.3)]',
-};
 
 export default function ForStudentsPage() {
   const navigate = useNavigate();

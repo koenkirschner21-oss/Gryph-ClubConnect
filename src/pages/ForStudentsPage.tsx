@@ -76,22 +76,22 @@ const missingCards: {
   hover: string;
 }[] = [
   {
-    title: 'Clubs to explore',
-    description: 'Browse clubs by category, interest, activity, or keyword instead of relying on word of mouth.',
+    title: 'Clubs that fit your interests',
+    description: 'Browse clubs by category, activity, or keyword and learn what each community is about.',
     icon: Compass,
     accent: 'red',
     hover: 'hover:border-[#E51937]/45 hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(229,25,55,0.12)]',
   },
   {
-    title: 'Events to attend',
-    description: 'Find upcoming events across clubs and RSVP before they get buried in posts or group chats.',
+    title: 'Events happening across campus',
+    description: 'See upcoming club events and find new ways to participate.',
     icon: Calendar,
     accent: 'gold',
     hover: 'hover:border-[#FFC429]/40 hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(255,196,41,0.1)]',
   },
   {
-    title: 'Roles to apply for',
-    description: 'Discover open club positions and application opportunities without waiting for someone to send you the form.',
+    title: 'Open club positions',
+    description: 'Discover leadership and executive opportunities and apply from one place.',
     icon: Briefcase,
     accent: 'neutral',
     hover: 'hover:border-white/[0.16] hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(0,0,0,0.35)]',
@@ -447,7 +447,7 @@ export default function ForStudentsPage() {
         </div>
       </section>
 
-      {/* What you might be missing */}
+      {/* Discover more on campus */}
       <section className="py-16 sm:py-20 bg-[#111111] border-t border-[#222222]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-10 sm:mb-12 max-w-3xl">
@@ -455,10 +455,10 @@ export default function ForStudentsPage() {
               What you might be missing
             </p>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
-              Clubs, events, and roles are easier to find when they live in one place.
+              See more opportunities without searching across different platforms.
             </h2>
             <p className="text-[#9CA3AF] text-base leading-relaxed">
-              Instead of hoping the right post, message, or link reaches you, Gryph ClubConnect gives students one place to browse what clubs are doing and how to get involved.
+              Gryph ClubConnect brings club profiles, upcoming events, and open positions into one organized place so students can explore more of campus life.
             </p>
           </AnimatedSection>
           <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-5" staggerDelay={0.08}>

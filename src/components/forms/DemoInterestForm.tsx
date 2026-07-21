@@ -16,11 +16,51 @@ const inputClass =
 const labelClass = 'block text-[13px] font-medium text-[#9CA3AF] mb-1.5';
 
 const nextSteps = [
-  'We review your club info',
-  'We focus the walkthrough on the workflows you care about',
-  'We follow up by email',
-  'If it makes sense, we help prepare your club for early access',
+  'We review your request',
+  'We follow up with the right next step',
+  'We tailor the walkthrough or onboarding to your club',
 ];
+
+const ROLE_OPTIONS = [
+  'President / Co-President',
+  'Managerial Executive',
+  'Executive',
+  'General Member',
+  'Faculty or Staff',
+  'Other',
+] as const;
+
+function getInterestLabel(option: ClubInterestOption): string {
+  if (option === 'Onboard my club') {
+    return 'Get my club started';
+  }
+
+  return option;
+}
+
+function getMessagePlaceholder(requestType: ClubInterestOption): string {
+  if (requestType === 'Onboard my club') {
+    return 'Tell us about your club and what you want to organize.';
+  }
+
+  if (requestType === 'Ask a question') {
+    return 'What would you like to know?';
+  }
+
+  return 'Which workflows would you like to see?';
+}
+
+function getSubmitLabel(requestType: ClubInterestOption): string {
+  if (requestType === 'Onboard my club') {
+    return 'Get My Club Started';
+  }
+
+  if (requestType === 'Ask a question') {
+    return 'Send My Question';
+  }
+
+  return 'Request a Demo';
+}
 
 type DemoInterestFormProps = {
   /** compact = homepage fields; full = Demo page with workflow checkboxes */
@@ -239,13 +279,22 @@ export default function DemoInterestForm({
         <label htmlFor={`${prefix}-role`} className={labelClass}>
           Your role in the club
         </label>
-        <input
+        <select
           id={`${prefix}-role`}
           name="role"
           required
-          placeholder="President, Co-President, VP Events, etc."
+          defaultValue=""
           className={inputClass}
-        />
+        >
+          <option value="" disabled>
+            Select your role
+          </option>
+          {ROLE_OPTIONS.map((role) => (
+            <option key={role} value={role}>
+              {role}
+            </option>
+          ))}
+        </select>
       </div>
 
       <div>
@@ -270,7 +319,7 @@ export default function DemoInterestForm({
                     : 'border-[#222222] bg-[#0B0B0B] text-[#9CA3AF] hover:border-[rgba(255,255,255,0.14)]'
                 }`}
               >
-                {option}
+                {getInterestLabel(option)}
               </button>
             );
           })}
@@ -316,12 +365,13 @@ export default function DemoInterestForm({
 
       <div>
         <label htmlFor={`${prefix}-message`} className={labelClass}>
-          Message / what do you want help with?
+          Tell us what you would like help with
         </label>
         <textarea
           id={`${prefix}-message`}
           name="message"
           rows={messageRows}
+          placeholder={getMessagePlaceholder(requestType)}
           className={`${inputClass} resize-y ${isCompact ? 'min-h-[72px]' : 'min-h-[100px]'}`}
         />
       </div>
@@ -337,7 +387,7 @@ export default function DemoInterestForm({
         disabled={submitting}
         className="w-full rounded-[10px] bg-[#E51937] hover:bg-[#C4122E] text-white font-semibold py-3 text-sm transition-colors disabled:opacity-60 focus:outline-none focus:ring-2 focus:ring-[#E51937] focus:ring-offset-2 focus:ring-offset-[#131313]"
       >
-        {submitting ? 'Submitting…' : isCompact ? 'Submit Request' : 'Request a Demo'}
+        {submitting ? 'Submitting…' : getSubmitLabel(requestType)}
       </button>
 
       <p className="text-[12px] text-[#777777] leading-relaxed">

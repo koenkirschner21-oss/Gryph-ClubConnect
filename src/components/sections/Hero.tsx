@@ -44,7 +44,7 @@ export default function Hero() {
       <div className="pointer-events-none absolute right-0 top-0 h-[420px] w-[420px] rounded-full bg-[#E51937] opacity-[0.03] blur-[120px]" />
 
       <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-12 pt-20 sm:px-6 sm:pb-16 sm:pt-24 lg:px-8 lg:pt-24">
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-14">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-10 xl:gap-14">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -52,7 +52,7 @@ export default function Hero() {
               duration: 0.6,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="flex flex-col gap-4 sm:gap-5"
+            className="flex min-w-0 flex-col gap-4 sm:gap-5"
           >
             <div className="flex flex-wrap items-center gap-2.5">
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FFC429] sm:text-xs">
@@ -70,9 +70,9 @@ export default function Hero() {
             </div>
 
             <h1
-              className="font-sans font-extrabold leading-[1.05] tracking-tight"
+              className="max-w-[38rem] font-sans font-extrabold leading-[1.04] tracking-tight"
               style={{
-                fontSize: 'clamp(2.25rem, 4.6vw, 3.55rem)',
+                fontSize: 'clamp(2.2rem, 3.9vw, 3.55rem)',
               }}
             >
               <span className="block text-[#F5F5F5]">
@@ -145,13 +145,13 @@ export default function Hero() {
               ease: [0.22, 1, 0.36, 1],
               delay: 0.1,
             }}
-            className="relative block lg:-mr-10 xl:-mr-16"
+            className="relative block min-w-0 lg:mr-0 xl:-mr-10 2xl:-mr-16"
           >
             <MockupImage
               name="heroHero"
               alt="Gryph ClubConnect dashboard on a laptop with the mobile club discovery experience beside it"
               className="relative !overflow-visible !rounded-none !border-0 !bg-transparent !shadow-none !ring-0"
-              imgClassName="h-auto w-full scale-[1.08] object-contain lg:scale-[1.15]"
+              imgClassName="h-auto w-full scale-100 object-contain lg:scale-[1.04] xl:scale-[1.12] 2xl:scale-[1.15]"
             />
           </motion.div>
         </div>

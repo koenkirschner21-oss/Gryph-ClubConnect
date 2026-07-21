@@ -1,83 +1,94 @@
-import { useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { goToDemoForm } from '../../lib/cta';
 
-const ROTATE_MS = 6000;
+const ROTATE_MS = 7000;
+const INTERACTION_PAUSE_MS = 12000;
 
 const workflows = [
   {
     key: 'dashboard',
-    label: 'Dashboard',
-    description: 'Track clubs, events, tasks, applications, and inbox updates from one place.',
-    highlights: ['Cross-club overview', 'Upcoming events', 'Tasks and applications'],
-    placeholderLabel: 'Dashboard view',
-    placeholderSubtext:
-      'Student dashboard with clubs, events, tasks, applications, and inbox updates.',
+    label: 'Student Dashboard',
+    description:
+      'Track clubs, events, tasks, applications, and inbox updates from one place.',
+    highlights: [
+      'Cross-club overview',
+      'Upcoming events',
+      'Tasks and applications',
+    ],
     imageSrc: 'screenshots/homepage-app-dashboard.png',
-    imageAlt: 'Gryph ClubConnect dashboard view',
+    imageAlt: 'Gryph ClubConnect student dashboard view',
   },
   {
     key: 'explore',
-    label: 'Explore',
-    description: 'Browse clubs, public profiles, events, and open roles.',
-    highlights: ['Search clubs', 'View public profiles', 'Discover opportunities'],
-    placeholderLabel: 'Explore view',
-    placeholderSubtext: 'Club discovery, public profiles, events, and open roles.',
+    label: 'Explore Clubs',
+    description: 'Browse clubs, public profiles, events, and open positions.',
+    highlights: [
+      'Search and filters',
+      'Public club profiles',
+      'Club discovery',
+    ],
     imageSrc: 'screenshots/homepage-app-explore.png',
-    imageAlt: 'Gryph ClubConnect explore view',
+    imageAlt: 'Gryph ClubConnect Explore Clubs view',
   },
   {
     key: 'workspace',
-    label: 'Workspace',
-    description: 'Run club operations from the Command Center.',
-    highlights: ['Pending actions', 'Quick actions', 'Club setup progress'],
-    placeholderLabel: 'Workspace view',
-    placeholderSubtext:
-      'Command Center with pending actions, quick actions, events, tasks, and setup progress.',
+    label: 'Command Center',
+    description: 'Run club operations from one organized Command Center.',
+    highlights: [
+      'Pending actions',
+      'Quick actions',
+      'Club setup progress',
+    ],
     imageSrc: 'screenshots/homepage-app-workspace.png',
-    imageAlt: 'Gryph ClubConnect workspace Command Center',
+    imageAlt: 'Gryph ClubConnect Command Center',
   },
   {
     key: 'events',
     label: 'Events & RSVPs',
-    description: 'Create events, collect RSVP answers, and manage attendees.',
-    highlights: ['RSVP questions', 'Attendee management', 'Event planning tasks'],
-    placeholderLabel: 'Events & RSVPs view',
-    placeholderSubtext:
-      'Event management with RSVP answers, attendee lists, and planning tasks.',
+    description:
+      'Create events, collect RSVP answers, and manage attendees.',
+    highlights: [
+      'RSVP questions',
+      'Attendee management',
+      'Event planning tasks',
+    ],
     imageSrc: 'screenshots/homepage-app-events-rsvps.png',
-    imageAlt: 'Gryph ClubConnect events and RSVP view',
+    imageAlt: 'Gryph ClubConnect events and RSVP management view',
   },
   {
     key: 'tasks',
-    label: 'Tasks',
+    label: 'Task Management',
     description: 'Assign work, track progress, and review completion.',
-    highlights: ['Owners and due dates', 'Status tracking', 'Review workflow'],
-    placeholderLabel: 'Tasks view',
-    placeholderSubtext: 'Task assignment, progress tracking, comments, and review states.',
+    highlights: [
+      'Owners and due dates',
+      'Status tracking',
+      'Review workflow',
+    ],
     imageSrc: 'screenshots/homepage-app-tasks.png',
-    imageAlt: 'Gryph ClubConnect tasks view',
+    imageAlt: 'Gryph ClubConnect task management view',
   },
   {
     key: 'hiring',
     label: 'Hiring',
-    description: 'Post roles, review applicants, and manage candidate statuses.',
-    highlights: ['Role listings', 'Applicant review', 'Status pipeline'],
-    placeholderLabel: 'Hiring view',
-    placeholderSubtext:
-      'Hiring pipeline with applications, custom questions, reviewers, and candidate statuses.',
+    description:
+      'Post positions, review applicants, and manage candidate statuses.',
+    highlights: ['Position listings', 'Applicant review', 'Status pipeline'],
     imageSrc: 'screenshots/homepage-app-hiring.png',
     imageAlt: 'Gryph ClubConnect hiring view',
   },
   {
     key: 'members',
     label: 'Members & Roles',
-    description: 'Manage members, role titles, invites, org structure, and permissions.',
-    highlights: ['Member directory', 'Invites and join codes', 'Roles and permissions'],
-    placeholderLabel: 'Members & Roles view',
-    placeholderSubtext: 'Member roster, role tiers, invites, org structure, and permission controls.',
+    description:
+      'Manage members, role titles, invites, club structure, and permissions.',
+    highlights: [
+      'Member directory',
+      'Invites and join codes',
+      'Roles and permissions',
+    ],
     imageSrc: 'screenshots/homepage-app-members-roles.png',
     imageAlt: 'Gryph ClubConnect members and roles view',
   },
@@ -86,87 +97,133 @@ const workflows = [
 export default function AppShowcase() {
   const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
-  const [paused, setPaused] = useState(false);
+  const [hoverPaused, setHoverPaused] = useState(false);
+  const [interactionPaused, setInteractionPaused] = useState(false);
+  const interactionTimerRef = useRef<number | null>(null);
+
   const active = workflows[activeIndex];
+  const paused = hoverPaused || interactionPaused;
 
   const advance = useCallback(() => {
-    setActiveIndex((prev) => (prev + 1) % workflows.length);
+    setActiveIndex((previousIndex) => {
+      return (previousIndex + 1) % workflows.length;
+    });
   }, []);
 
   useEffect(() => {
-    if (paused) return;
-    const interval = setInterval(advance, ROTATE_MS);
-    return () => clearInterval(interval);
-  }, [paused, advance, activeIndex]);
+    if (paused) {
+      return;
+    }
+
+    const interval = window.setInterval(advance, ROTATE_MS);
+    return () => window.clearInterval(interval);
+  }, [paused, advance]);
+
+  useEffect(() => {
+    return () => {
+      if (interactionTimerRef.current !== null) {
+        window.clearTimeout(interactionTimerRef.current);
+      }
+    };
+  }, []);
 
   const handleSelect = (index: number) => {
     setActiveIndex(index);
+    setInteractionPaused(true);
+
+    if (interactionTimerRef.current !== null) {
+      window.clearTimeout(interactionTimerRef.current);
+    }
+
+    interactionTimerRef.current = window.setTimeout(() => {
+      setInteractionPaused(false);
+      interactionTimerRef.current = null;
+    }, INTERACTION_PAUSE_MS);
   };
 
   const handleDemo = () => {
-    goToDemoForm({ interest: 'Request a demo', navigate, pathname: '/' });
+    goToDemoForm({
+      interest: 'Request a demo',
+      navigate,
+      pathname: '/',
+    });
   };
 
   return (
-    <section id="app-showcase" className="py-16 sm:py-20 bg-[#0B0B0B] scroll-mt-24 border-t border-[#222222]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 sm:mb-12 max-w-3xl mx-auto text-center">
-          <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
-            Product workflows
+    <section
+      id="app-showcase"
+      className="scroll-mt-24 border-t border-[#222222] bg-[#0B0B0B] py-16 sm:py-20"
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
+          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
+            Product tour
           </p>
-          <h2 className="text-[2.1rem] sm:text-[2.75rem] font-extrabold text-[#F5F5F5] font-sans mb-4 leading-tight">
-            See how Gryph ClubConnect works
+
+          <h2 className="mb-4 font-sans text-[2.1rem] font-extrabold leading-tight text-[#F5F5F5] sm:text-[2.75rem]">
+            See the platform in action
           </h2>
-          <p className="text-[#9CA3AF] text-base sm:text-lg leading-relaxed">
-            Explore the key workflows behind student discovery and club operations.
+
+          <p className="text-base leading-relaxed text-[#9CA3AF] sm:text-lg">
+            Explore the core tools students and club leaders use across
+            discovery, participation, and club management.
           </p>
         </div>
 
         <div
-          className="grid grid-cols-1 lg:grid-cols-[minmax(0,320px)_1fr] gap-8 lg:gap-10 items-start"
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
+          className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[minmax(0,310px)_1fr] lg:gap-10"
+          onMouseEnter={() => setHoverPaused(true)}
+          onMouseLeave={() => setHoverPaused(false)}
         >
           <div className="space-y-2">
             {workflows.map((workflow, index) => {
               const isActive = index === activeIndex;
+
               return (
                 <button
                   key={workflow.key}
                   type="button"
                   onClick={() => handleSelect(index)}
-                  className={`relative w-full rounded-[10px] border px-4 py-3.5 text-left transition-colors cursor-pointer overflow-hidden ${
+                  className={`relative w-full cursor-pointer overflow-hidden rounded-[10px] border px-4 py-3.5 text-left transition-colors ${
                     isActive
-                      ? 'bg-[#131313] border-[#E51937]/45 text-[#F5F5F5]'
-                      : 'bg-transparent border-white/[0.06] text-[#9CA3AF] hover:bg-[#131313] hover:border-white/[0.1] hover:text-[#F5F5F5]'
+                      ? 'border-[#E51937]/45 bg-[#131313] text-[#F5F5F5]'
+                      : 'border-white/[0.06] bg-transparent text-[#A5ABB5] hover:border-white/[0.1] hover:bg-[#131313] hover:text-[#F5F5F5]'
                   }`}
                 >
                   <div className="flex gap-3">
                     <span
-                      className={`shrink-0 text-[12px] font-semibold tabular-nums pt-0.5 ${
-                        isActive ? 'text-[#E51937]' : 'text-[#555555]'
+                      className={`shrink-0 pt-0.5 text-[12px] font-semibold tabular-nums ${
+                        isActive ? 'text-[#E51937]' : 'text-[#666666]'
                       }`}
                     >
                       {String(index + 1).padStart(2, '0')}
                     </span>
+
                     <div className="min-w-0">
-                      <span className="block text-sm font-semibold">{workflow.label}</span>
+                      <span className="block text-sm font-semibold">
+                        {workflow.label}
+                      </span>
+
                       <span
                         className={`mt-1 block text-[12px] leading-snug ${
-                          isActive ? 'text-[#9CA3AF]' : 'text-[#666666]'
+                          isActive ? 'text-[#9CA3AF]' : 'text-[#727780]'
                         }`}
                       >
                         {workflow.description}
                       </span>
                     </div>
                   </div>
+
                   {isActive && !paused && (
                     <motion.div
                       key={`progress-${activeIndex}`}
                       className="absolute bottom-0 left-0 h-[2px] bg-[#E51937]"
                       initial={{ width: '0%' }}
                       animate={{ width: '100%' }}
-                      transition={{ duration: ROTATE_MS / 1000, ease: 'linear' }}
+                      transition={{
+                        duration: ROTATE_MS / 1000,
+                        ease: 'linear',
+                      }}
                     />
                   )}
                 </button>
@@ -178,21 +235,23 @@ export default function AppShowcase() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={active.key}
-                initial={{ opacity: 0, y: 6 }}
+                initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -6 }}
-                transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                transition={{
+                  duration: 0.28,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
               >
                 <div className="mb-5">
-                  <h3 className="text-lg sm:text-xl font-bold text-[#F5F5F5] mb-1.5">
-                    {active.label} view
+                  <h3 className="mb-1.5 text-lg font-bold text-[#F5F5F5] sm:text-xl">
+                    {active.label}
                   </h3>
-                  <p className="text-sm text-[#9CA3AF] leading-relaxed max-w-xl mb-2">
+
+                  <p className="mb-4 max-w-xl text-sm leading-relaxed text-[#9CA3AF]">
                     {active.description}
                   </p>
-                  <p className="text-[11px] uppercase tracking-[0.14em] text-[#777777] mb-4">
-                    Demo data shown.
-                  </p>
+
                   <ul className="flex flex-wrap gap-2">
                     {active.highlights.map((item) => (
                       <li
@@ -220,13 +279,16 @@ export default function AppShowcase() {
         </div>
 
         <div className="mt-10 text-center">
-          <p className="text-sm text-[#9CA3AF] mb-1">Want to see the full workflow?</p>
+          <p className="mb-1 text-sm text-[#9CA3AF]">
+            Want to see how it works for your club?
+          </p>
+
           <button
             type="button"
             onClick={handleDemo}
-            className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#E51937] hover:text-[#FF6B7D] transition-colors"
+            className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#E51937] transition-colors hover:text-[#FF6B7D]"
           >
-            Request a demo
+            Request a Demo
             <ArrowRight size={16} />
           </button>
         </div>

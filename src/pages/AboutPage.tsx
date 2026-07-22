@@ -17,17 +17,17 @@ import Button from '../components/ui/Button';
 import { goToDemoForm } from '../lib/cta';
 
 const memberExperience = [
-  'Upcoming activity was hard to see',
-  'Updates lived across different places',
-  'Tasks and responsibilities were easy to lose track of',
-  'Involvement was spread across multiple clubs',
+  'Upcoming activity was unclear',
+  'Tasks were hard to track',
+  'Updates were scattered',
+  'Multiple clubs were difficult to manage',
 ];
 
 const leadershipPerspective = [
-  'People and responsibilities had to be coordinated',
-  'Events, meetings, and follow-ups needed structure',
-  'Applications, documents, and access had to be managed',
-  'The team needed one shared source of truth',
+  'Responsibilities were difficult to coordinate',
+  'Events and meetings were disconnected',
+  'Applications and documents were scattered',
+  'There was no shared operational view',
 ];
 
 const managementFeatures = [
@@ -82,10 +82,13 @@ export default function AboutPage() {
               Built from the reality of running student clubs.
             </h1>
             <p className="mb-4 max-w-2xl text-base leading-relaxed text-[#9CA3AF] sm:text-lg">
-              Gryph ClubConnect began with a simple realization: if staying organized as a club member is difficult, managing the people, events, tasks, meetings, and decisions behind a club must be even harder.
+              Gryph ClubConnect began with my own experience trying to stay organized across multiple student clubs. Even as a member, it was difficult to know what was coming up, what I was responsible for, and where important updates were being shared.
+            </p>
+            <p className="mb-4 max-w-2xl text-base leading-relaxed text-[#9CA3AF] sm:text-lg">
+              When I moved into leadership roles, I realized the challenge was even bigger for the people coordinating the club behind the scenes.
             </p>
             <p className="mb-7 max-w-2xl text-base leading-relaxed text-[#9CA3AF] sm:text-lg">
-              The platform is being built to give club teams a clearer way to run their operations while helping students discover where they can get involved.
+              That experience shaped Gryph ClubConnect into a club-management platform first, with discovery built in to connect students to the opportunities clubs create.
             </p>
             <div className="mb-5 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
               <Button
@@ -120,18 +123,39 @@ export default function AboutPage() {
                 The story behind it
               </p>
               <h2 className="mb-5 font-sans text-2xl font-extrabold leading-tight text-[#F5F5F5] sm:text-3xl">
-                The problem became clearer from both sides of club life.
+                What started as member confusion became a club-management problem.
               </h2>
-              <div className="space-y-5 text-base leading-relaxed text-[#9CA3AF]">
-                <p>
-                  Gryph ClubConnect started from my own experience being involved in multiple student clubs at the University of Guelph. As a general member, I often did not know what was coming up, which tasks I was responsible for, where updates were being shared, or how to keep track of everything across different clubs.
-                </p>
-                <p>
-                  As I moved into leadership roles—including Web Operations Manager for the Lang Students&apos; Association and a marketing-management role with GEMA—the problem became even more obvious. If members with limited responsibilities were already confused, the executives coordinating events, tasks, meetings, applications, documents, and people were carrying an even larger organizational burden.
-                </p>
-                <p>
-                  That became the foundation for Gryph ClubConnect: build the club-management system first, then connect it to discovery so students can find clubs, events, and opportunities through the same platform.
-                </p>
+              <div className="space-y-5">
+                <div>
+                  <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#E51937]">
+                    01 — Trying to stay involved
+                  </p>
+                  <p className="text-base leading-relaxed text-[#9CA3AF]">
+                    As a member of multiple clubs, I regularly lost track of upcoming events, responsibilities, updates, and tasks. The information existed, but it was spread across too many places.
+                  </p>
+                </div>
+                <div>
+                  <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#FFC429]">
+                    02 — Seeing the leadership burden
+                  </p>
+                  <p className="text-base leading-relaxed text-[#9CA3AF]">
+                    After moving into roles with the Lang Students&apos; Association and GEMA, I saw how much coordination happened behind the scenes. Executives were managing people, meetings, events, applications, documents, permissions, and follow-ups across disconnected tools.
+                  </p>
+                </div>
+                <div>
+                  <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#F5F5F5]">
+                    03 — Defining the product
+                  </p>
+                  <p className="text-base leading-relaxed text-[#9CA3AF]">
+                    That changed the direction of Gryph ClubConnect. The priority became building a stronger operating system for clubs, then connecting it to discovery so students could find and participate in the opportunities those clubs create.
+                  </p>
+                </div>
+
+                <div className="rounded-[12px] border border-[#E51937]/20 bg-[rgba(229,25,55,0.06)] p-5 text-center">
+                  <p className="text-sm font-semibold leading-relaxed text-[#F5F5F5]">
+                    The same problem affected both sides of club life—members lacked visibility, while leaders lacked structure.
+                  </p>
+                </div>
               </div>
             </AnimatedSection>
 
@@ -147,7 +171,7 @@ export default function AboutPage() {
                         First
                       </p>
                       <h3 className="text-lg font-semibold text-[#F5F5F5]">
-                        Member experience
+                        “What am I supposed to be doing?”
                       </h3>
                     </div>
                   </div>
@@ -175,7 +199,7 @@ export default function AboutPage() {
                         Then
                       </p>
                       <h3 className="text-lg font-semibold text-[#F5F5F5]">
-                        Leadership perspective
+                        “How are we supposed to coordinate everyone?”
                       </h3>
                     </div>
                   </div>
@@ -197,6 +221,9 @@ export default function AboutPage() {
       <section className="border-t border-[#222222] bg-[#0B0B0B] py-16 sm:py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-10 max-w-3xl">
+            <p className="mb-4 text-sm font-semibold text-[#F5F5F5]">
+              That insight determined what Gryph ClubConnect needed to become.
+            </p>
             <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FFC429] sm:text-xs">
               What we are building
             </p>
@@ -204,7 +231,7 @@ export default function AboutPage() {
               A club-management platform that also makes involvement easier to discover.
             </h2>
             <p className="text-base leading-relaxed text-[#9CA3AF]">
-              The core of Gryph ClubConnect is the club workspace: members, tasks, events, meetings, hiring, documents, permissions, and reporting in one place. The discovery experience connects students to those clubs, events, and opportunities instead of leaving them scattered across separate pages and social posts.
+              Gryph ClubConnect is being built around the club workspace first: members, roles, tasks, events, meetings, hiring, documents, permissions, and reporting in one place. The discovery experience then connects students directly to those clubs, events, and opportunities.
             </p>
           </AnimatedSection>
 
@@ -223,6 +250,9 @@ export default function AboutPage() {
                     <h3 className="text-xl font-bold text-[#F5F5F5]">
                       Club management
                     </h3>
+                    <p className="mt-1 text-sm leading-relaxed text-[#9CA3AF]">
+                      Give club teams the structure needed to coordinate people and work.
+                    </p>
                   </div>
                 </div>
                 <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
@@ -255,6 +285,9 @@ export default function AboutPage() {
                     <h3 className="text-xl font-bold text-[#F5F5F5]">
                       Student discovery
                     </h3>
+                    <p className="mt-1 text-sm leading-relaxed text-[#9CA3AF]">
+                      Give students a clearer way to find and act on club opportunities.
+                    </p>
                   </div>
                 </div>
                 <div className="space-y-3">
@@ -273,6 +306,14 @@ export default function AboutPage() {
               </div>
             </AnimatedSection>
           </div>
+
+          <AnimatedSection delay={0.08} className="mt-5">
+            <div className="mx-auto max-w-3xl rounded-[12px] border border-white/[0.08] bg-[#111111] px-5 py-4 text-center">
+              <p className="text-sm font-semibold text-[#F5F5F5]">
+                Club teams create opportunities <span className="mx-2 text-[#777777]">→</span> students discover and engage with them.
+              </p>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
@@ -281,13 +322,13 @@ export default function AboutPage() {
           <AnimatedSection>
             <div className="rounded-[16px] border border-white/[0.08] bg-[#131313] p-7 text-center sm:p-9">
               <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FFC429] sm:text-xs">
-                Independent platform
+                How it is being built
               </p>
               <h2 className="mb-4 font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
-                Student-built and independent from the University of Guelph.
+                Independent, student-built, and shaped by real club experience.
               </h2>
               <p className="mx-auto mb-6 max-w-2xl text-base leading-relaxed text-[#9CA3AF]">
-                Gryph ClubConnect is not officially affiliated with, endorsed by, or operated by the University of Guelph. It is an independent student-built platform shaped by real experience in student clubs and developed with feedback from students and club leaders.
+                Gryph ClubConnect is being developed independently from the University of Guelph and is not officially affiliated with, endorsed by, or operated by the University. The platform is shaped by firsthand club experience and feedback from the students and leaders it is designed to support.
               </p>
               <div className="flex flex-wrap items-center justify-center gap-2">
                 {['Independent', 'Student-built', 'Early access'].map((badge) => (
@@ -309,10 +350,10 @@ export default function AboutPage() {
         <div className="relative z-10 mx-auto max-w-3xl px-4 text-center">
           <AnimatedSection>
             <h2 className="mb-4 font-sans text-3xl font-extrabold text-[#F5F5F5] sm:text-4xl">
-              See how Gryph ClubConnect could support your club.
+              Help shape a better way to run student clubs.
             </h2>
             <p className="mx-auto mb-8 max-w-xl text-base leading-relaxed text-[#9CA3AF]">
-              Request a walkthrough focused on your team&apos;s current workflows or get your club ready for early access.
+              Request a walkthrough, share how your club currently operates, and see how Gryph ClubConnect could support your team as the platform moves toward early access.
             </p>
             <div className="flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
               <Button

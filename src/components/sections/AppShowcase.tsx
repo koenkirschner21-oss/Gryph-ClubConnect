@@ -156,7 +156,7 @@ export default function AppShowcase() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
-          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
+          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FF5A70] sm:text-xs">
             Product tour
           </p>
 
@@ -193,7 +193,7 @@ export default function AppShowcase() {
                   <div className="flex gap-3">
                     <span
                       className={`shrink-0 pt-0.5 text-[12px] font-semibold tabular-nums ${
-                        isActive ? 'text-[#E51937]' : 'text-[#666666]'
+                        isActive ? 'text-[#FF5A70]' : 'text-[#9CA3AF]'
                       }`}
                     >
                       {String(index + 1).padStart(2, '0')}
@@ -206,7 +206,7 @@ export default function AppShowcase() {
 
                       <span
                         className={`mt-1 block text-[12px] leading-snug ${
-                          isActive ? 'text-[#9CA3AF]' : 'text-[#727780]'
+                          isActive ? 'text-[#9CA3AF]' : 'text-[#AEB4C0]'
                         }`}
                       >
                         {workflow.description}
@@ -286,7 +286,7 @@ export default function AppShowcase() {
           <button
             type="button"
             onClick={handleDemo}
-            className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#E51937] transition-colors hover:text-[#FF6B7D]"
+            className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#FF5A70] transition-colors hover:text-[#FF7A8D]"
           >
             Request a Demo
             <ArrowRight size={16} />

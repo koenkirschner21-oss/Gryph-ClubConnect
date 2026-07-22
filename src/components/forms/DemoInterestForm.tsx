@@ -1,4 +1,10 @@
-import { useEffect, useId, useState, type FormEvent } from 'react';
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type FormEvent,
+} from 'react';
 import { Link } from 'react-router-dom';
 import { Check } from 'lucide-react';
 import {
@@ -10,6 +16,7 @@ import {
 } from '../../lib/forms';
 import { CLUB_INTEREST_EVENT, consumeClubFormInterest, type ClubInterestOption } from '../../lib/cta';
 import BrandLogo from '../ui/BrandLogo';
+import { trackEvent } from '../../lib/analytics';
 
 const inputClass =
   'w-full min-w-0 bg-[#0B0B0B] border border-[#222222] rounded-[10px] px-3.5 py-2.5 text-sm text-[#F5F5F5] placeholder:text-[#777777] focus:outline-none focus:ring-2 focus:ring-[#E51937] focus:border-[#E51937] transition-colors';
@@ -83,6 +90,7 @@ export default function DemoInterestForm({
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const formStarted = useRef(false);
 
   useEffect(() => {
     const pending = consumeClubFormInterest();
@@ -109,6 +117,20 @@ export default function DemoInterestForm({
     );
   };
 
+  const handleFormStart = () => {
+    if (formStarted.current) {
+      return;
+    }
+
+    formStarted.current = true;
+
+    trackEvent('form_start', {
+      form_name: 'club_interest',
+      form_source: formSource,
+      request_type: requestType,
+    });
+  };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSubmitting(true);
@@ -133,6 +155,13 @@ export default function DemoInterestForm({
       });
 
       if (res.ok) {
+        trackEvent('generate_lead', {
+          form_name: 'club_interest',
+          form_source: formSource,
+          request_type: requestType,
+          workflow_count: workflows.length,
+        });
+
         setSubmitted(true);
         form.reset();
         setWorkflows([]);
@@ -234,6 +263,7 @@ export default function DemoInterestForm({
       action={DEMO_FORM_ENDPOINT}
       method="POST"
       onSubmit={handleSubmit}
+      onFocusCapture={handleFormStart}
       className={fieldGap}
       noValidate
     >

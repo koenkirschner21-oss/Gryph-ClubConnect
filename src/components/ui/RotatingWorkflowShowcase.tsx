@@ -28,7 +28,7 @@ type RotatingWorkflowShowcaseProps = {
 
 const accentStyles = {
   red: {
-    stepNum: 'text-[#E51937]',
+    stepNum: 'text-[#FF5A70]',
     activeBorder: 'border-l-[#E51937]',
     activeBg: 'bg-[rgba(229,25,55,0.06)]',
     inactiveHover: 'hover:bg-[#161616]',
@@ -119,7 +119,7 @@ export default function RotatingWorkflowShowcase({
               >
                 <span
                   className={`w-8 shrink-0 pt-0.5 text-[13px] font-semibold tabular-nums ${
-                    isActive ? styles.stepNum : 'text-[#666666]'
+                    isActive ? styles.stepNum : 'text-[#9CA3AF]'
                   }`}
                 >
                   {String(index + 1).padStart(2, '0')}
@@ -128,7 +128,7 @@ export default function RotatingWorkflowShowcase({
                 <div className="min-w-0">
                   <h3
                     className={`mb-1 text-[15px] font-semibold sm:text-base ${
-                      isActive ? 'text-[#F5F5F5]' : 'text-[#B0B6C0]'
+                      isActive ? 'text-[#F5F5F5]' : 'text-[#BFC4CC]'
                     }`}
                   >
                     {step.title}
@@ -136,7 +136,7 @@ export default function RotatingWorkflowShowcase({
 
                   <p
                     className={`text-[13px] leading-relaxed sm:text-[14px] ${
-                      isActive ? 'text-[#9CA3AF]' : 'text-[#727780]'
+                      isActive ? 'text-[#9CA3AF]' : 'text-[#AEB4C0]'
                     }`}
                   >
                     {step.description}

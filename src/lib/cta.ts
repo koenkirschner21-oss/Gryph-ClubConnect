@@ -1,3 +1,5 @@
+import { trackEvent } from './analytics';
+
 /**
  * Marketing CTA routing for the early-access funnel.
  *
@@ -8,66 +10,127 @@
  * Log In → APP_LOGIN_URL
  */
 
-export const APP_LOGIN_URL = 'https://app.gryphclubconnect.com/login';
+export const APP_LOGIN_URL =
+  'https://app.gryphclubconnect.com/login';
 
 /**
- * Future public signup — do not promote as a primary website CTA until the app is public-ready.
- * https://app.gryphclubconnect.com/signup
+ * Future public signup — do not promote as a primary website CTA
+ * until the app is public-ready.
  */
-export const APP_SIGNUP_URL = 'https://app.gryphclubconnect.com/signup';
+export const APP_SIGNUP_URL =
+  'https://app.gryphclubconnect.com/signup';
 
 export const DEMO_PATH = '/demo';
 export const FOR_STUDENTS_PATH = '/for-students';
 export const FOR_CLUBS_PATH = '/for-clubs';
 export const FEATURES_PATH = '/features';
 
-export const HOMEPAGE_DEMO_FORM_ID = 'homepage-demo-form';
-export const DEMO_FORM_ID = 'demo-form';
-export const HOMEPAGE_STUDENT_ACCESS_ID = 'homepage-student-access';
-export const STUDENT_ACCESS_ID = 'student-access';
+export const HOMEPAGE_DEMO_FORM_ID =
+  'homepage-demo-form';
+
+export const DEMO_FORM_ID =
+  'demo-form';
+
+export const HOMEPAGE_STUDENT_ACCESS_ID =
+  'homepage-student-access';
+
+export const STUDENT_ACCESS_ID =
+  'student-access';
 
 /** @deprecated Prefer DEMO_FORM_ID */
-export const REQUEST_DEMO_ID = DEMO_FORM_ID;
+export const REQUEST_DEMO_ID =
+  DEMO_FORM_ID;
+
 /** Onboard CTAs share the demo form targets. */
-export const ONBOARD_CLUB_ID = 'onboard-your-club';
+export const ONBOARD_CLUB_ID =
+  'onboard-your-club';
 
 /** @deprecated Prefer goToDemoForm */
-export const JOIN_TESTING_ID = DEMO_FORM_ID;
+export const JOIN_TESTING_ID =
+  DEMO_FORM_ID;
+
 /** @deprecated Prefer goToDemoForm */
-export const REQUEST_WALKTHROUGH_ID = DEMO_FORM_ID;
+export const REQUEST_WALKTHROUGH_ID =
+  DEMO_FORM_ID;
 
-export type ClubInterestOption = 'Request a demo' | 'Onboard my club' | 'Ask a question';
+export type ClubInterestOption =
+  | 'Request a demo'
+  | 'Onboard my club'
+  | 'Ask a question';
 
-export const CLUB_INTEREST_EVENT = 'gcc:set-club-interest';
-const CLUB_INTEREST_STORAGE_KEY = 'gcc:club-form-interest';
+export const CLUB_INTEREST_EVENT =
+  'gcc:set-club-interest';
 
-/** Preselect demo form interest before scrolling to the form. */
-export function setClubFormInterest(interest: ClubInterestOption) {
-  if (typeof window === 'undefined') return;
-  try {
-    sessionStorage.setItem(CLUB_INTEREST_STORAGE_KEY, interest);
-  } catch {
-    /* ignore */
+const CLUB_INTEREST_STORAGE_KEY =
+  'gcc:club-form-interest';
+
+/**
+ * Preselect demo form interest before scrolling to the form.
+ */
+export function setClubFormInterest(
+  interest: ClubInterestOption,
+) {
+  if (typeof window === 'undefined') {
+    return;
   }
-  window.dispatchEvent(new CustomEvent(CLUB_INTEREST_EVENT, { detail: interest }));
+
+  try {
+    sessionStorage.setItem(
+      CLUB_INTEREST_STORAGE_KEY,
+      interest,
+    );
+  } catch {
+    // Ignore unavailable browser storage.
+  }
+
+  window.dispatchEvent(
+    new CustomEvent(CLUB_INTEREST_EVENT, {
+      detail: interest,
+    }),
+  );
 }
 
-/** Read and clear a pending demo-form interest (for cross-page CTA navigation). */
-export function consumeClubFormInterest(): ClubInterestOption | null {
-  if (typeof window === 'undefined') return null;
+/**
+ * Read and clear a pending demo-form interest.
+ */
+export function consumeClubFormInterest():
+  | ClubInterestOption
+  | null {
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
   try {
-    const value = sessionStorage.getItem(CLUB_INTEREST_STORAGE_KEY);
-    sessionStorage.removeItem(CLUB_INTEREST_STORAGE_KEY);
-    if (value === 'Request a demo' || value === 'Onboard my club' || value === 'Ask a question') {
+    const value = sessionStorage.getItem(
+      CLUB_INTEREST_STORAGE_KEY,
+    );
+
+    sessionStorage.removeItem(
+      CLUB_INTEREST_STORAGE_KEY,
+    );
+
+    if (
+      value === 'Request a demo' ||
+      value === 'Onboard my club' ||
+      value === 'Ask a question'
+    ) {
       return value;
     }
   } catch {
-    /* ignore */
+    // Ignore unavailable browser storage.
   }
+
   return null;
 }
 
-type NavigateFn = (to: string | { pathname: string; hash?: string }) => void;
+type NavigateFn = (
+  to:
+    | string
+    | {
+        pathname: string;
+        hash?: string;
+      },
+) => void;
 
 type GoOptions = {
   navigate?: NavigateFn;
@@ -75,14 +138,51 @@ type GoOptions = {
 };
 
 function scrollToId(sectionId: string) {
-  const el = document.getElementById(sectionId);
-  if (el) {
-    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const element =
+    document.getElementById(sectionId);
+
+  if (element) {
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
   }
 }
 
-/** Scroll to a section by id. Student access routes to For Students. */
-export function goToSection(sectionId: string, options?: GoOptions) {
+/**
+ * Track a click to the external app login page.
+ */
+export function trackLoginClick(
+  pathname: string,
+) {
+  trackEvent('login_click', {
+    source_path: pathname,
+    destination: APP_LOGIN_URL,
+  });
+}
+
+/**
+ * Track clicks to social media or other external destinations.
+ */
+export function trackOutboundClick(
+  label: string,
+  destination: string,
+  pathname: string,
+) {
+  trackEvent('outbound_click', {
+    link_label: label,
+    destination,
+    source_path: pathname,
+  });
+}
+
+/**
+ * Scroll to a section by id.
+ */
+export function goToSection(
+  sectionId: string,
+  options?: GoOptions,
+) {
   if (
     sectionId === DEMO_FORM_ID ||
     sectionId === REQUEST_DEMO_ID ||
@@ -93,13 +193,21 @@ export function goToSection(sectionId: string, options?: GoOptions) {
     return;
   }
 
-  if (sectionId === STUDENT_ACCESS_ID || sectionId === HOMEPAGE_STUDENT_ACCESS_ID) {
+  if (
+    sectionId === STUDENT_ACCESS_ID ||
+    sectionId === HOMEPAGE_STUDENT_ACCESS_ID
+  ) {
     goToStudentAccess(options);
     return;
   }
 
-  const scroll = () => scrollToId(sectionId);
-  const onHome = !options?.pathname || options.pathname === '/';
+  const scroll = () =>
+    scrollToId(sectionId);
+
+  const onHome =
+    !options?.pathname ||
+    options.pathname === '/';
+
   if (onHome) {
     scroll();
     return;
@@ -107,12 +215,12 @@ export function goToSection(sectionId: string, options?: GoOptions) {
 
   if (options?.navigate) {
     options.navigate('/');
+
     setTimeout(scroll, 120);
     return;
   }
 
   window.location.assign('/');
-  setTimeout(scroll, 120);
 }
 
 /**
@@ -121,18 +229,38 @@ export function goToSection(sectionId: string, options?: GoOptions) {
  * Other pages → /demo#demo-form
  */
 export function goToDemoForm(
-  options?: GoOptions & { interest?: ClubInterestOption }
+  options?: GoOptions & {
+    interest?: ClubInterestOption;
+  },
 ) {
+  const interest =
+    options?.interest ?? 'Request a demo';
+
+  const pathname =
+    options?.pathname ?? '/';
+
+  trackEvent('club_cta_click', {
+    interest,
+    source_path: pathname,
+    destination: DEMO_PATH,
+  });
+
   if (options?.interest) {
-    setClubFormInterest(options.interest);
+    setClubFormInterest(
+      options.interest,
+    );
   }
 
-  const pathname = options?.pathname ?? '/';
-  const onHome = pathname === '/';
-  const onDemo = pathname === DEMO_PATH;
+  const onHome =
+    pathname === '/';
+
+  const onDemo =
+    pathname === DEMO_PATH;
 
   if (onHome) {
-    scrollToId(HOMEPAGE_DEMO_FORM_ID);
+    scrollToId(
+      HOMEPAGE_DEMO_FORM_ID,
+    );
     return;
   }
 
@@ -142,13 +270,22 @@ export function goToDemoForm(
   }
 
   if (options?.navigate) {
-    options.navigate({ pathname: DEMO_PATH, hash: DEMO_FORM_ID });
-    setTimeout(() => scrollToId(DEMO_FORM_ID), 350);
+    options.navigate({
+      pathname: DEMO_PATH,
+      hash: DEMO_FORM_ID,
+    });
+
+    setTimeout(
+      () => scrollToId(DEMO_FORM_ID),
+      350,
+    );
+
     return;
   }
 
-  window.location.assign(`${DEMO_PATH}#${DEMO_FORM_ID}`);
-  setTimeout(() => scrollToId(DEMO_FORM_ID), 350);
+  window.location.assign(
+    `${DEMO_PATH}#${DEMO_FORM_ID}`,
+  );
 }
 
 /**
@@ -156,27 +293,52 @@ export function goToDemoForm(
  * For Students → scroll to #student-access
  * Other pages → /for-students#student-access
  */
-export function goToStudentAccess(options?: GoOptions) {
-  const pathname = options?.pathname ?? '/';
-  const onHome = pathname === '/';
-  const onForStudents = pathname === FOR_STUDENTS_PATH;
+export function goToStudentAccess(
+  options?: GoOptions,
+) {
+  const pathname =
+    options?.pathname ?? '/';
+
+  trackEvent('student_access_click', {
+    source_path: pathname,
+    destination: FOR_STUDENTS_PATH,
+  });
+
+  const onHome =
+    pathname === '/';
+
+  const onForStudents =
+    pathname === FOR_STUDENTS_PATH;
 
   if (onHome) {
-    scrollToId(HOMEPAGE_STUDENT_ACCESS_ID);
+    scrollToId(
+      HOMEPAGE_STUDENT_ACCESS_ID,
+    );
     return;
   }
 
   if (onForStudents) {
-    scrollToId(STUDENT_ACCESS_ID);
+    scrollToId(
+      STUDENT_ACCESS_ID,
+    );
     return;
   }
 
   if (options?.navigate) {
-    options.navigate({ pathname: FOR_STUDENTS_PATH, hash: STUDENT_ACCESS_ID });
-    setTimeout(() => scrollToId(STUDENT_ACCESS_ID), 350);
+    options.navigate({
+      pathname: FOR_STUDENTS_PATH,
+      hash: STUDENT_ACCESS_ID,
+    });
+
+    setTimeout(
+      () => scrollToId(STUDENT_ACCESS_ID),
+      350,
+    );
+
     return;
   }
 
-  window.location.assign(`${FOR_STUDENTS_PATH}#${STUDENT_ACCESS_ID}`);
-  setTimeout(() => scrollToId(STUDENT_ACCESS_ID), 350);
+  window.location.assign(
+    `${FOR_STUDENTS_PATH}#${STUDENT_ACCESS_ID}`,
+  );
 }

@@ -5,6 +5,7 @@ import Footer from './components/layout/Footer';
 import ErrorBoundary from './components/ui/ErrorBoundary';
 import Analytics from './components/analytics/Analytics';
 import SEO from './components/seo/SEO';
+import CookieConsent from './components/privacy/CookieConsent';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const FeaturesPage = lazy(() => import('./pages/FeaturesPage'));
@@ -60,6 +61,7 @@ export default function App() {
           </main>
 
           <Footer />
+          <CookieConsent />
         </div>
       </ErrorBoundary>
     </BrowserRouter>

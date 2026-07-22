@@ -49,34 +49,34 @@ export default function CookieConsent() {
           aria-labelledby="cookie-consent-title"
           aria-describedby="cookie-consent-description"
         >
-          <div className="mx-auto max-w-5xl overflow-hidden rounded-[16px] border border-white/[0.1] bg-[#111111] shadow-[0_24px_70px_rgba(0,0,0,0.65)]">
+          <div className="mx-auto max-w-4xl overflow-hidden rounded-[14px] border border-white/[0.1] bg-[#111111] shadow-[0_24px_70px_rgba(0,0,0,0.65)]">
             <div className="h-[2px] bg-gradient-to-r from-[#E51937] via-[#FFC429] to-[#E51937]" />
 
-            <div className="flex flex-col gap-5 p-5 sm:p-6 lg:flex-row lg:items-center lg:justify-between">
+            <div className="flex flex-col gap-4 p-5 sm:p-5 lg:flex-row lg:items-center lg:justify-between">
               <div className="max-w-2xl">
                 <p
                   id="cookie-consent-title"
-                  className="mb-2 text-base font-bold text-[#F5F5F5]"
+                  className="mb-1.5 text-base font-bold text-[#F5F5F5]"
                 >
-                  Help us improve Gryph ClubConnect
+                  Cookie preferences
                 </p>
 
                 <p
                   id="cookie-consent-description"
                   className="text-sm leading-relaxed text-[#9CA3AF]"
                 >
-                  We use optional Google Analytics cookies to
-                  understand how visitors use the website and improve
-                  the experience. Analytics will not load unless you
-                  accept. We do not send form names, email addresses,
-                  club names, or messages to Google Analytics.
+                  We use optional analytics cookies to understand how visitors
+                  interact with Gryph ClubConnect, measure website performance,
+                  and improve the platform. Analytics remains disabled unless
+                  you choose to accept. You can update your choice at any time
+                  through Cookie Settings.
                 </p>
 
                 <Link
                   to="/privacy"
-                  className="mt-3 inline-flex text-sm font-semibold text-[#E51937] underline underline-offset-4 transition-colors hover:text-[#FF6B7D]"
+                  className="mt-2.5 inline-flex text-sm font-semibold text-[#E51937] underline underline-offset-4 transition-colors hover:text-[#FF6B7D]"
                 >
-                  Read our Privacy Policy
+                  View Privacy Policy
                 </Link>
               </div>
 
@@ -86,7 +86,7 @@ export default function CookieConsent() {
                   onClick={handleDecline}
                   className="inline-flex min-h-[44px] w-full items-center justify-center rounded-[10px] border border-white/[0.12] bg-transparent px-5 py-3 text-sm font-semibold text-[#F5F5F5] transition-colors hover:bg-white/[0.05] focus:outline-none focus:ring-2 focus:ring-[#FFC429] focus:ring-offset-2 focus:ring-offset-[#111111] sm:w-auto"
                 >
-                  Decline analytics
+                  Decline
                 </button>
 
                 <button
@@ -94,7 +94,7 @@ export default function CookieConsent() {
                   onClick={handleAccept}
                   className="inline-flex min-h-[44px] w-full items-center justify-center rounded-[10px] bg-[#E51937] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#C4122E] focus:outline-none focus:ring-2 focus:ring-[#E51937] focus:ring-offset-2 focus:ring-offset-[#111111] sm:w-auto"
                 >
-                  Accept analytics
+                  Accept analytics cookies
                 </button>
               </div>
             </div>

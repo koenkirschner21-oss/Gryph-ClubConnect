@@ -187,7 +187,7 @@ export default function Footer() {
                     pathname: location.pathname,
                   })
                 }
-                className="inline-flex items-center gap-1.5 rounded-full border border-[#E51937]/20 bg-[rgba(229,25,55,0.12)] px-2.5 py-1 font-sans text-xs text-[#E51937] transition-colors hover:bg-[rgba(229,25,55,0.2)]"
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#E51937]/25 bg-[rgba(229,25,55,0.14)] px-2.5 py-1 font-sans text-xs text-[#FF5A70] transition-colors hover:bg-[rgba(229,25,55,0.22)] hover:text-[#FF7A8D]"
               >
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#E51937] opacity-75" />
@@ -212,7 +212,7 @@ export default function Footer() {
             </p>
           </div>
 
-          <p className="max-w-3xl text-center text-xs leading-relaxed text-[#777777] sm:text-left">
+          <p className="max-w-3xl text-center text-xs leading-relaxed text-[#9CA3AF] sm:text-left">
             Gryph ClubConnect is an independent student-built platform and is
             not officially affiliated with, endorsed by, or operated by the
             University of Guelph.

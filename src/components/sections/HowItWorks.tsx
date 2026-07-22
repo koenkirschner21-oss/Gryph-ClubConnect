@@ -59,7 +59,7 @@ export default function HowItWorks() {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="mb-10 max-w-3xl sm:mb-12">
-          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
+          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FF5A70] sm:text-xs">
             How early access works
           </p>
 
@@ -86,7 +86,7 @@ export default function HowItWorks() {
                       : ''
                   }`}
                 >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#E51937]/35 bg-[rgba(229,25,55,0.12)] text-[12px] font-bold tabular-nums text-[#E51937]">
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-[#E51937]/35 bg-[rgba(229,25,55,0.12)] text-[12px] font-bold tabular-nums text-[#FF5A70]">
                     {step.step}
                   </span>
 
@@ -106,7 +106,7 @@ export default function HowItWorks() {
             <button
               type="button"
               onClick={handleDemo}
-              className="mt-5 inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#E51937] transition-colors hover:text-[#FF6B7D]"
+              className="mt-5 inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#FF5A70] transition-colors hover:text-[#FF7A8D]"
             >
               Ready to see it? Request a Demo
               <ArrowRight size={16} />

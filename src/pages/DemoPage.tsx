@@ -6,7 +6,6 @@ import {
   ChevronDown,
   ClipboardCheck,
   LayoutDashboard,
-  Play,
   ShieldCheck,
   Users,
   type LucideIcon,
@@ -47,14 +46,14 @@ const walkthroughAreas: {
     title: 'People and hiring',
     description:
       'Review members, roles, applications, applicant management, and leadership transitions.',
-    accent: 'neutral',
+    accent: 'red',
   },
   {
     icon: ShieldCheck,
-    title: 'Access and insights',
+    title: 'Leadership and insights',
     description:
       'Walk through permissions, setup, reporting, analytics, and activity visibility.',
-    accent: 'gold',
+    accent: 'neutral',
   },
 ];
 
@@ -120,8 +119,8 @@ const audiences = [
       'See how individual responsibilities can be managed without relying on scattered messages or spreadsheets.',
   },
   {
-    label: 'Preparing for launch',
-    title: 'Clubs Preparing for Launch',
+    label: 'Clubs getting started',
+    title: 'Clubs Getting Started',
     description:
       'Understand which workflows to set up first and how the workspace can grow with your team.',
   },
@@ -130,19 +129,19 @@ const audiences = [
 const howItWorksSteps = [
   {
     title: 'Tell us about your club',
-    description: 'Share your club name, your role, and what your team wants to improve.',
+    description: 'Share your role, priorities, and current process.',
   },
   {
     title: 'Choose the workflows',
-    description: 'Select the parts of the platform you want the walkthrough to focus on.',
+    description: 'Select what your team wants to see.',
   },
   {
     title: 'Walk through the platform',
-    description: 'See student discovery, club operations, permissions, and team workflows in action.',
+    description: 'See those workflows in action.',
   },
   {
     title: 'Decide the next step',
-    description: 'Discuss early access and workspace setup when it makes sense for your club.',
+    description: 'Discuss early access when it makes sense.',
   },
 ];
 
@@ -220,14 +219,14 @@ export default function DemoPage() {
       <section className="relative overflow-hidden bg-[#0B0B0B] pt-28 pb-14 sm:pt-32 sm:pb-16">
         <div className="pointer-events-none absolute -top-40 left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-[#E51937] opacity-[0.04] blur-[140px]" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12">
             <AnimatedSection>
               <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
                 Request a demo
               </p>
               <h1
                 className="mb-5 font-sans font-extrabold leading-tight text-[#F5F5F5]"
-                style={{ fontSize: 'clamp(2.35rem, 4.4vw, 3.65rem)' }}
+                style={{ fontSize: 'clamp(2.25rem, 4vw, 3.4rem)' }}
               >
                 See how Gryph ClubConnect could work for your club.
               </h1>
@@ -262,32 +261,21 @@ export default function DemoPage() {
             </AnimatedSection>
 
             <AnimatedSection delay={0.08}>
-              <button
-                type="button"
-                className="group relative mx-auto block w-full max-w-[650px] text-left"
-                aria-label="Watch the Gryph ClubConnect product overview"
-              >
+              <div className="relative mx-auto block w-full max-w-[610px]">
                 <MockupImage
                   name="demoHero"
                   alt="Gryph ClubConnect product overview preview"
                   className="relative !overflow-visible !rounded-none !border-0 !bg-transparent !shadow-none !ring-0"
-                  imgClassName="mx-auto h-auto w-full object-contain lg:scale-[0.94]"
+                  imgClassName="mx-auto h-auto w-full object-contain lg:scale-[0.9]"
                 />
-                <span className="absolute inset-0 flex items-center justify-center">
-                  <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/20 bg-black/65 text-white shadow-[0_10px_30px_rgba(0,0,0,0.4)] transition-transform duration-200 group-hover:scale-105">
-                    <Play size={24} fill="currentColor" />
-                  </span>
-                </span>
-                <span className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full border border-white/[0.1] bg-black/70 px-3 py-1.5 text-[12px] font-semibold text-[#F5F5F5] backdrop-blur-sm">
-                  Watch Product Overview
-                </span>
-              </button>
+                {/* Add the YouTube modal trigger here once the product overview video is published. */}
+              </div>
             </AnimatedSection>
           </div>
         </div>
       </section>
 
-      <section className="border-t border-[#222222] bg-[#111111] py-16 sm:py-20">
+      <section className="border-t border-[#222222] bg-[#111111] py-14 sm:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-10 max-w-3xl">
             <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FFC429] sm:text-xs">
@@ -308,7 +296,7 @@ export default function DemoPage() {
 
               return (
                 <StaggerItem key={area.title}>
-                  <div className="relative h-full overflow-hidden rounded-[14px] border border-white/[0.08] bg-[#131313] p-6 transition-colors hover:border-white/[0.14]">
+                  <div className="relative h-full overflow-hidden rounded-[14px] border border-white/[0.08] bg-[#131313] p-5 transition-colors hover:border-white/[0.14]">
                     <span
                       className={`absolute inset-y-0 left-0 w-[3px] ${style.bar}`}
                       aria-hidden
@@ -332,7 +320,7 @@ export default function DemoPage() {
         </div>
       </section>
 
-      <section className="border-t border-[#222222] bg-[#0B0B0B] py-16 sm:py-20">
+      <section className="border-t border-[#222222] bg-[#0B0B0B] py-12 sm:py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-10 max-w-3xl">
             <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
@@ -348,7 +336,7 @@ export default function DemoPage() {
           </AnimatedSection>
 
           <AnimatedSection>
-            <div className="mx-auto max-w-4xl overflow-hidden rounded-[14px] border border-white/[0.08] bg-[#131313]">
+            <div className="mx-auto max-w-5xl overflow-hidden rounded-[14px] border border-white/[0.08] bg-[#131313]">
               {demoOptions.map((option, index) => {
                 const active = activeDemoOption === index;
 
@@ -382,7 +370,7 @@ export default function DemoPage() {
                       />
                     </button>
                     {active && (
-                      <div className="border-t border-white/[0.06] px-5 py-5">
+                      <div className="border-t border-white/[0.06] px-5 py-6 sm:px-6">
                         <p className="mb-4 text-sm leading-relaxed text-[#9CA3AF]">
                           {option.description}
                         </p>
@@ -390,8 +378,9 @@ export default function DemoPage() {
                           {option.items.map((item) => (
                             <div
                               key={item}
-                              className="rounded-[9px] border border-white/[0.07] bg-[#0B0B0B] px-3.5 py-3 text-sm text-[#F5F5F5]"
+                              className="flex items-center gap-2.5 rounded-[9px] border border-white/[0.07] bg-[#0B0B0B] px-3.5 py-3 text-sm text-[#F5F5F5]"
                             >
+                              <Check size={14} className="shrink-0 text-[#FFC429]" />
                               {item}
                             </div>
                           ))}
@@ -401,7 +390,7 @@ export default function DemoPage() {
                           onClick={handleDemo}
                           className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#E51937] transition-colors hover:text-[#FF6B7D]"
                         >
-                          Include this in my demo
+                          Request this demo focus
                           <ArrowRight size={15} />
                         </button>
                       </div>
@@ -414,14 +403,14 @@ export default function DemoPage() {
         </div>
       </section>
 
-      <section className="border-t border-[#222222] bg-[#111111] py-16 sm:py-20">
+      <section className="border-t border-[#222222] bg-[#111111] py-12 sm:py-14">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-10 max-w-3xl">
             <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FFC429] sm:text-xs">
               Who it&apos;s for
             </p>
             <h2 className="font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
-              Built for the people responsible for club operations.
+              Built for every level of club leadership.
             </h2>
           </AnimatedSection>
 
@@ -477,7 +466,7 @@ export default function DemoPage() {
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
               {howItWorksSteps.map((step, index) => (
                 <div key={step.title} className="relative">
-                  <div className="h-full rounded-[12px] border border-white/[0.08] bg-[#131313] p-5">
+                  <div className="h-full rounded-[12px] border border-white/[0.08] bg-[#131313] p-4">
                     <span
                       className={`mb-3 inline-flex h-8 w-8 items-center justify-center rounded-full border text-[11px] font-bold tabular-nums ${
                         index % 2 === 0
@@ -514,7 +503,7 @@ export default function DemoPage() {
       >
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-14">
-            <AnimatedSection>
+            <AnimatedSection className="lg:sticky lg:top-28">
               <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
                 Request a demo
               </p>
@@ -527,7 +516,7 @@ export default function DemoPage() {
                 club&apos;s needs.
               </p>
 
-              <div className="mb-5 max-w-md rounded-[12px] border border-[#222222] bg-[#131313] p-5 sm:p-6">
+              <div className="max-w-md rounded-[12px] border border-[#222222] bg-[#131313] p-5 sm:p-6">
                 <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#FFC429]">
                   What happens next
                 </p>
@@ -543,9 +532,7 @@ export default function DemoPage() {
                     </li>
                   ))}
                 </ol>
-              </div>
-
-              <div className="max-w-md rounded-[12px] border border-white/[0.08] bg-[#0B0B0B] p-5">
+                <div className="my-5 h-px bg-white/[0.08]" />
                 <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#777777]">
                   Helpful context to share
                 </p>
@@ -567,11 +554,10 @@ export default function DemoPage() {
             <AnimatedSection delay={0.08}>
               <div className="rounded-[14px] border border-[#222222] bg-[#131313] p-6 shadow-[0_16px_48px_rgba(0,0,0,0.35)] sm:p-7">
                 <h3 className="mb-1 font-sans text-xl font-bold text-[#F5F5F5]">
-                  Request a demo or club onboarding
+                  Tell us about your club
                 </h3>
                 <p className="mb-6 text-sm leading-relaxed text-[#777777]">
-                  Tell us about your club so we can focus the walkthrough on
-                  what matters most.
+                  Choose what you want to see and we&apos;ll focus the walkthrough around your team.
                 </p>
                 <DemoInterestForm variant="full" idPrefix="demo-page" />
               </div>

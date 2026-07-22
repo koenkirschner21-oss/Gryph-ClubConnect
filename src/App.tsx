@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
 import ErrorBoundary from './components/ui/ErrorBoundary';
+import Analytics from './components/analytics/Analytics';
+import SEO from './components/seo/SEO';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const FeaturesPage = lazy(() => import('./pages/FeaturesPage'));
@@ -31,8 +33,12 @@ export default function App() {
   return (
     <BrowserRouter>
       <ErrorBoundary>
+        <SEO />
+        <Analytics />
+
         <div className="bg-[#0B0B0B] min-h-screen text-[#F5F5F5] overflow-x-hidden">
           <Navbar />
+
           <main className="min-w-0">
             <Suspense fallback={<PageLoader />}>
               <Routes>
@@ -52,6 +58,7 @@ export default function App() {
               </Routes>
             </Suspense>
           </main>
+
           <Footer />
         </div>
       </ErrorBoundary>

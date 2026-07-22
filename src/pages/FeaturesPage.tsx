@@ -295,29 +295,29 @@ function ProductMapVisual() {
   ];
 
   return (
-    <div className="relative max-w-xl mx-auto lg:ml-auto">
-      <div className="absolute -inset-8 rounded-full bg-[#E51937] opacity-[0.04] blur-[70px] pointer-events-none" />
-      <div className="relative rounded-[16px] border border-white/[0.08] bg-[#111111] p-4 sm:p-5 shadow-[0_20px_55px_rgba(0,0,0,0.42)]">
-        <div className="flex items-center justify-between gap-4 mb-4">
+    <div className="relative max-w-[610px] mx-auto lg:ml-auto">
+      <div className="absolute -inset-6 rounded-full bg-[#E51937] opacity-[0.035] blur-[65px] pointer-events-none" />
+      <div className="relative rounded-[16px] border border-white/[0.08] bg-[#111111] p-4 shadow-[0_20px_55px_rgba(0,0,0,0.42)]">
+        <div className="flex items-center justify-between gap-4 mb-3.5">
           <div>
             <p className="text-[10px] uppercase tracking-[0.16em] text-[#777777] mb-1">
-              Connected platform
+              How the platform connects
             </p>
             <p className="text-sm font-semibold text-[#F5F5F5]">
-              One path from discovery to management
+              Discovery becomes participation, then club management.
             </p>
           </div>
-          <span className="shrink-0 rounded-full border border-[#E51937]/20 bg-[rgba(229,25,55,0.1)] px-2.5 py-1 text-[10px] font-semibold text-[#E51937]">
+          <span className="shrink-0 rounded-full border border-[#E51937]/15 bg-[rgba(229,25,55,0.07)] px-2.5 py-1 text-[10px] font-semibold text-[#E51937]">
             Gryph ClubConnect
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
           {columns.map((column, index) => {
             const style = accentStyles[column.accent];
             return (
               <div key={column.title} className="relative">
-                <div className="h-full rounded-[12px] border border-white/[0.08] bg-[#0B0B0B] p-3.5">
+                <div className="h-full rounded-[12px] border border-white/[0.08] bg-[#0B0B0B] p-3">
                   <div className="flex items-center gap-2 mb-3">
                     <span className={`flex h-7 w-7 items-center justify-center rounded-full border text-[10px] font-bold ${style.border} ${style.background} ${style.text}`}>
                       {String(index + 1).padStart(2, '0')}
@@ -338,7 +338,7 @@ function ProductMapVisual() {
                 {index < columns.length - 1 && (
                   <ArrowRight
                     size={15}
-                    className="hidden sm:block absolute top-1/2 -right-2.5 -translate-y-1/2 z-10 text-[#555555]"
+                    className="hidden sm:block absolute top-1/2 -right-2.5 -translate-y-1/2 z-10 text-[#777777]"
                     aria-hidden
                   />
                 )}
@@ -520,22 +520,22 @@ export default function FeaturesPage() {
 
   return (
     <div className="page-transition">
-      <section className="relative pt-28 sm:pt-32 pb-14 sm:pb-16 overflow-hidden bg-[#0B0B0B]">
+      <section className="relative pt-24 sm:pt-28 pb-12 sm:pb-14 overflow-hidden bg-[#0B0B0B]">
         <div className="absolute -top-40 right-0 w-[520px] h-[520px] rounded-full bg-[#E51937] opacity-[0.035] blur-[110px] pointer-events-none" />
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.94fr_1.06fr] gap-10 lg:gap-14 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr] gap-9 lg:gap-12 items-center">
             <AnimatedSection>
               <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-4">
                 Platform overview
               </p>
               <h1
-                className="font-sans font-extrabold text-[#F5F5F5] mb-5 leading-tight"
-                style={{ fontSize: 'clamp(2.35rem, 4.4vw, 3.65rem)' }}
+                className="font-sans font-extrabold text-[#F5F5F5] mb-4 leading-[1.06] max-w-[680px]"
+                style={{ fontSize: 'clamp(2.3rem, 3.55vw, 3.2rem)' }}
               >
-                One connected platform for student discovery and club operations.
+                One platform connecting student discovery and club operations.
               </h1>
-              <p className="text-[#9CA3AF] text-base sm:text-lg max-w-xl leading-relaxed mb-7">
-                Gryph ClubConnect helps students discover clubs, events, and opportunities while giving club leaders one organized workspace to manage members, tasks, meetings, hiring, permissions, and more.
+              <p className="text-[#9CA3AF] text-base sm:text-lg max-w-[620px] leading-relaxed mb-6">
+                Gryph ClubConnect helps students discover clubs, events, and opportunities while giving club teams one workspace to manage members, tasks, meetings, hiring, permissions, and more.
               </p>
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-5">
                 <Button
@@ -560,7 +560,7 @@ export default function FeaturesPage() {
               </p>
             </AnimatedSection>
 
-            <AnimatedSection delay={0.1}>
+            <AnimatedSection delay={0.1} className="lg:scale-[0.96] lg:origin-center">
               <ProductMapVisual />
             </AnimatedSection>
           </div>

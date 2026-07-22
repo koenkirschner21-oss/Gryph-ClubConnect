@@ -1,284 +1,329 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ArrowRight, Check } from 'lucide-react';
 import {
-  Compass,
-  LayoutGrid,
-  CalendarPlus,
-  CheckSquare,
-  UserCheck,
-  Shield,
-  Crown,
+  ArrowRight,
+  Check,
+  ChevronDown,
+  ClipboardCheck,
+  LayoutDashboard,
+  Play,
+  ShieldCheck,
   Users,
-  UserCog,
-  Rocket,
   type LucideIcon,
 } from 'lucide-react';
-import AnimatedSection, { StaggerContainer, StaggerItem } from '../components/ui/AnimatedSection';
+import AnimatedSection, {
+  StaggerContainer,
+  StaggerItem,
+} from '../components/ui/AnimatedSection';
 import Button from '../components/ui/Button';
 import MockupImage from '../components/mockups/MockupImage';
 import DemoInterestForm from '../components/forms/DemoInterestForm';
 import { goToDemoForm, DEMO_FORM_ID } from '../lib/cta';
 
-const walkthroughCards: {
+type Accent = 'red' | 'gold' | 'neutral';
+
+const walkthroughAreas: {
   icon: LucideIcon;
   title: string;
   description: string;
-  accent: 'red' | 'gold' | 'neutral';
+  accent: Accent;
 }[] = [
   {
-    icon: Compass,
-    title: 'Student discovery',
+    icon: LayoutDashboard,
+    title: 'Student experience',
     description:
-      'See how students can find clubs, view public profiles, discover events, RSVP, and apply for roles.',
+      'Explore discovery, public profiles, events, RSVPs, applications, and the student dashboard.',
     accent: 'red',
   },
   {
-    icon: LayoutGrid,
-    title: 'Command Center',
+    icon: ClipboardCheck,
+    title: 'Club operations',
     description:
-      'See how presidents and execs can track pending actions, setup progress, tasks, applications, events, and quick actions.',
-    accent: 'gold',
-  },
-  {
-    icon: CalendarPlus,
-    title: 'Events & RSVPs',
-    description:
-      'Walk through creating events, collecting RSVP answers, reviewing attendees, and connecting event planning tasks.',
-    accent: 'neutral',
-  },
-  {
-    icon: CheckSquare,
-    title: 'Tasks & ownership',
-    description:
-      'See how exec teams can assign work, set due dates, review progress, and keep ownership clear.',
-    accent: 'red',
-  },
-  {
-    icon: UserCheck,
-    title: 'Hiring & applications',
-    description:
-      'Review how clubs can post roles, collect applications, review candidates, and move applicants through a status pipeline.',
-    accent: 'gold',
-  },
-  {
-    icon: Shield,
-    title: 'Members, roles & permissions',
-    description:
-      'See how clubs can manage members, promote people, assign roles, set reporting structure, and control access levels.',
-    accent: 'neutral',
-  },
-];
-
-const demoFocusItems = [
-  'Club setup',
-  'Public club profile',
-  'Events and RSVPs',
-  'Event planning tasks',
-  'Announcements and chat',
-  'Meeting agendas and notes',
-  'Task assignment and review',
-  'Hiring and applications',
-  'Members and org structure',
-  'Roles and permissions',
-  'Documents and resources',
-  'Analytics and activity tracking',
-  'Student discovery flow',
-];
-
-const audienceCards: {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  accent: 'red' | 'gold' | 'neutral';
-}[] = [
-  {
-    icon: Crown,
-    title: 'Presidents & Co-Presidents',
-    description:
-      'Understand how the full workspace works, from setup and permissions to members, events, hiring, and analytics.',
-    accent: 'red',
-  },
-  {
-    icon: UserCog,
-    title: 'Managerial Executives',
-    description:
-      'See how team leads can oversee specific workflows like events, hiring, members, documents, or operations.',
+      'See the Command Center, tasks, announcements, meetings, documents, and daily workflows.',
     accent: 'gold',
   },
   {
     icon: Users,
-    title: 'Club Executives',
+    title: 'People and hiring',
     description:
-      'See how execs can manage their own responsibilities without relying on scattered messages and spreadsheets.',
+      'Review members, roles, applications, applicant management, and leadership transitions.',
     accent: 'neutral',
   },
   {
-    icon: Rocket,
-    title: 'Clubs preparing for launch',
+    icon: ShieldCheck,
+    title: 'Access and insights',
     description:
-      'Use the walkthrough to decide what workflows your club should set up first.',
+      'Walk through permissions, setup, reporting, analytics, and activity visibility.',
     accent: 'gold',
+  },
+];
+
+const demoOptions = [
+  {
+    title: 'Getting your club set up',
+    description:
+      'Understand the foundation of the workspace and how access is organized.',
+    items: ['Club setup', 'Public profile', 'Invite members', 'Roles and permissions'],
+  },
+  {
+    title: 'Managing events and communication',
+    description:
+      'See how teams coordinate activity and keep members informed.',
+    items: [
+      'Events and RSVPs',
+      'Event planning',
+      'Announcements and chat',
+      'Meetings and notes',
+    ],
+  },
+  {
+    title: 'Managing people and opportunities',
+    description:
+      'Review the workflows used to grow, structure, and support the club.',
+    items: [
+      'Hiring and applications',
+      'Members and structure',
+      'Join requests',
+      'Leadership access',
+    ],
+  },
+  {
+    title: 'Staying organized',
+    description:
+      'Focus on the systems that keep ownership, information, and progress clear.',
+    items: [
+      'Tasks and review',
+      'Documents and resources',
+      'Analytics',
+      'Student discovery',
+    ],
+  },
+];
+
+const audiences = [
+  {
+    label: 'Presidents',
+    title: 'Presidents and Co-Presidents',
+    description:
+      'See the full workspace, including setup, members, events, hiring, analytics, and permissions.',
+  },
+  {
+    label: 'Managerial executives',
+    title: 'Managerial Executives',
+    description:
+      'Focus on the team workflows they oversee, such as events, hiring, operations, or member management.',
+  },
+  {
+    label: 'Club executives',
+    title: 'Club Executives',
+    description:
+      'See how individual responsibilities can be managed without relying on scattered messages or spreadsheets.',
+  },
+  {
+    label: 'Preparing for launch',
+    title: 'Clubs Preparing for Launch',
+    description:
+      'Understand which workflows to set up first and how the workspace can grow with your team.',
   },
 ];
 
 const howItWorksSteps = [
   {
-    title: 'Request a demo',
-    description: 'Tell us your club name, your role, and what you want to see.',
+    title: 'Tell us about your club',
+    description: 'Share your club name, your role, and what your team wants to improve.',
   },
   {
-    title: 'Pick the right workflows',
-    description: 'We focus the walkthrough on the parts of the platform your club would actually use.',
+    title: 'Choose the workflows',
+    description: 'Select the parts of the platform you want the walkthrough to focus on.',
   },
   {
-    title: 'Walk through the workspace',
+    title: 'Walk through the platform',
     description: 'See student discovery, club operations, permissions, and team workflows in action.',
   },
   {
     title: 'Decide the next step',
-    description: 'If it makes sense, we can help prepare your club workspace for early access.',
+    description: 'Discuss early access and workspace setup when it makes sense for your club.',
   },
 ];
 
-const prepareChecklist = [
-  'How your club currently shares announcements',
-  'How you manage events and RSVPs',
-  'How your exec team assigns tasks',
-  'How you recruit or review applicants',
-  'How you store documents and meeting notes',
-  'Who needs access to what',
+const helpfulContext = [
+  'How you currently manage events and RSVPs',
+  'How tasks and responsibilities are assigned',
+  'How applications and applicants are reviewed',
+  'How documents and meeting notes are stored',
+  'Who needs access to which workflows',
 ];
 
 const afterRequestSteps = [
   'We review your club and role',
-  'We focus the walkthrough on the workflows you care about',
-  'We show how your club could manage events, tasks, hiring, members, permissions, and updates',
-  'If it makes sense, we help prepare your club for early access',
+  'We focus the walkthrough on the workflows you select',
+  'We show how the platform could support your team',
+  'We discuss early access when it makes sense',
 ];
 
-const accentBar = {
-  red: 'bg-[#E51937]',
-  gold: 'bg-[#FFC429]',
-  neutral: 'bg-[rgba(255,255,255,0.22)]',
+const accentStyles = {
+  red: {
+    bar: 'bg-[#E51937]',
+    icon:
+      'border-[#E51937]/30 bg-[rgba(229,25,55,0.12)] text-[#E51937]',
+  },
+  gold: {
+    bar: 'bg-[#FFC429]',
+    icon:
+      'border-[#FFC429]/30 bg-[rgba(255,196,41,0.12)] text-[#FFC429]',
+  },
+  neutral: {
+    bar: 'bg-white/25',
+    icon: 'border-white/[0.1] bg-white/[0.04] text-[#F5F5F5]',
+  },
 };
-
-const iconAccent = {
-  red: 'border-[#E51937]/30 bg-[rgba(229,25,55,0.12)] text-[#E51937]',
-  gold: 'border-[#FFC429]/30 bg-[rgba(255,196,41,0.12)] text-[#FFC429]',
-  neutral: 'border-white/[0.1] bg-white/[0.04] text-[#F5F5F5]',
-};
-
-const cardHover = {
-  red: 'hover:border-[#E51937]/45 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(229,25,55,0.1)]',
-  gold: 'hover:border-[#FFC429]/40 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(255,196,41,0.08)]',
-  neutral: 'hover:border-white/[0.16] hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(0,0,0,0.3)]',
-};
-
-function TextCta({ label, onClick }: { label: string; onClick: () => void }) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#E51937] hover:text-[#FF6B7D] transition-colors"
-    >
-      {label}
-      <ArrowRight size={16} />
-    </button>
-  );
-}
 
 export default function DemoPage() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [activeDemoOption, setActiveDemoOption] = useState(0);
+  const [activeAudience, setActiveAudience] = useState(0);
 
   useEffect(() => {
     const hash = location.hash.replace(/^#/, '');
     if (hash === DEMO_FORM_ID || hash === 'request-demo') {
-      const t = window.setTimeout(() => {
-        document.getElementById(DEMO_FORM_ID)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const timer = window.setTimeout(() => {
+        document
+          .getElementById(DEMO_FORM_ID)
+          ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 80);
-      return () => window.clearTimeout(t);
+
+      return () => window.clearTimeout(timer);
     }
+
+    return undefined;
   }, [location.hash, location.pathname]);
 
   const handleDemo = () => {
-    goToDemoForm({ interest: 'Request a demo', navigate, pathname: '/demo' });
+    goToDemoForm({
+      interest: 'Request a demo',
+      navigate,
+      pathname: '/demo',
+    });
   };
 
   const handleOnboard = () => {
-    goToDemoForm({ interest: 'Onboard my club', navigate, pathname: '/demo' });
+    goToDemoForm({
+      interest: 'Onboard my club',
+      navigate,
+      pathname: '/demo',
+    });
   };
 
   return (
     <div className="page-transition">
-      {/* 1. Hero */}
-      <section className="relative pt-28 sm:pt-32 pb-16 sm:pb-20 overflow-hidden bg-[#0B0B0B]">
-        <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] rounded-full bg-[#E51937] opacity-[0.04] blur-[140px] pointer-events-none" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+      <section className="relative overflow-hidden bg-[#0B0B0B] pt-28 pb-14 sm:pt-32 sm:pb-16">
+        <div className="pointer-events-none absolute -top-40 left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-[#E51937] opacity-[0.04] blur-[140px]" />
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
             <AnimatedSection>
-              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-4">
-                Request a Demo
+              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
+                Request a demo
               </p>
               <h1
-                className="font-sans font-extrabold text-[#F5F5F5] mb-5 leading-tight"
-                style={{ fontSize: 'clamp(2rem, 5vw, 3.4rem)' }}
+                className="mb-5 font-sans font-extrabold leading-tight text-[#F5F5F5]"
+                style={{ fontSize: 'clamp(2.35rem, 4.4vw, 3.65rem)' }}
               >
                 See how Gryph ClubConnect could work for your club.
               </h1>
-              <p className="text-[#9CA3AF] text-lg leading-relaxed mb-8 max-w-xl">
-                Book a walkthrough of the student discovery flow and club workspace. We&apos;ll show how clubs can manage events, RSVPs, tasks, meetings, members, hiring, documents, analytics, roles, and permissions from one organized platform.
+              <p className="mb-7 max-w-xl text-base leading-relaxed text-[#9CA3AF] sm:text-lg">
+                Book a walkthrough focused on the workflows your club uses most.
+                See how Gryph ClubConnect can support events, members, tasks,
+                meetings, hiring, permissions, and more from one connected
+                workspace.
               </p>
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-5">
-                <Button variant="red" size="lg" onClick={handleDemo} className="w-full sm:w-auto">
+              <div className="mb-5 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+                <Button
+                  variant="red"
+                  size="lg"
+                  onClick={handleDemo}
+                  className="w-full sm:w-auto"
+                >
                   Request a Demo
                 </Button>
-                <Button variant="ghost" size="lg" onClick={handleOnboard} className="w-full sm:w-auto">
-                  Onboard Your Club
+                <Button
+                  variant="ghost"
+                  size="lg"
+                  onClick={handleOnboard}
+                  className="w-full sm:w-auto"
+                >
+                  Get Your Club Started
                 </Button>
               </div>
               <p className="text-[13px] text-[#777777]">
-                Requesting a demo does not create an account or officially register your club.
+                Requesting a demo does not create an account or officially
+                register your club.
               </p>
             </AnimatedSection>
-            <AnimatedSection delay={0.08} className="relative lg:-mr-10 xl:-mr-16">
-              <MockupImage
-                name="demoHero"
-                alt="Gryph ClubConnect demo walkthrough preview"
-                className="relative !overflow-visible !rounded-none !border-0 !bg-transparent !shadow-none !ring-0"
-                imgClassName="h-auto w-full scale-[1.08] object-contain lg:scale-[1.16]"
-              />
+
+            <AnimatedSection delay={0.08}>
+              <button
+                type="button"
+                className="group relative mx-auto block w-full max-w-[650px] text-left"
+                aria-label="Watch the Gryph ClubConnect product overview"
+              >
+                <MockupImage
+                  name="demoHero"
+                  alt="Gryph ClubConnect product overview preview"
+                  className="relative !overflow-visible !rounded-none !border-0 !bg-transparent !shadow-none !ring-0"
+                  imgClassName="mx-auto h-auto w-full object-contain lg:scale-[0.94]"
+                />
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <span className="flex h-16 w-16 items-center justify-center rounded-full border border-white/20 bg-black/65 text-white shadow-[0_10px_30px_rgba(0,0,0,0.4)] transition-transform duration-200 group-hover:scale-105">
+                    <Play size={24} fill="currentColor" />
+                  </span>
+                </span>
+                <span className="absolute bottom-3 left-1/2 -translate-x-1/2 rounded-full border border-white/[0.1] bg-black/70 px-3 py-1.5 text-[12px] font-semibold text-[#F5F5F5] backdrop-blur-sm">
+                  Watch Product Overview
+                </span>
+              </button>
             </AnimatedSection>
           </div>
         </div>
       </section>
 
-      {/* 2. What you'll see */}
-      <section className="py-16 sm:py-20 bg-[#111111] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="border-t border-[#222222] bg-[#111111] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-10 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#FFC429] mb-3">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FFC429] sm:text-xs">
               What the walkthrough covers
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans">
-              A guided tour of the workflows your club actually uses.
+            <h2 className="font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
+              A guided tour built around your club&apos;s real workflows.
             </h2>
           </AnimatedSection>
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" staggerDelay={0.05}>
-            {walkthroughCards.map((card) => {
-              const Icon = card.icon;
+
+          <StaggerContainer
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2"
+            staggerDelay={0.06}
+          >
+            {walkthroughAreas.map((area) => {
+              const Icon = area.icon;
+              const style = accentStyles[area.accent];
+
               return (
-                <StaggerItem key={card.title}>
-                  <div
-                    className={`relative overflow-hidden rounded-[12px] border border-white/[0.08] bg-[#131313] p-5 h-full transition-all duration-200 ${cardHover[card.accent]}`}
-                  >
-                    <span className={`absolute inset-x-0 top-0 h-[2px] ${accentBar[card.accent]}`} aria-hidden />
-                    <div className={`w-9 h-9 rounded-[8px] border flex items-center justify-center mb-3 ${iconAccent[card.accent]}`}>
-                      <Icon size={16} />
+                <StaggerItem key={area.title}>
+                  <div className="relative h-full overflow-hidden rounded-[14px] border border-white/[0.08] bg-[#131313] p-6 transition-colors hover:border-white/[0.14]">
+                    <span
+                      className={`absolute inset-y-0 left-0 w-[3px] ${style.bar}`}
+                      aria-hidden
+                    />
+                    <div
+                      className={`mb-4 flex h-10 w-10 items-center justify-center rounded-[10px] border ${style.icon}`}
+                    >
+                      <Icon size={18} />
                     </div>
-                    <h3 className="text-[#F5F5F5] font-semibold mb-2">{card.title}</h3>
-                    <p className="text-[#9CA3AF] text-sm leading-relaxed">{card.description}</p>
+                    <h3 className="mb-2 text-lg font-semibold text-[#F5F5F5]">
+                      {area.title}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-[#9CA3AF]">
+                      {area.description}
+                    </p>
                   </div>
                 </StaggerItem>
               );
@@ -287,101 +332,152 @@ export default function DemoPage() {
         </div>
       </section>
 
-      {/* 3. Choose your demo focus */}
-      <section className="py-16 sm:py-20 bg-[#0B0B0B] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="border-t border-[#222222] bg-[#0B0B0B] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-10 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
               Demo options
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans">
-              Focus the walkthrough on what your club needs most.
+            <h2 className="mb-3 font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
+              Choose what you want to see in the walkthrough.
             </h2>
+            <p className="text-base leading-relaxed text-[#9CA3AF]">
+              Every club operates differently. Focus the demo on the workflows
+              your team is actively trying to improve.
+            </p>
           </AnimatedSection>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-            <AnimatedSection>
-              <p className="text-[#9CA3AF] text-base leading-relaxed mb-6">
-                Every club runs differently. The demo can focus on the parts of Gryph ClubConnect that matter most to your team.
-              </p>
-              <TextCta label="Request a Demo" onClick={handleDemo} />
-            </AnimatedSection>
-            <AnimatedSection delay={0.06}>
-              <div className="rounded-[14px] border border-white/[0.08] bg-[#131313] p-5 sm:p-6">
-                <div className="flex flex-wrap gap-2">
-                  {demoFocusItems.map((item, index) => (
-                    <span
-                      key={item}
-                      className={`inline-flex items-center rounded-full border px-3 py-1.5 text-[13px] font-medium ${
-                        index % 3 === 0
-                          ? 'border-[#E51937]/25 bg-[rgba(229,25,55,0.08)] text-[#F5F5F5]'
-                          : index % 3 === 1
-                            ? 'border-[#FFC429]/25 bg-[rgba(255,196,41,0.08)] text-[#F5F5F5]'
-                            : 'border-white/[0.1] bg-white/[0.03] text-[#F5F5F5]'
+
+          <AnimatedSection>
+            <div className="mx-auto max-w-4xl overflow-hidden rounded-[14px] border border-white/[0.08] bg-[#131313]">
+              {demoOptions.map((option, index) => {
+                const active = activeDemoOption === index;
+
+                return (
+                  <div
+                    key={option.title}
+                    className={
+                      index < demoOptions.length - 1
+                        ? 'border-b border-white/[0.08]'
+                        : ''
+                    }
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setActiveDemoOption(index)}
+                      className={`flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors ${
+                        active
+                          ? 'bg-[rgba(229,25,55,0.08)]'
+                          : 'hover:bg-white/[0.025]'
                       }`}
+                      aria-expanded={active}
                     >
-                      {item}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </AnimatedSection>
-          </div>
+                      <span className="text-sm font-semibold text-[#F5F5F5] sm:text-base">
+                        {option.title}
+                      </span>
+                      <ChevronDown
+                        size={18}
+                        className={`shrink-0 text-[#777777] transition-transform ${
+                          active ? 'rotate-180 text-[#E51937]' : ''
+                        }`}
+                      />
+                    </button>
+                    {active && (
+                      <div className="border-t border-white/[0.06] px-5 py-5">
+                        <p className="mb-4 text-sm leading-relaxed text-[#9CA3AF]">
+                          {option.description}
+                        </p>
+                        <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
+                          {option.items.map((item) => (
+                            <div
+                              key={item}
+                              className="rounded-[9px] border border-white/[0.07] bg-[#0B0B0B] px-3.5 py-3 text-sm text-[#F5F5F5]"
+                            >
+                              {item}
+                            </div>
+                          ))}
+                        </div>
+                        <button
+                          type="button"
+                          onClick={handleDemo}
+                          className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#E51937] transition-colors hover:text-[#FF6B7D]"
+                        >
+                          Include this in my demo
+                          <ArrowRight size={15} />
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* 4. Who should book */}
-      <section className="py-16 sm:py-20 bg-[#111111] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="border-t border-[#222222] bg-[#111111] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-10 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#FFC429] mb-3">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FFC429] sm:text-xs">
               Who it&apos;s for
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans">
-              Built for the people running club operations.
+            <h2 className="font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
+              Built for the people responsible for club operations.
             </h2>
           </AnimatedSection>
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 gap-5" staggerDelay={0.05}>
-            {audienceCards.map((card) => {
-              const Icon = card.icon;
-              return (
-                <StaggerItem key={card.title}>
-                  <div
-                    className={`relative overflow-hidden rounded-[14px] border border-white/[0.08] bg-[#131313] p-6 sm:p-7 h-full transition-all duration-200 ${cardHover[card.accent]}`}
-                  >
-                    <span className={`absolute inset-y-0 left-0 w-[3px] ${accentBar[card.accent]}`} aria-hidden />
-                    <div className="flex items-start gap-4">
-                      <div className={`w-11 h-11 shrink-0 rounded-[10px] border flex items-center justify-center ${iconAccent[card.accent]}`}>
-                        <Icon size={18} />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-semibold text-[#F5F5F5] mb-2">{card.title}</h3>
-                        <p className="text-[#9CA3AF] text-sm leading-relaxed">{card.description}</p>
-                      </div>
-                    </div>
-                  </div>
-                </StaggerItem>
-              );
-            })}
-          </StaggerContainer>
+
+          <AnimatedSection>
+            <div className="rounded-[14px] border border-white/[0.08] bg-[#131313] p-5 sm:p-6">
+              <div className="mb-5 flex flex-wrap gap-2">
+                {audiences.map((audience, index) => {
+                  const active = activeAudience === index;
+
+                  return (
+                    <button
+                      key={audience.label}
+                      type="button"
+                      onClick={() => setActiveAudience(index)}
+                      className={`rounded-full border px-3.5 py-2 text-[13px] font-semibold transition-colors ${
+                        active
+                          ? 'border-[#E51937]/35 bg-[rgba(229,25,55,0.12)] text-[#F5F5F5]'
+                          : 'border-white/[0.08] bg-[#0B0B0B] text-[#9CA3AF] hover:border-white/[0.14] hover:text-[#F5F5F5]'
+                      }`}
+                      aria-pressed={active}
+                    >
+                      {audience.label}
+                    </button>
+                  );
+                })}
+              </div>
+
+              <div className="rounded-[11px] border border-white/[0.07] bg-[#0B0B0B] p-5 sm:p-6">
+                <h3 className="mb-2 text-lg font-semibold text-[#F5F5F5]">
+                  {audiences[activeAudience].title}
+                </h3>
+                <p className="max-w-3xl text-sm leading-relaxed text-[#9CA3AF]">
+                  {audiences[activeAudience].description}
+                </p>
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
-      {/* 5. How the demo works */}
-      <section className="py-16 sm:py-20 bg-[#0B0B0B] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="border-t border-[#222222] bg-[#0B0B0B] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-10 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
               How it works
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans">
-              Simple walkthrough. No commitment.
+            <h2 className="font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
+              A simple walkthrough built around your club.
             </h2>
           </AnimatedSection>
+
           <AnimatedSection>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
               {howItWorksSteps.map((step, index) => (
                 <div key={step.title} className="relative">
-                  <div className="rounded-[12px] border border-white/[0.08] bg-[#131313] p-5 h-full">
+                  <div className="h-full rounded-[12px] border border-white/[0.08] bg-[#131313] p-5">
                     <span
                       className={`mb-3 inline-flex h-8 w-8 items-center justify-center rounded-full border text-[11px] font-bold tabular-nums ${
                         index % 2 === 0
@@ -391,16 +487,19 @@ export default function DemoPage() {
                     >
                       {String(index + 1).padStart(2, '0')}
                     </span>
-                    <h3 className="text-base font-semibold text-[#F5F5F5] mb-1.5">{step.title}</h3>
-                    <p className="text-sm text-[#9CA3AF] leading-relaxed">{step.description}</p>
+                    <h3 className="mb-1.5 text-base font-semibold text-[#F5F5F5]">
+                      {step.title}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-[#9CA3AF]">
+                      {step.description}
+                    </p>
                   </div>
                   {index < howItWorksSteps.length - 1 && (
-                    <span
-                      className="absolute top-1/2 -right-2 z-10 hidden lg:block text-[#444444]"
+                    <ArrowRight
+                      size={15}
+                      className="absolute top-1/2 -right-2 z-10 hidden -translate-y-1/2 text-[#444444] lg:block"
                       aria-hidden
-                    >
-                      →
-                    </span>
+                    />
                   )}
                 </div>
               ))}
@@ -409,79 +508,70 @@ export default function DemoPage() {
         </div>
       </section>
 
-      {/* 6. What to prepare */}
-      <section className="py-16 sm:py-20 bg-[#111111] border-t border-[#222222]">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-8 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#FFC429] mb-3">
-              Before the walkthrough
-            </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
-              Bring your club&apos;s current process.
-            </h2>
-            <p className="text-[#9CA3AF] text-base leading-relaxed">
-              The most useful demos happen when we understand how your club currently manages events, members, hiring, updates, and day-to-day work.
-            </p>
-          </AnimatedSection>
-          <AnimatedSection delay={0.06}>
-            <div className="rounded-[14px] border border-white/[0.08] bg-[#131313] p-6 sm:p-8">
-              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-                {prepareChecklist.map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[#FFC429]/30 bg-[rgba(255,196,41,0.1)] text-[#FFC429]">
-                      <Check size={12} strokeWidth={2.5} />
-                    </span>
-                    <span className="text-sm text-[#F5F5F5] leading-relaxed">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* 7. Request form */}
       <section
         id={DEMO_FORM_ID}
-        className="relative py-16 sm:py-20 overflow-hidden bg-[#0B0B0B] border-t border-[#222222] scroll-mt-28"
+        className="relative scroll-mt-28 overflow-hidden border-t border-[#222222] bg-[#111111] py-16 sm:py-20"
       >
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-14">
             <AnimatedSection>
-              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
+              <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
                 Request a demo
               </p>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-4">
-                Ready to see how Gryph ClubConnect works?
+              <h2 className="mb-4 font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
+                Request a walkthrough built around your club.
               </h2>
-              <p className="text-[#9CA3AF] text-base leading-relaxed mb-8 max-w-xl">
-                Request a walkthrough and see how your club could use Gryph ClubConnect to manage discovery, events, RSVPs, tasks, meetings, hiring, members, documents, analytics, roles, and permissions from one workspace.
+              <p className="mb-7 max-w-xl text-base leading-relaxed text-[#9CA3AF]">
+                Tell us what your team wants to improve and which workflows you
+                would like to see. We&apos;ll focus the walkthrough around your
+                club&apos;s needs.
               </p>
 
-              <div className="rounded-[12px] border border-[#222222] bg-[#131313] p-5 sm:p-6 max-w-md">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#FFC429] mb-3">
-                  What happens after you request a demo
+              <div className="mb-5 max-w-md rounded-[12px] border border-[#222222] bg-[#131313] p-5 sm:p-6">
+                <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#FFC429]">
+                  What happens next
                 </p>
                 <ol className="space-y-3">
                   {afterRequestSteps.map((step, index) => (
                     <li key={step} className="flex gap-3 text-sm">
-                      <span className="shrink-0 w-6 h-6 rounded-full border border-[#E51937]/35 bg-[rgba(229,25,55,0.12)] text-[11px] font-bold text-[#E51937] flex items-center justify-center">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-[#E51937]/35 bg-[rgba(229,25,55,0.12)] text-[11px] font-bold text-[#E51937]">
                         {index + 1}
                       </span>
-                      <span className="pt-0.5 text-[#9CA3AF] leading-relaxed">{step}</span>
+                      <span className="pt-0.5 leading-relaxed text-[#9CA3AF]">
+                        {step}
+                      </span>
                     </li>
                   ))}
                 </ol>
               </div>
+
+              <div className="max-w-md rounded-[12px] border border-white/[0.08] bg-[#0B0B0B] p-5">
+                <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#777777]">
+                  Helpful context to share
+                </p>
+                <ul className="space-y-3">
+                  {helpfulContext.map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[#FFC429]/30 bg-[rgba(255,196,41,0.1)] text-[#FFC429]">
+                        <Check size={12} strokeWidth={2.5} />
+                      </span>
+                      <span className="text-sm leading-relaxed text-[#9CA3AF]">
+                        {item}
+                      </span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </AnimatedSection>
 
             <AnimatedSection delay={0.08}>
-              <div className="rounded-[14px] border border-[#222222] bg-[#131313] p-6 sm:p-7 shadow-[0_16px_48px_rgba(0,0,0,0.35)]">
-                <h3 className="text-xl font-bold text-[#F5F5F5] font-sans mb-1">
+              <div className="rounded-[14px] border border-[#222222] bg-[#131313] p-6 shadow-[0_16px_48px_rgba(0,0,0,0.35)] sm:p-7">
+                <h3 className="mb-1 font-sans text-xl font-bold text-[#F5F5F5]">
                   Request a demo or club onboarding
                 </h3>
-                <p className="text-[#777777] text-sm mb-6 leading-relaxed">
-                  Tell us about your club so we can focus the walkthrough on what matters most.
+                <p className="mb-6 text-sm leading-relaxed text-[#777777]">
+                  Tell us about your club so we can focus the walkthrough on
+                  what matters most.
                 </p>
                 <DemoInterestForm variant="full" idPrefix="demo-page" />
               </div>

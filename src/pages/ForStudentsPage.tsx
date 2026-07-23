@@ -19,7 +19,10 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { useEffect } from 'react';
-import AnimatedSection, { StaggerContainer, StaggerItem } from '../components/ui/AnimatedSection';
+import AnimatedSection, {
+  StaggerContainer,
+  StaggerItem,
+} from '../components/ui/AnimatedSection';
 import Button from '../components/ui/Button';
 import MockupImage from '../components/mockups/MockupImage';
 import ClubWorkflowSlideshow, {
@@ -59,13 +62,48 @@ const problemCards = [
   },
 ];
 
-const journeySteps: { title: string; description: string; icon: LucideIcon; accent: 'red' | 'gold' | 'neutral' }[] = [
-  { title: 'Discover clubs', description: 'Search by name, category, interest, or keyword.', icon: Search, accent: 'red' },
-  { title: 'View club profiles', description: 'See what a club does, meeting info, upcoming events, open roles, and ways to get involved.', icon: Eye, accent: 'gold' },
-  { title: 'RSVP for events', description: 'Find events and sign up without digging through posts or group chats.', icon: Calendar, accent: 'red' },
-  { title: 'Apply for roles', description: 'Browse open club positions and submit applications from one account.', icon: Briefcase, accent: 'gold' },
-  { title: 'Follow or save clubs', description: 'Keep track of clubs you care about before or after joining.', icon: Bookmark, accent: 'neutral' },
-  { title: 'Stay organized', description: 'Use your dashboard to see upcoming events, applications, club updates, tasks, and inbox alerts.', icon: LayoutDashboard, accent: 'red' },
+const journeySteps: {
+  title: string;
+  description: string;
+  icon: LucideIcon;
+  accent: 'red' | 'gold' | 'neutral';
+}[] = [
+  {
+    title: 'Discover clubs',
+    description: 'Search by name, category, interest, or keyword.',
+    icon: Search,
+    accent: 'red',
+  },
+  {
+    title: 'View club profiles',
+    description: 'See what a club does, meeting info, upcoming events, open roles, and ways to get involved.',
+    icon: Eye,
+    accent: 'gold',
+  },
+  {
+    title: 'RSVP for events',
+    description: 'Find events and sign up without digging through posts or group chats.',
+    icon: Calendar,
+    accent: 'red',
+  },
+  {
+    title: 'Apply for roles',
+    description: 'Browse open club positions and submit applications from one account.',
+    icon: Briefcase,
+    accent: 'gold',
+  },
+  {
+    title: 'Follow or save clubs',
+    description: 'Keep track of clubs you care about before or after joining.',
+    icon: Bookmark,
+    accent: 'neutral',
+  },
+  {
+    title: 'Stay organized',
+    description: 'Use your dashboard to see upcoming events, applications, club updates, tasks, and inbox alerts.',
+    icon: LayoutDashboard,
+    accent: 'red',
+  },
 ];
 
 const missingCards: {
@@ -80,21 +118,24 @@ const missingCards: {
     description: 'Browse clubs by category, interest, activity, or keyword instead of relying on word of mouth.',
     icon: Compass,
     accent: 'red',
-    hover: 'hover:border-[#E51937]/45 hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(229,25,55,0.12)]',
+    hover:
+      'hover:border-[#E51937]/45 hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(229,25,55,0.12)]',
   },
   {
     title: 'Events to attend',
     description: 'Find upcoming events across clubs and RSVP before they get buried in posts or group chats.',
     icon: Calendar,
     accent: 'gold',
-    hover: 'hover:border-[#FFC429]/40 hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(255,196,41,0.1)]',
+    hover:
+      'hover:border-[#FFC429]/40 hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(255,196,41,0.1)]',
   },
   {
     title: 'Roles to apply for',
     description: 'Discover open club positions and application opportunities without waiting for someone to send you the form.',
     icon: Briefcase,
     accent: 'neutral',
-    hover: 'hover:border-white/[0.16] hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(0,0,0,0.35)]',
+    hover:
+      'hover:border-white/[0.16] hover:-translate-y-0.5 hover:shadow-[0_14px_36px_rgba(0,0,0,0.35)]',
   },
 ];
 
@@ -143,30 +184,80 @@ const workflowSteps: ClubWorkflowStep[] = [
 
 const canDoGroups: {
   label: string;
-  cards: { title: string; description: string; icon: LucideIcon; accent: 'red' | 'gold' | 'neutral' }[];
+  cards: {
+    title: string;
+    description: string;
+    icon: LucideIcon;
+    accent: 'red' | 'gold' | 'neutral';
+  }[];
 }[] = [
   {
     label: 'Discover',
     cards: [
-      { title: 'Explore Clubs', description: 'Search clubs by name, category, interest, or keyword.', icon: Compass, accent: 'red' },
-      { title: 'View Public Profiles', description: 'See descriptions, meeting info, updates, events, and open roles.', icon: Building2, accent: 'gold' },
-      { title: 'Find Events', description: 'Browse events across clubs and see what is coming up.', icon: Calendar, accent: 'red' },
+      {
+        title: 'Explore Clubs',
+        description: 'Search clubs by name, category, interest, or keyword.',
+        icon: Compass,
+        accent: 'red',
+      },
+      {
+        title: 'View Public Profiles',
+        description: 'See descriptions, meeting info, updates, events, and open roles.',
+        icon: Building2,
+        accent: 'gold',
+      },
+      {
+        title: 'Find Events',
+        description: 'Browse events across clubs and see what is coming up.',
+        icon: Calendar,
+        accent: 'red',
+      },
     ],
   },
   {
     label: 'Take Action',
     cards: [
-      { title: 'RSVP', description: 'Sign up for events and answer event questions.', icon: ClipboardCheck, accent: 'gold' },
-      { title: 'Apply for Roles', description: 'Submit applications for open club positions.', icon: Briefcase, accent: 'red' },
-      { title: 'Track Applications', description: 'See where your applications stand.', icon: Search, accent: 'gold' },
+      {
+        title: 'RSVP',
+        description: 'Sign up for events and answer event questions.',
+        icon: ClipboardCheck,
+        accent: 'gold',
+      },
+      {
+        title: 'Apply for Roles',
+        description: 'Submit applications for open club positions.',
+        icon: Briefcase,
+        accent: 'red',
+      },
+      {
+        title: 'Track Applications',
+        description: 'See where your applications stand.',
+        icon: Search,
+        accent: 'gold',
+      },
     ],
   },
   {
     label: 'Stay Organized',
     cards: [
-      { title: 'Follow or Save Clubs', description: 'Keep an eye on clubs before joining or while deciding.', icon: Bookmark, accent: 'neutral' },
-      { title: 'Student Dashboard', description: 'See upcoming events, applications, club updates, and tasks in one place.', icon: LayoutDashboard, accent: 'red' },
-      { title: 'Inbox & Alerts', description: 'Keep important updates and pending actions visible.', icon: Bell, accent: 'gold' },
+      {
+        title: 'Follow or Save Clubs',
+        description: 'Keep an eye on clubs before joining or while deciding.',
+        icon: Bookmark,
+        accent: 'neutral',
+      },
+      {
+        title: 'Student Dashboard',
+        description: 'See upcoming events, applications, club updates, and tasks in one place.',
+        icon: LayoutDashboard,
+        accent: 'red',
+      },
+      {
+        title: 'Inbox & Alerts',
+        description: 'Keep important updates and pending actions visible.',
+        icon: Bell,
+        accent: 'gold',
+      },
     ],
   },
 ];
@@ -216,9 +307,18 @@ const audienceCards: {
 ];
 
 const connectedFlow = [
-  { title: 'Student discovers', description: 'They find a club, event, or open role.' },
-  { title: 'Student takes action', description: 'They RSVP, apply, follow, or request to join.' },
-  { title: 'Club team follows up', description: 'Execs review responses and manage the next step.' },
+  {
+    title: 'Student discovers',
+    description: 'They find a club, event, or open role.',
+  },
+  {
+    title: 'Student takes action',
+    description: 'They RSVP, apply, follow, or request to join.',
+  },
+  {
+    title: 'Club team follows up',
+    description: 'Execs review responses and manage the next step.',
+  },
 ];
 
 const accentBar = {
@@ -235,8 +335,10 @@ const iconAccent = {
 
 const audienceHover = {
   red: 'hover:border-[#E51937]/40 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(229,25,55,0.1)]',
-  gold: 'hover:border-[#FFC429]/35 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(255,196,41,0.08)]',
-  neutral: 'hover:border-white/[0.14] hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(0,0,0,0.3)]',
+  gold:
+    'hover:border-[#FFC429]/35 hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(255,196,41,0.08)]',
+  neutral:
+    'hover:border-white/[0.14] hover:-translate-y-0.5 hover:shadow-[0_10px_28px_rgba(0,0,0,0.3)]',
 };
 
 export default function ForStudentsPage() {
@@ -245,12 +347,18 @@ export default function ForStudentsPage() {
 
   useEffect(() => {
     const hash = location.hash.replace(/^#/, '');
+
     if (hash === STUDENT_ACCESS_ID) {
-      const t = window.setTimeout(() => {
-        document.getElementById(STUDENT_ACCESS_ID)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const timer = window.setTimeout(() => {
+        document
+          .getElementById(STUDENT_ACCESS_ID)
+          ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 80);
-      return () => window.clearTimeout(t);
+
+      return () => window.clearTimeout(timer);
     }
+
+    return undefined;
   }, [location.hash, location.pathname]);
 
   const handleStudentAccess = () => {
@@ -260,41 +368,78 @@ export default function ForStudentsPage() {
   return (
     <div className="page-transition">
       {/* Hero */}
-      <section className="relative pt-28 sm:pt-32 pb-14 sm:pb-16 overflow-hidden bg-[#0B0B0B]">
-        <div className="absolute -top-40 left-0 w-[500px] h-[500px] rounded-full bg-[#E51937] opacity-[0.04] blur-[100px] pointer-events-none" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-            <AnimatedSection>
-              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-4">
+      <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-[#0B0B0B] lg:min-h-[calc(100vh-4rem)]">
+        <div className="pointer-events-none absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-[#E51937] opacity-[0.04] blur-[100px]" />
+
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-12 pt-24 sm:px-6 sm:pb-16 sm:pt-24 lg:px-8 lg:pt-24">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-10 xl:gap-14">
+            <AnimatedSection className="flex min-w-0 flex-col">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
                 For students
               </p>
+
               <h1
-                className="font-sans font-extrabold text-[#F5F5F5] mb-5 leading-tight"
-                style={{ fontSize: 'clamp(2.1rem, 4.5vw, 3.4rem)' }}
+                className="mt-4 max-w-[38rem] font-sans font-extrabold leading-[1.04] tracking-tight text-[#F5F5F5] sm:mt-5"
+                style={{ fontSize: 'clamp(2.2rem, 3.9vw, 3.55rem)' }}
               >
                 Find clubs, events, and roles without hunting through group chats.
               </h1>
-              <p className="text-[#9CA3AF] text-base sm:text-lg max-w-xl leading-relaxed mb-7">
-                Gryph ClubConnect gives students one place to explore clubs, view public profiles, discover events, RSVP, apply for roles, follow updates, and keep track of involvement from one account.
+
+              <p
+                className="mt-4 max-w-[38rem] text-lg text-[#9CA3AF] sm:mt-5 sm:text-xl"
+                style={{ lineHeight: '1.6' }}
+              >
+                Gryph ClubConnect gives students one place to explore clubs,
+                view public profiles, discover events, RSVP, apply for roles,
+                follow updates, and keep track of involvement from one account.
               </p>
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-5">
-                <Button variant="red" size="lg" onClick={handleStudentAccess} className="w-full sm:w-auto">
+
+              <div className="mt-6 flex flex-col items-start gap-3 sm:mt-7 sm:flex-row sm:items-center">
+                <Button
+                  variant="red"
+                  size="md"
+                  onClick={handleStudentAccess}
+                  className="w-[230px] whitespace-nowrap shadow-[0_8px_24px_rgba(229,25,55,0.22)] sm:w-auto sm:px-8 sm:py-4 sm:text-base"
+                >
                   Get Student Access
                 </Button>
-                <Button variant="ghost" size="lg" onClick={() => navigate('/features')} className="w-full sm:w-auto">
+
+                <Button
+                  variant="ghost"
+                  size="md"
+                  onClick={() => navigate('/features')}
+                  className="w-[230px] whitespace-nowrap sm:w-auto sm:px-8 sm:py-4 sm:text-base"
+                >
                   Explore Clubs
                 </Button>
               </div>
-              <p className="text-[13px] text-[#777777]">
+
+              <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[12px] text-[#9CA3AF] sm:mt-6">
+                <span className="inline-flex items-center gap-2">
+                  <span className="text-[#E51937]">✓</span>
+                  Discover clubs and events
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <span className="text-[#E51937]">✓</span>
+                  Find open roles
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <span className="text-[#E51937]">✓</span>
+                  Track your involvement
+                </span>
+              </div>
+
+              <p className="mt-4 max-w-[38rem] text-[13px] leading-relaxed text-[#777777]">
                 Student access requests do not create an account automatically.
               </p>
             </AnimatedSection>
-            <AnimatedSection delay={0.1} className="relative lg:-mr-10 xl:-mr-16">
+
+            <AnimatedSection delay={0.1} className="relative min-w-0">
               <MockupImage
                 name="studentHero"
                 alt="Gryph ClubConnect student dashboard and club discovery"
                 className="relative !overflow-visible !rounded-none !border-0 !bg-transparent !shadow-none !ring-0"
-                imgClassName="h-auto w-full scale-[1.08] object-contain lg:scale-[1.16]"
+                imgClassName="mx-auto h-auto w-full max-w-[620px] object-contain lg:scale-[0.94]"
               />
             </AnimatedSection>
           </div>
@@ -302,28 +447,39 @@ export default function ForStudentsPage() {
       </section>
 
       {/* Student problem */}
-      <section className="py-16 sm:py-20 bg-[#111111] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-10 sm:mb-12 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
+      <section className="border-t border-[#222222] bg-[#111111] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-10 max-w-3xl sm:mb-12">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
               The student problem
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-4">
+            <h2 className="mb-4 font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
               Campus involvement is hard to find when everything is scattered.
             </h2>
-            <p className="text-[#9CA3AF] text-base leading-relaxed">
+            <p className="text-base leading-relaxed text-[#9CA3AF]">
               Students often hear about clubs through Instagram posts, group chats, friends, random links, or tabling. That makes it easy to miss events, roles, and communities that would have been a good fit.
             </p>
           </AnimatedSection>
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4" staggerDelay={0.06}>
+
+          <StaggerContainer
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
+            staggerDelay={0.06}
+          >
             {problemCards.map((card) => (
               <StaggerItem key={card.title}>
                 <div
                   className={`relative flex h-full flex-col overflow-hidden rounded-[12px] border border-white/[0.08] bg-[#131313] p-5 transition-all duration-200 ${card.hover}`}
                 >
-                  <span className={`absolute inset-x-0 top-0 h-[2px] ${accentBar[card.accent]}`} aria-hidden />
-                  <h3 className="text-base font-bold text-[#F5F5F5] font-sans mb-2">{card.title}</h3>
-                  <p className="text-[#9CA3AF] text-sm leading-relaxed">{card.body}</p>
+                  <span
+                    className={`absolute inset-x-0 top-0 h-[2px] ${accentBar[card.accent]}`}
+                    aria-hidden
+                  />
+                  <h3 className="mb-2 font-sans text-base font-bold text-[#F5F5F5]">
+                    {card.title}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-[#9CA3AF]">
+                    {card.body}
+                  </p>
                 </div>
               </StaggerItem>
             ))}
@@ -332,28 +488,29 @@ export default function ForStudentsPage() {
       </section>
 
       {/* Student journey */}
-      <section className="py-16 sm:py-20 bg-[#0B0B0B] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-10 sm:mb-12 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
+      <section className="border-t border-[#222222] bg-[#0B0B0B] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-10 max-w-3xl sm:mb-12">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
               Student journey
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
+            <h2 className="mb-3 font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
               From discovering a club to staying involved.
             </h2>
-            <p className="text-[#9CA3AF] text-base leading-relaxed">
+            <p className="text-base leading-relaxed text-[#9CA3AF]">
               Gryph ClubConnect connects the steps students already take when getting involved on campus.
             </p>
           </AnimatedSection>
 
           <AnimatedSection>
-            <div className="hidden lg:grid lg:grid-cols-6 gap-3">
+            <div className="hidden gap-3 lg:grid lg:grid-cols-6">
               {journeySteps.map((step, index) => {
                 const Icon = step.icon;
+
                 return (
                   <div key={step.title} className="relative">
-                    <div className="rounded-[10px] border border-white/[0.08] bg-[#131313] p-4 h-full flex flex-col">
-                      <div className="flex items-center justify-between mb-3">
+                    <div className="flex h-full flex-col rounded-[10px] border border-white/[0.08] bg-[#131313] p-4">
+                      <div className="mb-3 flex items-center justify-between">
                         <span
                           className={`text-[12px] font-semibold tabular-nums ${
                             step.accent === 'red'
@@ -365,15 +522,27 @@ export default function ForStudentsPage() {
                         >
                           {String(index + 1).padStart(2, '0')}
                         </span>
-                        <div className={`w-7 h-7 rounded-[7px] border flex items-center justify-center ${iconAccent[step.accent]}`}>
+
+                        <div
+                          className={`flex h-7 w-7 items-center justify-center rounded-[7px] border ${iconAccent[step.accent]}`}
+                        >
                           <Icon size={13} />
                         </div>
                       </div>
-                      <p className="text-sm font-semibold text-[#F5F5F5] mb-1.5">{step.title}</p>
-                      <p className="text-[12px] text-[#9CA3AF] leading-snug flex-1">{step.description}</p>
+
+                      <p className="mb-1.5 text-sm font-semibold text-[#F5F5F5]">
+                        {step.title}
+                      </p>
+                      <p className="flex-1 text-[12px] leading-snug text-[#9CA3AF]">
+                        {step.description}
+                      </p>
                     </div>
+
                     {index < journeySteps.length - 1 && (
-                      <span className="absolute top-1/2 -right-2 z-10 hidden xl:block text-[#444444]" aria-hidden>
+                      <span
+                        className="absolute -right-2 top-1/2 z-10 hidden text-[#444444] xl:block"
+                        aria-hidden
+                      >
                         →
                       </span>
                     )}
@@ -382,16 +551,17 @@ export default function ForStudentsPage() {
               })}
             </div>
 
-            <div className="lg:hidden space-y-3">
+            <div className="space-y-3 lg:hidden">
               {journeySteps.map((step, index) => {
                 const Icon = step.icon;
+
                 return (
                   <div
                     key={step.title}
                     className="flex gap-4 rounded-[10px] border border-white/[0.08] bg-[#131313] px-4 py-4"
                   >
                     <span
-                      className={`shrink-0 text-[13px] font-semibold tabular-nums pt-0.5 ${
+                      className={`shrink-0 pt-0.5 text-[13px] font-semibold tabular-nums ${
                         step.accent === 'red'
                           ? 'text-[#E51937]'
                           : step.accent === 'gold'
@@ -401,9 +571,12 @@ export default function ForStudentsPage() {
                     >
                       {String(index + 1).padStart(2, '0')}
                     </span>
+
                     <div className="min-w-0 flex-1">
-                      <div className="flex items-center gap-2 mb-1">
-                        <p className="text-sm font-semibold text-[#F5F5F5]">{step.title}</p>
+                      <div className="mb-1 flex items-center gap-2">
+                        <p className="text-sm font-semibold text-[#F5F5F5]">
+                          {step.title}
+                        </p>
                         <Icon
                           size={14}
                           className={
@@ -415,7 +588,9 @@ export default function ForStudentsPage() {
                           }
                         />
                       </div>
-                      <p className="text-[13px] text-[#9CA3AF] leading-snug">{step.description}</p>
+                      <p className="text-[13px] leading-snug text-[#9CA3AF]">
+                        {step.description}
+                      </p>
                     </div>
                   </div>
                 );
@@ -426,33 +601,47 @@ export default function ForStudentsPage() {
       </section>
 
       {/* What you might be missing */}
-      <section className="py-16 sm:py-20 bg-[#111111] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-10 sm:mb-12 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
+      <section className="border-t border-[#222222] bg-[#111111] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-10 max-w-3xl sm:mb-12">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
               What you might be missing
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
+            <h2 className="mb-3 font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
               Clubs, events, and roles are easier to find when they live in one place.
             </h2>
-            <p className="text-[#9CA3AF] text-base leading-relaxed">
+            <p className="text-base leading-relaxed text-[#9CA3AF]">
               Instead of hoping the right post, message, or link reaches you, Gryph ClubConnect gives students one place to browse what clubs are doing and how to get involved.
             </p>
           </AnimatedSection>
-          <StaggerContainer className="grid grid-cols-1 md:grid-cols-3 gap-5" staggerDelay={0.08}>
+
+          <StaggerContainer
+            className="grid grid-cols-1 gap-5 md:grid-cols-3"
+            staggerDelay={0.08}
+          >
             {missingCards.map((card) => {
               const Icon = card.icon;
+
               return (
                 <StaggerItem key={card.title}>
                   <div
-                    className={`relative flex h-full flex-col overflow-hidden rounded-[14px] border border-white/[0.08] bg-[#131313] p-6 sm:p-7 transition-all duration-200 ${card.hover}`}
+                    className={`relative flex h-full flex-col overflow-hidden rounded-[14px] border border-white/[0.08] bg-[#131313] p-6 transition-all duration-200 sm:p-7 ${card.hover}`}
                   >
-                    <span className={`absolute inset-x-0 top-0 h-[2px] ${accentBar[card.accent]}`} aria-hidden />
-                    <div className={`w-11 h-11 rounded-[10px] border flex items-center justify-center mb-5 ${iconAccent[card.accent]}`}>
+                    <span
+                      className={`absolute inset-x-0 top-0 h-[2px] ${accentBar[card.accent]}`}
+                      aria-hidden
+                    />
+                    <div
+                      className={`mb-5 flex h-11 w-11 items-center justify-center rounded-[10px] border ${iconAccent[card.accent]}`}
+                    >
                       <Icon size={20} />
                     </div>
-                    <h3 className="text-xl font-bold text-[#F5F5F5] font-sans mb-3">{card.title}</h3>
-                    <p className="text-[#9CA3AF] text-[15px] leading-relaxed">{card.description}</p>
+                    <h3 className="mb-3 font-sans text-xl font-bold text-[#F5F5F5]">
+                      {card.title}
+                    </h3>
+                    <p className="text-[15px] leading-relaxed text-[#9CA3AF]">
+                      {card.description}
+                    </p>
                   </div>
                 </StaggerItem>
               );
@@ -462,19 +651,20 @@ export default function ForStudentsPage() {
       </section>
 
       {/* Student workflows */}
-      <section className="py-16 sm:py-20 bg-[#0B0B0B] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-8 sm:mb-10 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
+      <section className="border-t border-[#222222] bg-[#0B0B0B] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-8 max-w-3xl sm:mb-10">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
               Student workflows
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
+            <h2 className="mb-3 font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
               See the path from finding a club to getting involved.
             </h2>
-            <p className="text-[#9CA3AF] text-base leading-relaxed">
+            <p className="text-base leading-relaxed text-[#9CA3AF]">
               Click through the student journey or let it rotate. Real product screenshots will be added as the demo set is finalized.
             </p>
           </AnimatedSection>
+
           <AnimatedSection delay={0.05}>
             <ClubWorkflowSlideshow
               steps={workflowSteps}
@@ -486,36 +676,45 @@ export default function ForStudentsPage() {
         </div>
       </section>
 
-      {/* What students can do — grouped */}
-      <section className="py-16 sm:py-20 bg-[#111111] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* What students can do */}
+      <section className="border-t border-[#222222] bg-[#111111] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-8 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
               What students can do
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
+            <h2 className="mb-3 font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
               Everything students need to find and follow club life.
             </h2>
           </AnimatedSection>
+
           <div className="space-y-8">
             {canDoGroups.map((group) => (
               <AnimatedSection key={group.label}>
-                <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#777777] mb-3">
+                <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#777777]">
                   {group.label}
                 </p>
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+
+                <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                   {group.cards.map((card) => {
                     const Icon = card.icon;
+
                     return (
                       <div
                         key={card.title}
-                        className="rounded-[10px] border border-white/[0.08] bg-[#131313] p-4 h-full transition-all duration-200 hover:border-white/[0.14] hover:bg-[#161616] hover:-translate-y-0.5"
+                        className="h-full rounded-[10px] border border-white/[0.08] bg-[#131313] p-4 transition-all duration-200 hover:-translate-y-0.5 hover:border-white/[0.14] hover:bg-[#161616]"
                       >
-                        <div className={`w-8 h-8 rounded-[8px] border flex items-center justify-center mb-3 ${iconAccent[card.accent]}`}>
+                        <div
+                          className={`mb-3 flex h-8 w-8 items-center justify-center rounded-[8px] border ${iconAccent[card.accent]}`}
+                        >
                           <Icon size={15} />
                         </div>
-                        <h3 className="text-[#F5F5F5] font-semibold text-sm mb-1">{card.title}</h3>
-                        <p className="text-[#9CA3AF] text-[12px] leading-relaxed">{card.description}</p>
+                        <h3 className="mb-1 text-sm font-semibold text-[#F5F5F5]">
+                          {card.title}
+                        </h3>
+                        <p className="text-[12px] leading-relaxed text-[#9CA3AF]">
+                          {card.description}
+                        </p>
                       </div>
                     );
                   })}
@@ -527,33 +726,47 @@ export default function ForStudentsPage() {
       </section>
 
       {/* Who it helps */}
-      <section className="py-16 sm:py-20 bg-[#0B0B0B] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="border-t border-[#222222] bg-[#0B0B0B] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-10 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#FFC429] mb-3">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FFC429] sm:text-xs">
               Who it helps
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
+            <h2 className="mb-3 font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
               Whether you are new, involved, or trying to get more involved.
             </h2>
-            <p className="text-[#9CA3AF] text-base leading-relaxed">
+            <p className="text-base leading-relaxed text-[#9CA3AF]">
               Gryph ClubConnect is built for students who want a clearer way to find clubs, keep up with events, and discover opportunities without needing to already know the right group chat or Instagram page.
             </p>
           </AnimatedSection>
-          <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4" staggerDelay={0.05}>
+
+          <StaggerContainer
+            className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
+            staggerDelay={0.05}
+          >
             {audienceCards.map((card) => {
               const Icon = card.icon;
+
               return (
                 <StaggerItem key={card.title}>
                   <div
-                    className={`relative overflow-hidden rounded-[12px] border border-white/[0.08] bg-[#131313] p-5 h-full transition-all duration-200 ${audienceHover[card.accent]}`}
+                    className={`relative h-full overflow-hidden rounded-[12px] border border-white/[0.08] bg-[#131313] p-5 transition-all duration-200 ${audienceHover[card.accent]}`}
                   >
-                    <span className={`absolute inset-x-0 top-0 h-[2px] ${accentBar[card.accent]}`} aria-hidden />
-                    <div className={`w-9 h-9 rounded-[8px] border flex items-center justify-center mb-3 ${iconAccent[card.accent]}`}>
+                    <span
+                      className={`absolute inset-x-0 top-0 h-[2px] ${accentBar[card.accent]}`}
+                      aria-hidden
+                    />
+                    <div
+                      className={`mb-3 flex h-9 w-9 items-center justify-center rounded-[8px] border ${iconAccent[card.accent]}`}
+                    >
                       <Icon size={16} />
                     </div>
-                    <h3 className="text-[#F5F5F5] font-semibold mb-2">{card.title}</h3>
-                    <p className="text-[#9CA3AF] text-sm leading-relaxed">{card.description}</p>
+                    <h3 className="mb-2 font-semibold text-[#F5F5F5]">
+                      {card.title}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-[#9CA3AF]">
+                      {card.description}
+                    </p>
                   </div>
                 </StaggerItem>
               );
@@ -563,24 +776,25 @@ export default function ForStudentsPage() {
       </section>
 
       {/* Connected club life */}
-      <section className="py-16 sm:py-20 bg-[#111111] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="border-t border-[#222222] bg-[#111111] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-10 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
               Connected club life
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
+            <h2 className="mb-3 font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
               What students do connects to how clubs manage.
             </h2>
-            <p className="text-[#9CA3AF] text-base leading-relaxed">
+            <p className="text-base leading-relaxed text-[#9CA3AF]">
               When students RSVP, apply, follow, or request to join, club teams can review interest, manage attendees, organize applicants, and follow up from their workspace. Students get a clearer path in, and clubs get cleaner information to work with.
             </p>
           </AnimatedSection>
+
           <AnimatedSection>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               {connectedFlow.map((step, index) => (
                 <div key={step.title} className="relative">
-                  <div className="rounded-[12px] border border-white/[0.08] bg-[#131313] p-5 h-full">
+                  <div className="h-full rounded-[12px] border border-white/[0.08] bg-[#131313] p-5">
                     <span
                       className={`mb-3 inline-flex h-8 w-8 items-center justify-center rounded-full border text-[11px] font-bold tabular-nums ${
                         index % 2 === 0
@@ -590,12 +804,17 @@ export default function ForStudentsPage() {
                     >
                       {String(index + 1).padStart(2, '0')}
                     </span>
-                    <h3 className="text-base font-semibold text-[#F5F5F5] mb-1.5">{step.title}</h3>
-                    <p className="text-sm text-[#9CA3AF] leading-relaxed">{step.description}</p>
+                    <h3 className="mb-1.5 text-base font-semibold text-[#F5F5F5]">
+                      {step.title}
+                    </h3>
+                    <p className="text-sm leading-relaxed text-[#9CA3AF]">
+                      {step.description}
+                    </p>
                   </div>
+
                   {index < connectedFlow.length - 1 && (
                     <span
-                      className="absolute top-1/2 -right-2 z-10 hidden md:block text-[#444444]"
+                      className="absolute -right-2 top-1/2 z-10 hidden text-[#444444] md:block"
                       aria-hidden
                     >
                       →
@@ -611,23 +830,23 @@ export default function ForStudentsPage() {
       {/* Student access form */}
       <section
         id={STUDENT_ACCESS_ID}
-        className="relative py-16 sm:py-20 overflow-hidden bg-[#0B0B0B] border-t border-[#222222] scroll-mt-28"
+        className="relative scroll-mt-28 overflow-hidden border-t border-[#222222] bg-[#0B0B0B] py-16 sm:py-20"
       >
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-14">
             <AnimatedSection>
-              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
+              <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
                 Student access
               </p>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-4">
+              <h2 className="mb-4 font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
                 Ready to find more of what is happening on campus?
               </h2>
-              <p className="text-[#9CA3AF] text-base leading-relaxed mb-6 max-w-xl">
+              <p className="mb-6 max-w-xl text-base leading-relaxed text-[#9CA3AF]">
                 Request student access to follow Gryph ClubConnect as it prepares for launch and get a clearer way to discover clubs, events, and roles.
               </p>
               <Link
                 to="/features"
-                className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#E51937] hover:text-[#FF6B7D] transition-colors"
+                className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#E51937] transition-colors hover:text-[#FF6B7D]"
               >
                 Explore Club Features
                 <ArrowRight size={16} />
@@ -635,11 +854,11 @@ export default function ForStudentsPage() {
             </AnimatedSection>
 
             <AnimatedSection delay={0.08}>
-              <div className="rounded-[14px] border border-[#222222] bg-[#131313] p-6 sm:p-7 shadow-[0_16px_48px_rgba(0,0,0,0.35)]">
-                <h3 className="text-xl font-bold text-[#F5F5F5] font-sans mb-1">
+              <div className="rounded-[14px] border border-[#222222] bg-[#131313] p-6 shadow-[0_16px_48px_rgba(0,0,0,0.35)] sm:p-7">
+                <h3 className="mb-1 font-sans text-xl font-bold text-[#F5F5F5]">
                   Get student access
                 </h3>
-                <p className="text-[#777777] text-sm mb-6 leading-relaxed">
+                <p className="mb-6 text-sm leading-relaxed text-[#777777]">
                   Tell us a bit about yourself so we can follow up as access opens.
                 </p>
                 <StudentAccessForm sourcePage="For Students" idPrefix="for-students" />

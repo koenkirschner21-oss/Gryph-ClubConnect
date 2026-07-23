@@ -216,51 +216,76 @@ export default function DemoPage() {
 
   return (
     <div className="page-transition">
-      <section className="relative overflow-hidden bg-[#0B0B0B] pt-28 pb-14 sm:pt-32 sm:pb-16">
-        <div className="pointer-events-none absolute -top-40 left-1/2 h-[500px] w-[800px] -translate-x-1/2 rounded-full bg-[#E51937] opacity-[0.04] blur-[140px]" />
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12">
-            <AnimatedSection>
-              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
+      {/* Hero */}
+      <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-[#0B0B0B] lg:min-h-[calc(100vh-4rem)]">
+        <div className="pointer-events-none absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-[#E51937] opacity-[0.04] blur-[100px]" />
+
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-12 pt-24 sm:px-6 sm:pb-16 sm:pt-24 lg:px-8 lg:pt-24">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-10 xl:gap-14">
+            <AnimatedSection className="flex min-w-0 flex-col">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
                 Request a demo
               </p>
+
               <h1
-                className="mb-5 font-sans font-extrabold leading-tight text-[#F5F5F5]"
-                style={{ fontSize: 'clamp(2.25rem, 4vw, 3.4rem)' }}
+                className="mt-4 max-w-[38rem] font-sans font-extrabold leading-[1.04] tracking-tight text-[#F5F5F5] sm:mt-5"
+                style={{ fontSize: 'clamp(2.2rem, 3.9vw, 3.55rem)' }}
               >
                 See how Gryph ClubConnect could work for your club.
               </h1>
-              <p className="mb-7 max-w-xl text-base leading-relaxed text-[#9CA3AF] sm:text-lg">
+
+              <p
+                className="mt-4 max-w-[38rem] text-lg text-[#9CA3AF] sm:mt-5 sm:text-xl"
+                style={{ lineHeight: '1.6' }}
+              >
                 Book a walkthrough focused on the workflows your club uses most.
                 See how Gryph ClubConnect can support events, members, tasks,
                 meetings, hiring, permissions, and more from one connected
                 workspace.
               </p>
-              <div className="mb-5 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+
+              <div className="mt-6 flex flex-col items-start gap-3 sm:mt-7 sm:flex-row sm:items-center">
                 <Button
                   variant="red"
-                  size="lg"
+                  size="md"
                   onClick={handleDemo}
-                  className="w-full sm:w-auto"
+                  className="w-[230px] whitespace-nowrap shadow-[0_8px_24px_rgba(229,25,55,0.22)] sm:w-auto sm:px-8 sm:py-4 sm:text-base"
                 >
                   Request a Demo
                 </Button>
+
                 <Button
                   variant="ghost"
-                  size="lg"
+                  size="md"
                   onClick={handleOnboard}
-                  className="w-full sm:w-auto"
+                  className="w-[230px] whitespace-nowrap sm:w-auto sm:px-8 sm:py-4 sm:text-base"
                 >
                   Get Your Club Started
                 </Button>
               </div>
-              <p className="text-[13px] text-[#777777]">
+
+              <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[12px] text-[#9CA3AF] sm:mt-6">
+                <span className="inline-flex items-center gap-2">
+                  <span className="text-[#E51937]">✓</span>
+                  Tailored walkthrough
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <span className="text-[#E51937]">✓</span>
+                  Club-specific workflows
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <span className="text-[#E51937]">✓</span>
+                  Early access guidance
+                </span>
+              </div>
+
+              <p className="mt-4 max-w-[38rem] text-[13px] leading-relaxed text-[#777777]">
                 Requesting a demo does not create an account or officially
                 register your club.
               </p>
             </AnimatedSection>
 
-            <AnimatedSection delay={0.08}>
+            <AnimatedSection delay={0.08} className="relative min-w-0">
               <div className="relative mx-auto block w-full max-w-[610px]">
                 <MockupImage
                   name="demoHero"

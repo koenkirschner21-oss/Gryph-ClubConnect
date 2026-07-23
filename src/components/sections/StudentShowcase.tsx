@@ -49,7 +49,7 @@ export default function StudentShowcase() {
   return (
     <section className="border-t border-[#222222] bg-[#0B0B0B] py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <AnimatedSection className="mx-auto mb-10 max-w-3xl text-center sm:mb-12 lg:mx-0 lg:text-left">
+        <AnimatedSection className="mb-10 max-w-3xl text-left sm:mb-12 lg:mx-0">
           <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FF5A70] sm:text-xs">
             For students
           </p>

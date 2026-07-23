@@ -43,8 +43,8 @@ export default function Hero() {
 
       <div className="pointer-events-none absolute right-0 top-0 h-[420px] w-[420px] rounded-full bg-[#E51937] opacity-[0.03] blur-[120px]" />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-12 pt-28 sm:px-6 sm:pb-16 sm:pt-24 lg:px-8 lg:pt-24">
-        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-10 xl:gap-14">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-12 pt-24 sm:px-6 sm:pb-16 sm:pt-24 lg:px-8 lg:pt-24">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-10 xl:gap-14">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
@@ -52,7 +52,7 @@ export default function Hero() {
               duration: 0.6,
               ease: [0.22, 1, 0.36, 1],
             }}
-            className="flex min-w-0 flex-col gap-4 sm:gap-5"
+            className="flex min-w-0 flex-col"
           >
             <div className="flex flex-wrap items-center gap-2.5">
               <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FFC429] sm:text-xs">
@@ -64,13 +64,13 @@ export default function Hero() {
                 aria-hidden
               />
 
-              <p className="text-[13px] leading-snug text-[#9CA3AF]">
+              <p className="w-full text-[13px] leading-snug text-[#9CA3AF] sm:w-auto">
                 Early access onboarding is open for University of Guelph clubs.
               </p>
             </div>
 
             <h1
-              className="max-w-[38rem] font-sans font-extrabold leading-[1.04] tracking-tight"
+              className="mt-4 max-w-[38rem] font-sans font-extrabold leading-[1.04] tracking-tight sm:mt-5"
               style={{
                 fontSize: 'clamp(2.2rem, 3.9vw, 3.55rem)',
               }}
@@ -85,7 +85,7 @@ export default function Hero() {
             </h1>
 
             <p
-              className="max-w-[36rem] text-lg text-[#9CA3AF] sm:text-xl"
+              className="mt-4 max-w-[36rem] text-lg text-[#9CA3AF] sm:mt-5 sm:text-xl"
               style={{
                 lineHeight: '1.6',
               }}
@@ -95,27 +95,27 @@ export default function Hero() {
               to manage their team and operations.
             </p>
 
-            <div className="flex flex-col items-start gap-3 pt-0.5 sm:flex-row sm:items-center">
+            <div className="mt-6 flex flex-col items-start gap-3 sm:mt-7 sm:flex-row sm:items-center">
               <Button
                 variant="red"
-                size="lg"
+                size="md"
                 onClick={handleGetStarted}
-                className="w-[230px] max-w-full shadow-[0_8px_24px_rgba(229,25,55,0.22)] sm:w-auto"
+                className="w-[230px] whitespace-nowrap shadow-[0_8px_24px_rgba(229,25,55,0.22)] sm:w-auto sm:px-8 sm:py-4 sm:text-base"
               >
                 Get Your Club Started
               </Button>
 
               <Button
                 variant="ghost"
-                size="lg"
+                size="md"
                 onClick={handleDemo}
-                className="w-[190px] max-w-full sm:w-auto"
+                className="w-[230px] whitespace-nowrap sm:w-auto sm:px-8 sm:py-4 sm:text-base"
               >
                 Request a Demo
               </Button>
             </div>
 
-            <div className="pt-0.5">
+            <div className="mt-6 sm:mt-7">
               <div className="h-px w-full max-w-xl bg-[#222222]" />
 
               <div className="mt-3 flex flex-wrap gap-x-4 gap-y-2">

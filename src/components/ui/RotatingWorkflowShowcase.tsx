@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import {
   useEffect,
   useRef,
@@ -57,8 +57,18 @@ export default function RotatingWorkflowShowcase({
   const interactionTimerRef = useRef<number | null>(null);
 
   const styles = accentStyles[accent];
-  const activeStep = steps[activeIndex];
   const paused = hoverPaused || interactionPaused;
+
+  useEffect(() => {
+    steps.forEach((step) => {
+      if (!step.imageSrc) {
+        return;
+      }
+
+      const image = new Image();
+      image.src = `${import.meta.env.BASE_URL}${step.imageSrc}`;
+    });
+  }, [steps]);
 
   useEffect(() => {
     if (paused || steps.length <= 1) {
@@ -83,6 +93,10 @@ export default function RotatingWorkflowShowcase({
   }, []);
 
   const handleStepSelect = (index: number) => {
+    if (index === activeIndex) {
+      return;
+    }
+
     setActiveIndex(index);
     setInteractionPaused(true);
 
@@ -107,7 +121,8 @@ export default function RotatingWorkflowShowcase({
               <button
                 type="button"
                 onClick={() => handleStepSelect(index)}
-                className={`flex w-full gap-4 border-l-2 px-5 py-4 text-left transition-colors sm:px-6 sm:py-4 ${
+                aria-pressed={isActive}
+                className={`flex w-full gap-4 border-l-2 px-5 py-4 text-left transition-colors duration-200 sm:px-6 sm:py-4 ${
                   index < steps.length - 1
                     ? 'border-b border-[#222222]'
                     : ''
@@ -118,7 +133,7 @@ export default function RotatingWorkflowShowcase({
                 }`}
               >
                 <span
-                  className={`w-8 shrink-0 pt-0.5 text-[13px] font-semibold tabular-nums ${
+                  className={`w-8 shrink-0 pt-0.5 text-[13px] font-semibold tabular-nums transition-colors duration-200 ${
                     isActive ? styles.stepNum : 'text-[#9CA3AF]'
                   }`}
                 >
@@ -127,7 +142,7 @@ export default function RotatingWorkflowShowcase({
 
                 <div className="min-w-0">
                   <h3
-                    className={`mb-1 text-[15px] font-semibold sm:text-base ${
+                    className={`mb-1 text-[15px] font-semibold transition-colors duration-200 sm:text-base ${
                       isActive ? 'text-[#F5F5F5]' : 'text-[#BFC4CC]'
                     }`}
                   >
@@ -135,7 +150,7 @@ export default function RotatingWorkflowShowcase({
                   </h3>
 
                   <p
-                    className={`text-[13px] leading-relaxed sm:text-[14px] ${
+                    className={`text-[13px] leading-relaxed transition-colors duration-200 sm:text-[14px] ${
                       isActive ? 'text-[#9CA3AF]' : 'text-[#AEB4C0]'
                     }`}
                   >
@@ -158,39 +173,62 @@ export default function RotatingWorkflowShowcase({
       onMouseEnter={() => setHoverPaused(true)}
       onMouseLeave={() => setHoverPaused(false)}
     >
-      <AnimatePresence mode="wait">
-        {activeStep.imageSrc ? (
-          <motion.div
-            key={activeStep.imageSrc}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-            className="overflow-hidden rounded-[12px] border border-[#222222] bg-[#131313] shadow-[0_16px_48px_rgba(0,0,0,0.4)]"
-          >
-            <img
-              src={`${import.meta.env.BASE_URL}${activeStep.imageSrc}`}
-              alt={activeStep.imageAlt ?? activeStep.placeholderLabel}
-              className="block h-auto w-full object-contain"
-              loading="lazy"
-              decoding="async"
-            />
-          </motion.div>
-        ) : (
-          <motion.div
-            key={activeStep.placeholderLabel}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -6 }}
-            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-          >
-            <AnimatedScreenshotPlaceholder
-              label={activeStep.placeholderLabel}
-              subtitle={placeholderSubtitle}
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div className="relative aspect-[16/10] overflow-hidden rounded-[12px] border border-[#222222] bg-[#131313] shadow-[0_16px_48px_rgba(0,0,0,0.4)]">
+        {steps.map((step, index) => {
+          const isActive = index === activeIndex;
+
+          if (!step.imageSrc) {
+            return (
+              <motion.div
+                key={step.placeholderLabel}
+                initial={false}
+                animate={{
+                  opacity: isActive ? 1 : 0,
+                }}
+                transition={{
+                  duration: 0.22,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className={`absolute inset-0 ${
+                  isActive ? 'pointer-events-auto' : 'pointer-events-none'
+                }`}
+                aria-hidden={!isActive}
+              >
+                <AnimatedScreenshotPlaceholder
+                  label={step.placeholderLabel}
+                  subtitle={placeholderSubtitle}
+                />
+              </motion.div>
+            );
+          }
+
+          return (
+            <motion.div
+              key={step.imageSrc}
+              initial={false}
+              animate={{
+                opacity: isActive ? 1 : 0,
+              }}
+              transition={{
+                duration: 0.22,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className={`absolute inset-0 flex items-center justify-center ${
+                isActive ? 'pointer-events-auto' : 'pointer-events-none'
+              }`}
+              aria-hidden={!isActive}
+            >
+              <img
+                src={`${import.meta.env.BASE_URL}${step.imageSrc}`}
+                alt={isActive ? step.imageAlt ?? step.placeholderLabel : ''}
+                className="block h-full w-full object-contain"
+                loading={index === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+              />
+            </motion.div>
+          );
+        })}
+      </div>
     </div>
   );
 

@@ -43,7 +43,7 @@ export default function Hero() {
 
       <div className="pointer-events-none absolute right-0 top-0 h-[420px] w-[420px] rounded-full bg-[#E51937] opacity-[0.03] blur-[120px]" />
 
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-12 pt-20 sm:px-6 sm:pb-16 sm:pt-24 lg:px-8 lg:pt-24">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-12 pt-28 sm:px-6 sm:pb-16 sm:pt-24 lg:px-8 lg:pt-24">
         <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-10 xl:gap-14">
           <motion.div
             initial={{ opacity: 0, y: 14 }}
@@ -95,12 +95,12 @@ export default function Hero() {
               to manage their team and operations.
             </p>
 
-            <div className="flex flex-col items-stretch gap-3 pt-0.5 sm:flex-row sm:items-center">
+            <div className="flex flex-col items-start gap-3 pt-0.5 sm:flex-row sm:items-center">
               <Button
                 variant="red"
                 size="lg"
                 onClick={handleGetStarted}
-                className="w-full shadow-[0_8px_24px_rgba(229,25,55,0.22)] sm:w-auto"
+                className="w-[230px] max-w-full shadow-[0_8px_24px_rgba(229,25,55,0.22)] sm:w-auto"
               >
                 Get Your Club Started
               </Button>
@@ -109,7 +109,7 @@ export default function Hero() {
                 variant="ghost"
                 size="lg"
                 onClick={handleDemo}
-                className="w-full sm:w-auto"
+                className="w-[190px] max-w-full sm:w-auto"
               >
                 Request a Demo
               </Button>
@@ -130,6 +130,7 @@ export default function Hero() {
                       className="shrink-0 text-[#E51937]"
                       aria-hidden
                     />
+
                     <span>{point}</span>
                   </div>
                 ))}

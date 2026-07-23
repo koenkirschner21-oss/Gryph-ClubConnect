@@ -68,47 +68,69 @@ export default function AboutPage() {
 
   return (
     <div className="page-transition">
-      <section className="relative overflow-hidden bg-[#0B0B0B] pt-28 pb-14 sm:pt-32 sm:pb-16">
-        <div className="pointer-events-none absolute -top-40 right-0 h-[540px] w-[540px] rounded-full bg-[#E51937] opacity-[0.035] blur-[120px]" />
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="max-w-3xl">
-            <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
+      {/* Hero */}
+      <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-[#0B0B0B] lg:min-h-[calc(100vh-4rem)]">
+        <div className="pointer-events-none absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-[#E51937] opacity-[0.04] blur-[100px]" />
+
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-12 pt-24 sm:px-6 sm:pb-16 sm:pt-24 lg:px-8 lg:pt-24">
+          <AnimatedSection className="flex max-w-3xl min-w-0 flex-col">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
               About Gryph ClubConnect
             </p>
+
             <h1
-              className="mb-5 font-sans font-extrabold leading-tight text-[#F5F5F5]"
-              style={{ fontSize: 'clamp(2.35rem, 4.4vw, 3.65rem)' }}
+              className="mt-4 max-w-[42rem] font-sans font-extrabold leading-[1.04] tracking-tight text-[#F5F5F5] sm:mt-5"
+              style={{ fontSize: 'clamp(2.2rem, 3.9vw, 3.55rem)' }}
             >
               Built from the reality of running student clubs.
             </h1>
-            <p className="mb-4 max-w-2xl text-base leading-relaxed text-[#9CA3AF] sm:text-lg">
-              Gryph ClubConnect began with my own experience trying to stay organized across multiple student clubs. Even as a member, it was difficult to know what was coming up, what I was responsible for, and where important updates were being shared.
+
+            <p
+              className="mt-4 max-w-[42rem] text-lg text-[#9CA3AF] sm:mt-5 sm:text-xl"
+              style={{ lineHeight: '1.6' }}
+            >
+              Gryph ClubConnect began with firsthand experience trying to stay
+              organized across multiple student clubs, then grew into a platform
+              designed to help club teams coordinate people, work, and opportunities
+              in one place.
             </p>
-            <p className="mb-4 max-w-2xl text-base leading-relaxed text-[#9CA3AF] sm:text-lg">
-              When I moved into leadership roles, I realized the challenge was even bigger for the people coordinating the club behind the scenes.
-            </p>
-            <p className="mb-7 max-w-2xl text-base leading-relaxed text-[#9CA3AF] sm:text-lg">
-              That experience shaped Gryph ClubConnect into a club-management platform first, with discovery built in to connect students to the opportunities clubs create.
-            </p>
-            <div className="mb-5 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+
+            <div className="mt-6 flex flex-col items-start gap-3 sm:mt-7 sm:flex-row sm:items-center">
               <Button
                 variant="red"
-                size="lg"
+                size="md"
                 onClick={handleOnboard}
-                className="w-full sm:w-auto"
+                className="w-[230px] whitespace-nowrap shadow-[0_8px_24px_rgba(229,25,55,0.22)] sm:w-auto sm:px-8 sm:py-4 sm:text-base"
               >
                 Get Your Club Started
               </Button>
+
               <Button
                 variant="ghost"
-                size="lg"
+                size="md"
                 onClick={handleDemo}
-                className="w-full sm:w-auto"
+                className="w-[230px] whitespace-nowrap sm:w-auto sm:px-8 sm:py-4 sm:text-base"
               >
                 Request a Demo
               </Button>
             </div>
-            <p className="text-[13px] text-[#777777]">
+
+            <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[12px] text-[#9CA3AF] sm:mt-6">
+              <span className="inline-flex items-center gap-2">
+                <span className="text-[#E51937]">✓</span>
+                Student-built
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <span className="text-[#E51937]">✓</span>
+                Shaped by real club experience
+              </span>
+              <span className="inline-flex items-center gap-2">
+                <span className="text-[#E51937]">✓</span>
+                Built for UofG club life
+              </span>
+            </div>
+
+            <p className="mt-4 max-w-[42rem] text-[13px] leading-relaxed text-[#777777]">
               Independent from the University of Guelph.
             </p>
           </AnimatedSection>

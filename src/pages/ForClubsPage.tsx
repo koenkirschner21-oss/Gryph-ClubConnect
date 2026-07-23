@@ -355,45 +355,74 @@ export default function ForClubsPage() {
 
   return (
     <div className="page-transition">
-      {/* 1. Hero — keep mostly as-is */}
-      <section className="relative pt-28 sm:pt-32 pb-14 sm:pb-16 overflow-hidden bg-[#0B0B0B]">
-        <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-[#E51937] opacity-[0.04] blur-[100px] pointer-events-none" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-            <AnimatedSection>
-              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#FFC429] mb-4">
+      {/* 1. Hero */}
+      <section className="relative min-h-[calc(100vh-64px)] overflow-hidden bg-[#0B0B0B] pt-24 sm:pt-28 lg:flex lg:items-center lg:pt-20">
+        <div className="pointer-events-none absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-[#E51937] opacity-[0.04] blur-[100px]" />
+
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-5 pb-8 sm:px-6 sm:pb-12 lg:px-8">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+            <AnimatedSection className="min-w-0">
+              <p className="mb-4 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FFC429] sm:text-xs">
                 For clubs
               </p>
+
               <h1
-                className="font-sans font-extrabold text-[#F5F5F5] mb-3 leading-tight"
-                style={{ fontSize: 'clamp(2.1rem, 4.5vw, 3.5rem)' }}
+                className="max-w-[34rem] font-sans font-extrabold leading-[1.05] tracking-tight text-[#F5F5F5]"
+                style={{ fontSize: 'clamp(2rem, 4.5vw, 3.5rem)' }}
               >
                 Run your club from one workspace.
               </h1>
-              <p className="text-[#9CA3AF] text-lg sm:text-xl mb-5 leading-snug">
-                without chasing group chats, forms, spreadsheets, and shared drives.
+
+              <p className="mt-3 max-w-[34rem] text-lg leading-snug text-[#9CA3AF] sm:text-xl">
+                Without chasing group chats, forms, spreadsheets, and shared drives.
               </p>
-              <p className="text-[#9CA3AF] text-base max-w-xl leading-relaxed mb-7">
+
+              <p className="mt-5 max-w-[36rem] text-base leading-relaxed text-[#9CA3AF]">
                 Gryph ClubConnect gives presidents, executives, and club teams one place to manage events, RSVPs, tasks, meetings, announcements, members, hiring, documents, analytics, setup, roles, reporting, and permissions.
               </p>
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-5">
-                <Button variant="red" size="lg" onClick={handleOnboard} className="w-full sm:w-auto">
+
+              <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+                <Button
+                  variant="red"
+                  size="md"
+                  onClick={handleOnboard}
+                  className="w-[169px] whitespace-nowrap px-5 py-3 text-sm sm:w-auto sm:min-w-[169px]"
+                >
                   Onboard Your Club
                 </Button>
-                <Button variant="ghost" size="lg" onClick={handleDemo} className="w-full sm:w-auto">
+
+                <Button
+                  variant="ghost"
+                  size="md"
+                  onClick={handleDemo}
+                  className="w-[169px] whitespace-nowrap px-5 py-3 text-sm sm:w-auto sm:min-w-[169px]"
+                >
                   Request a Demo
                 </Button>
               </div>
-              <p className="text-[13px] text-[#777777]">
-                Student-built for UofG club life. Independent from the University of Guelph.
-              </p>
+
+              <div className="mt-7 flex flex-wrap gap-x-5 gap-y-3 border-t border-white/[0.06] pt-5 text-[11px] text-[#9CA3AF] sm:text-xs">
+                <span className="inline-flex items-center gap-2">
+                  <span className="text-[#E51937]">✓</span>
+                  Student-built
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <span className="text-[#E51937]">✓</span>
+                  Designed for UofG club life
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <span className="text-[#E51937]">✓</span>
+                  Independent from the University of Guelph
+                </span>
+              </div>
             </AnimatedSection>
-            <AnimatedSection delay={0.1} className="relative lg:-mr-10 xl:-mr-16">
+
+            <AnimatedSection delay={0.1} className="relative min-w-0 lg:-mr-6 xl:-mr-10">
               <MockupImage
                 name="workspace"
                 alt="Gryph ClubConnect club command center"
                 className="relative !overflow-visible !rounded-none !border-0 !bg-transparent !shadow-none !ring-0"
-                imgClassName="h-auto w-full scale-[1.08] object-contain lg:scale-[1.16]"
+                imgClassName="mx-auto h-auto w-full max-w-[590px] object-contain lg:max-w-[650px]"
               />
             </AnimatedSection>
           </div>

@@ -295,12 +295,12 @@ function ProductMapVisual() {
   ];
 
   return (
-    <div className="relative max-w-[610px] mx-auto lg:ml-auto">
-      <div className="absolute -inset-6 rounded-full bg-[#E51937] opacity-[0.035] blur-[65px] pointer-events-none" />
+    <div className="relative mx-auto max-w-[610px] lg:ml-auto">
+      <div className="pointer-events-none absolute -inset-6 rounded-full bg-[#E51937] opacity-[0.035] blur-[65px]" />
       <div className="relative rounded-[16px] border border-white/[0.08] bg-[#111111] p-4 shadow-[0_20px_55px_rgba(0,0,0,0.42)]">
-        <div className="flex items-center justify-between gap-4 mb-3.5">
+        <div className="mb-3.5 flex items-center justify-between gap-4">
           <div>
-            <p className="text-[10px] uppercase tracking-[0.16em] text-[#777777] mb-1">
+            <p className="mb-1 text-[10px] uppercase tracking-[0.16em] text-[#777777]">
               How the platform connects
             </p>
             <p className="text-sm font-semibold text-[#F5F5F5]">
@@ -312,17 +312,22 @@ function ProductMapVisual() {
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+        <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-3">
           {columns.map((column, index) => {
             const style = accentStyles[column.accent];
+
             return (
               <div key={column.title} className="relative">
                 <div className="h-full rounded-[12px] border border-white/[0.08] bg-[#0B0B0B] p-3">
-                  <div className="flex items-center gap-2 mb-3">
-                    <span className={`flex h-7 w-7 items-center justify-center rounded-full border text-[10px] font-bold ${style.border} ${style.background} ${style.text}`}>
+                  <div className="mb-3 flex items-center gap-2">
+                    <span
+                      className={`flex h-7 w-7 items-center justify-center rounded-full border text-[10px] font-bold ${style.border} ${style.background} ${style.text}`}
+                    >
                       {String(index + 1).padStart(2, '0')}
                     </span>
-                    <p className="text-sm font-semibold text-[#F5F5F5]">{column.title}</p>
+                    <p className="text-sm font-semibold text-[#F5F5F5]">
+                      {column.title}
+                    </p>
                   </div>
                   <div className="space-y-2">
                     {column.items.map((item) => (
@@ -335,10 +340,11 @@ function ProductMapVisual() {
                     ))}
                   </div>
                 </div>
+
                 {index < columns.length - 1 && (
                   <ArrowRight
                     size={15}
-                    className="hidden sm:block absolute top-1/2 -right-2.5 -translate-y-1/2 z-10 text-[#777777]"
+                    className="absolute -right-2.5 top-1/2 z-10 hidden -translate-y-1/2 text-[#777777] sm:block"
                     aria-hidden
                   />
                 )}
@@ -351,15 +357,9 @@ function ProductMapVisual() {
   );
 }
 
-function ScreenshotFrame({
-  src,
-  alt,
-}: {
-  src: string;
-  alt: string;
-}) {
+function ScreenshotFrame({ src, alt }: { src: string; alt: string }) {
   return (
-    <div className="rounded-[14px] border border-white/[0.08] bg-[#0B0B0B] p-3 sm:p-4 shadow-[0_18px_52px_rgba(0,0,0,0.38)]">
+    <div className="rounded-[14px] border border-white/[0.08] bg-[#0B0B0B] p-3 shadow-[0_18px_52px_rgba(0,0,0,0.38)] sm:p-4">
       <img
         src={`${import.meta.env.BASE_URL}${src}`}
         alt={alt}
@@ -388,24 +388,28 @@ function TabbedFeatureSection({
   const active = tabs.find((tab) => tab.id === activeId) ?? tabs[0];
 
   return (
-    <section className={`py-16 sm:py-20 border-t border-[#222222] ${dark ? 'bg-[#0B0B0B]' : 'bg-[#111111]'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[0.88fr_1.12fr] gap-10 lg:gap-14 items-center">
+    <section
+      className={`border-t border-[#222222] py-16 sm:py-20 ${
+        dark ? 'bg-[#0B0B0B]' : 'bg-[#111111]'
+      }`}
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:gap-14">
           <AnimatedSection className={reverse ? 'order-1 lg:order-2' : ''}>
-            <p className={`text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] mb-3 ${eyebrowColor}`}>
+            <p className={`mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-xs ${eyebrowColor}`}>
               {eyebrow}
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-4 leading-tight">
+            <h2 className="mb-4 font-sans text-2xl font-extrabold leading-tight text-[#F5F5F5] sm:text-3xl">
               {active.title}
             </h2>
-            <p className="text-[#9CA3AF] text-base leading-relaxed mb-5">
+            <p className="mb-5 text-base leading-relaxed text-[#9CA3AF]">
               {active.body}
             </p>
-            <ul className="space-y-2 mb-6">
+            <ul className="mb-6 space-y-2">
               {active.bullets.map((item) => (
                 <li key={item} className="flex items-start gap-2.5 text-sm">
                   <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#E51937]" />
-                  <span className="text-[#9CA3AF] leading-snug">{item}</span>
+                  <span className="leading-snug text-[#9CA3AF]">{item}</span>
                 </li>
               ))}
             </ul>
@@ -413,6 +417,7 @@ function TabbedFeatureSection({
             <div className="flex flex-wrap gap-2">
               {tabs.map((tab) => {
                 const selected = tab.id === active.id;
+
                 return (
                   <button
                     key={tab.id}
@@ -421,7 +426,7 @@ function TabbedFeatureSection({
                     className={`rounded-full border px-3.5 py-2 text-[13px] font-semibold transition-colors ${
                       selected
                         ? 'border-[#E51937]/35 bg-[rgba(229,25,55,0.12)] text-[#F5F5F5]'
-                        : 'border-white/[0.08] bg-[#131313] text-[#9CA3AF] hover:text-[#F5F5F5] hover:border-white/[0.14]'
+                        : 'border-white/[0.08] bg-[#131313] text-[#9CA3AF] hover:border-white/[0.14] hover:text-[#F5F5F5]'
                     }`}
                     aria-pressed={selected}
                   >
@@ -432,7 +437,10 @@ function TabbedFeatureSection({
             </div>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.08} className={reverse ? 'order-2 lg:order-1' : ''}>
+          <AnimatedSection
+            delay={0.08}
+            className={reverse ? 'order-2 lg:order-1' : ''}
+          >
             <ScreenshotFrame src={active.imageSrc} alt={active.imageAlt} />
           </AnimatedSection>
         </div>
@@ -463,30 +471,37 @@ function SingleFeatureSection({
   dark?: boolean;
 }) {
   return (
-    <section className={`py-16 sm:py-20 border-t border-[#222222] ${dark ? 'bg-[#0B0B0B]' : 'bg-[#111111]'}`}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-[0.88fr_1.12fr] gap-10 lg:gap-14 items-center">
+    <section
+      className={`border-t border-[#222222] py-16 sm:py-20 ${
+        dark ? 'bg-[#0B0B0B]' : 'bg-[#111111]'
+      }`}
+    >
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:gap-14">
           <AnimatedSection className={reverse ? 'order-1 lg:order-2' : ''}>
-            <p className={`text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] mb-3 ${eyebrowColor}`}>
+            <p className={`mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] sm:text-xs ${eyebrowColor}`}>
               {eyebrow}
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-4 leading-tight">
+            <h2 className="mb-4 font-sans text-2xl font-extrabold leading-tight text-[#F5F5F5] sm:text-3xl">
               {title}
             </h2>
-            <p className="text-[#9CA3AF] text-base leading-relaxed mb-5">
+            <p className="mb-5 text-base leading-relaxed text-[#9CA3AF]">
               {body}
             </p>
             <ul className="space-y-2">
               {bullets.map((item) => (
                 <li key={item} className="flex items-start gap-2.5 text-sm">
                   <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#E51937]" />
-                  <span className="text-[#9CA3AF] leading-snug">{item}</span>
+                  <span className="leading-snug text-[#9CA3AF]">{item}</span>
                 </li>
               ))}
             </ul>
           </AnimatedSection>
 
-          <AnimatedSection delay={0.08} className={reverse ? 'order-2 lg:order-1' : ''}>
+          <AnimatedSection
+            delay={0.08}
+            className={reverse ? 'order-2 lg:order-1' : ''}
+          >
             <ScreenshotFrame src={imageSrc} alt={imageAlt} />
           </AnimatedSection>
         </div>
@@ -520,69 +535,97 @@ export default function FeaturesPage() {
 
   return (
     <div className="page-transition">
-      <section className="relative pt-24 sm:pt-28 pb-12 sm:pb-14 overflow-hidden bg-[#0B0B0B]">
-        <div className="absolute -top-40 right-0 w-[520px] h-[520px] rounded-full bg-[#E51937] opacity-[0.035] blur-[110px] pointer-events-none" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-[0.92fr_1.08fr] gap-9 lg:gap-12 items-center">
-            <AnimatedSection>
-              <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-4">
+      {/* Hero */}
+      <section className="relative flex min-h-[88vh] items-center overflow-hidden bg-[#0B0B0B] lg:min-h-[calc(100vh-4rem)]">
+        <div className="pointer-events-none absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-[#E51937] opacity-[0.04] blur-[100px]" />
+
+        <div className="relative z-10 mx-auto w-full max-w-7xl px-4 pb-12 pt-24 sm:px-6 sm:pb-16 sm:pt-24 lg:px-8 lg:pt-24">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-[0.92fr_1.08fr] lg:gap-10 xl:gap-14">
+            <AnimatedSection className="flex min-w-0 flex-col">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
                 Platform overview
               </p>
+
               <h1
-                className="font-sans font-extrabold text-[#F5F5F5] mb-4 leading-[1.06] max-w-[680px]"
-                style={{ fontSize: 'clamp(2.3rem, 3.55vw, 3.2rem)' }}
+                className="mt-4 max-w-[38rem] font-sans font-extrabold leading-[1.04] tracking-tight text-[#F5F5F5] sm:mt-5"
+                style={{ fontSize: 'clamp(2.2rem, 3.9vw, 3.55rem)' }}
               >
                 One platform connecting student discovery and club operations.
               </h1>
-              <p className="text-[#9CA3AF] text-base sm:text-lg max-w-[620px] leading-relaxed mb-6">
-                Gryph ClubConnect helps students discover clubs, events, and opportunities while giving club teams one workspace to manage members, tasks, meetings, hiring, permissions, and more.
+
+              <p
+                className="mt-4 max-w-[38rem] text-lg text-[#9CA3AF] sm:mt-5 sm:text-xl"
+                style={{ lineHeight: '1.6' }}
+              >
+                Gryph ClubConnect helps students discover clubs, events, and
+                opportunities while giving club teams one workspace to manage
+                members, tasks, meetings, hiring, permissions, and more.
               </p>
-              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 mb-5">
+
+              <div className="mt-6 flex flex-col items-start gap-3 sm:mt-7 sm:flex-row sm:items-center">
                 <Button
                   variant="red"
-                  size="lg"
+                  size="md"
                   onClick={handleOnboard}
-                  className="w-full sm:w-auto"
+                  className="w-[230px] whitespace-nowrap shadow-[0_8px_24px_rgba(229,25,55,0.22)] sm:w-auto sm:px-8 sm:py-4 sm:text-base"
                 >
                   Get Your Club Started
                 </Button>
+
                 <Button
                   variant="ghost"
-                  size="lg"
+                  size="md"
                   onClick={handleDemo}
-                  className="w-full sm:w-auto"
+                  className="w-[230px] whitespace-nowrap sm:w-auto sm:px-8 sm:py-4 sm:text-base"
                 >
                   Request a Demo
                 </Button>
               </div>
-              <p className="text-[13px] text-[#777777]">
-                Student-built for UofG club life. Independent from the University of Guelph.
+
+              <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-[12px] text-[#9CA3AF] sm:mt-6">
+                <span className="inline-flex items-center gap-2">
+                  <span className="text-[#E51937]">✓</span>
+                  Student discovery
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <span className="text-[#E51937]">✓</span>
+                  Club operations
+                </span>
+                <span className="inline-flex items-center gap-2">
+                  <span className="text-[#E51937]">✓</span>
+                  Leadership controls
+                </span>
+              </div>
+
+              <p className="mt-4 max-w-[38rem] text-[13px] leading-relaxed text-[#777777]">
+                Student-built for UofG club life. Independent from the University
+                of Guelph.
               </p>
             </AnimatedSection>
 
-            <AnimatedSection delay={0.1} className="lg:scale-[0.96] lg:origin-center">
+            <AnimatedSection delay={0.1} className="relative min-w-0 lg:scale-[0.94] lg:origin-center">
               <ProductMapVisual />
             </AnimatedSection>
           </div>
         </div>
       </section>
 
-      <section className="py-16 sm:py-20 bg-[#111111] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-10 sm:mb-12 max-w-3xl mx-auto text-center">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
+      <section className="border-t border-[#222222] bg-[#111111] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
               How the platform connects
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
+            <h2 className="mb-3 font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
               Built around the full path from discovery to club management.
             </h2>
-            <p className="text-[#9CA3AF] text-base leading-relaxed">
+            <p className="text-base leading-relaxed text-[#9CA3AF]">
               Students, club teams, and leaders work in different parts of the same connected system.
             </p>
           </AnimatedSection>
 
           <StaggerContainer
-            className="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6"
+            className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-3"
             staggerDelay={0.08}
           >
             {pillars.map((pillar) => {
@@ -593,18 +636,23 @@ export default function FeaturesPage() {
                 <StaggerItem key={pillar.title}>
                   <div className="relative h-full overflow-hidden rounded-[14px] border border-white/[0.08] bg-[#131313] p-6 sm:p-7">
                     <span className={`absolute inset-x-0 top-0 h-[2px] ${style.top}`} />
-                    <div className={`w-10 h-10 rounded-[10px] border flex items-center justify-center mb-4 ${style.border} ${style.background} ${style.text}`}>
+                    <div
+                      className={`mb-4 flex h-10 w-10 items-center justify-center rounded-[10px] border ${style.border} ${style.background} ${style.text}`}
+                    >
                       <Icon size={18} />
                     </div>
-                    <h3 className="text-lg font-bold text-[#F5F5F5] font-sans mb-3">
+                    <h3 className="mb-3 font-sans text-lg font-bold text-[#F5F5F5]">
                       {pillar.title}
                     </h3>
-                    <p className="text-[#9CA3AF] text-sm leading-relaxed mb-5">
+                    <p className="mb-5 text-sm leading-relaxed text-[#9CA3AF]">
                       {pillar.body}
                     </p>
                     <ul className="space-y-2">
                       {pillar.points.map((point) => (
-                        <li key={point} className="flex items-center gap-2 text-[13px] text-[#F5F5F5]">
+                        <li
+                          key={point}
+                          className="flex items-center gap-2 text-[13px] text-[#F5F5F5]"
+                        >
                           <span className={`h-1.5 w-1.5 rounded-full ${style.top}`} />
                           {point}
                         </li>
@@ -618,16 +666,16 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20 bg-[#0B0B0B] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="border-t border-[#222222] bg-[#0B0B0B] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <AnimatedSection className="mb-10 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
               Platform overview
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
+            <h2 className="mb-3 font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
               Explore, coordinate, and lead from one platform.
             </h2>
-            <p className="text-[#9CA3AF] text-base leading-relaxed">
+            <p className="text-base leading-relaxed text-[#9CA3AF]">
               A quick view of the core workflows before exploring the product in more detail.
             </p>
           </AnimatedSection>
@@ -635,23 +683,25 @@ export default function FeaturesPage() {
           <div className="space-y-4">
             {overviewBands.map((band) => {
               const style = accentStyles[band.accent];
+
               return (
                 <AnimatedSection key={band.title}>
                   <div className="rounded-[14px] border border-white/[0.08] bg-[#131313] p-5 sm:p-6">
-                    <div className="grid grid-cols-1 lg:grid-cols-[0.32fr_0.68fr] gap-5 lg:gap-8 items-center">
+                    <div className="grid grid-cols-1 items-center gap-5 lg:grid-cols-[0.32fr_0.68fr] lg:gap-8">
                       <div>
-                        <p className={`text-sm font-semibold uppercase tracking-[0.14em] mb-2 ${style.text}`}>
+                        <p className={`mb-2 text-sm font-semibold uppercase tracking-[0.14em] ${style.text}`}>
                           {band.title}
                         </p>
-                        <p className="text-[#9CA3AF] text-sm leading-relaxed">
+                        <p className="text-sm leading-relaxed text-[#9CA3AF]">
                           {band.description}
                         </p>
                       </div>
-                      <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-5 gap-2.5">
+
+                      <div className="grid grid-cols-2 gap-2.5 sm:grid-cols-3 xl:grid-cols-5">
                         {band.items.map(({ label, icon: Icon }) => (
                           <div
                             key={label}
-                            className="rounded-[10px] border border-white/[0.07] bg-[#0B0B0B] px-3 py-3 flex items-center gap-2.5"
+                            className="flex items-center gap-2.5 rounded-[10px] border border-white/[0.07] bg-[#0B0B0B] px-3 py-3"
                           >
                             <Icon size={15} className={style.text} />
                             <span className="text-[12px] font-medium text-[#F5F5F5]">
@@ -708,17 +758,17 @@ export default function FeaturesPage() {
         dark={false}
       />
 
-      <section className="py-14 sm:py-16 bg-[#111111] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="max-w-3xl mx-auto text-center">
-            <div className="w-20 h-[2px] mx-auto mb-6 bg-gradient-to-r from-[#E51937] to-[#FFC429]" />
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
+      <section className="border-t border-[#222222] bg-[#111111] py-14 sm:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mx-auto max-w-3xl text-center">
+            <div className="mx-auto mb-6 h-[2px] w-20 bg-gradient-to-r from-[#E51937] to-[#FFC429]" />
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
               Explore the platform
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
+            <h2 className="mb-3 font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
               See how the core club workflows work together.
             </h2>
-            <p className="text-[#9CA3AF] text-base leading-relaxed">
+            <p className="text-base leading-relaxed text-[#9CA3AF]">
               From assigning work to managing applicants and access, each workflow stays connected to the wider club workspace.
             </p>
           </AnimatedSection>
@@ -754,22 +804,22 @@ export default function FeaturesPage() {
         tabs={leadershipTabs}
       />
 
-      <section className="py-16 sm:py-20 bg-[#111111] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-10 sm:mb-12 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#E51937] mb-3">
+      <section className="border-t border-[#222222] bg-[#111111] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-10 max-w-3xl sm:mb-12">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#E51937] sm:text-xs">
               Connected workflows
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
+            <h2 className="mb-3 font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
               Every action connects to the next step.
             </h2>
-            <p className="text-[#9CA3AF] text-base leading-relaxed">
+            <p className="text-base leading-relaxed text-[#9CA3AF]">
               Student discovery, applications, events, club operations, and leadership controls work together instead of living in separate tools.
             </p>
           </AnimatedSection>
 
           <AnimatedSection>
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-3">
+            <div className="grid grid-cols-1 gap-3 md:grid-cols-5">
               {flowSteps.map((step, index) => {
                 const Icon = step.icon;
                 const red = index % 2 === 0;
@@ -777,27 +827,30 @@ export default function FeaturesPage() {
                 return (
                   <div key={step.title} className="relative">
                     <div className="h-full rounded-[12px] border border-white/[0.08] bg-[#131313] p-4 text-center">
-                      <div className={`mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full border ${
-                        red
-                          ? 'border-[#E51937]/30 bg-[rgba(229,25,55,0.1)] text-[#E51937]'
-                          : 'border-[#FFC429]/30 bg-[rgba(255,196,41,0.1)] text-[#FFC429]'
-                      }`}>
+                      <div
+                        className={`mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-full border ${
+                          red
+                            ? 'border-[#E51937]/30 bg-[rgba(229,25,55,0.1)] text-[#E51937]'
+                            : 'border-[#FFC429]/30 bg-[rgba(255,196,41,0.1)] text-[#FFC429]'
+                        }`}
+                      >
                         <Icon size={17} />
                       </div>
-                      <p className="text-[10px] tabular-nums text-[#666666] mb-1">
+                      <p className="mb-1 text-[10px] tabular-nums text-[#666666]">
                         {String(index + 1).padStart(2, '0')}
                       </p>
-                      <h3 className="text-sm font-semibold text-[#F5F5F5] mb-1.5">
+                      <h3 className="mb-1.5 text-sm font-semibold text-[#F5F5F5]">
                         {step.title}
                       </h3>
-                      <p className="text-[12px] text-[#9CA3AF] leading-snug">
+                      <p className="text-[12px] leading-snug text-[#9CA3AF]">
                         {step.description}
                       </p>
                     </div>
+
                     {index < flowSteps.length - 1 && (
                       <ArrowRight
                         size={15}
-                        className="hidden md:block absolute top-1/2 -right-2.5 -translate-y-1/2 z-10 text-[#4A4A4A]"
+                        className="absolute -right-2.5 top-1/2 z-10 hidden -translate-y-1/2 text-[#4A4A4A] md:block"
                         aria-hidden
                       />
                     )}
@@ -809,24 +862,24 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      <section className="py-16 sm:py-20 bg-[#0B0B0B] border-t border-[#222222]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <AnimatedSection className="mb-8 sm:mb-10 max-w-3xl">
-            <p className="text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] text-[#FFC429] mb-3">
+      <section className="border-t border-[#222222] bg-[#0B0B0B] py-16 sm:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <AnimatedSection className="mb-8 max-w-3xl sm:mb-10">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FFC429] sm:text-xs">
               Before and after
             </p>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#F5F5F5] font-sans mb-3">
+            <h2 className="mb-3 font-sans text-2xl font-extrabold text-[#F5F5F5] sm:text-3xl">
               Replace scattered tools with connected workflows.
             </h2>
-            <p className="text-[#9CA3AF] text-base leading-relaxed">
+            <p className="text-base leading-relaxed text-[#9CA3AF]">
               Bring the work clubs already do into a workspace designed to keep information, ownership, and follow-through connected.
             </p>
           </AnimatedSection>
 
           <AnimatedSection>
-            <div className="grid grid-cols-1 lg:grid-cols-2 overflow-hidden rounded-[14px] border border-white/[0.08] bg-[#131313]">
-              <div className="p-6 sm:p-7 border-b lg:border-b-0 lg:border-r border-white/[0.08]">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#777777] mb-5">
+            <div className="grid grid-cols-1 overflow-hidden rounded-[14px] border border-white/[0.08] bg-[#131313] lg:grid-cols-2">
+              <div className="border-b border-white/[0.08] p-6 sm:p-7 lg:border-b-0 lg:border-r">
+                <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#777777]">
                   Before
                 </p>
                 <div className="space-y-3">
@@ -842,16 +895,16 @@ export default function FeaturesPage() {
               </div>
 
               <div className="p-6 sm:p-7">
-                <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#E51937] mb-5">
+                <p className="mb-5 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#E51937]">
                   With Gryph ClubConnect
                 </p>
                 <div className="space-y-3">
                   {afterItems.map((item) => (
                     <div
                       key={item}
-                      className="rounded-[9px] border border-[#E51937]/15 bg-[rgba(229,25,55,0.06)] px-4 py-3 text-sm text-[#F5F5F5] flex items-start gap-2.5"
+                      className="flex items-start gap-2.5 rounded-[9px] border border-[#E51937]/15 bg-[rgba(229,25,55,0.06)] px-4 py-3 text-sm text-[#F5F5F5]"
                     >
-                      <span className="mt-[7px] h-1.5 w-1.5 rounded-full bg-[#E51937] shrink-0" />
+                      <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#E51937]" />
                       <span>{item}</span>
                     </div>
                   ))}
@@ -862,16 +915,17 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      <section className="relative py-16 sm:py-20 overflow-hidden bg-[#111111] border-t border-[#222222]">
-        <div className="relative z-10 max-w-3xl mx-auto px-4 text-center">
+      <section className="relative overflow-hidden border-t border-[#222222] bg-[#111111] py-16 sm:py-20">
+        <div className="relative z-10 mx-auto max-w-3xl px-4 text-center">
           <AnimatedSection>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#F5F5F5] font-sans mb-4">
+            <h2 className="mb-4 font-sans text-3xl font-extrabold text-[#F5F5F5] sm:text-4xl">
               See how Gryph ClubConnect could work for your club.
             </h2>
-            <p className="text-[#9CA3AF] text-base mb-8 max-w-2xl mx-auto leading-relaxed">
+            <p className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-[#9CA3AF]">
               Request a walkthrough focused on the workflows your team uses and see how your club could prepare for early access.
             </p>
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-4">
+
+            <div className="flex flex-col items-stretch justify-center gap-4 sm:flex-row sm:items-center">
               <Button
                 variant="red"
                 size="lg"
@@ -889,17 +943,19 @@ export default function FeaturesPage() {
                 Request a Demo
               </Button>
             </div>
+
             <button
               type="button"
               onClick={handleStudentAccess}
-              className="mt-6 text-sm text-[#9CA3AF] hover:text-[#F5F5F5] transition-colors underline underline-offset-2"
+              className="mt-6 text-sm text-[#9CA3AF] underline underline-offset-2 transition-colors hover:text-[#F5F5F5]"
             >
               Looking for student access? Explore the student experience.
             </button>
+
             <div className="mt-4">
               <Link
                 to="/for-students"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#E51937] hover:text-[#FF6B7D] transition-colors"
+                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#E51937] transition-colors hover:text-[#FF6B7D]"
               >
                 View the For Students page
                 <ArrowRight size={15} />

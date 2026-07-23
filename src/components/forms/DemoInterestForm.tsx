@@ -6,7 +6,7 @@ import {
   type FormEvent,
 } from 'react';
 import { Link } from 'react-router-dom';
-import { Check } from 'lucide-react';
+import { Check, ChevronDown } from 'lucide-react';
 import {
   DEMO_FORM_ENDPOINT,
   DEMO_FORM_SOURCE_DEMO_PAGE,
@@ -14,7 +14,11 @@ import {
   DEMO_INTEREST_OPTIONS,
   DEMO_WORKFLOW_OPTIONS,
 } from '../../lib/forms';
-import { CLUB_INTEREST_EVENT, consumeClubFormInterest, type ClubInterestOption } from '../../lib/cta';
+import {
+  CLUB_INTEREST_EVENT,
+  consumeClubFormInterest,
+  type ClubInterestOption,
+} from '../../lib/cta';
 import BrandLogo from '../ui/BrandLogo';
 import { trackEvent } from '../../lib/analytics';
 
@@ -70,7 +74,7 @@ function getSubmitLabel(requestType: ClubInterestOption): string {
 }
 
 type DemoInterestFormProps = {
-  /** compact = homepage fields; full = Demo page with workflow checkboxes */
+  /** compact = homepage fields; full = Demo page with workflow selector */
   variant?: 'compact' | 'full';
   idPrefix?: string;
 };
@@ -80,13 +84,17 @@ export default function DemoInterestForm({
   idPrefix,
 }: DemoInterestFormProps) {
   const reactId = useId().replace(/:/g, '');
-  const prefix = idPrefix ?? (variant === 'compact' ? `home-${reactId}` : `demo-${reactId}`);
+  const prefix =
+    idPrefix ?? (variant === 'compact' ? `home-${reactId}` : `demo-${reactId}`);
   const isCompact = variant === 'compact';
-  const formSource = isCompact ? DEMO_FORM_SOURCE_HOMEPAGE : DEMO_FORM_SOURCE_DEMO_PAGE;
+  const formSource = isCompact
+    ? DEMO_FORM_SOURCE_HOMEPAGE
+    : DEMO_FORM_SOURCE_DEMO_PAGE;
 
   const [requestType, setRequestType] =
     useState<(typeof DEMO_INTEREST_OPTIONS)[number]>('Request a demo');
   const [workflows, setWorkflows] = useState<string[]>([]);
+  const [workflowsOpen, setWorkflowsOpen] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -94,6 +102,7 @@ export default function DemoInterestForm({
 
   useEffect(() => {
     const pending = consumeClubFormInterest();
+
     if (pending) {
       setRequestType(pending);
       setSubmitted(false);
@@ -102,18 +111,29 @@ export default function DemoInterestForm({
 
     const handler = (event: Event) => {
       const detail = (event as CustomEvent<ClubInterestOption>).detail;
-      if (!detail || !(DEMO_INTEREST_OPTIONS as readonly string[]).includes(detail)) return;
+
+      if (
+        !detail ||
+        !(DEMO_INTEREST_OPTIONS as readonly string[]).includes(detail)
+      ) {
+        return;
+      }
+
       setRequestType(detail);
       setSubmitted(false);
       setError(null);
     };
+
     window.addEventListener(CLUB_INTEREST_EVENT, handler);
+
     return () => window.removeEventListener(CLUB_INTEREST_EVENT, handler);
   }, []);
 
   const toggleWorkflow = (option: string) => {
     setWorkflows((prev) =>
-      prev.includes(option) ? prev.filter((w) => w !== option) : [...prev, option]
+      prev.includes(option)
+        ? prev.filter((workflow) => workflow !== option)
+        : [...prev, option]
     );
   };
 
@@ -131,30 +151,30 @@ export default function DemoInterestForm({
     });
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setSubmitting(true);
     setError(null);
 
-    const form = e.currentTarget;
+    const form = event.currentTarget;
     const data = new FormData(form);
+
     data.set('requestType', requestType);
     data.set('formSource', formSource);
 
-    // Ensure workflow values are present even if FormData misses controlled checkboxes
     if (!isCompact) {
       data.delete('workflows');
-      workflows.forEach((w) => data.append('workflows', w));
+      workflows.forEach((workflow) => data.append('workflows', workflow));
     }
 
     try {
-      const res = await fetch(DEMO_FORM_ENDPOINT, {
+      const response = await fetch(DEMO_FORM_ENDPOINT, {
         method: 'POST',
         body: data,
         headers: { Accept: 'application/json' },
       });
 
-      if (res.ok) {
+      if (response.ok) {
         trackEvent('generate_lead', {
           form_name: 'club_interest',
           form_source: formSource,
@@ -165,12 +185,17 @@ export default function DemoInterestForm({
         setSubmitted(true);
         form.reset();
         setWorkflows([]);
+        setWorkflowsOpen(false);
         setRequestType('Request a demo');
       } else {
-        setError('Something went wrong. Please try again or email gryphclubconnect@gmail.com.');
+        setError(
+          'Something went wrong. Please try again or email gryphclubconnect@gmail.com.'
+        );
       }
     } catch {
-      setError('Something went wrong. Please try again or email gryphclubconnect@gmail.com.');
+      setError(
+        'Something went wrong. Please try again or email gryphclubconnect@gmail.com.'
+      );
     } finally {
       setSubmitting(false);
     }
@@ -183,8 +208,14 @@ export default function DemoInterestForm({
         role="status"
         aria-live="polite"
       >
-        <span className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-[#E51937] via-[#FFC429] to-[#E51937]" aria-hidden />
-        <div className="absolute -top-16 right-0 h-32 w-32 rounded-full bg-[#E51937] opacity-[0.08] blur-[48px] pointer-events-none" aria-hidden />
+        <span
+          className="absolute inset-x-0 top-0 h-[2px] bg-gradient-to-r from-[#E51937] via-[#FFC429] to-[#E51937]"
+          aria-hidden
+        />
+        <div
+          className="pointer-events-none absolute -top-16 right-0 h-32 w-32 rounded-full bg-[#E51937] opacity-[0.08] blur-[48px]"
+          aria-hidden
+        />
 
         <div className="relative">
           <div className="mb-5 flex items-center justify-between gap-3">
@@ -194,25 +225,26 @@ export default function DemoInterestForm({
             </span>
           </div>
 
-          <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#FFC429] mb-2">
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-[#FFC429]">
             Request received
           </p>
-          <h3 className="text-xl sm:text-[1.35rem] font-extrabold text-[#F5F5F5] font-sans mb-2 leading-tight">
+          <h3 className="mb-2 font-sans text-xl font-extrabold leading-tight text-[#F5F5F5] sm:text-[1.35rem]">
             Request sent successfully
           </h3>
-          <p className="text-[#9CA3AF] text-sm leading-relaxed mb-6">
-            Thanks — your request was sent. We&apos;ll follow up soon using the email you provided. No account was created.
+          <p className="mb-6 text-sm leading-relaxed text-[#9CA3AF]">
+            Thanks — your request was sent. We&apos;ll follow up soon using the
+            email you provided. No account was created.
           </p>
 
-          <div className="rounded-[10px] border border-[#222222] bg-[#131313] p-4 sm:p-5 mb-6">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-[#777777] mb-3">
+          <div className="mb-6 rounded-[10px] border border-[#222222] bg-[#131313] p-4 sm:p-5">
+            <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-[#777777]">
               What happens next
             </p>
             <ol className="space-y-3">
               {nextSteps.map((step, index) => (
                 <li key={step} className="flex gap-3 text-sm">
                   <span
-                    className={`shrink-0 w-6 h-6 rounded-full border text-[11px] font-bold flex items-center justify-center ${
+                    className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full border text-[11px] font-bold ${
                       index % 2 === 0
                         ? 'border-[#E51937]/35 bg-[rgba(229,25,55,0.12)] text-[#E51937]'
                         : 'border-[#FFC429]/35 bg-[rgba(255,196,41,0.12)] text-[#FFC429]'
@@ -220,31 +252,34 @@ export default function DemoInterestForm({
                   >
                     {index + 1}
                   </span>
-                  <span className="pt-0.5 text-[#9CA3AF] leading-relaxed">{step}</span>
+                  <span className="pt-0.5 leading-relaxed text-[#9CA3AF]">
+                    {step}
+                  </span>
                 </li>
               ))}
             </ol>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row">
             <button
               type="button"
               onClick={() => setSubmitted(false)}
-              className="inline-flex flex-1 items-center justify-center rounded-[10px] bg-[#E51937] hover:bg-[#C4122E] text-white font-semibold px-5 py-3 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-[#E51937] focus:ring-offset-2 focus:ring-offset-[#0B0B0B]"
+              className="inline-flex flex-1 items-center justify-center rounded-[10px] bg-[#E51937] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#C4122E] focus:outline-none focus:ring-2 focus:ring-[#E51937] focus:ring-offset-2 focus:ring-offset-[#0B0B0B]"
             >
               Submit another request
             </button>
+
             {isCompact ? (
               <Link
                 to="/demo"
-                className="inline-flex flex-1 items-center justify-center rounded-[10px] border border-[rgba(255,255,255,0.12)] hover:bg-[rgba(255,255,255,0.05)] hover:border-[rgba(255,255,255,0.2)] text-[#F5F5F5] font-semibold px-5 py-3 text-sm transition-colors"
+                className="inline-flex flex-1 items-center justify-center rounded-[10px] border border-[rgba(255,255,255,0.12)] px-5 py-3 text-sm font-semibold text-[#F5F5F5] transition-colors hover:border-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.05)]"
               >
                 Back to demo page
               </Link>
             ) : (
               <Link
                 to="/features"
-                className="inline-flex flex-1 items-center justify-center rounded-[10px] border border-[rgba(255,255,255,0.12)] hover:bg-[rgba(255,255,255,0.05)] hover:border-[rgba(255,255,255,0.2)] text-[#F5F5F5] font-semibold px-5 py-3 text-sm transition-colors"
+                className="inline-flex flex-1 items-center justify-center rounded-[10px] border border-[rgba(255,255,255,0.12)] px-5 py-3 text-sm font-semibold text-[#F5F5F5] transition-colors hover:border-[rgba(255,255,255,0.2)] hover:bg-[rgba(255,255,255,0.05)]"
               >
                 Explore features
               </Link>
@@ -257,6 +292,12 @@ export default function DemoInterestForm({
 
   const fieldGap = isCompact ? 'space-y-3' : 'space-y-4';
   const messageRows = isCompact ? 3 : 4;
+  const workflowSummary =
+    workflows.length === 0
+      ? 'Select workflows'
+      : workflows.length === 1
+        ? '1 workflow selected'
+        : `${workflows.length} workflows selected`;
 
   return (
     <form
@@ -302,7 +343,12 @@ export default function DemoInterestForm({
         <label htmlFor={`${prefix}-club-name`} className={labelClass}>
           Club name
         </label>
-        <input id={`${prefix}-club-name`} name="clubName" required className={inputClass} />
+        <input
+          id={`${prefix}-club-name`}
+          name="clubName"
+          required
+          className={inputClass}
+        />
       </div>
 
       <div>
@@ -332,18 +378,19 @@ export default function DemoInterestForm({
           What are you interested in?
         </p>
         <div
-          className="grid grid-cols-1 sm:grid-cols-3 gap-2 min-w-0"
+          className="grid min-w-0 grid-cols-1 gap-2 sm:grid-cols-3"
           role="group"
           aria-labelledby={`${prefix}-request-type-label`}
         >
           {DEMO_INTEREST_OPTIONS.map((option) => {
             const selected = requestType === option;
+
             return (
               <button
                 key={option}
                 type="button"
                 onClick={() => setRequestType(option)}
-                className={`rounded-[10px] border px-3 py-2.5 text-[12px] sm:text-[13px] font-medium transition-colors text-left min-w-0 break-words ${
+                className={`min-w-0 rounded-[10px] border px-3 py-2.5 text-left text-[12px] font-medium transition-colors sm:text-[13px] ${
                   selected
                     ? 'border-[#E51937]/50 bg-[rgba(229,25,55,0.12)] text-[#F5F5F5]'
                     : 'border-[#222222] bg-[#0B0B0B] text-[#9CA3AF] hover:border-[rgba(255,255,255,0.14)]'
@@ -361,34 +408,83 @@ export default function DemoInterestForm({
           <p className={labelClass} id={`${prefix}-workflows-label`}>
             Which workflows do you want to see?
           </p>
-          <div
-            className="grid grid-cols-1 sm:grid-cols-2 gap-2"
-            role="group"
-            aria-labelledby={`${prefix}-workflows-label`}
-          >
-            {DEMO_WORKFLOW_OPTIONS.map((option) => {
-              const selected = workflows.includes(option);
-              return (
-                <label
-                  key={option}
-                  className={`flex items-start gap-2.5 rounded-[10px] border px-3 py-2.5 text-[13px] cursor-pointer transition-colors ${
-                    selected
-                      ? 'border-[#FFC429]/40 bg-[rgba(255,196,41,0.08)] text-[#F5F5F5]'
-                      : 'border-[#222222] bg-[#0B0B0B] text-[#9CA3AF] hover:border-[rgba(255,255,255,0.14)]'
-                  }`}
-                >
-                  <input
-                    type="checkbox"
-                    name="workflows"
-                    value={option}
-                    className="mt-0.5 rounded border-[#444] bg-[#0B0B0B] text-[#E51937] focus:ring-[#E51937]"
-                    checked={selected}
-                    onChange={() => toggleWorkflow(option)}
-                  />
-                  <span className="leading-snug">{option}</span>
-                </label>
-              );
-            })}
+
+          <div className="overflow-hidden rounded-[10px] border border-[#222222] bg-[#0B0B0B]">
+            <button
+              type="button"
+              onClick={() => setWorkflowsOpen((open) => !open)}
+              className="flex w-full items-center justify-between gap-3 px-3.5 py-3 text-left transition-colors hover:bg-white/[0.025] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-[#E51937]"
+              aria-expanded={workflowsOpen}
+              aria-controls={`${prefix}-workflows-panel`}
+            >
+              <span>
+                <span className="block text-sm font-medium text-[#F5F5F5]">
+                  {workflowSummary}
+                </span>
+                {workflows.length > 0 && (
+                  <span className="mt-0.5 block text-[12px] text-[#777777]">
+                    Open to review or change your selections
+                  </span>
+                )}
+              </span>
+
+              <ChevronDown
+                size={18}
+                className={`shrink-0 text-[#777777] transition-transform duration-200 ${
+                  workflowsOpen ? 'rotate-180 text-[#E51937]' : ''
+                }`}
+                aria-hidden
+              />
+            </button>
+
+            {workflowsOpen && (
+              <div
+                id={`${prefix}-workflows-panel`}
+                className="border-t border-white/[0.07] p-3"
+                role="group"
+                aria-labelledby={`${prefix}-workflows-label`}
+              >
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                  {DEMO_WORKFLOW_OPTIONS.map((option) => {
+                    const selected = workflows.includes(option);
+
+                    return (
+                      <label
+                        key={option}
+                        className={`flex cursor-pointer items-start gap-2.5 rounded-[9px] border px-3 py-2.5 text-[13px] transition-colors ${
+                          selected
+                            ? 'border-[#FFC429]/40 bg-[rgba(255,196,41,0.08)] text-[#F5F5F5]'
+                            : 'border-[#222222] bg-[#111111] text-[#9CA3AF] hover:border-[rgba(255,255,255,0.14)]'
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          name="workflows"
+                          value={option}
+                          className="mt-0.5 rounded border-[#444] bg-[#0B0B0B] text-[#E51937] focus:ring-[#E51937]"
+                          checked={selected}
+                          onChange={() => toggleWorkflow(option)}
+                        />
+                        <span className="leading-snug">{option}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+
+                <div className="mt-3 flex items-center justify-between gap-3 border-t border-white/[0.06] pt-3">
+                  <span className="text-[12px] text-[#777777]">
+                    {workflowSummary}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setWorkflowsOpen(false)}
+                    className="text-[12px] font-semibold text-[#E51937] transition-colors hover:text-[#FF6B7D]"
+                  >
+                    Done
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -402,12 +498,14 @@ export default function DemoInterestForm({
           name="message"
           rows={messageRows}
           placeholder={getMessagePlaceholder(requestType)}
-          className={`${inputClass} resize-y ${isCompact ? 'min-h-[72px]' : 'min-h-[100px]'}`}
+          className={`${inputClass} resize-y ${
+            isCompact ? 'min-h-[72px]' : 'min-h-[100px]'
+          }`}
         />
       </div>
 
       {error && (
-        <p className="text-sm text-[#E51937] leading-relaxed" role="alert">
+        <p className="text-sm leading-relaxed text-[#E51937]" role="alert">
           {error}
         </p>
       )}
@@ -415,13 +513,14 @@ export default function DemoInterestForm({
       <button
         type="submit"
         disabled={submitting}
-        className="w-full rounded-[10px] bg-[#E51937] hover:bg-[#C4122E] text-white font-semibold py-3 text-sm transition-colors disabled:opacity-60 focus:outline-none focus:ring-2 focus:ring-[#E51937] focus:ring-offset-2 focus:ring-offset-[#131313]"
+        className="w-full rounded-[10px] bg-[#E51937] py-3 text-sm font-semibold text-white transition-colors hover:bg-[#C4122E] focus:outline-none focus:ring-2 focus:ring-[#E51937] focus:ring-offset-2 focus:ring-offset-[#131313] disabled:opacity-60"
       >
         {submitting ? 'Submitting…' : getSubmitLabel(requestType)}
       </button>
 
-      <p className="text-[12px] text-[#777777] leading-relaxed">
-        Submitting this form does not create an account or officially register your club.
+      <p className="text-[12px] leading-relaxed text-[#777777]">
+        Submitting this form does not create an account or officially register
+        your club.
       </p>
     </form>
   );

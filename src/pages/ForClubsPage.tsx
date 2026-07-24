@@ -15,7 +15,6 @@ import {
 } from 'lucide-react';
 import AnimatedSection, { StaggerContainer, StaggerItem } from '../components/ui/AnimatedSection';
 import Button from '../components/ui/Button';
-import FeatureScreenshotPlaceholder from '../components/features/FeatureScreenshotPlaceholder';
 import MockupImage from '../components/mockups/MockupImage';
 import ClubWorkflowSlideshow, {
   type ClubWorkflowStep,
@@ -105,24 +104,32 @@ const eventSteps: ClubWorkflowStep[] = [
     description: 'Set event details, visibility, location, date, and event information.',
     placeholderLabel: 'Create Event',
     placeholderSubtext: 'Event creation flow with event details, date, location, visibility, and description.',
+    imageSrc: 'screenshots/for-clubs-events-create-event.png',
+    imageAlt: 'Gryph ClubConnect event creation screen',
   },
   {
     title: 'Collect RSVPs',
     description: 'Add sign-up questions and let students or members respond.',
     placeholderLabel: 'RSVP Questions',
     placeholderSubtext: 'RSVP form with custom sign-up questions and response options.',
+    imageSrc: 'screenshots/for-clubs-events-collect-rsvps.png',
+    imageAlt: 'Gryph ClubConnect RSVP questions screen',
   },
   {
     title: 'Review attendees',
     description: 'View who is coming and review RSVP answers.',
     placeholderLabel: 'RSVP Answers',
     placeholderSubtext: 'Attendee list with RSVP responses, answers, and event status.',
+    imageSrc: 'screenshots/for-clubs-events-review-attendees.png',
+    imageAlt: 'Gryph ClubConnect event attendee and RSVP response screen',
   },
   {
     title: 'Assign planning tasks',
     description: 'Create event-linked tasks so planning work stays connected.',
     placeholderLabel: 'Event-Linked Tasks',
     placeholderSubtext: 'Tasks connected to an event with owners, due dates, and review status.',
+    imageSrc: 'screenshots/for-clubs-events-planning-tasks.png',
+    imageAlt: 'Gryph ClubConnect event planning tasks screen',
   },
 ];
 
@@ -132,24 +139,32 @@ const taskSteps: ClubWorkflowStep[] = [
     description: 'Add title, description, owner, due date, and priority.',
     placeholderLabel: 'Create Task',
     placeholderSubtext: 'Task creation with owner, due date, priority, and linked context.',
+    imageSrc: 'screenshots/for-clubs-tasks-create-task.png',
+    imageAlt: 'Gryph ClubConnect task creation screen',
   },
   {
     title: 'Track progress',
     description: 'Move work through To Do, In Progress, Needs Review, and Complete.',
     placeholderLabel: 'Task Status',
     placeholderSubtext: 'Task board showing status, assigned work, and ownership.',
+    imageSrc: 'screenshots/for-clubs-tasks-track-progress.png',
+    imageAlt: 'Gryph ClubConnect task progress screen',
   },
   {
     title: 'Review work',
     description: 'Send work back, approve completion, or leave comments.',
     placeholderLabel: 'Task Review',
     placeholderSubtext: 'Review workflow with comments, send-back states, and completion controls.',
+    imageSrc: 'screenshots/for-clubs-tasks-review-work.png',
+    imageAlt: 'Gryph ClubConnect task review screen',
   },
   {
     title: 'Connect work to events',
     description: 'Keep event planning tasks tied to the event they support.',
     placeholderLabel: 'Event Task Context',
     placeholderSubtext: 'Event-linked task view showing planning work connected to a specific event.',
+    imageSrc: 'screenshots/for-clubs-tasks-connect-to-events.png',
+    imageAlt: 'Gryph ClubConnect event-linked task screen',
   },
 ];
 
@@ -159,24 +174,32 @@ const meetingSteps: ClubWorkflowStep[] = [
     description: 'Create a meeting with date, time, location, visibility, and attendees.',
     placeholderLabel: 'Meeting Setup',
     placeholderSubtext: 'Meeting setup with date, location, attendees, and visibility.',
+    imageSrc: 'screenshots/for-clubs-meetings-schedule.png',
+    imageAlt: 'Gryph ClubConnect meeting scheduling screen',
   },
   {
     title: 'Build the agenda',
     description: 'Prepare agenda items before the meeting.',
     placeholderLabel: 'Meeting Agenda',
     placeholderSubtext: 'Agenda builder with discussion items and meeting structure.',
+    imageSrc: 'screenshots/for-clubs-meetings-agenda.png',
+    imageAlt: 'Gryph ClubConnect meeting agenda screen',
   },
   {
     title: 'Capture notes and decisions',
     description: 'Record what was discussed and what decisions were made.',
     placeholderLabel: 'Meeting Notes',
     placeholderSubtext: 'Meeting notes and decisions captured in one workspace.',
+    imageSrc: 'screenshots/for-clubs-meetings-notes-decisions.png',
+    imageAlt: 'Gryph ClubConnect meeting notes and decisions screen',
   },
   {
     title: 'Assign follow-ups',
     description: 'Turn meeting outcomes into tasks with owners and due dates.',
     placeholderLabel: 'Meeting Follow-Ups',
     placeholderSubtext: 'Follow-up tasks created from meeting notes and assigned to owners.',
+    imageSrc: 'screenshots/for-clubs-meetings-follow-ups.png',
+    imageAlt: 'Gryph ClubConnect meeting follow-up tasks screen',
   },
 ];
 
@@ -186,24 +209,32 @@ const hiringSteps: ClubWorkflowStep[] = [
     description: 'Create an open role with responsibilities, requirements, and application details.',
     placeholderLabel: 'Create Role',
     placeholderSubtext: 'Role posting setup with title, description, requirements, and application questions.',
+    imageSrc: 'screenshots/for-clubs-hiring-post-role.png',
+    imageAlt: 'Gryph ClubConnect role posting screen',
   },
   {
     title: 'Collect applications',
     description: 'Students apply with answers and supporting information.',
     placeholderLabel: 'Applicant List',
     placeholderSubtext: 'Applicant list with submitted applications and candidate details.',
+    imageSrc: 'screenshots/for-clubs-hiring-collect-applications.png',
+    imageAlt: 'Gryph ClubConnect applicant list screen',
   },
   {
     title: 'Review candidates',
     description: 'Review answers, add context, and evaluate applicants.',
     placeholderLabel: 'Applicant Review',
     placeholderSubtext: 'Applicant review view with answers, notes, and reviewer context.',
+    imageSrc: 'screenshots/for-clubs-hiring-review-candidates.png',
+    imageAlt: 'Gryph ClubConnect applicant review screen',
   },
   {
     title: 'Move through statuses',
     description: 'Track candidates across Pending, Reviewed, Interview, Accepted, and Rejected.',
     placeholderLabel: 'Hiring Pipeline',
     placeholderSubtext: 'Candidate pipeline with statuses and application progress.',
+    imageSrc: 'screenshots/for-clubs-hiring-review-candidates.png',
+    imageAlt: 'Gryph ClubConnect hiring pipeline and applicant status screen',
   },
 ];
 
@@ -386,7 +417,7 @@ export default function ForClubsPage() {
                   variant="red"
                   size="md"
                   onClick={handleOnboard}
-                  className="w-[169px] whitespace-nowrap px-5 py-3 text-sm sm:w-auto sm:min-w-[169px]"
+                  className="w-[230px] whitespace-nowrap shadow-[0_8px_24px_rgba(229,25,55,0.22)] sm:w-auto sm:px-8 sm:py-4 sm:text-base"
                 >
                   Onboard Your Club
                 </Button>
@@ -395,7 +426,7 @@ export default function ForClubsPage() {
                   variant="ghost"
                   size="md"
                   onClick={handleDemo}
-                  className="w-[169px] whitespace-nowrap px-5 py-3 text-sm sm:w-auto sm:min-w-[169px]"
+                  className="w-[230px] whitespace-nowrap sm:w-auto sm:px-8 sm:py-4 sm:text-base"
                 >
                   Request a Demo
                 </Button>
@@ -477,9 +508,12 @@ export default function ForClubsPage() {
               <TextCta label="Request a demo of the club workspace" onClick={handleDemo} />
             </AnimatedSection>
             <AnimatedSection delay={0.08}>
-              <FeatureScreenshotPlaceholder
-                label="Command Center Overview"
-                subtext="President view with setup progress, pending actions, quick actions, upcoming activity, tasks, events, hiring, and team responsibilities."
+              <img
+                src={`${import.meta.env.BASE_URL}screenshots/for-clubs-command-center-overview.png`}
+                alt="Gryph ClubConnect Command Center overview"
+                className="block h-auto w-full rounded-[12px] border border-white/[0.08] bg-[#131313] object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
+                loading="lazy"
+                decoding="async"
               />
             </AnimatedSection>
           </div>
@@ -508,9 +542,12 @@ export default function ForClubsPage() {
               <TextCta label="Talk through access levels" onClick={handleDemo} />
             </AnimatedSection>
             <AnimatedSection delay={0.08}>
-              <FeatureScreenshotPlaceholder
-                label="Access Levels & Permissions"
-                subtext="Role management view with access levels, promoted executives, reporting structure, and permission controls."
+              <img
+                src={`${import.meta.env.BASE_URL}screenshots/for-clubs-access-levels-permissions.png`}
+                alt="Gryph ClubConnect access levels and permissions"
+                className="block h-auto w-full rounded-[12px] border border-white/[0.08] bg-[#131313] object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
+                loading="lazy"
+                decoding="async"
               />
             </AnimatedSection>
           </div>
@@ -655,9 +692,12 @@ export default function ForClubsPage() {
               <TextCta label="Talk through access levels" onClick={handleDemo} />
             </AnimatedSection>
             <AnimatedSection delay={0.08}>
-              <FeatureScreenshotPlaceholder
-                label="Member Management"
-                subtext="Member roster with join requests, custom titles, reporting structure, promoted members, and permission controls."
+              <img
+                src={`${import.meta.env.BASE_URL}screenshots/for-clubs-members-executive-role.png`}
+                alt="Gryph ClubConnect member management and executive roles"
+                className="block h-auto w-full rounded-[12px] border border-white/[0.08] bg-[#131313] object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
+                loading="lazy"
+                decoding="async"
               />
             </AnimatedSection>
           </div>
@@ -669,9 +709,12 @@ export default function ForClubsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
             <AnimatedSection delay={0.08} className="order-2 lg:order-1">
-              <FeatureScreenshotPlaceholder
-                label="Club Analytics"
-                subtext="Analytics dashboard with member, event, task, announcement, hiring, and profile insights."
+              <img
+                src={`${import.meta.env.BASE_URL}screenshots/for-clubs-club-analytics.png`}
+                alt="Gryph ClubConnect club analytics dashboard"
+                className="block h-auto w-full rounded-[12px] border border-white/[0.08] bg-[#131313] object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
+                loading="lazy"
+                decoding="async"
               />
             </AnimatedSection>
             <AnimatedSection className="order-1 lg:order-2">

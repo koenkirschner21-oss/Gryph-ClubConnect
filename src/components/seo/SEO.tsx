@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const SITE_URL = 'https://gryphclubconnect.com';
-const DEFAULT_IMAGE =
-  `${SITE_URL}/screenshots/clubconnect-homepage-hero.png`;
+const DEFAULT_IMAGE = `${SITE_URL}/screenshots/clubconnect-homepage-hero.png`;
 
 type PageMetadata = {
   title: string;
@@ -14,90 +13,72 @@ type PageMetadata = {
 
 const metadata: Record<string, PageMetadata> = {
   '/': {
-    title:
-      'Gryph ClubConnect | University of Guelph Club Platform',
+    title: 'Gryph ClubConnect | University of Guelph Club Platform',
     description:
       'Discover University of Guelph clubs, events, and opportunities while giving club teams one connected workspace for members, tasks, meetings, hiring, permissions, and more.',
   },
 
   '/for-clubs': {
-    title:
-      'Club Management for U of G Clubs | Gryph ClubConnect',
+    title: 'Club Management for U of G Clubs | Gryph ClubConnect',
     description:
       'Run your University of Guelph club from one workspace for members, roles, events, tasks, meetings, hiring, documents, permissions, and analytics.',
   },
 
   '/for-students': {
-    title:
-      'Find U of G Clubs, Events and Opportunities | Gryph ClubConnect',
+    title: 'Find U of G Clubs, Events and Opportunities | Gryph ClubConnect',
     description:
       'Explore University of Guelph clubs, discover events and open positions, apply, RSVP, and keep your involvement organized across every club.',
   },
 
   '/features': {
-    title:
-      'Student Club Management Platform Features | Gryph ClubConnect',
+    title: 'Student Club Management Platform Features | Gryph ClubConnect',
     description:
       'Explore Gryph ClubConnect features for club discovery, member management, events, RSVPs, tasks, meetings, hiring, permissions, documents, and analytics.',
   },
 
+  '/how-it-works': {
+    title: 'How Gryph ClubConnect Works | Gryph ClubConnect',
+    description:
+      'Learn how Gryph ClubConnect helps University of Guelph students discover clubs and helps club leaders manage members, events, tasks, hiring, and more.',
+  },
+
   '/demo': {
-    title:
-      'Request a Gryph ClubConnect Demo',
+    title: 'Request a Gryph ClubConnect Demo',
     description:
       'Request a walkthrough of Gryph ClubConnect and see how the platform can support your club’s current workflows and early-access onboarding.',
   },
 
   '/about': {
-    title:
-      'About Gryph ClubConnect | Student-Built at U of G',
+    title: 'About Gryph ClubConnect | Student-Built at U of G',
     description:
       'Learn why Gryph ClubConnect is being built as an independent, student-built platform for University of Guelph club operations and discovery.',
   },
 
   '/privacy': {
-    title:
-      'Privacy Policy | Gryph ClubConnect',
-    description:
-      'Read the Gryph ClubConnect privacy policy.',
+    title: 'Privacy Policy | Gryph ClubConnect',
+    description: 'Read the Gryph ClubConnect privacy policy.',
   },
 
   '/terms': {
-    title:
-      'Terms of Use | Gryph ClubConnect',
-    description:
-      'Read the Gryph ClubConnect terms of use.',
-  },
-
-  '/how-it-works': {
-    title:
-      'How Gryph ClubConnect Works',
-    description:
-      'Learn how Gryph ClubConnect connects student discovery and club operations.',
-    index: false,
+    title: 'Terms of Use | Gryph ClubConnect',
+    description: 'Read the Gryph ClubConnect terms of use.',
   },
 
   '/pricing': {
-    title:
-      'Gryph ClubConnect Pricing',
-    description:
-      'Gryph ClubConnect pricing information.',
+    title: 'Gryph ClubConnect Pricing',
+    description: 'Gryph ClubConnect pricing information.',
     index: false,
   },
 
   '/blog': {
-    title:
-      'Gryph ClubConnect Blog',
-    description:
-      'Updates and resources from Gryph ClubConnect.',
+    title: 'Gryph ClubConnect Blog',
+    description: 'Updates and resources from Gryph ClubConnect.',
     index: false,
   },
 
   '/careers': {
-    title:
-      'Careers | Gryph ClubConnect',
-    description:
-      'Career opportunities with Gryph ClubConnect.',
+    title: 'Careers | Gryph ClubConnect',
+    description: 'Career opportunities with Gryph ClubConnect.',
     index: false,
   },
 };
@@ -108,8 +89,7 @@ function setMeta(
   key: string,
   content: string,
 ) {
-  let element =
-    document.head.querySelector<HTMLMetaElement>(selector);
+  let element = document.head.querySelector<HTMLMetaElement>(selector);
 
   if (!element) {
     element = document.createElement('meta');
@@ -121,10 +101,9 @@ function setMeta(
 }
 
 function setCanonical(url: string) {
-  let canonical =
-    document.head.querySelector<HTMLLinkElement>(
-      'link[rel="canonical"]',
-    );
+  let canonical = document.head.querySelector<HTMLLinkElement>(
+    'link[rel="canonical"]',
+  );
 
   if (!canonical) {
     canonical = document.createElement('link');
@@ -138,8 +117,7 @@ function setCanonical(url: string) {
 function setStructuredData() {
   const id = 'gcc-structured-data';
 
-  let script =
-    document.getElementById(id) as HTMLScriptElement | null;
+  let script = document.getElementById(id) as HTMLScriptElement | null;
 
   if (!script) {
     script = document.createElement('script');
@@ -200,10 +178,8 @@ export default function SEO() {
 
   useEffect(() => {
     const page = metadata[location.pathname] ?? {
-      title:
-        'Page Not Found | Gryph ClubConnect',
-      description:
-        'The requested page could not be found.',
+      title: 'Page Not Found | Gryph ClubConnect',
+      description: 'The requested page could not be found.',
       index: false,
     };
 
@@ -229,12 +205,7 @@ export default function SEO() {
       page.description,
     );
 
-    setMeta(
-      'meta[name="robots"]',
-      'name',
-      'robots',
-      robots,
-    );
+    setMeta('meta[name="robots"]', 'name', 'robots', robots);
 
     setMeta(
       'meta[property="og:site_name"]',

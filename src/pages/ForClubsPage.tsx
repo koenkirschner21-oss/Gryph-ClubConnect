@@ -104,32 +104,32 @@ const eventSteps: ClubWorkflowStep[] = [
     description: 'Set event details, visibility, location, date, and event information.',
     placeholderLabel: 'Create Event',
     placeholderSubtext: 'Event creation flow with event details, date, location, visibility, and description.',
-    imageSrc: 'screenshots/for-clubs-events-create-event.png',
-    imageAlt: 'Gryph ClubConnect event creation screen',
+    imageSrc: 'screenshots/for-clubs-event-create-final.png',
+    imageAlt: 'Gryph ClubConnect event creation form showing event details, visibility, recurrence, date, time, location, and RSVP questions.',
   },
   {
     title: 'Collect RSVPs',
     description: 'Add sign-up questions and let students or members respond.',
     placeholderLabel: 'RSVP Questions',
     placeholderSubtext: 'RSVP form with custom sign-up questions and response options.',
-    imageSrc: 'screenshots/for-clubs-events-collect-rsvps.png',
-    imageAlt: 'Gryph ClubConnect RSVP questions screen',
+    imageSrc: 'screenshots/for-clubs-event-rsvp-final.png',
+    imageAlt: 'Gryph ClubConnect event RSVP form showing custom sign-up questions and confirmation controls.',
   },
   {
     title: 'Review attendees',
     description: 'View who is coming and review RSVP answers.',
     placeholderLabel: 'RSVP Answers',
     placeholderSubtext: 'Attendee list with RSVP responses, answers, and event status.',
-    imageSrc: 'screenshots/for-clubs-events-review-attendees.png',
-    imageAlt: 'Gryph ClubConnect event attendee and RSVP response screen',
+    imageSrc: 'screenshots/for-clubs-event-attendees-final.png',
+    imageAlt: 'Gryph ClubConnect event management screen showing attendees and RSVP statuses.',
   },
   {
     title: 'Assign planning tasks',
     description: 'Create event-linked tasks so planning work stays connected.',
     placeholderLabel: 'Event-Linked Tasks',
     placeholderSubtext: 'Tasks connected to an event with owners, due dates, and review status.',
-    imageSrc: 'screenshots/for-clubs-events-planning-tasks.png',
-    imageAlt: 'Gryph ClubConnect event planning tasks screen',
+    imageSrc: 'screenshots/for-clubs-event-planning-tasks-final.png',
+    imageAlt: 'Gryph ClubConnect event details page showing planning tasks linked directly to the event.',
   },
 ];
 
@@ -509,8 +509,8 @@ export default function ForClubsPage() {
             </AnimatedSection>
             <AnimatedSection delay={0.08}>
               <img
-                src={`${import.meta.env.BASE_URL}screenshots/for-clubs-command-center-overview.png`}
-                alt="Gryph ClubConnect Command Center overview"
+                src={`${import.meta.env.BASE_URL}screenshots/for-clubs-command-center-final.png`}
+                alt="Gryph ClubConnect Command Center showing pending actions, upcoming activity, assigned work, tasks, and hiring activity."
                 className="block h-auto w-full rounded-[12px] border border-white/[0.08] bg-[#131313] object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
                 loading="lazy"
                 decoding="async"

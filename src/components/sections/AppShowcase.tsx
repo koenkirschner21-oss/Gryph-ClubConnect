@@ -18,8 +18,10 @@ const workflows = [
       'Upcoming events',
       'Tasks and applications',
     ],
-    imageSrc: 'screenshots/homepage-app-dashboard.png',
-    imageAlt: 'Gryph ClubConnect student dashboard view',
+    imageSrc:
+      'screenshots/homepage-product-tour-student-dashboard-final.png',
+    imageAlt:
+      'Gryph ClubConnect student dashboard showing clubs, tasks, upcoming events, inbox updates, and announcements.',
   },
   {
     key: 'explore',
@@ -30,8 +32,9 @@ const workflows = [
       'Public club profiles',
       'Club discovery',
     ],
-    imageSrc: 'screenshots/homepage-app-explore.png',
-    imageAlt: 'Gryph ClubConnect Explore Clubs view',
+    imageSrc: 'screenshots/homepage-product-tour-explore-clubs-final.png',
+    imageAlt:
+      'Gryph ClubConnect Explore Clubs page showing active University of Guelph clubs and membership states.',
   },
   {
     key: 'workspace',
@@ -42,8 +45,10 @@ const workflows = [
       'Quick actions',
       'Club setup progress',
     ],
-    imageSrc: 'screenshots/homepage-app-workspace.png',
-    imageAlt: 'Gryph ClubConnect Command Center',
+    imageSrc:
+      'screenshots/homepage-product-tour-command-center-final.png',
+    imageAlt:
+      'Gryph ClubConnect Command Center showing pending actions, club activity, tasks, and hiring information.',
   },
   {
     key: 'events',
@@ -55,8 +60,10 @@ const workflows = [
       'Attendee management',
       'Event planning tasks',
     ],
-    imageSrc: 'screenshots/homepage-app-events-rsvps.png',
-    imageAlt: 'Gryph ClubConnect events and RSVP management view',
+    imageSrc:
+      'screenshots/homepage-product-tour-events-management-final.png',
+    imageAlt:
+      'Gryph ClubConnect events management page showing upcoming events, RSVP controls, attendees, and planning tasks.',
   },
   {
     key: 'tasks',
@@ -67,8 +74,10 @@ const workflows = [
       'Status tracking',
       'Review workflow',
     ],
-    imageSrc: 'screenshots/homepage-app-tasks.png',
-    imageAlt: 'Gryph ClubConnect task management view',
+    imageSrc:
+      'screenshots/homepage-product-tour-task-management-final.png',
+    imageAlt:
+      'Gryph ClubConnect task management page showing assignments, progress, priorities, due dates, and task actions.',
   },
   {
     key: 'hiring',
@@ -76,8 +85,10 @@ const workflows = [
     description:
       'Post positions, review applicants, and manage candidate statuses.',
     highlights: ['Position listings', 'Applicant review', 'Status pipeline'],
-    imageSrc: 'screenshots/homepage-app-hiring.png',
-    imageAlt: 'Gryph ClubConnect hiring view',
+    imageSrc:
+      'screenshots/homepage-product-tour-hiring-management-final.png',
+    imageAlt:
+      'Gryph ClubConnect hiring management page showing open positions, applicants, review statuses, and hiring actions.',
   },
   {
     key: 'members',
@@ -89,8 +100,10 @@ const workflows = [
       'Invites and join codes',
       'Roles and permissions',
     ],
-    imageSrc: 'screenshots/homepage-app-members-roles.png',
-    imageAlt: 'Gryph ClubConnect members and roles view',
+    imageSrc:
+      'screenshots/homepage-product-tour-members-roles-final.png',
+    imageAlt:
+      'Gryph ClubConnect members page showing member roles, access levels, invites, join codes, and management actions.',
   },
 ] as const;
 

@@ -12,56 +12,63 @@ const workflowSteps: WorkflowStep[] = [
     description:
       'See pending actions, upcoming activity, open work, and setup progress from one clear overview.',
     placeholderLabel: 'Command Center',
-    imageSrc: 'screenshots/homepage-club-command-center.png',
-    imageAlt: 'Gryph ClubConnect club Command Center',
+    imageSrc: 'screenshots/homepage-leaders-command-center-final.png',
+    imageAlt:
+      'Gryph ClubConnect Club Command Center showing pending actions, upcoming activity, tasks, and hiring activity.',
   },
   {
     title: 'Keep members updated',
     description:
       'Post announcements, keep important updates visible, and support club communication beyond scattered group chats.',
     placeholderLabel: 'Announcements',
-    imageSrc: 'screenshots/homepage-club-announcements.png',
-    imageAlt: 'Gryph ClubConnect club announcements screen',
+    imageSrc: 'screenshots/homepage-leaders-announcements-final.png',
+    imageAlt:
+      'Gryph ClubConnect Announcements page showing pinned club updates, visibility controls, and post management.',
   },
   {
     title: 'Plan events and track RSVPs',
     description:
       'Create events, collect sign-ups, review RSVP answers, manage attendees, and connect planning tasks to the event.',
     placeholderLabel: 'Events & RSVPs',
-    imageSrc: 'screenshots/homepage-club-events-rsvps.png',
-    imageAlt: 'Gryph ClubConnect events and RSVP management screen',
+    imageSrc: 'screenshots/homepage-leaders-events-management-final.png',
+    imageAlt:
+      'Gryph ClubConnect Events management page showing upcoming events, RSVPs, attendees, and planning tasks.',
   },
   {
     title: 'Assign and review tasks',
     description:
       'Set ownership, due dates, priorities, comments, and review states across your team.',
     placeholderLabel: 'Tasks',
-    imageSrc: 'screenshots/homepage-club-tasks.png',
-    imageAlt: 'Gryph ClubConnect club task management screen',
+    imageSrc: 'screenshots/homepage-leaders-tasks-final.png',
+    imageAlt:
+      'Gryph ClubConnect Tasks page showing assignments, due dates, priorities, progress, and completion status.',
   },
   {
     title: 'Run meetings and follow-ups',
     description:
       'Prepare agendas, capture notes and decisions, and turn follow-ups into assigned tasks.',
     placeholderLabel: 'Meetings',
-    imageSrc: 'screenshots/homepage-club-meetings.png',
-    imageAlt: 'Gryph ClubConnect meeting management screen',
+    imageSrc: 'screenshots/homepage-leaders-meetings-final.png',
+    imageAlt:
+      'Gryph ClubConnect meeting workspace showing agenda items, preparation notes, attendees, and meeting details.',
   },
   {
     title: 'Manage members and roles',
     description:
       'Organize your member directory, role titles, access levels, invites, and club structure.',
     placeholderLabel: 'Members & roles',
-    imageSrc: 'screenshots/homepage-club-members-resources.png',
-    imageAlt: 'Gryph ClubConnect members and roles screen',
+    imageSrc: 'screenshots/homepage-leaders-members-roles-final.png',
+    imageAlt:
+      'Gryph ClubConnect Members page showing the club role hierarchy, member counts, invites, and access levels.',
   },
   {
     title: 'Review applicants and manage hiring',
     description:
       'Post roles, review applications, schedule interviews, and move candidates through a clear status pipeline.',
     placeholderLabel: 'Hiring',
-    imageSrc: 'screenshots/homepage-club-hiring-permissions.png',
-    imageAlt: 'Gryph ClubConnect hiring and applicant management screen',
+    imageSrc: 'screenshots/homepage-leaders-hiring-final.png',
+    imageAlt:
+      'Gryph ClubConnect Hiring page showing open positions, applicants, review statuses, and hiring actions.',
   },
 ];
 

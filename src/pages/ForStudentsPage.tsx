@@ -144,41 +144,57 @@ const workflowSteps: ClubWorkflowStep[] = [
     title: 'Explore Clubs',
     description: 'Find clubs by name, category, interest, or keyword.',
     placeholderLabel: 'Explore Clubs',
-    placeholderSubtext: 'Explore page with search, categories, club cards, and join states.',
-    imageSrc: 'screenshots/for-students-explore-clubs.png',
-    imageAlt: 'Gryph ClubConnect Explore Clubs screen',
+    placeholderSubtext:
+      'Explore page with search, categories, club cards, and join states.',
+    imageSrc: 'screenshots/for-students-workflow-explore-clubs-final.png',
+    imageAlt:
+      'Gryph ClubConnect Explore Clubs page showing searchable University of Guelph clubs, filters, and membership states.',
   },
   {
     title: 'Club Profiles',
-    description: 'See what a club does, when it meets, what it posts, and how to get involved.',
+    description:
+      'See what a club does, when it meets, what it posts, and how to get involved.',
     placeholderLabel: 'Club Profile',
-    placeholderSubtext: 'Public club profile with meeting info, upcoming events, open roles, announcements, and join options.',
-    imageSrc: 'screenshots/for-students-club-profiles.png',
-    imageAlt: 'Gryph ClubConnect public club profile screen',
+    placeholderSubtext:
+      'Public club profile with meeting info, upcoming events, open roles, announcements, and join options.',
+    imageSrc: 'screenshots/for-students-workflow-club-profile-final.png',
+    imageAlt:
+      'Gryph ClubConnect public profile for the Guelph Film and Photography Club showing events, announcements, meeting details, and open positions.',
   },
   {
     title: 'Event RSVP',
-    description: 'Sign up for events and answer event questions from one place.',
+    description:
+      'Sign up for events and answer event questions from one place.',
     placeholderLabel: 'Event RSVP',
-    placeholderSubtext: 'Event detail and RSVP flow with sign-up questions and confirmation.',
-    imageSrc: 'screenshots/for-students-event-rsvp.png',
-    imageAlt: 'Gryph ClubConnect event RSVP screen',
+    placeholderSubtext:
+      'Campus Events page with upcoming events, filters, and event sign-up options.',
+    imageSrc: 'screenshots/for-students-workflow-event-rsvp-final.png',
+    imageAlt:
+      'Gryph ClubConnect Campus Events page showing upcoming University of Guelph club events and sign-up options.',
   },
   {
     title: 'Role Applications',
-    description: 'Apply for open roles and keep track of where your application stands.',
+    description:
+      'Apply for open roles and keep track of where your application stands.',
     placeholderLabel: 'Role Application',
-    placeholderSubtext: 'Open role page with application questions and application status.',
-    imageSrc: 'screenshots/for-students-role-applications.png',
-    imageAlt: 'Gryph ClubConnect role application screen',
+    placeholderSubtext:
+      'Club position application with custom questions, document uploads, and submission controls.',
+    imageSrc:
+      'screenshots/for-students-workflow-role-application-final.png',
+    imageAlt:
+      'Gryph ClubConnect club position application form showing custom questions, resume upload, portfolio upload, and submission controls.',
   },
   {
     title: 'Student Dashboard',
-    description: 'Keep saved clubs, upcoming events, applications, updates, and tasks organized.',
+    description:
+      'Keep saved clubs, upcoming events, applications, updates, and tasks organized.',
     placeholderLabel: 'Student Dashboard',
-    placeholderSubtext: 'Dashboard with saved clubs, upcoming events, applications, tasks, and inbox updates.',
-    imageSrc: 'screenshots/for-students-student-dashboard.png',
-    imageAlt: 'Gryph ClubConnect student dashboard screen',
+    placeholderSubtext:
+      'Dashboard with club requests, upcoming events, applications, tasks, memberships, and inbox updates.',
+    imageSrc:
+      'screenshots/for-students-workflow-student-dashboard-final.png',
+    imageAlt:
+      'Gryph ClubConnect student dashboard showing a pending join request, tasks, events, club memberships, inbox updates, and announcements.',
   },
 ];
 
@@ -661,7 +677,7 @@ export default function ForStudentsPage() {
               See the path from finding a club to getting involved.
             </h2>
             <p className="text-base leading-relaxed text-[#9CA3AF]">
-              Click through the student journey or let it rotate. Real product screenshots will be added as the demo set is finalized.
+              Click through the student journey or let it rotate to see how students discover clubs, explore events, apply for roles, and manage their involvement.
             </p>
           </AnimatedSection>
 

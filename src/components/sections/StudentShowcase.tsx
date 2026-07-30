@@ -8,40 +8,46 @@ const workflowSteps: WorkflowStep[] = [
     title: 'Explore clubs',
     description: 'Search by club name, category, interest, or keyword.',
     placeholderLabel: 'Explore clubs',
-    imageSrc: 'screenshots/homepage-workflow-explore-clubs.png',
-    imageAlt: 'Gryph ClubConnect Explore Clubs screen',
+    imageSrc: 'screenshots/homepage-students-explore-clubs-final.png',
+    imageAlt:
+      'Gryph ClubConnect Explore Clubs page showing University of Guelph student clubs.',
   },
   {
     title: 'View public club profiles',
     description:
       'See what a club does, when it meets, its upcoming events and open roles, and how to get involved.',
     placeholderLabel: 'Club profile',
-    imageSrc: 'screenshots/homepage-workflow-club-profile.png',
-    imageAlt: 'Gryph ClubConnect public club profile',
+    imageSrc:
+      'screenshots/homepage-students-public-club-profile-final.png',
+    imageAlt:
+      'Gryph ClubConnect public profile for the Gryphon Lego Builders Club.',
   },
   {
     title: 'Sign up for events',
     description:
       'Browse campus events, view the details, and RSVP directly through the platform.',
     placeholderLabel: 'Event sign-up',
-    imageSrc: 'screenshots/homepage-workflow-event-rsvp.png',
-    imageAlt: 'Gryph ClubConnect event RSVP screen',
+    imageSrc: 'screenshots/homepage-students-campus-events-final.png',
+    imageAlt:
+      'Gryph ClubConnect Campus Events page showing upcoming University of Guelph club events.',
   },
   {
     title: 'Apply for club positions',
     description:
       'Browse open club positions, submit applications, and track application progress.',
     placeholderLabel: 'Role applications',
-    imageSrc: 'screenshots/homepage-workflow-apply-role.png',
-    imageAlt: 'Gryph ClubConnect club role application',
+    imageSrc: 'screenshots/homepage-students-role-details-final.png',
+    imageAlt:
+      'Gryph ClubConnect club position listing with role details and an Apply Now button.',
   },
   {
     title: 'Stay organized',
     description:
       'Keep your clubs, upcoming events, tasks, applications, and updates organized in one dashboard.',
     placeholderLabel: 'Student dashboard',
-    imageSrc: 'screenshots/homepage-workflow-student-dashboard.png',
-    imageAlt: 'Gryph ClubConnect student dashboard',
+    imageSrc: 'screenshots/homepage-students-dashboard-final.png',
+    imageAlt:
+      'Gryph ClubConnect student dashboard showing clubs, tasks, events, inbox updates, and announcements.',
   },
 ];
 

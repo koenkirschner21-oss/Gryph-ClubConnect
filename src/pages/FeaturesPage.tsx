@@ -127,7 +127,7 @@ const studentTabs: TabItem[] = [
       'See events and open positions',
       'Save or follow clubs',
     ],
-    imageSrc: 'screenshots/features-discovery-explore-clubs.png',
+    imageSrc: 'screenshots/features-explore-clubs-final.png',
     imageAlt: 'Gryph ClubConnect Explore Clubs screen',
   },
   {
@@ -158,7 +158,7 @@ const coordinationTabs: TabItem[] = [
       'Status tracking',
       'Review and completion flow',
     ],
-    imageSrc: 'screenshots/features-tasks-review-workflow.png',
+    imageSrc: 'screenshots/features-tasks-final.png',
     imageAlt: 'Gryph ClubConnect tasks and review workflow',
   },
   {
@@ -172,7 +172,7 @@ const coordinationTabs: TabItem[] = [
       'Decisions and recaps',
       'Follow-up tasks',
     ],
-    imageSrc: 'screenshots/features-meetings-follow-through.png',
+    imageSrc: 'screenshots/features-meetings-final.png',
     imageAlt: 'Gryph ClubConnect meetings workflow',
   },
 ];
@@ -189,7 +189,7 @@ const leadershipTabs: TabItem[] = [
       'Role tiers and custom titles',
       'Permission controls',
     ],
-    imageSrc: 'screenshots/features-members-roles-permissions.png',
+    imageSrc: 'screenshots/features-members-access-final.png',
     imageAlt: 'Gryph ClubConnect members, roles, and permissions',
   },
   {
@@ -203,7 +203,7 @@ const leadershipTabs: TabItem[] = [
       'Task completion',
       'Hiring and profile engagement',
     ],
-    imageSrc: 'screenshots/features-analytics-club-insights.png',
+    imageSrc: 'screenshots/features-analytics-final.png',
     imageAlt: 'Gryph ClubConnect club analytics',
   },
 ];
@@ -737,7 +737,7 @@ export default function FeaturesPage() {
           'Attendee lists and responses',
           'Event-linked planning tasks',
         ]}
-        imageSrc="screenshots/features-events-rsvp-management.png"
+        imageSrc="screenshots/features-events-rsvps-final.png"
         imageAlt="Gryph ClubConnect events and RSVP management"
         reverse
       />
@@ -753,7 +753,7 @@ export default function FeaturesPage() {
           'Tasks awaiting action',
           'Applications and member requests',
         ]}
-        imageSrc="screenshots/features-command-center-operations.png"
+        imageSrc="screenshots/features-command-center-final.png"
         imageAlt="Gryph ClubConnect Command Center"
         dark={false}
       />
@@ -792,7 +792,7 @@ export default function FeaturesPage() {
           'Candidate review',
           'Status pipeline',
         ]}
-        imageSrc="screenshots/features-hiring-candidate-pipeline.png"
+        imageSrc="screenshots/features-hiring-final.png"
         imageAlt="Gryph ClubConnect hiring candidate pipeline"
         reverse
         dark={false}

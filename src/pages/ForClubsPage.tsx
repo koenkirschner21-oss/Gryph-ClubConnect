@@ -139,7 +139,7 @@ const taskSteps: ClubWorkflowStep[] = [
     description: 'Add title, description, owner, due date, and priority.',
     placeholderLabel: 'Create Task',
     placeholderSubtext: 'Task creation with owner, due date, priority, and linked context.',
-    imageSrc: 'screenshots/for-clubs-tasks-create-task.png',
+    imageSrc: 'screenshots/for-clubs-tasks-create-task-final.png',
     imageAlt: 'Gryph ClubConnect task creation screen',
   },
   {
@@ -147,7 +147,7 @@ const taskSteps: ClubWorkflowStep[] = [
     description: 'Move work through To Do, In Progress, Needs Review, and Complete.',
     placeholderLabel: 'Task Status',
     placeholderSubtext: 'Task board showing status, assigned work, and ownership.',
-    imageSrc: 'screenshots/for-clubs-tasks-track-progress.png',
+    imageSrc: 'screenshots/for-clubs-tasks-track-progress-final.png',
     imageAlt: 'Gryph ClubConnect task progress screen',
   },
   {
@@ -155,7 +155,7 @@ const taskSteps: ClubWorkflowStep[] = [
     description: 'Send work back, approve completion, or leave comments.',
     placeholderLabel: 'Task Review',
     placeholderSubtext: 'Review workflow with comments, send-back states, and completion controls.',
-    imageSrc: 'screenshots/for-clubs-tasks-review-work.png',
+    imageSrc: 'screenshots/for-clubs-tasks-review-work-final.png',
     imageAlt: 'Gryph ClubConnect task review screen',
   },
   {
@@ -163,7 +163,7 @@ const taskSteps: ClubWorkflowStep[] = [
     description: 'Keep event planning tasks tied to the event they support.',
     placeholderLabel: 'Event Task Context',
     placeholderSubtext: 'Event-linked task view showing planning work connected to a specific event.',
-    imageSrc: 'screenshots/for-clubs-tasks-connect-to-events.png',
+    imageSrc: 'screenshots/for-clubs-tasks-connect-to-events-final.png',
     imageAlt: 'Gryph ClubConnect event-linked task screen',
   },
 ];
@@ -174,7 +174,7 @@ const meetingSteps: ClubWorkflowStep[] = [
     description: 'Create a meeting with date, time, location, visibility, and attendees.',
     placeholderLabel: 'Meeting Setup',
     placeholderSubtext: 'Meeting setup with date, location, attendees, and visibility.',
-    imageSrc: 'screenshots/for-clubs-meetings-schedule.png',
+    imageSrc: 'screenshots/for-clubs-meetings-schedule-final.png',
     imageAlt: 'Gryph ClubConnect meeting scheduling screen',
   },
   {
@@ -182,7 +182,7 @@ const meetingSteps: ClubWorkflowStep[] = [
     description: 'Prepare agenda items before the meeting.',
     placeholderLabel: 'Meeting Agenda',
     placeholderSubtext: 'Agenda builder with discussion items and meeting structure.',
-    imageSrc: 'screenshots/for-clubs-meetings-agenda.png',
+    imageSrc: 'screenshots/for-clubs-meetings-agenda-final.png',
     imageAlt: 'Gryph ClubConnect meeting agenda screen',
   },
   {
@@ -190,7 +190,7 @@ const meetingSteps: ClubWorkflowStep[] = [
     description: 'Record what was discussed and what decisions were made.',
     placeholderLabel: 'Meeting Notes',
     placeholderSubtext: 'Meeting notes and decisions captured in one workspace.',
-    imageSrc: 'screenshots/for-clubs-meetings-notes-decisions.png',
+    imageSrc: 'screenshots/for-clubs-meetings-notes-decisions-final.png',
     imageAlt: 'Gryph ClubConnect meeting notes and decisions screen',
   },
   {
@@ -198,7 +198,7 @@ const meetingSteps: ClubWorkflowStep[] = [
     description: 'Turn meeting outcomes into tasks with owners and due dates.',
     placeholderLabel: 'Meeting Follow-Ups',
     placeholderSubtext: 'Follow-up tasks created from meeting notes and assigned to owners.',
-    imageSrc: 'screenshots/for-clubs-meetings-follow-ups.png',
+    imageSrc: 'screenshots/for-clubs-meetings-follow-ups-final.png',
     imageAlt: 'Gryph ClubConnect meeting follow-up tasks screen',
   },
 ];
@@ -209,7 +209,7 @@ const hiringSteps: ClubWorkflowStep[] = [
     description: 'Create an open role with responsibilities, requirements, and application details.',
     placeholderLabel: 'Create Role',
     placeholderSubtext: 'Role posting setup with title, description, requirements, and application questions.',
-    imageSrc: 'screenshots/for-clubs-hiring-post-role.png',
+    imageSrc: 'screenshots/for-clubs-hiring-post-role-final.png',
     imageAlt: 'Gryph ClubConnect role posting screen',
   },
   {
@@ -217,7 +217,7 @@ const hiringSteps: ClubWorkflowStep[] = [
     description: 'Students apply with answers and supporting information.',
     placeholderLabel: 'Applicant List',
     placeholderSubtext: 'Applicant list with submitted applications and candidate details.',
-    imageSrc: 'screenshots/for-clubs-hiring-collect-applications.png',
+    imageSrc: 'screenshots/for-clubs-hiring-collect-applications-final.png',
     imageAlt: 'Gryph ClubConnect applicant list screen',
   },
   {
@@ -225,7 +225,7 @@ const hiringSteps: ClubWorkflowStep[] = [
     description: 'Review answers, add context, and evaluate applicants.',
     placeholderLabel: 'Applicant Review',
     placeholderSubtext: 'Applicant review view with answers, notes, and reviewer context.',
-    imageSrc: 'screenshots/for-clubs-hiring-review-candidates.png',
+    imageSrc: 'screenshots/for-clubs-hiring-review-candidates-final.png',
     imageAlt: 'Gryph ClubConnect applicant review screen',
   },
   {
@@ -233,8 +233,8 @@ const hiringSteps: ClubWorkflowStep[] = [
     description: 'Track candidates across Pending, Reviewed, Interview, Accepted, and Rejected.',
     placeholderLabel: 'Hiring Pipeline',
     placeholderSubtext: 'Candidate pipeline with statuses and application progress.',
-    imageSrc: 'screenshots/for-clubs-hiring-review-candidates.png',
-    imageAlt: 'Gryph ClubConnect hiring pipeline and applicant status screen',
+    imageSrc: 'screenshots/for-clubs-hiring-status-pipeline-final.png',
+    imageAlt: 'Gryph ClubConnect hiring pipeline showing candidates moving through application statuses.',
   },
 ];
 
@@ -693,7 +693,7 @@ export default function ForClubsPage() {
             </AnimatedSection>
             <AnimatedSection delay={0.08}>
               <img
-                src={`${import.meta.env.BASE_URL}screenshots/for-clubs-members-executive-role.png`}
+                src={`${import.meta.env.BASE_URL}screenshots/for-clubs-members-executive-role-final.png`}
                 alt="Gryph ClubConnect member management and executive roles"
                 className="block h-auto w-full rounded-[12px] border border-white/[0.08] bg-[#131313] object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
                 loading="lazy"

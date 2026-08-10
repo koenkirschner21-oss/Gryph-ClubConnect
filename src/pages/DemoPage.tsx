@@ -289,7 +289,7 @@ export default function DemoPage() {
                   name="demoHero"
                   alt="Gryph ClubConnect product overview preview"
                   className="relative !overflow-visible !rounded-none !border-0 !bg-transparent !shadow-none !ring-0"
-                  imgClassName="mx-auto h-auto w-full object-contain lg:scale-[0.9]"
+                  imgClassName="mx-auto h-full w-full max-w-[620px] object-contain"
                 />
                 {/* Add the YouTube modal trigger here once the product overview video is published. */}
               </div>

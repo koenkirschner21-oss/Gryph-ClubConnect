@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { goToDemoForm } from '../../lib/cta';
+import ScreenshotImage from '../ui/ScreenshotImage';
 
 const ROTATE_MS = 7000;
 const INTERACTION_PAUSE_MS = 12000;
@@ -280,12 +281,12 @@ export default function AppShowcase() {
                 </div>
 
                 <div className="overflow-hidden rounded-[12px] border border-white/[0.08] bg-[#131313] shadow-[0_16px_48px_rgba(0,0,0,0.35)]">
-                  <img
-                    src={`${import.meta.env.BASE_URL}${active.imageSrc}`}
+                  <ScreenshotImage
+                    src={active.imageSrc}
                     alt={active.imageAlt}
                     className="block h-auto w-full object-contain"
-                    loading="lazy"
-                    decoding="async"
+                    width={1600}
+                    height={1000}
                   />
                 </div>
               </motion.div>

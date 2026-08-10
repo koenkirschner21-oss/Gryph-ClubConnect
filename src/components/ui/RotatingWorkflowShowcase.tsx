@@ -6,6 +6,7 @@ import {
   type ReactNode,
 } from 'react';
 import { AnimatedScreenshotPlaceholder } from './ScreenshotPlaceholder';
+import ScreenshotImage from './ScreenshotImage';
 
 export type WorkflowStep = {
   title: string;
@@ -58,17 +59,6 @@ export default function RotatingWorkflowShowcase({
 
   const styles = accentStyles[accent];
   const paused = hoverPaused || interactionPaused;
-
-  useEffect(() => {
-    steps.forEach((step) => {
-      if (!step.imageSrc) {
-        return;
-      }
-
-      const image = new Image();
-      image.src = `${import.meta.env.BASE_URL}${step.imageSrc}`;
-    });
-  }, [steps]);
 
   useEffect(() => {
     if (paused || steps.length <= 1) {
@@ -219,12 +209,13 @@ export default function RotatingWorkflowShowcase({
               }`}
               aria-hidden={!isActive}
             >
-              <img
-                src={`${import.meta.env.BASE_URL}${step.imageSrc}`}
+              <ScreenshotImage
+                src={step.imageSrc}
                 alt={isActive ? step.imageAlt ?? step.placeholderLabel : ''}
                 className="block h-full w-full object-contain"
-                loading={index === 0 ? 'eager' : 'lazy'}
-                decoding="async"
+                priority={index === 0}
+                width={1600}
+                height={1000}
               />
             </motion.div>
           );

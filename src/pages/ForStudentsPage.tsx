@@ -453,7 +453,7 @@ export default function ForStudentsPage() {
                 name="studentHero"
                 alt="Gryph ClubConnect student dashboard and club discovery"
                 className="relative !overflow-visible !rounded-none !border-0 !bg-transparent !shadow-none !ring-0"
-                imgClassName="mx-auto h-auto w-full max-w-[620px] object-contain lg:scale-[0.94]"
+                imgClassName="mx-auto h-full w-full max-w-[620px] object-contain"
               />
             </AnimatedSection>
           </div>

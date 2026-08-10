@@ -164,7 +164,7 @@ export default function Hero() {
               alt="Gryph ClubConnect dashboard on a laptop with the mobile club discovery experience beside it"
               priority
               className="relative !overflow-visible !rounded-none !border-0 !bg-transparent !shadow-none !ring-0"
-              imgClassName="h-auto w-full scale-100 object-contain lg:scale-[1.04] xl:scale-[1.12] 2xl:scale-[1.15]"
+              imgClassName="h-full w-full object-contain"
             />
           </motion.div>
         </div>

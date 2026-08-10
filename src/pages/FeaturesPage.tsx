@@ -24,6 +24,7 @@ import AnimatedSection, {
   StaggerItem,
 } from '../components/ui/AnimatedSection';
 import Button from '../components/ui/Button';
+import ScreenshotImage from '../components/ui/ScreenshotImage';
 import {
   goToDemoForm,
   goToStudentAccess,
@@ -360,12 +361,12 @@ function ProductMapVisual() {
 function ScreenshotFrame({ src, alt }: { src: string; alt: string }) {
   return (
     <div className="rounded-[14px] border border-white/[0.08] bg-[#0B0B0B] p-3 shadow-[0_18px_52px_rgba(0,0,0,0.38)] sm:p-4">
-      <img
-        src={`${import.meta.env.BASE_URL}${src}`}
+      <ScreenshotImage
+        src={src}
         alt={alt}
         className="block h-auto w-full rounded-[9px] object-contain"
-        loading="lazy"
-        decoding="async"
+        width={1600}
+        height={1000}
       />
     </div>
   );

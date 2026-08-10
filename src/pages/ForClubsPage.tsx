@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import AnimatedSection, { StaggerContainer, StaggerItem } from '../components/ui/AnimatedSection';
 import Button from '../components/ui/Button';
+import ScreenshotImage from '../components/ui/ScreenshotImage';
 import MockupImage from '../components/mockups/MockupImage';
 import ClubWorkflowSlideshow, {
   type ClubWorkflowStep,
@@ -453,7 +454,7 @@ export default function ForClubsPage() {
                 name="workspace"
                 alt="Gryph ClubConnect club command center"
                 className="relative !overflow-visible !rounded-none !border-0 !bg-transparent !shadow-none !ring-0"
-                imgClassName="mx-auto h-auto w-full max-w-[590px] object-contain lg:max-w-[650px]"
+                imgClassName="mx-auto h-full w-full max-w-[590px] object-contain lg:max-w-[650px]"
               />
             </AnimatedSection>
           </div>
@@ -508,12 +509,12 @@ export default function ForClubsPage() {
               <TextCta label="Request a demo of the club workspace" onClick={handleDemo} />
             </AnimatedSection>
             <AnimatedSection delay={0.08}>
-              <img
-                src={`${import.meta.env.BASE_URL}screenshots/for-clubs-command-center-final.png`}
+              <ScreenshotImage
+                src="screenshots/for-clubs-command-center-final.png"
                 alt="Gryph ClubConnect Command Center showing pending actions, upcoming activity, assigned work, tasks, and hiring activity."
                 className="block h-auto w-full rounded-[12px] border border-white/[0.08] bg-[#131313] object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
-                loading="lazy"
-                decoding="async"
+                width={1600}
+                height={1000}
               />
             </AnimatedSection>
           </div>
@@ -542,12 +543,12 @@ export default function ForClubsPage() {
               <TextCta label="Talk through access levels" onClick={handleDemo} />
             </AnimatedSection>
             <AnimatedSection delay={0.08}>
-              <img
-                src={`${import.meta.env.BASE_URL}screenshots/for-clubs-access-levels-permissions.png`}
+              <ScreenshotImage
+                src="screenshots/for-clubs-access-levels-permissions.png"
                 alt="Gryph ClubConnect access levels and permissions"
                 className="block h-auto w-full rounded-[12px] border border-white/[0.08] bg-[#131313] object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
-                loading="lazy"
-                decoding="async"
+                width={1600}
+                height={1000}
               />
             </AnimatedSection>
           </div>
@@ -692,12 +693,12 @@ export default function ForClubsPage() {
               <TextCta label="Talk through access levels" onClick={handleDemo} />
             </AnimatedSection>
             <AnimatedSection delay={0.08}>
-              <img
-                src={`${import.meta.env.BASE_URL}screenshots/for-clubs-members-executive-role-final.png`}
+              <ScreenshotImage
+                src="screenshots/for-clubs-members-executive-role-final.png"
                 alt="Gryph ClubConnect member management and executive roles"
                 className="block h-auto w-full rounded-[12px] border border-white/[0.08] bg-[#131313] object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
-                loading="lazy"
-                decoding="async"
+                width={1600}
+                height={1000}
               />
             </AnimatedSection>
           </div>
@@ -709,12 +710,12 @@ export default function ForClubsPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12 items-center">
             <AnimatedSection delay={0.08} className="order-2 lg:order-1">
-              <img
-                src={`${import.meta.env.BASE_URL}screenshots/for-clubs-club-analytics.png`}
+              <ScreenshotImage
+                src="screenshots/for-clubs-club-analytics.png"
                 alt="Gryph ClubConnect club analytics dashboard"
                 className="block h-auto w-full rounded-[12px] border border-white/[0.08] bg-[#131313] object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
-                loading="lazy"
-                decoding="async"
+                width={1600}
+                height={1000}
               />
             </AnimatedSection>
             <AnimatedSection className="order-1 lg:order-2">

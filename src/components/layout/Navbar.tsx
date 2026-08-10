@@ -147,7 +147,7 @@ export default function Navbar() {
   return (
     <>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+        className={`fixed inset-x-0 top-0 z-[110] transition-all duration-300 ${
           scrolled
             ? 'border-b border-[#222222] shadow-lg shadow-black/20 backdrop-blur-xl'
             : 'bg-transparent backdrop-blur-md'
@@ -269,7 +269,7 @@ export default function Navbar() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
-              className="fixed inset-x-0 top-[64px] z-40 max-h-[calc(100dvh-64px)] overflow-y-auto border-b border-[#222222] bg-[#111111]/95 shadow-2xl backdrop-blur-lg sm:top-[72px] sm:max-h-[calc(100dvh-72px)] lg:hidden"
+              className="fixed inset-x-0 top-[64px] z-[110] max-h-[calc(100dvh-64px)] overflow-y-auto border-b border-[#222222] bg-[#111111]/95 shadow-2xl backdrop-blur-lg sm:top-[72px] sm:max-h-[calc(100dvh-72px)] lg:hidden"
               role="dialog"
               aria-modal="true"
               aria-label="Mobile navigation"

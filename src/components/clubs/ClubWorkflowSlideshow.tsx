@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback, type ReactNode } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import FeatureScreenshotPlaceholder from '../features/FeatureScreenshotPlaceholder';
+import ScreenshotImage from '../ui/ScreenshotImage';
 
 export type ClubWorkflowStep = {
   title: string;
@@ -129,12 +130,12 @@ export default function ClubWorkflowSlideshow({
           transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
         >
           {active.imageSrc ? (
-            <img
-              src={`${import.meta.env.BASE_URL}${active.imageSrc}`}
+            <ScreenshotImage
+              src={active.imageSrc}
               alt={active.imageAlt ?? active.placeholderLabel}
               className="block h-auto w-full rounded-[12px] border border-white/[0.08] bg-[#131313] object-contain shadow-[0_16px_48px_rgba(0,0,0,0.35)]"
-              loading="lazy"
-              decoding="async"
+              width={1600}
+              height={1000}
             />
           ) : (
             <FeatureScreenshotPlaceholder

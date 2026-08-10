@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const SITE_URL = 'https://gryphclubconnect.com';
-const DEFAULT_IMAGE = `${SITE_URL}/screenshots/clubconnect-homepage-hero.png`;
+const DEFAULT_IMAGE = `${SITE_URL}/social-preview.png`;
 
 type PageMetadata = {
   title: string;
@@ -247,6 +247,20 @@ export default function SEO() {
       'property',
       'og:image',
       image,
+    );
+
+    setMeta(
+      'meta[property="og:image:width"]',
+      'property',
+      'og:image:width',
+      '1200',
+    );
+
+    setMeta(
+      'meta[property="og:image:height"]',
+      'property',
+      'og:image:height',
+      '630',
     );
 
     setMeta(

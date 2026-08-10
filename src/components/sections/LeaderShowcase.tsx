@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import AnimatedSection from '../ui/AnimatedSection';
 import RotatingWorkflowShowcase, {
@@ -110,14 +110,24 @@ export default function LeaderShowcase() {
           screenshotSide="left"
           placeholderSubtitle="Club leader workflow screenshot"
           footer={
-            <button
-              type="button"
-              onClick={handleGetStarted}
-              className="mt-5 inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#FFC429] transition-colors hover:text-[#FFD45C]"
-            >
-              Get Your Club Started
-              <ArrowRight size={16} />
-            </button>
+            <div className="mt-5 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-5">
+              <Link
+                to="/for-clubs"
+                className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#FFC429] transition-colors hover:text-[#FFD45C] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111111]"
+              >
+                Go to For Clubs
+                <ArrowRight size={16} aria-hidden />
+              </Link>
+
+              <button
+                type="button"
+                onClick={handleGetStarted}
+                className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#9CA3AF] transition-colors hover:text-[#F5F5F5] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111111]"
+              >
+                Get Your Club Started
+                <ArrowRight size={16} aria-hidden />
+              </button>
+            </div>
           }
         />
       </div>

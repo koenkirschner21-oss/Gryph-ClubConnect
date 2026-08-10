@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { ArrowRight, Check } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
 import Button from '../ui/Button';
 import MockupImage from '../mockups/MockupImage';
 import { goToDemoForm } from '../../lib/cta';
@@ -114,6 +114,17 @@ export default function Hero() {
                 Request a Demo
               </Button>
             </div>
+
+            <p className="mt-4 text-[14px] text-[#9CA3AF]">
+              Looking for clubs, events, and roles?{' '}
+              <Link
+                to="/for-students"
+                className="inline-flex items-center gap-1 font-semibold text-[#FF6B7D] underline-offset-2 transition-colors hover:text-[#FF8A98] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
+              >
+                Go to For Students
+                <ArrowRight size={14} aria-hidden />
+              </Link>
+            </p>
 
             <div className="mt-6 sm:mt-7">
               <div className="h-px w-full max-w-xl bg-[#222222]" />

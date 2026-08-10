@@ -7,18 +7,21 @@ import {
   type LucideIcon,
 } from 'lucide-react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { goToDemoForm } from '../../lib/cta';
+import { goToDemoForm, scrollToTop } from '../../lib/cta';
 import BrandLogo from '../ui/BrandLogo';
 
 const platformLinks: { label: string; href: string }[] = [
   { label: 'For Clubs', href: '/for-clubs' },
   { label: 'For Students', href: '/for-students' },
   { label: 'Features', href: '/features' },
+  { label: 'How It Works', href: '/how-it-works' },
   { label: 'Demo', href: '/demo' },
 ];
 
 const companyLinks = [
   { label: 'About', href: '/about' },
+  { label: 'Blog', href: '/blog' },
+  { label: 'Careers', href: '/careers' },
   { label: 'Privacy', href: '/privacy' },
   { label: 'Terms', href: '/terms' },
 ];
@@ -122,6 +125,10 @@ export default function Footer() {
                     href={link.href}
                     onClick={(event) => {
                       event.preventDefault();
+                      if (location.pathname === link.href) {
+                        scrollToTop('auto');
+                        return;
+                      }
                       navigate(link.href);
                     }}
                     className="group inline-flex items-center gap-1 rounded-sm text-sm text-[#9CA3AF] transition-colors hover:text-[#F5F5F5] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
@@ -150,6 +157,10 @@ export default function Footer() {
                     href={link.href}
                     onClick={(event) => {
                       event.preventDefault();
+                      if (location.pathname === link.href) {
+                        scrollToTop('auto');
+                        return;
+                      }
                       navigate(link.href);
                     }}
                     className="group inline-flex items-center gap-1 rounded-sm text-sm text-[#9CA3AF] transition-colors hover:text-[#F5F5F5] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"

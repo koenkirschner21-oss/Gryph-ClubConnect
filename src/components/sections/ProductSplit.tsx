@@ -18,9 +18,10 @@ const audiences = [
       'Apply for open roles',
       'Track clubs, tasks, and applications',
     ],
-    cta: 'Explore student features',
+    cta: 'Go to For Students',
   },
   {
+    id: 'for-clubs',
     to: '/for-clubs',
     accent: 'gold' as const,
     title: 'For club leaders',
@@ -31,7 +32,7 @@ const audiences = [
       'Review applicants and members',
       'Control roles, permissions, and club access',
     ],
-    cta: 'Explore club leader tools',
+    cta: 'Go to For Clubs',
   },
 ];
 

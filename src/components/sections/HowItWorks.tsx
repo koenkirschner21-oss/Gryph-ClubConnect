@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import AnimatedSection from '../ui/AnimatedSection';
 import { goToDemoForm } from '../../lib/cta';
@@ -55,7 +55,7 @@ export default function HowItWorks() {
   return (
     <section
       id="how-it-works"
-      className="border-t border-[#222222] bg-[#0B0B0B] py-16 sm:py-20"
+      className="scroll-mt-24 border-t border-[#222222] bg-[#0B0B0B] py-16 sm:py-20"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="mb-10 max-w-3xl sm:mb-12">
@@ -111,6 +111,17 @@ export default function HowItWorks() {
               Ready to see it? Request a Demo
               <ArrowRight size={16} aria-hidden />
             </button>
+
+            <p className="mt-4 text-sm text-[#9CA3AF]">
+              Here for campus discovery instead?{' '}
+              <Link
+                to="/for-students"
+                className="inline-flex items-center gap-1 font-semibold text-[#FF6B7D] underline-offset-2 transition-colors hover:text-[#FF8A98] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
+              >
+                Go to For Students
+                <ArrowRight size={14} aria-hidden />
+              </Link>
+            </p>
           </AnimatedSection>
 
           <AnimatedSection delay={0.1}>

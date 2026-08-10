@@ -5,9 +5,9 @@ import { trackEvent } from './analytics';
  *
  * Homepage demo CTAs → #homepage-demo-form
  * Other pages demo/onboard → /demo#demo-form
- * Homepage student CTAs → #homepage-student-access
- * Other pages student access → /for-students#student-access
- * Log In → APP_LOGIN_URL
+ * Student access CTAs → /for-students#student-access
+ *   (homepage included — there is no homepage student form section)
+ * Log In → AccessCodeModal / APP_LOGIN_URL (handled in Navbar)
  */
 
 export const APP_LOGIN_URL =
@@ -36,6 +36,9 @@ export const HOMEPAGE_STUDENT_ACCESS_ID =
 
 export const STUDENT_ACCESS_ID =
   'student-access';
+
+/** Sticky header clearance used for in-page anchors. */
+export const STICKY_NAV_OFFSET_PX = 88;
 
 /** @deprecated Prefer DEMO_FORM_ID */
 export const REQUEST_DEMO_ID =
@@ -137,15 +140,41 @@ type GoOptions = {
   pathname?: string;
 };
 
-function scrollToId(sectionId: string) {
+/** Scroll to an element id, clearing sticky nav overlap. */
+export function scrollToId(sectionId: string) {
   const element =
     document.getElementById(sectionId);
 
-  if (element) {
-    element.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
+  if (!element) {
+    return;
+  }
+
+  const top =
+    element.getBoundingClientRect().top +
+    window.scrollY -
+    STICKY_NAV_OFFSET_PX;
+
+  window.scrollTo({
+    top: Math.max(0, top),
+    behavior: 'smooth',
+  });
+}
+
+/** Reset scroll to the top of the document (route transitions). */
+export function scrollToTop(behavior: ScrollBehavior = 'auto') {
+  const html = document.documentElement;
+  const previous = html.style.scrollBehavior;
+
+  if (behavior === 'auto') {
+    html.style.scrollBehavior = 'auto';
+  }
+
+  window.scrollTo({ top: 0, left: 0, behavior });
+  html.scrollTop = 0;
+  document.body.scrollTop = 0;
+
+  if (behavior === 'auto') {
+    html.style.scrollBehavior = previous;
   }
 }
 
@@ -289,9 +318,8 @@ export function goToDemoForm(
 }
 
 /**
- * Homepage → scroll to #homepage-student-access
- * For Students → scroll to #student-access
- * Other pages → /for-students#student-access
+ * All pages (including homepage) → /for-students#student-access
+ * Already on For Students → scroll to #student-access
  */
 export function goToStudentAccess(
   options?: GoOptions,
@@ -304,18 +332,8 @@ export function goToStudentAccess(
     destination: FOR_STUDENTS_PATH,
   });
 
-  const onHome =
-    pathname === '/';
-
   const onForStudents =
     pathname === FOR_STUDENTS_PATH;
-
-  if (onHome) {
-    scrollToId(
-      HOMEPAGE_STUDENT_ACCESS_ID,
-    );
-    return;
-  }
 
   if (onForStudents) {
     scrollToId(

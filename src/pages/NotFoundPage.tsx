@@ -19,7 +19,8 @@ export default function NotFoundPage() {
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Button variant="red" href="/">Go Home</Button>
-              <Button variant="ghost" href="/features">View Features</Button>
+              <Button variant="ghost" href="/for-students">For Students</Button>
+              <Button variant="ghost" href="/for-clubs">For Clubs</Button>
             </div>
           </AnimatedSection>
         </div>

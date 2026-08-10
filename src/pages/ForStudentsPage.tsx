@@ -29,7 +29,7 @@ import ClubWorkflowSlideshow, {
   type ClubWorkflowStep,
 } from '../components/clubs/ClubWorkflowSlideshow';
 import StudentAccessForm from '../components/forms/StudentAccessForm';
-import { goToStudentAccess, STUDENT_ACCESS_ID } from '../lib/cta';
+import { goToStudentAccess, scrollToId, STUDENT_ACCESS_ID } from '../lib/cta';
 
 const problemCards = [
   {
@@ -366,9 +366,7 @@ export default function ForStudentsPage() {
 
     if (hash === STUDENT_ACCESS_ID) {
       const timer = window.setTimeout(() => {
-        document
-          .getElementById(STUDENT_ACCESS_ID)
-          ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        scrollToId(STUDENT_ACCESS_ID);
       }, 80);
 
       return () => window.clearTimeout(timer);
@@ -426,7 +424,7 @@ export default function ForStudentsPage() {
                   onClick={() => navigate('/features')}
                   className="w-[230px] whitespace-nowrap sm:w-auto sm:px-8 sm:py-4 sm:text-base"
                 >
-                  Explore Clubs
+                  View Features
                 </Button>
               </div>
 
@@ -864,9 +862,19 @@ export default function ForStudentsPage() {
                 to="/features"
                 className="inline-flex items-center gap-1.5 rounded-sm text-[15px] font-semibold text-[#FF6B7D] underline-offset-2 transition-colors hover:text-[#FF8A98] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
               >
-                Explore Club Features
+                View Features
                 <ArrowRight size={16} aria-hidden />
               </Link>
+              <p className="mt-4 text-sm text-[#9CA3AF]">
+                Running a club instead?{' '}
+                <Link
+                  to="/for-clubs"
+                  className="inline-flex items-center gap-1 font-semibold text-[#FFC429] underline-offset-2 transition-colors hover:text-[#FFD45C] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
+                >
+                  Go to For Clubs
+                  <ArrowRight size={14} aria-hidden />
+                </Link>
+              </p>
             </AnimatedSection>
 
             <AnimatedSection delay={0.08}>

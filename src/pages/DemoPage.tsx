@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import {
   ArrowRight,
   Check,
@@ -17,7 +17,7 @@ import AnimatedSection, {
 import Button from '../components/ui/Button';
 import MockupImage from '../components/mockups/MockupImage';
 import DemoInterestForm from '../components/forms/DemoInterestForm';
-import { goToDemoForm, DEMO_FORM_ID } from '../lib/cta';
+import { goToDemoForm, scrollToId, DEMO_FORM_ID } from '../lib/cta';
 
 type Accent = 'red' | 'gold' | 'neutral';
 
@@ -187,9 +187,7 @@ export default function DemoPage() {
     const hash = location.hash.replace(/^#/, '');
     if (hash === DEMO_FORM_ID || hash === 'request-demo') {
       const timer = window.setTimeout(() => {
-        document
-          .getElementById(DEMO_FORM_ID)
-          ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        scrollToId(DEMO_FORM_ID);
       }, 80);
 
       return () => window.clearTimeout(timer);
@@ -575,6 +573,17 @@ export default function DemoPage() {
                   ))}
                 </ul>
               </div>
+
+              <p className="mt-6 max-w-md text-sm text-[#9CA3AF]">
+                Looking for clubs and campus events?{' '}
+                <Link
+                  to="/for-students"
+                  className="inline-flex items-center gap-1 font-semibold text-[#FF6B7D] underline-offset-2 transition-colors hover:text-[#FF8A98] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111111]"
+                >
+                  Go to For Students
+                  <ArrowRight size={14} aria-hidden />
+                </Link>
+              </p>
             </AnimatedSection>
 
             <AnimatedSection delay={0.08}>

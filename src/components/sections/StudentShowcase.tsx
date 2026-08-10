@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import AnimatedSection from '../ui/AnimatedSection';
 import RotatingWorkflowShowcase, {
   type WorkflowStep,
@@ -53,7 +55,10 @@ const workflowSteps: WorkflowStep[] = [
 
 export default function StudentShowcase() {
   return (
-    <section className="border-t border-[#222222] bg-[#0B0B0B] py-16 sm:py-20">
+    <section
+      id="for-students-home"
+      className="scroll-mt-24 border-t border-[#222222] bg-[#0B0B0B] py-16 sm:py-20"
+    >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <AnimatedSection className="mb-10 max-w-3xl text-left sm:mb-12 lg:mx-0">
           <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.18em] text-[#FF5A70] sm:text-xs">
@@ -76,6 +81,15 @@ export default function StudentShowcase() {
           accent="red"
           screenshotSide="right"
           placeholderSubtitle="Student workflow screenshot"
+          footer={
+            <Link
+              to="/for-students"
+              className="mt-5 inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#FF6B7D] transition-colors hover:text-[#FF8A98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
+            >
+              Go to For Students
+              <ArrowRight size={16} aria-hidden />
+            </Link>
+          }
         />
       </div>
     </section>

@@ -6,7 +6,7 @@ import { navLinks } from '../../data/index';
 import Button from '../ui/Button';
 import BrandLogo from '../ui/BrandLogo';
 import AccessCodeModal from './AccessCodeModal';
-import { goToDemoForm, goToSection } from '../../lib/cta';
+import { goToDemoForm, goToSection, scrollToTop } from '../../lib/cta';
 
 function useScrollPosition() {
   const [scrollY, setScrollY] = useState(0);
@@ -52,11 +52,13 @@ export default function Navbar() {
   }, [menuOpen, accessModalOpen]);
 
   useEffect(() => {
+    // Explicit hash targets are handled by the destination page.
+    // Route changes without a hash must land at the top immediately.
     if (location.hash) {
       return;
     }
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollToTop('auto');
   }, [location.pathname, location.hash]);
 
   useEffect(() => {
@@ -114,6 +116,11 @@ export default function Navbar() {
       return;
     }
 
+    if (location.pathname === link.href) {
+      scrollToTop('auto');
+      return;
+    }
+
     navigate(link.href);
   };
 
@@ -158,9 +165,20 @@ export default function Navbar() {
           <Link
             to="/"
             className="group flex min-w-0 shrink items-center rounded-lg transition-opacity duration-200 hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
-            onClick={() => {
+            onClick={(event) => {
               setMenuOpen(false);
-              window.scrollTo({ top: 0, behavior: 'smooth' });
+
+              if (location.pathname === '/') {
+                event.preventDefault();
+                // Instant reset — bypass html { scroll-behavior: smooth }
+                const html = document.documentElement;
+                const previous = html.style.scrollBehavior;
+                html.style.scrollBehavior = 'auto';
+                window.scrollTo(0, 0);
+                html.scrollTop = 0;
+                document.body.scrollTop = 0;
+                html.style.scrollBehavior = previous;
+              }
             }}
             aria-label="Gryph ClubConnect Home"
           >

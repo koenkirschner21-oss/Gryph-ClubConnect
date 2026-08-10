@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 import AnimatedSection from '../ui/AnimatedSection';
 import DemoInterestForm from '../forms/DemoInterestForm';
 import { HOMEPAGE_DEMO_FORM_ID } from '../../lib/cta';
@@ -76,6 +78,17 @@ export default function FinalCTA() {
                 gryphclubconnect@gmail.com
               </a>
               .
+            </p>
+
+            <p className="mt-4 max-w-md text-sm text-[#9CA3AF]">
+              Looking for clubs and campus events?{' '}
+              <Link
+                to="/for-students"
+                className="inline-flex items-center gap-1 font-semibold text-[#FF6B7D] underline-offset-2 transition-colors hover:text-[#FF8A98] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
+              >
+                Go to For Students
+                <ArrowRight size={14} aria-hidden />
+              </Link>
             </p>
           </AnimatedSection>
 

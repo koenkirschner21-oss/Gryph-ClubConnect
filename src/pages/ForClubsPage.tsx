@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import {
   Megaphone,
@@ -796,6 +796,15 @@ export default function ForClubsPage() {
               <p className="mt-6 text-[13px] text-[#777777]">
                 Submitting interest does not create an account or officially register your club.
               </p>
+              <div className="mt-4">
+                <Link
+                  to="/for-students"
+                  className="inline-flex items-center gap-1.5 rounded-sm text-sm font-semibold text-[#FF6B7D] underline-offset-2 transition-colors hover:text-[#FF8A98] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#131313]"
+                >
+                  Looking for clubs and events? Go to For Students
+                  <ArrowRight size={15} aria-hidden />
+                </Link>
+              </div>
             </div>
           </AnimatedSection>
         </div>

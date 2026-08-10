@@ -43,8 +43,11 @@
 }
 
 html {
-  scroll-behavior: smooth;
   color-scheme: dark;
+  /* Clear fixed/sticky header for in-page anchors.
+     Do not set scroll-behavior: smooth here — it fights instant
+     route/logo top resets. Anchor scrolls use JS smooth instead. */
+  scroll-padding-top: 5.5rem;
 }
 
 body {

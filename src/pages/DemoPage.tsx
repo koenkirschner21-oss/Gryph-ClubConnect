@@ -377,7 +377,7 @@ export default function DemoPage() {
                     <button
                       type="button"
                       onClick={() => setActiveDemoOption(index)}
-                      className={`flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors ${
+                      className={`flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-inset ${
                         active
                           ? 'bg-[rgba(229,25,55,0.08)]'
                           : 'hover:bg-white/[0.025]'
@@ -392,6 +392,7 @@ export default function DemoPage() {
                         className={`shrink-0 text-[#777777] transition-transform ${
                           active ? 'rotate-180 text-[#E51937]' : ''
                         }`}
+                        aria-hidden
                       />
                     </button>
                     {active && (
@@ -405,7 +406,7 @@ export default function DemoPage() {
                               key={item}
                               className="flex items-center gap-2.5 rounded-[9px] border border-white/[0.07] bg-[#0B0B0B] px-3.5 py-3 text-sm text-[#F5F5F5]"
                             >
-                              <Check size={14} className="shrink-0 text-[#FFC429]" />
+                              <Check size={14} className="shrink-0 text-[#FFC429]" aria-hidden />
                               {item}
                             </div>
                           ))}
@@ -413,10 +414,10 @@ export default function DemoPage() {
                         <button
                           type="button"
                           onClick={handleDemo}
-                          className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[#E51937] transition-colors hover:text-[#FF6B7D]"
+                          className="mt-5 inline-flex items-center gap-1.5 rounded-sm text-sm font-semibold text-[#FF6B7D] underline-offset-2 transition-colors hover:text-[#FF8A98] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
                         >
                           Request this demo focus
-                          <ArrowRight size={15} />
+                          <ArrowRight size={15} aria-hidden />
                         </button>
                       </div>
                     )}

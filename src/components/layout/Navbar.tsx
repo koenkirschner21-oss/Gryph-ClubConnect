@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -27,6 +27,8 @@ type NavItem = {
   hash?: string;
 };
 
+const MOBILE_NAV_ID = 'mobile-navigation';
+
 export default function Navbar() {
   const scrollY = useScrollPosition();
   const scrolled = scrollY > 20;
@@ -34,6 +36,8 @@ export default function Navbar() {
   const [accessModalOpen, setAccessModalOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileNavRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (accessModalOpen) {
@@ -54,6 +58,38 @@ export default function Navbar() {
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [location.pathname, location.hash]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+
+    const panel = mobileNavRef.current;
+    const focusable = panel?.querySelectorAll<HTMLElement>(
+      'a[href], button:not([disabled])',
+    );
+    focusable?.[0]?.focus();
+
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+        return;
+      }
+      if (e.key !== 'Tab' || !focusable || focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
+  }, [menuOpen]);
 
   const isActive = (link: NavItem) => {
     if (link.hash) {
@@ -115,10 +151,13 @@ export default function Navbar() {
             : undefined
         }
       >
-        <nav className="mx-auto flex h-[64px] max-w-7xl items-center justify-between px-4 py-2 sm:h-[72px] sm:px-6 lg:px-8">
+        <nav
+          className="mx-auto flex h-[64px] max-w-7xl items-center justify-between px-4 py-2 sm:h-[72px] sm:px-6 lg:px-8"
+          aria-label="Primary"
+        >
           <Link
             to="/"
-            className="group flex min-w-0 shrink items-center transition-opacity duration-200 hover:opacity-90"
+            className="group flex min-w-0 shrink items-center rounded-lg transition-opacity duration-200 hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
             onClick={() => {
               setMenuOpen(false);
               window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -137,7 +176,7 @@ export default function Navbar() {
                   key={link.label}
                   href={link.hash ? `/#${link.hash}` : link.href}
                   onClick={(event) => handleNavClick(event, link)}
-                  className={`relative whitespace-nowrap rounded-lg px-3 py-2.5 text-[14px] font-medium transition-colors xl:px-4 xl:text-[15px] ${
+                  className={`relative whitespace-nowrap rounded-lg px-3 py-2.5 text-[14px] font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B] xl:px-4 xl:text-[15px] ${
                     active
                       ? 'text-[#F5F5F5]'
                       : 'text-[#9CA3AF] hover:bg-[#222222]/50 hover:text-[#F5F5F5]'
@@ -155,6 +194,7 @@ export default function Navbar() {
                         bounce: 0.2,
                         duration: 0.4,
                       }}
+                      aria-hidden
                     />
                   )}
                 </a>
@@ -178,10 +218,13 @@ export default function Navbar() {
           </div>
 
           <button
-            className="rounded-lg p-2.5 text-[#9CA3AF] transition-colors hover:text-[#F5F5F5] focus:outline-none focus:ring-2 focus:ring-[#E51937] lg:hidden"
+            ref={menuButtonRef}
+            type="button"
+            className="rounded-lg p-2.5 text-[#9CA3AF] transition-colors hover:text-[#F5F5F5] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] lg:hidden"
             onClick={() => setMenuOpen((open) => !open)}
             aria-label={menuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={menuOpen}
+            aria-controls={MOBILE_NAV_ID}
           >
             <AnimatePresence mode="wait" initial={false}>
               <motion.span
@@ -191,6 +234,7 @@ export default function Navbar() {
                 exit={{ opacity: 0, rotate: 90 }}
                 transition={{ duration: 0.15 }}
                 className="block"
+                aria-hidden
               >
                 {menuOpen ? <X size={24} /> : <Menu size={24} />}
               </motion.span>
@@ -201,12 +245,15 @@ export default function Navbar() {
         <AnimatePresence>
           {menuOpen && (
             <motion.div
+              ref={mobileNavRef}
+              id={MOBILE_NAV_ID}
               initial={{ opacity: 0, y: -8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.2 }}
               className="fixed inset-x-0 top-[64px] z-40 max-h-[calc(100dvh-64px)] overflow-y-auto border-b border-[#222222] bg-[#111111]/95 shadow-2xl backdrop-blur-lg sm:top-[72px] sm:max-h-[calc(100dvh-72px)] lg:hidden"
-              role="navigation"
+              role="dialog"
+              aria-modal="true"
               aria-label="Mobile navigation"
             >
               <div className="space-y-1 px-4 py-5">
@@ -218,7 +265,7 @@ export default function Navbar() {
                       key={link.label}
                       href={link.hash ? `/#${link.hash}` : link.href}
                       onClick={(event) => handleNavClick(event, link)}
-                      className={`block rounded-xl px-4 py-3.5 text-[15px] font-medium transition-all ${
+                      className={`block rounded-xl px-4 py-3.5 text-[15px] font-medium transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-inset ${
                         active
                           ? 'border border-[#E51937]/20 bg-[#E51937]/10 text-[#F5F5F5]'
                           : 'text-[#9CA3AF] hover:bg-[#222222] hover:text-[#F5F5F5]'

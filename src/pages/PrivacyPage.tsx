@@ -7,7 +7,7 @@ const headingClass =
   'mb-3 font-sans text-xl font-bold text-[#F5F5F5]';
 
 const linkClass =
-  'font-medium text-[#E51937] underline underline-offset-4 transition-colors hover:text-[#FF6B7D]';
+  'rounded-sm font-medium text-[#FF6B7D] underline underline-offset-4 transition-colors hover:text-[#FF8A98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]';
 
 export default function PrivacyPage() {
   return (

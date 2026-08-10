@@ -41,7 +41,7 @@ const accentStyles = {
     bullet: 'bg-[#E51937]',
     hover:
       'hover:border-[#E51937]/50 hover:bg-[#161616] hover:-translate-y-0.5 hover:shadow-[0_12px_32px_rgba(229,25,55,0.12)]',
-    cta: 'text-[#E51937] group-hover:text-[#FF6B7D]',
+    cta: 'text-[#FF6B7D] group-hover:text-[#FF8A98]',
   },
   gold: {
     bar: 'bg-[#FFC429]',

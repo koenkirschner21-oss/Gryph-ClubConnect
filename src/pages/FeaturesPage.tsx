@@ -955,10 +955,10 @@ export default function FeaturesPage() {
             <div className="mt-4">
               <Link
                 to="/for-students"
-                className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#E51937] transition-colors hover:text-[#FF6B7D]"
+                className="inline-flex items-center gap-1.5 rounded-sm text-sm font-semibold text-[#FF6B7D] underline-offset-2 transition-colors hover:text-[#FF8A98] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
               >
                 View the For Students page
-                <ArrowRight size={15} />
+                <ArrowRight size={15} aria-hidden />
               </Link>
             </div>
           </AnimatedSection>

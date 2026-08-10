@@ -27,7 +27,8 @@ const sizeClasses: Record<Size, string> = {
   lg: 'px-8 py-4 text-base',
 };
 
-const focusClasses = 'focus:outline-none focus:ring-2 focus:ring-[#E51937] focus:ring-offset-2 focus:ring-offset-[#0B0B0B]';
+const focusClasses =
+  'focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]';
 
 export default function Button({
   variant = 'red',

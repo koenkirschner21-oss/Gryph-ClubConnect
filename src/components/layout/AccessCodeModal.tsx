@@ -28,7 +28,11 @@ export default function AccessCodeModal({
 }: AccessCodeModalProps) {
   const navigate = useNavigate();
   const inputId = useId();
+  const titleId = 'access-code-title';
+  const descId = 'access-code-desc';
   const inputRef = useRef<HTMLInputElement>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const previouslyFocused = useRef<HTMLElement | null>(null);
   const [code, setCode] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
@@ -37,6 +41,8 @@ export default function AccessCodeModal({
     if (!open) {
       return undefined;
     }
+
+    previouslyFocused.current = document.activeElement as HTMLElement | null;
 
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
@@ -47,7 +53,30 @@ export default function AccessCodeModal({
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape' && !submitting) {
+        event.preventDefault();
         onClose();
+        return;
+      }
+
+      if (event.key !== 'Tab') return;
+
+      const panel = dialogRef.current;
+      if (!panel) return;
+
+      const focusable = panel.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      );
+      if (focusable.length === 0) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
       }
     };
 
@@ -57,6 +86,7 @@ export default function AccessCodeModal({
       window.clearTimeout(focusTimer);
       window.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = previousOverflow;
+      previouslyFocused.current?.focus?.();
     };
   }, [open, onClose, submitting]);
 
@@ -134,9 +164,7 @@ export default function AccessCodeModal({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="access-code-title"
+          role="presentation"
           onMouseDown={(event) => {
             if (event.target === event.currentTarget && !submitting) {
               onClose();
@@ -144,6 +172,11 @@ export default function AccessCodeModal({
           }}
         >
           <motion.div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={titleId}
+            aria-describedby={descId}
             initial={{ opacity: 0, y: 18, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.98 }}
@@ -163,16 +196,19 @@ export default function AccessCodeModal({
               type="button"
               onClick={onClose}
               disabled={submitting}
-              className="absolute right-4 top-4 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.08] bg-[#0B0B0B] text-[#9CA3AF] transition-colors hover:border-white/[0.16] hover:text-[#F5F5F5] disabled:cursor-not-allowed disabled:opacity-50"
+              className="absolute right-4 top-4 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/[0.08] bg-[#0B0B0B] text-[#9CA3AF] transition-colors hover:border-white/[0.16] hover:text-[#F5F5F5] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] disabled:cursor-not-allowed disabled:opacity-50"
               aria-label="Close early access window"
             >
-              <X size={17} />
+              <X size={17} aria-hidden />
             </button>
 
             <div className="relative p-6 sm:p-7">
               <BrandLogo variant="footer" />
 
-              <div className="mt-7 inline-flex h-11 w-11 items-center justify-center rounded-[11px] border border-[#E51937]/30 bg-[rgba(229,25,55,0.12)] text-[#E51937]">
+              <div
+                className="mt-7 inline-flex h-11 w-11 items-center justify-center rounded-[11px] border border-[#E51937]/30 bg-[rgba(229,25,55,0.12)] text-[#E51937]"
+                aria-hidden
+              >
                 <LockKeyhole size={20} />
               </div>
 
@@ -181,13 +217,16 @@ export default function AccessCodeModal({
               </p>
 
               <h2
-                id="access-code-title"
+                id={titleId}
                 className="mt-2 font-sans text-2xl font-extrabold leading-tight text-[#F5F5F5] sm:text-[1.75rem]"
               >
                 Enter your ClubConnect access code.
               </h2>
 
-              <p className="mt-3 text-sm leading-relaxed text-[#9CA3AF]">
+              <p
+                id={descId}
+                className="mt-3 text-sm leading-relaxed text-[#9CA3AF]"
+              >
                 The app is currently limited to approved testers and participating
                 club teams while we prepare for launch.
               </p>
@@ -239,17 +278,17 @@ export default function AccessCodeModal({
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-[10px] bg-[#E51937] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#C4122E] focus:outline-none focus:ring-2 focus:ring-[#E51937] focus:ring-offset-2 focus:ring-offset-[#111111] disabled:cursor-not-allowed disabled:opacity-65"
+                  className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-[10px] bg-[#E51937] px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#C4122E] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111111] disabled:cursor-not-allowed disabled:opacity-65"
                 >
                   {submitting ? (
                     <>
-                      <Loader2 size={16} className="animate-spin" />
+                      <Loader2 size={16} className="animate-spin" aria-hidden />
                       Verifying code…
                     </>
                   ) : (
                     <>
                       Continue to Login
-                      <ArrowRight size={16} />
+                      <ArrowRight size={16} aria-hidden />
                     </>
                   )}
                 </button>
@@ -262,7 +301,7 @@ export default function AccessCodeModal({
                 <button
                   type="button"
                   onClick={handleRequestAccess}
-                  className="mt-1 text-[13px] font-semibold text-[#E51937] transition-colors hover:text-[#FF6B7D]"
+                  className="mt-1 rounded-sm text-[13px] font-semibold text-[#FF6B7D] transition-colors hover:text-[#FF8A98] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#111111]"
                 >
                   Request early access
                 </button>

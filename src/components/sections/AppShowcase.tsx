@@ -197,7 +197,9 @@ export default function AppShowcase() {
                   key={workflow.key}
                   type="button"
                   onClick={() => handleSelect(index)}
-                  className={`relative w-full cursor-pointer overflow-hidden rounded-[10px] border px-4 py-3.5 text-left transition-colors ${
+                  aria-pressed={isActive}
+                  aria-current={isActive ? 'true' : undefined}
+                  className={`relative w-full cursor-pointer overflow-hidden rounded-[10px] border px-4 py-3.5 text-left transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B] ${
                     isActive
                       ? 'border-[#E51937]/45 bg-[#131313] text-[#F5F5F5]'
                       : 'border-white/[0.06] bg-transparent text-[#A5ABB5] hover:border-white/[0.1] hover:bg-[#131313] hover:text-[#F5F5F5]'
@@ -299,10 +301,10 @@ export default function AppShowcase() {
           <button
             type="button"
             onClick={handleDemo}
-            className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#FF5A70] transition-colors hover:text-[#FF7A8D]"
+            className="inline-flex items-center gap-1.5 rounded-sm text-[15px] font-semibold text-[#FF5A70] underline-offset-2 transition-colors hover:text-[#FF7A8D] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
           >
             Request a Demo
-            <ArrowRight size={16} />
+            <ArrowRight size={16} aria-hidden />
           </button>
         </div>
       </div>

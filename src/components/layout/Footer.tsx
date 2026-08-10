@@ -98,7 +98,7 @@ export default function Footer() {
                   aria-label={label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-lg p-2 text-[#9CA3AF] transition-colors hover:bg-[#222222] hover:text-[#F5F5F5]"
+                  className="rounded-lg p-2 text-[#9CA3AF] transition-colors hover:bg-[#222222] hover:text-[#F5F5F5] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
                 >
                   {customIcon === 'tiktok' ? (
                     <TikTokIcon />
@@ -124,12 +124,13 @@ export default function Footer() {
                       event.preventDefault();
                       navigate(link.href);
                     }}
-                    className="group inline-flex items-center gap-1 text-sm text-[#9CA3AF] transition-colors hover:text-[#F5F5F5]"
+                    className="group inline-flex items-center gap-1 rounded-sm text-sm text-[#9CA3AF] transition-colors hover:text-[#F5F5F5] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
                   >
                     {link.label}
                     <ArrowRight
                       size={12}
                       className="-translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
+                      aria-hidden
                     />
                   </a>
                 </li>
@@ -151,12 +152,13 @@ export default function Footer() {
                       event.preventDefault();
                       navigate(link.href);
                     }}
-                    className="group inline-flex items-center gap-1 text-sm text-[#9CA3AF] transition-colors hover:text-[#F5F5F5]"
+                    className="group inline-flex items-center gap-1 rounded-sm text-sm text-[#9CA3AF] transition-colors hover:text-[#F5F5F5] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
                   >
                     {link.label}
                     <ArrowRight
                       size={12}
                       className="-translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
+                      aria-hidden
                     />
                   </a>
                 </li>
@@ -172,9 +174,9 @@ export default function Footer() {
             <div className="space-y-3">
               <a
                 href="mailto:gryphclubconnect@gmail.com"
-                className="inline-flex items-center gap-2 text-sm text-[#9CA3AF] transition-colors hover:text-[#F5F5F5]"
+                className="inline-flex items-center gap-2 rounded-sm text-sm text-[#9CA3AF] transition-colors hover:text-[#F5F5F5] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
               >
-                <Mail size={15} className="shrink-0" />
+                <Mail size={15} className="shrink-0" aria-hidden />
                 gryphclubconnect@gmail.com
               </a>
 
@@ -187,7 +189,7 @@ export default function Footer() {
                     pathname: location.pathname,
                   })
                 }
-                className="inline-flex items-center gap-1.5 rounded-full border border-[#E51937]/25 bg-[rgba(229,25,55,0.14)] px-2.5 py-1 font-sans text-xs text-[#FF5A70] transition-colors hover:bg-[rgba(229,25,55,0.22)] hover:text-[#FF7A8D]"
+                className="inline-flex items-center gap-1.5 rounded-full border border-[#E51937]/25 bg-[rgba(229,25,55,0.14)] px-2.5 py-1 font-sans text-xs text-[#FF5A70] transition-colors hover:bg-[rgba(229,25,55,0.22)] hover:text-[#FF7A8D] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
               >
                 <span className="relative flex h-1.5 w-1.5">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#E51937] opacity-75" />

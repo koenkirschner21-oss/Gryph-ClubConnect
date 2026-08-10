@@ -68,7 +68,9 @@ export default function ClubWorkflowSlideshow({
               <button
                 type="button"
                 onClick={() => setActiveIndex(index)}
-                className={`flex w-full cursor-pointer gap-4 border-l-2 px-5 py-4 text-left transition-colors ${
+                aria-current={isActive ? 'step' : undefined}
+                aria-pressed={isActive}
+                className={`flex w-full cursor-pointer gap-4 border-l-2 px-5 py-4 text-left transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-inset ${
                   index < steps.length - 1
                     ? 'border-b border-white/[0.08]'
                     : ''

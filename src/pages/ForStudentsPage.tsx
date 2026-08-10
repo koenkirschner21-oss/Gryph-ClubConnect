@@ -862,10 +862,10 @@ export default function ForStudentsPage() {
               </p>
               <Link
                 to="/features"
-                className="inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#E51937] transition-colors hover:text-[#FF6B7D]"
+                className="inline-flex items-center gap-1.5 rounded-sm text-[15px] font-semibold text-[#FF6B7D] underline-offset-2 transition-colors hover:text-[#FF8A98] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
               >
                 Explore Club Features
-                <ArrowRight size={16} />
+                <ArrowRight size={16} aria-hidden />
               </Link>
             </AnimatedSection>
 

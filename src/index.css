@@ -72,9 +72,28 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 a:focus-visible,
-button:focus-visible {
+button:focus-visible,
+summary:focus-visible,
+[role="button"]:focus-visible,
+[role="tab"]:focus-visible {
   outline: 2px solid var(--color-red);
   outline-offset: 3px;
+}
+
+/* Ensure keyboard focus is visible even when components clear outline */
+.focus-ring {
+  outline: none;
+}
+.focus-ring:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 3px;
+}
+
+/* Prefer reduced motion for decorative animations when requested */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 /* ===== SCROLLBAR ===== */

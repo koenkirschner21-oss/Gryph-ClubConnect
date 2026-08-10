@@ -106,10 +106,10 @@ export default function HowItWorks() {
             <button
               type="button"
               onClick={handleDemo}
-              className="mt-5 inline-flex items-center gap-1.5 text-[15px] font-semibold text-[#FF5A70] transition-colors hover:text-[#FF7A8D]"
+              className="mt-5 inline-flex items-center gap-1.5 rounded-sm text-[15px] font-semibold text-[#FF5A70] underline-offset-2 transition-colors hover:text-[#FF7A8D] hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B]"
             >
               Ready to see it? Request a Demo
-              <ArrowRight size={16} />
+              <ArrowRight size={16} aria-hidden />
             </button>
           </AnimatedSection>
 

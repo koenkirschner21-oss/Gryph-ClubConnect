@@ -121,8 +121,9 @@ export default function RotatingWorkflowShowcase({
               <button
                 type="button"
                 onClick={() => handleStepSelect(index)}
+                aria-current={isActive ? 'step' : undefined}
                 aria-pressed={isActive}
-                className={`flex w-full gap-4 border-l-2 px-5 py-4 text-left transition-colors duration-200 sm:px-6 sm:py-4 ${
+                className={`flex w-full gap-4 border-l-2 px-5 py-4 text-left transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-inset sm:px-6 sm:py-4 ${
                   index < steps.length - 1
                     ? 'border-b border-[#222222]'
                     : ''

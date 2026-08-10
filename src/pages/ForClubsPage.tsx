@@ -303,10 +303,10 @@ function TextCta({
     <button
       type="button"
       onClick={onClick}
-      className="mt-5 inline-flex items-center gap-1.5 text-[14px] font-semibold text-[#FFC429] hover:text-[#FFD45C] transition-colors"
+      className="mt-5 inline-flex items-center gap-1.5 text-[14px] font-semibold text-[#FFC429] hover:text-[#FFD45C] underline-offset-2 hover:underline transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#FFC429] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B] rounded-sm"
     >
       {label}
-      <ArrowRight size={15} />
+      <ArrowRight size={15} aria-hidden />
     </button>
   );
 }

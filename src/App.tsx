@@ -38,9 +38,15 @@ export default function App() {
         <Analytics />
 
         <div className="bg-[#0B0B0B] min-h-screen text-[#F5F5F5] overflow-x-hidden">
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[200] focus:rounded-[10px] focus:bg-[#E51937] focus:px-4 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-white focus:outline-none focus:ring-2 focus:ring-[#FFC429] focus:ring-offset-2 focus:ring-offset-[#0B0B0B]"
+          >
+            Skip to main content
+          </a>
           <Navbar />
 
-          <main className="min-w-0">
+          <main id="main-content" className="min-w-0" tabIndex={-1}>
             <Suspense fallback={<PageLoader />}>
               <Routes>
                 <Route path="/" element={<HomePage />} />

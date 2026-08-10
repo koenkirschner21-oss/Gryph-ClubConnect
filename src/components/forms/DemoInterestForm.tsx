@@ -390,7 +390,8 @@ export default function DemoInterestForm({
                 key={option}
                 type="button"
                 onClick={() => setRequestType(option)}
-                className={`min-w-0 rounded-[10px] border px-3 py-2.5 text-left text-[12px] font-medium transition-colors sm:text-[13px] ${
+                aria-pressed={selected}
+                className={`min-w-0 break-words rounded-[10px] border px-3 py-2.5 text-left text-[12px] font-medium transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#E51937] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0B0B0B] sm:text-[13px] ${
                   selected
                     ? 'border-[#E51937]/50 bg-[rgba(229,25,55,0.12)] text-[#F5F5F5]'
                     : 'border-[#222222] bg-[#0B0B0B] text-[#9CA3AF] hover:border-[rgba(255,255,255,0.14)]'
